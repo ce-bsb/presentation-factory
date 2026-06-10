@@ -8,6 +8,7 @@ from pathlib import Path
 from presentation_factory.builder import (
     build_package,
     presentation_slugs,
+    validate_repository,
     workspace_target,
 )
 from presentation_factory.config import ConfigurationError, Repository
@@ -28,7 +29,11 @@ class BuilderTest(unittest.TestCase):
     def test_lists_registered_presentations(self) -> None:
         self.assertEqual(
             presentation_slugs(self.repository),
-            ["bb-dijur-sentencas", "bb-dirco-workshop"],
+            [
+                "bb-dijur-sentencas",
+                "bb-dirco-workshop",
+                "ia-parceria-produtividade",
+            ],
         )
 
     def test_builds_package_with_selected_model(self) -> None:
@@ -53,6 +58,23 @@ class BuilderTest(unittest.TestCase):
         self.assertTrue(
             (destination / "workspace/assets/partner/logo-dark.svg").is_file()
         )
+
+    def test_builds_ibm_owned_presentation(self) -> None:
+        destination = build_package(
+            self.repository,
+            "ia-parceria-produtividade",
+            output=self.output / "ibm-package",
+        )
+        manifest = json.loads(
+            (destination / "manifest.json").read_text(encoding="utf-8")
+        )
+
+        self.assertEqual(manifest["owner"]["slug"], "ibm")
+        self.assertEqual(
+            manifest["template"],
+            "organizations/ibm/templates/ia-productivity-deck",
+        )
+        self.assertTrue((destination / "workspace/index.html").is_file())
 
     def test_rejects_unknown_model(self) -> None:
         with self.assertRaises(ConfigurationError):
@@ -79,11 +101,15 @@ class BuilderTest(unittest.TestCase):
         ]
         self.assertTrue(all(path.is_file() for path in expected))
 
+    def test_all_presentation_directories_are_registered(self) -> None:
+        self.assertEqual(validate_repository(self.repository), [])
+
     def test_presentations_are_always_light(self) -> None:
         sources = [
             *ROOT.glob("clients/**/*.css"),
             *ROOT.glob("clients/**/templates/**/*.html"),
             *ROOT.glob("organizations/**/*.css"),
+            *ROOT.glob("organizations/**/templates/**/*.html"),
             *ROOT.glob("organizations/**/presentations/**/*.html"),
         ]
         for path in sources:

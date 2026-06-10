@@ -22,6 +22,7 @@ organizations/
     ├── assets/
     ├── design-systems/
     ├── presentations/
+    ├── templates/
     └── entity.toml
 catalog/models.toml
 src/presentation_factory/
@@ -37,6 +38,9 @@ dist/
   `organizations/ibm/`.
 - `src/` contém apenas o motor genérico.
 - `dist/` contém pacotes gerados e não é versionado.
+- Toda pasta em `presentations/` deve conter `brief.md` e
+  `presentation.toml`; apresentações HTML completas pertencem à camada
+  `templates/`.
 
 Uma apresentação pode usar assets de outra organização sem duplicá-los no
 repositório. A associação é explícita:
@@ -74,7 +78,8 @@ default_model = "primary"
 ```
 
 Os slugs devem ser únicos no repositório. O validador rejeita slugs ambíguos,
-modelos inexistentes, assets ausentes e caminhos externos.
+modelos inexistentes, assets ausentes, caminhos externos e pastas de
+apresentação sem manifesto.
 
 ## Comandos
 

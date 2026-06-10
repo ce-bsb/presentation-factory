@@ -1,0 +1,6 @@
+name = "IA — Uma parceria para produtividade"
+template = "organizations/ibm/templates/ia-productivity-deck"
+brief = "organizations/ibm/presentations/ia-parceria-produtividade/brief.md"
+default_model = "primary"
+
+[assets]

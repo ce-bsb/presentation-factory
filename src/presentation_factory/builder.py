@@ -74,8 +74,7 @@ def build_package(
     presentation_dir = config_path.parent
     presentation = load_toml(config_path)
     catalog = load_toml(repository.model_catalog)
-    entity_dir = presentation_dir.parents[1]
-    entity = load_toml(entity_dir / "entity.toml")
+    entity = load_toml(repository.entity_config_for(presentation_dir))
 
     selected_model = (
         model_alias
@@ -178,9 +177,21 @@ def build_package(
 
 def validate_repository(repository: Repository) -> list[str]:
     errors: list[str] = []
+    unmanaged = [
+        path
+        for path in repository.presentation_directories()
+        if not (path / "presentation.toml").is_file()
+    ]
+    errors.extend(
+        "apresentação sem presentation.toml: "
+        f"{path.relative_to(repository.root)}"
+        for path in unmanaged
+    )
+
     slugs = presentation_slugs(repository)
     if not slugs:
-        return ["nenhuma apresentação cadastrada"]
+        errors.append("nenhuma apresentação cadastrada")
+        return errors
 
     for slug in slugs:
         try:

@@ -11,6 +11,7 @@ on:
         options:
           - bb-dirco-workshop
           - bb-dijur-sentencas
+          - ia-parceria-produtividade
       model:
         description: Model alias
         required: true
