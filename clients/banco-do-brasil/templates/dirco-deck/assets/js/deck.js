@@ -15,12 +15,6 @@
   var idxPanel  = document.getElementById('index-panel');
   var idxItems  = Array.prototype.slice.call(document.querySelectorAll('.index-item'));
   var goLinks   = Array.prototype.slice.call(document.querySelectorAll('[data-go]'));
-  var zoomDialog = document.getElementById('image-zoom');
-  var zoomImage = document.getElementById('image-zoom-content');
-  var zoomTitle = document.getElementById('image-zoom-title');
-  var zoomClose = document.getElementById('image-zoom-close');
-  var zoomTriggers = Array.prototype.slice.call(document.querySelectorAll('[data-zoom-src]'));
-  var lastZoomTrigger = null;
   var current   = 1;
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
@@ -94,14 +88,6 @@
 
     var key = e.key;
 
-    if (zoomDialog && zoomDialog.open) {
-      if (key === 'Escape') {
-        e.preventDefault();
-        closeZoom();
-      }
-      return;
-    }
-
     if (key === 'Escape') {
       e.preventDefault();
       toggleIndex();
@@ -163,42 +149,6 @@
   if (idxPanel) {
     idxPanel.addEventListener('click', function (e) {
       if (e.target === idxPanel) closeIndex();
-    });
-  }
-
-  /* ---- Image zoom ---- */
-  function openZoom(trigger) {
-    if (!zoomDialog || !zoomImage) return;
-    lastZoomTrigger = trigger;
-    zoomImage.src = trigger.getAttribute('data-zoom-src') || '';
-    zoomImage.alt = trigger.getAttribute('data-zoom-alt') || '';
-    if (zoomTitle) {
-      zoomTitle.textContent = trigger.getAttribute('data-zoom-alt') || 'Imagem ampliada';
-    }
-    zoomDialog.showModal();
-    if (zoomClose) zoomClose.focus();
-  }
-
-  function closeZoom() {
-    if (!zoomDialog || !zoomDialog.open) return;
-    zoomDialog.close();
-    zoomImage.removeAttribute('src');
-    if (lastZoomTrigger) lastZoomTrigger.focus();
-  }
-
-  zoomTriggers.forEach(function (trigger) {
-    trigger.addEventListener('click', function () {
-      openZoom(trigger);
-    });
-  });
-  if (zoomClose) zoomClose.addEventListener('click', closeZoom);
-  if (zoomDialog) {
-    zoomDialog.addEventListener('click', function (e) {
-      if (e.target === zoomDialog) closeZoom();
-    });
-    zoomDialog.addEventListener('cancel', function (e) {
-      e.preventDefault();
-      closeZoom();
     });
   }
 

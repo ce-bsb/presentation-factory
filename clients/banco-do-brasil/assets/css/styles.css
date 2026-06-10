@@ -488,7 +488,6 @@ button {
 }
 
 .method-figure {
-  position: relative;
   margin: 0;
   padding: var(--u-4);
   background: var(--white);
@@ -500,124 +499,6 @@ button {
   max-height: min(48vh, 520px);
   object-fit: contain;
   object-position: center;
-}
-.image-zoom-trigger {
-  position: absolute;
-  right: var(--u-5);
-  top: var(--u-5);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--u-2);
-  min-height: 40px;
-  padding: var(--u-2) var(--u-3);
-  border: 1px solid var(--ink);
-  background: var(--white);
-  color: var(--ink);
-  font: 500 var(--text-14)/1 var(--font-sans);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(22, 22, 22, 0.16);
-}
-.image-zoom-trigger:hover {
-  background: var(--bg-alt);
-}
-.image-zoom-trigger:focus-visible,
-.image-zoom__close:focus-visible {
-  outline: var(--focus-width) solid var(--focus-color);
-  outline-offset: 2px;
-}
-.image-zoom-trigger svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-}
-
-.image-zoom {
-  width: 100vw;
-  max-width: none;
-  height: 100vh;
-  max-height: none;
-  margin: 0;
-  padding: var(--u-6);
-  border: 0;
-  background: rgba(22, 22, 22, 0.92);
-  color: var(--ink);
-}
-.image-zoom::backdrop {
-  background: rgba(22, 22, 22, 0.92);
-}
-.image-zoom__panel {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  background: var(--white);
-}
-.image-zoom__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 56px;
-  padding-left: var(--u-5);
-  border-bottom: 1px solid var(--line);
-}
-.image-zoom__header h2 {
-  margin: 0;
-  font-size: var(--text-18);
-  font-weight: 500;
-}
-.image-zoom__close {
-  align-self: stretch;
-  width: 56px;
-  border: 0;
-  border-left: 1px solid var(--line);
-  background: var(--white);
-  color: var(--ink);
-  cursor: pointer;
-}
-.image-zoom__close:hover {
-  background: var(--bg-alt);
-}
-.image-zoom__close svg {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-}
-.image-zoom__viewport {
-  overflow: auto;
-  padding: var(--u-5);
-  text-align: center;
-}
-.image-zoom__viewport img {
-  display: block;
-  width: auto;
-  max-width: none;
-  min-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-.image-zoom__hint {
-  margin: 0;
-  padding: var(--u-3) var(--u-5);
-  border-top: 1px solid var(--line);
-  color: var(--ink-muted);
-  font-size: var(--text-14);
-}
-
-@media (max-width: 640px) {
-  .image-zoom {
-    padding: var(--u-3);
-  }
-  .image-zoom-trigger span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-  }
 }
 
 .pipeline {
