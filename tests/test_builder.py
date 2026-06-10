@@ -140,6 +140,22 @@ class BuilderTest(unittest.TestCase):
                 msg=str(path.relative_to(ROOT)),
             )
 
+    def test_bb_template_has_accessible_image_zoom(self) -> None:
+        template = (
+            ROOT
+            / "clients/banco-do-brasil/templates/dirco-deck/index.html"
+        ).read_text(encoding="utf-8")
+        controller = (
+            ROOT
+            / "clients/banco-do-brasil/templates/dirco-deck/assets/js/deck.js"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn('class="image-zoom-trigger"', template)
+        self.assertIn('aria-haspopup="dialog"', template)
+        self.assertIn('id="image-zoom"', template)
+        self.assertIn("zoomDialog.showModal()", controller)
+        self.assertIn("closeZoom()", controller)
+
 
 if __name__ == "__main__":
     unittest.main()
