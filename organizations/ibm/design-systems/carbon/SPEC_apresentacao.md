@@ -27,6 +27,10 @@ A apresentação é um arquivo HTML único com duas áreas fixas:
 
 ## 2. Cores
 
+A apresentação deve usar **sempre o tema claro**, independentemente da
+preferência de modo claro ou escuro do sistema operacional. Não use
+`prefers-color-scheme` para alterar cores, logos ou controles.
+
 | Token | Valor | Uso |
 |---|---|---|
 | `blue-60` | `#0f62fe` | Cor principal — sidebar, destaques, links |
@@ -50,8 +54,9 @@ A apresentação é um arquivo HTML único com duas áreas fixas:
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   color: #161616;
+  background: #ffffff;
 }
 ```
 

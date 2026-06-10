@@ -79,6 +79,41 @@ class BuilderTest(unittest.TestCase):
         ]
         self.assertTrue(all(path.is_file() for path in expected))
 
+    def test_presentations_are_always_light(self) -> None:
+        sources = [
+            *ROOT.glob("clients/**/*.css"),
+            *ROOT.glob("clients/**/templates/**/*.html"),
+            *ROOT.glob("organizations/**/*.css"),
+            *ROOT.glob("organizations/**/presentations/**/*.html"),
+        ]
+        for path in sources:
+            content = path.read_text(encoding="utf-8")
+            self.assertNotIn(
+                "prefers-color-scheme: dark",
+                content,
+                msg=str(path.relative_to(ROOT)),
+            )
+
+        template = (
+            ROOT
+            / "clients/banco-do-brasil/templates/dirco-deck/index.html"
+        ).read_text(encoding="utf-8")
+        self.assertIn('name="color-scheme" content="light"', template)
+
+    def test_presentation_body_base_is_18px(self) -> None:
+        stylesheets = [
+            ROOT / "clients/banco-do-brasil/assets/css/styles.css",
+            ROOT / "clients/caixa/assets/css/styles.css",
+            ROOT / "organizations/ibm/assets/css/styles.css",
+        ]
+        for path in stylesheets:
+            content = path.read_text(encoding="utf-8")
+            self.assertIn(
+                "font-size: 18px;",
+                content,
+                msg=str(path.relative_to(ROOT)),
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

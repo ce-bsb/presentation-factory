@@ -4,6 +4,8 @@
 - Implemente componentes e padrões do **Carbon Design System** (https://carbondesignsystem.com)
 - Use **IBM Plex** como fonte principal (https://www.ibm.com/plex/)
 - Mantenha consistência visual com o ecossistema IBM em todos os slides
+- Use sempre o tema claro. A apresentação não deve responder ao modo de cor do sistema operacional.
+- Use `18px` como tamanho-base para textos gerais e `20px` para textos longos ou de maior destaque.
 
 
 # Requisitos técnicos

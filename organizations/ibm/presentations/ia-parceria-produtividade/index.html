@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="slides-format" content="viewport" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
   <title>IA — Uma parceria para produtividade · IBM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +19,8 @@
        ===================================================================== */
 
     :root{
+      color-scheme:light;
+
       /* Carbon Gray */
       --gray-10:#f4f4f4;
       --gray-20:#e0e0e0;
@@ -50,23 +54,25 @@
       --yellow-30:#f1c21b;
 
       /* Functional */
-      --bg:#161616;             /* Gray 100 */
-      --bg-elevated:#262626;    /* Gray 90 */
-      --bg-layer:#393939;       /* Gray 80 */
-      --line:#393939;
-      --line-strong:#525252;
-      --text:#f4f4f4;
-      --text-secondary:#c6c6c6;
-      --text-muted:#8d8d8d;
+      --bg:#ffffff;
+      --bg-elevated:#f4f4f4;
+      --bg-layer:#e0e0e0;
+      --line:#e0e0e0;
+      --line-strong:#c6c6c6;
+      --text:#161616;
+      --text-secondary:#525252;
+      --text-muted:#6f6f6f;
       --primary:#0f62fe;
       --primary-hover:#0353e9;
-      --focus:#ffffff;
+      --focus:#0f62fe;
     }
 
     *,*::before,*::after{box-sizing:border-box;}
     html,body{margin:0;background:var(--bg);}
     body{
       font-family:'IBM Plex Sans', system-ui, sans-serif;
+      font-size:18px;
+      line-height:1.5;
       color:var(--text);
       font-weight:400;
       letter-spacing:0;
@@ -158,9 +164,9 @@
     .display-02{font-size:54px; line-height:62px; font-weight:300; letter-spacing:-.5px;}
     .display-03{font-size:72px; line-height:78px; font-weight:300; letter-spacing:-1px;}
     .display-04{font-size:96px; line-height:102px; font-weight:300; letter-spacing:-1.5px;}
-    .body-01{font-size:14px; line-height:20px;}
-    .body-02{font-size:16px; line-height:24px;}
-    .body-long{font-size:18px; line-height:28px; font-weight:300;}
+    .body-01{font-size:18px; line-height:26px;}
+    .body-02{font-size:18px; line-height:26px;}
+    .body-long{font-size:20px; line-height:30px; font-weight:300;}
     .label-01{font-family:'IBM Plex Mono', monospace; font-size:12px; line-height:16px; letter-spacing:.32px; text-transform:uppercase; color:var(--text-muted);}
     .helper{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-muted); letter-spacing:.02em;}
 
@@ -578,7 +584,7 @@
           <div class="col-6 reveal">
             <div class="eyebrow">Agenda</div>
             <h2 class="productive-heading-05" style="margin:0 0 20px; font-size:34px; line-height:42px; font-weight:300;">O que vamos<br/>percorrer juntos</h2>
-            <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:15px; line-height:22px;">
+            <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">
               Da evolução das ferramentas humanas até a sinergia entre pessoas e IA aplicada ao banco — um caminho em sete movimentos.
             </p>
             <div class="accent-bar" style="margin-top:24px;"></div>
@@ -1000,13 +1006,13 @@
               <span class="tile-corner" style="border-color:var(--cyan-30);"></span>
               <div class="label-01" style="margin-bottom:12px; color:var(--cyan-30);">Exemplo · Investimentos</div>
               <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Proposta de portfólio em minutos</div>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">Com base em perfil, regras de produto e cenário macro, a IA monta uma primeira versão revisável.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Com base em perfil, regras de produto e cenário macro, a IA monta uma primeira versão revisável.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
               <div class="label-01" style="margin-bottom:12px;">Resultado</div>
               <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Menos tempo operacional</div>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">Mais tempo para análise crítica, conversa com o cliente e decisão qualificada.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Mais tempo para análise crítica, conversa com o cliente e decisão qualificada.</p>
             </div>
           </div>
         </div>
@@ -1051,7 +1057,7 @@
                 <svg viewBox="0 0 64 64"><path d="M32 6 C 22 16, 22 32, 32 42 C 42 32, 42 16, 32 6 Z M22 38 L14 50 L26 46 M42 38 L50 50 L38 46"/><circle cx="32" cy="24" r="4"/></svg>
               </div>
               <div class="label-01" style="color:var(--cyan-30); margin-bottom:12px;">Presente, não futuro</div>
-              <p class="body-02" style="color:var(--text); margin:0; font-size:16px; line-height:24px;">
+              <p class="body-02" style="color:var(--text); margin:0; font-size:18px; line-height:26px;">
                 IA como parceira de trabalho é o presente. Nessa sinergia, a IA executa atividades operacionais e repetitivas, enquanto você amplia seu potencial criativo e estratégico.
               </p>
               <div class="accent-bar cyan" style="margin-top:auto;"></div>
@@ -1063,25 +1069,25 @@
               <span class="tile-corner"></span>
               <div class="label-01" style="margin-bottom:12px;">Humano no centro</div>
               <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Liderança</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">Você define prioridade, direciona esforço e responde pelo resultado.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Você define prioridade, direciona esforço e responde pelo resultado.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
               <div class="label-01" style="margin-bottom:12px;">Capacidade expandida</div>
               <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Escala</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">A IA multiplica velocidade, consistência e alcance das entregas.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">A IA multiplica velocidade, consistência e alcance das entregas.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
               <div class="label-01" style="margin-bottom:12px;">Novo foco</div>
               <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Estratégia</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">Menos tempo com rotina, mais tempo com análise, relacionamento e decisão.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Menos tempo com rotina, mais tempo com análise, relacionamento e decisão.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
               <div class="label-01" style="margin-bottom:12px;">Mensagem final</div>
               <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Parceria</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:14px; line-height:20px;">Você lidera e ela trabalha com você.</p>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Você lidera e ela trabalha com você.</p>
             </div>
           </div>
         </div>

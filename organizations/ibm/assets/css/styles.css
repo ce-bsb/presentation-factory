@@ -10,6 +10,8 @@
    Carbon-spec tokens are mirrored as CSS custom properties; legacy aliases
    are preserved to avoid breaking the existing slide deck markup. */
 :root {
+  color-scheme: light;
+
   /* ---- IBM Carbon grayscale ---- */
   --white:       #ffffff;
   --gray-10:     #f4f4f4;
@@ -114,7 +116,7 @@
   --font-sans:  'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:  'IBM Plex Mono', 'IBM Plex Sans', 'Helvetica Neue', monospace;
 
-  /* Productive type set is the default for desktop apps (14px base) */
+  /* Presentation type set uses an 18px reading base. */
   --type-set: productive;
 
   /* Legacy numeric type scale */
@@ -133,9 +135,9 @@
   /* Carbon type tokens (size · line-height · weight) */
   --label-01-size: 0.75rem;        --label-01-lh: 1rem;        --label-01-weight: 400;
   --helper-text-01-size: 0.75rem;  --helper-text-01-lh: 1rem;  --helper-text-01-weight: 400;
-  --body-compact-01-size: 0.875rem;--body-compact-01-lh: 1.125rem;--body-compact-01-weight: 400;
-  --body-01-size: 0.875rem;        --body-01-lh: 1.25rem;      --body-01-weight: 400;
-  --body-02-size: 1rem;            --body-02-lh: 1.5rem;       --body-02-weight: 400;
+  --body-compact-01-size: 1rem;    --body-compact-01-lh: 1.375rem;--body-compact-01-weight: 400;
+  --body-01-size: 1rem;            --body-01-lh: 1.5rem;       --body-01-weight: 400;
+  --body-02-size: 1.125rem;        --body-02-lh: 1.625rem;     --body-02-weight: 400;
   --heading-compact-01-size: 0.875rem; --heading-compact-01-lh: 1.125rem; --heading-compact-01-weight: 600;
   --heading-01-size: 0.875rem;     --heading-01-lh: 1.25rem;   --heading-01-weight: 600;
   --heading-02-size: 1rem;         --heading-02-lh: 1.5rem;    --heading-02-weight: 600;
@@ -180,40 +182,6 @@
   --focus-offset: 2px;
 }
 
-/* Dark theme — Carbon Gray 100 (design-2.md §Themes).
-   Re-maps semantic role tokens; legacy aliases inherit through the var() chain. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Carbon semantic role tokens (Gray 100 theme) */
-    --background:      var(--gray-100);
-    --layer:           var(--gray-90);
-    --layer-accent:    var(--gray-80);
-    --border-subtle:   var(--gray-80);
-    --border-strong:   var(--gray-70);
-    --text-primary:    var(--gray-10);
-    --text-secondary:  var(--gray-30);
-    --text-helper:     var(--gray-50);
-    --text-disabled:   var(--gray-60);
-    --interactive:     var(--blue-50);    /* lightened IBM Blue for dark */
-    --support-error:   var(--red-50);
-    --support-success: var(--green-50);
-    --support-info:    var(--blue-50);
-
-    /* Legacy aliases re-pointed to dark role tokens */
-    --bg:          var(--background);
-    --bg-alt:      var(--layer);
-    --ink:         var(--text-primary);
-    --ink-muted:   var(--text-secondary);
-    --ink-faint:   var(--text-disabled);
-    --line:        var(--border-subtle);
-    --line-strong: var(--border-strong);
-    --accent:      var(--interactive);
-    --accent-h:    #78a9ff;
-    --accent-alt:  #33b1ff;
-    --focus-color: var(--interactive);
-  }
-}
-
 /* ---------- Reset ---------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -222,12 +190,12 @@
 }
 html, body { margin: 0; padding: 0; }
 html {
-  font-size: 16px;
+  font-size: 18px;
   scroll-behavior: smooth;
 }
 body {
   font-family: var(--font-sans);
-  /* Productive default per design-2.md §Typography (body-01 → 14px / 400). */
+  /* Presentation default: body-01 → 18px / 400. */
   font-size: var(--body-01-size);
   line-height: var(--body-01-lh);
   font-weight: var(--body-01-weight);
@@ -537,18 +505,13 @@ button {
   color: var(--ibm-blue);
   font-weight: 400;
 }
-@media (prefers-color-scheme: dark) {
-  .display__alt {
-    color: #4589ff;
-  }
-}
 .cover-grid__footer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--u-6);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--u-5);
   padding-top: var(--u-5);
   border-top: 1px solid var(--line);
-  max-width: 720px;
+  max-width: 900px;
 }
 .presenter {
   display: flex;
@@ -582,11 +545,6 @@ button {
   opacity: 0.9;
   pointer-events: none;
   z-index: 1;
-}
-@media (prefers-color-scheme: dark) {
-  .cover-mark {
-    color: var(--gray-70);
-  }
 }
 @media (max-width: 980px) {
   .cover-mark {
@@ -1124,19 +1082,6 @@ button {
 }
 .btn--ghost:hover {
   background: var(--bg-alt);
-}
-
-@media (prefers-color-scheme: dark) {
-  .brand__ibm img {
-    filter: invert(1);
-  }
-  .btn {
-    background: var(--white);
-    color: var(--gray-100);
-  }
-  .btn:hover {
-    background: var(--gray-10);
-  }
 }
 
 @media (max-width: 560px) {

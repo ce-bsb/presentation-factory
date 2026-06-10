@@ -12,6 +12,8 @@ diretório de saída informado no pacote gerado.
 - Mantenha a estrutura `index.html`, `assets/` e `README.md`.
 - Implemente navegação por teclado, botões, toque, índice e barra de progresso.
 - Garanta responsividade, impressão em PDF e acessibilidade WCAG 2.1 AA.
+- Use sempre o tema claro, sem responder ao modo claro ou escuro do sistema.
+- Use `18px` como base para textos gerais e `20px` para textos longos ou de maior destaque.
 - Use o template como referência estrutural e o cadastro do cliente para tema,
   logotipo e assets.
 - Use caminhos relativos ao repositório. Nunca use `file://`, `/Users/`,

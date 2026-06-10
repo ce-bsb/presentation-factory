@@ -7,6 +7,8 @@
 
 /* ---------- Tokens ---------- */
 :root {
+  color-scheme: light;
+
   /* IBM Carbon grayscale */
   --white:       #ffffff;
   --gray-10:     #f4f4f4;
@@ -81,20 +83,6 @@
   --focus-offset: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:          var(--gray-100);
-    --bg-alt:      var(--gray-90);
-    --ink:         var(--gray-10);
-    --ink-muted:   var(--gray-30);
-    --ink-faint:   var(--gray-50);
-    --line:        var(--gray-80);
-    --line-strong: var(--gray-70);
-    --accent:      #3a8fd9;   /* Azul Caixa clareado para dark mode */
-    --accent-h:    #66aae6;
-  }
-}
-
 /* ---------- Reset ---------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -103,7 +91,7 @@
 }
 html, body { margin: 0; padding: 0; }
 html {
-  font-size: 16px;
+  font-size: 18px;
   scroll-behavior: smooth;
 }
 body {
@@ -383,18 +371,13 @@ button {
   color: var(--ibm-blue);
   font-weight: 400;
 }
-@media (prefers-color-scheme: dark) {
-  .display__alt {
-    color: #66aae6;
-  }
-}
 .cover-grid__footer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--u-6);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--u-5);
   padding-top: var(--u-5);
   border-top: 1px solid var(--line);
-  max-width: 720px;
+  max-width: 900px;
 }
 .presenter {
   display: flex;
@@ -428,11 +411,6 @@ button {
   opacity: 0.9;
   pointer-events: none;
   z-index: 1;
-}
-@media (prefers-color-scheme: dark) {
-  .cover-mark {
-    color: var(--gray-70);
-  }
 }
 @media (max-width: 980px) {
   .cover-mark {
@@ -965,19 +943,6 @@ button {
 }
 .btn--ghost:hover {
   background: var(--bg-alt);
-}
-
-@media (prefers-color-scheme: dark) {
-  .brand__ibm img {
-    filter: invert(1);
-  }
-  .btn {
-    background: var(--white);
-    color: var(--gray-100);
-  }
-  .btn:hover {
-    background: var(--gray-10);
-  }
 }
 
 @media (max-width: 560px) {
