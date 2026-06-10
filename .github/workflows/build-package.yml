@@ -1,0 +1,61 @@
+name: Build presentation package
+
+on:
+  workflow_dispatch:
+    inputs:
+      presentation:
+        description: Presentation slug
+        required: true
+        default: bb-dirco-workshop
+        type: choice
+        options:
+          - bb-dirco-workshop
+          - bb-dijur-sentencas
+      model:
+        description: Model alias
+        required: true
+        default: primary
+        type: choice
+        options:
+          - primary
+          - alternate
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate associations
+        run: PYTHONPATH=src python -m presentation_factory validate
+      - name: Run tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+
+  build:
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Resolve associations
+        run: >-
+          PYTHONPATH=src python -m presentation_factory build
+          "${{ inputs.presentation }}"
+          --model "${{ inputs.model }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.presentation }}-${{ inputs.model }}
+          path: dist/${{ inputs.presentation }}/${{ inputs.model }}
+          if-no-files-found: error

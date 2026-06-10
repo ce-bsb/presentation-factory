@@ -1,0 +1,14 @@
+.DS_Store
+__MACOSX/
+__pycache__/
+*.pyc
+
+dist/*
+!dist/.gitkeep
+
+# Saídas anteriores à arquitetura v2; pode ser removido após a migração.
+generated/
+
+.env
+.env.*
+!.env.example

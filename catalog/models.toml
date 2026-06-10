@@ -1,0 +1,11 @@
+default = "primary"
+
+[models.primary]
+provider = "watsonx"
+model_id_env = "WATSONX_PRIMARY_MODEL_ID"
+description = "Modelo principal para geração das apresentações"
+
+[models.alternate]
+provider = "watsonx"
+model_id_env = "WATSONX_ALTERNATE_MODEL_ID"
+description = "Modelo alternativo para comparação ou contingência"

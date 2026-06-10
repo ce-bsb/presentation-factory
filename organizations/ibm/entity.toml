@@ -1,0 +1,8 @@
+slug = "ibm"
+name = "IBM"
+kind = "organization"
+
+[design]
+system = "IBM Carbon Design System v11"
+font = "IBM Plex"
+language = "pt-BR"
