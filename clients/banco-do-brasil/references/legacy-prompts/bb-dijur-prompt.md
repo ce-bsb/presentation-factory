@@ -1,3 +1,7 @@
+> LEGADO: prompt antigo preservado apenas como referência histórica.
+> Não use como fonte de verdade para novas apresentações.
+> Use `prompts/presentation-generation.md` e `AGENTS.md`.
+
 Prompt para apresentação
 
 Você é um desenvolvedor front-end especializado em apresentações interativas em HTML e em design systems corporativos. Sua tarefa é criar uma apresentação HTML estática em português para o Banco do Brasil, seguindo o roteiro BB DIJUR - IA para avaliação de sentenças.

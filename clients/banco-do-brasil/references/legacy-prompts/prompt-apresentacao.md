@@ -1,3 +1,7 @@
+> LEGADO: prompt antigo preservado apenas como referência histórica.
+> Não use como fonte de verdade para novas apresentações.
+> Use `prompts/presentation-generation.md` e `AGENTS.md`.
+
 Prompt para apresentação
 
 Você é um desenvolvedor front-end especializado em apresentações HTML interativas e design systems corporativos. Sua tarefa é criar uma apresentação HTML estática em português para ==“NOMEDOCLIENTE”==, seguindo o roteiro ==“NOMEDOROTEIRO”==.

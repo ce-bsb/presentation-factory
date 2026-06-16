@@ -1,16 +1,16 @@
 # IBM Presentation Factory
 
-Pasta de referência para criar apresentações HTML com Bob, Codex, Claude,
-Cursor ou qualquer IA que consiga ler arquivos locais.
+Framework leve para gerar e revisar apresentações HTML com IA, mantendo
+templates, assets, prompts e regras visuais em uma única fonte versionada.
 
-O uso principal é: clonar o repositório, abrir a pasta na IA e pedir que ela use
-os templates, assets, padrões e prompts daqui como requisitos.
+Clone o repositório, abra a pasta em Bob, Codex, Claude, Cursor ou outro agente
+e peça para a IA usar os arquivos daqui como requisitos.
 
 ```mermaid
 flowchart LR
     A["Clonar"] --> B["Abrir na IA"]
-    B --> C["IA lê README, wiki, prompts, templates e assets"]
-C --> D["Pessoa passa objetivo e materiais"]
+    B --> C["IA lê AGENTS, prompts, templates e assets"]
+    C --> D["Pessoa passa objetivo e materiais"]
     D --> E["IA propõe plano"]
     E --> F["IA gera ou modifica o deck"]
     F --> G["Pessoa revisa"]
