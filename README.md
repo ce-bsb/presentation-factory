@@ -10,7 +10,7 @@ os templates, assets, padrões e prompts daqui como requisitos.
 flowchart LR
     A["Clonar"] --> B["Abrir na IA"]
     B --> C["IA lê README, wiki, prompts, templates e assets"]
-    C --> D["Pessoa passa objetivo e materiais"]
+C --> D["Pessoa passa objetivo e materiais"]
     D --> E["IA propõe plano"]
     E --> F["IA gera ou modifica o deck"]
     F --> G["Pessoa revisa"]
@@ -25,8 +25,10 @@ cd presentation-factory
 
 Abra a pasta em Bob, Codex, Claude, Cursor ou outro agente.
 
-Use o prompt base:
+Leia primeiro:
 
+- [AGENTS.md](AGENTS.md)
+- [QUICKSTART.md](QUICKSTART.md)
 - [prompts/presentation-generation.md](prompts/presentation-generation.md)
 
 Se a IA não acessa links externos, clone a wiki ao lado do repositório:

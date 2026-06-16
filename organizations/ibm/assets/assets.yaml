@@ -1,0 +1,29 @@
+assets:
+  - path: assets/img/logo-dark.svg
+    type: logo
+    owner: IBM
+    purpose: IBM logo for light backgrounds
+    use_when:
+      - partner branding
+      - header on light slides
+  - path: assets/img/logo-light.svg
+    type: logo
+    owner: IBM
+    purpose: IBM logo for dark or high-contrast areas
+    use_when:
+      - dark blocks
+      - footer or cover treatments requiring reversed logo
+  - path: assets/img/pilot-method.jpg
+    type: image
+    owner: IBM
+    purpose: visual explanation of the pilot method
+    use_when:
+      - explaining delivery approach
+      - workshop or discovery context
+  - path: assets/img/pilot-method-resume.svg
+    type: diagram
+    owner: IBM
+    purpose: summarized pilot method diagram
+    use_when:
+      - process explanation
+      - discovery or co-creation flow

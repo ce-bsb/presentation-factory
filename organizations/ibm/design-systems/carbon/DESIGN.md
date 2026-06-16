@@ -1,51 +1,10 @@
-# Orientação de Design
+# Design Rules
 
-- Siga rigorosamente o **IBM Design Language** (https://www.ibm.com/design/language/)
-- Implemente componentes e padrões do **Carbon Design System** (https://carbondesignsystem.com)
-- Use **IBM Plex** como fonte principal (https://www.ibm.com/plex/)
-- Mantenha consistência visual com o ecossistema IBM em todos os slides
-- Use sempre o tema claro. A apresentação não deve responder ao modo de cor do sistema operacional.
-- Use `18px` como tamanho-base para textos gerais e `20px` para textos longos ou de maior destaque.
+Canonical design rules now live in smaller files:
 
+- `AGENT_RULES.md`: mandatory rules for IA agents.
+- `TOKENS.md`: colors, typography and spacing.
+- `COMPONENTS.md`: reusable component patterns.
+- `ACCESSIBILITY.md`: accessibility and review requirements.
 
-# Requisitos técnicos
-
-- Reutilize o `index.html` e os assets deste template como referência de padrões e estrutura
-- Reutilize imagens e CSS de acordo com o nome do cliente
-- Estrutura de projeto: `index.html`, pasta `assets/` (contendo CSS, JavaScript, imagens e SVGs), e README curto baseado no modelo disponível
-- Apresentação em tela cheia, totalmente responsiva (desktop, tablet, mobile)
-- Navegação via teclado (setas, Enter) e botões na interface
-- Barra de progresso visível indicando posição atual na apresentação
-- Índice discreto (não intrusivo) para visualizar todas as slides
-- Nenhuma dependência de backend; toda a lógica deve ser client-side
-
-
-## Estrutura
-
-```
-ROTEIRO/
-├── index.html
-├── README.md
-└── assets/
-    ├── css/styles.css        # Tokens, layout, slides, navegação, print
-    ├── js/deck.js            # Controlador (teclado, botões, hash, swipe e índice)
-    └── img/                  # Imagens e assets usados na apresentação
-        ├──
-```
-
-
-# Navegação Básica
-
-- **→ / PageDown / Espaço**: próximo slide
-- **← / PageUp**: slide anterior
-- **Home / End**: primeiro / último slide
-- **Teclado numérico**: ir direto para o slide do número de referência
-- **Esc**: abrir/fechar índice
-- **Swipe** horizontal em touch
-- **Imprimir** (`Ctrl/Cmd + P`): CSS print produz uma página por slide
-
-O slide atual fica em `#slide-N` na URL, então links profundos funcionam.
-
-
-# Assets
-- Escolher os assets de acordo com o cliente indicado no Roteiro
+Do not duplicate rules here. Update the specific file above instead.

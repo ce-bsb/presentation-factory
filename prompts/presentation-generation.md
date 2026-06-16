@@ -16,13 +16,16 @@ explique qual template pretende usar e por quê, liste os assets relevantes e
 aponte informações faltantes.
 
 Execute nesta ordem:
-1. Leia completamente o README.md.
-2. Leia a wiki, se ela estiver disponível localmente ou por link.
-3. Inspecione os templates disponíveis.
-4. Inspecione assets existentes: logos, imagens, ícones, CSS e scripts.
-5. Entenda a organização de presentations/, templates/ e assets/.
-6. Identifique o template mais adequado.
-7. Se faltar informação, pergunte antes de gerar ou editar arquivos.
+1. Leia `AGENTS.md`.
+2. Leia completamente o README.md.
+3. Leia a wiki, se ela estiver disponível localmente ou por link.
+4. Leia `organizations/ibm/design-systems/carbon/AGENT_RULES.md`.
+5. Inspecione os templates disponíveis.
+6. Inspecione assets existentes: logos, imagens, ícones, CSS, scripts e
+   `assets.yaml`.
+7. Entenda a organização de presentations/, templates/ e assets/.
+8. Identifique o template mais adequado.
+9. Se faltar informação, pergunte antes de gerar ou editar arquivos.
 
 Restrições:
 - siga cores, tipografia, espaçamentos, layout, responsividade, navegação e PDF
