@@ -1,8 +1,21 @@
 # IBM Presentation Factory
 
-Repositório para montar pacotes reproduzíveis de apresentações HTML. A
-arquitetura organiza conteúdo por dono: cada cliente mantém suas apresentações
-e seus assets; materiais corporativos ficam na organização correspondente.
+Repositório para montar pacotes reproduzíveis de apresentações HTML e servir
+como base de referência para Bob ou qualquer IA gerar decks dentro dos padrões
+do IBM Client Engineering.
+
+O objetivo é concentrar em um só lugar:
+
+- como clonar, validar e usar o repositório;
+- como estruturar apresentações, templates, assets e briefs;
+- quais cores, fontes, tamanhos, espaçamentos e regras responsivas seguir;
+- quando reutilizar um template existente e quando criar outro;
+- como pedir para uma IA usar esta pasta como base antes de gerar ou modificar
+  uma apresentação.
+
+A arquitetura organiza conteúdo por dono: cada cliente mantém suas
+apresentações e seus assets; materiais corporativos ficam na organização
+correspondente.
 
 ## Primeiro uso
 
@@ -34,6 +47,9 @@ git clone git@github.com:ce-bsb/presentation-factory.git
 cd presentation-factory
 ```
 
+Se quiser contribuir em uma cópia própria antes de abrir pull request, faça um
+fork no GitHub e clone a URL do seu fork.
+
 ### 3. Valide a instalação local
 
 ```bash
@@ -48,13 +64,13 @@ manifestos, templates, modelos e assets. `make test` executa a suíte de testes.
 ### 4. Gere uma apresentação
 
 ```bash
-make build PRESENTATION=bb-dirco-workshop MODEL=primary
+make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
 ```
 
 O pacote gerado fica em:
 
 ```text
-dist/bb-dirco-workshop/primary/
+dist/<slug-da-apresentacao>/primary/
 ├── brief.md
 ├── manifest.json
 ├── prompt.md
@@ -66,11 +82,26 @@ dist/bb-dirco-workshop/primary/
 Abra no navegador:
 
 ```text
-dist/bb-dirco-workshop/primary/workspace/index.html
+dist/<slug-da-apresentacao>/primary/workspace/index.html
 ```
 
 Esse `workspace` é autocontido: ele reúne o template, o roteiro, os assets e o
 prompt preparados para uso por uma pessoa, runner ou agente.
+
+### 6. Use com Bob ou outra IA
+
+Depois de clonar, peça para a IA usar a pasta do repositório como base de
+conhecimento e geração. Exemplo:
+
+```text
+Use esta pasta presentation-factory como referência. Leia a wiki, o README, os
+templates, os assets e os padrões visuais. Gere ou modifique a apresentação
+seguindo os padrões do repositório, sem inventar cores, fontes, tamanhos ou
+estruturas fora do que está documentado.
+```
+
+Para uma apresentação nova, descreva também público, objetivo, mensagens
+principais, cliente, duração esperada e materiais de referência.
 
 ## Estrutura
 
@@ -157,14 +188,14 @@ Requer Python 3.11 ou superior.
 make list
 make validate
 make test
-make build PRESENTATION=bb-dirco-workshop MODEL=primary
+make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
 ```
 
 Uso direto:
 
 ```bash
 PYTHONPATH=src python3 -m presentation_factory build \
-  bb-dirco-workshop \
+  <slug-da-apresentacao> \
   --model alternate
 ```
 
