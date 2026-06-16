@@ -4,6 +4,74 @@ Repositório para montar pacotes reproduzíveis de apresentações HTML. A
 arquitetura organiza conteúdo por dono: cada cliente mantém suas apresentações
 e seus assets; materiais corporativos ficam na organização correspondente.
 
+## Primeiro uso
+
+### 1. Instale os pré-requisitos
+
+- Git.
+- Python 3.11 ou superior.
+- Acesso ao repositório `ce-bsb/presentation-factory` no GitHub.
+
+Confira as versões:
+
+```bash
+git --version
+python3 --version
+make --version
+```
+
+### 2. Clone o repositório
+
+```bash
+git clone https://github.com/ce-bsb/presentation-factory.git
+cd presentation-factory
+```
+
+Se preferir usar SSH:
+
+```bash
+git clone git@github.com:ce-bsb/presentation-factory.git
+cd presentation-factory
+```
+
+### 3. Valide a instalação local
+
+```bash
+make list
+make validate
+make test
+```
+
+`make list` mostra as apresentações disponíveis. `make validate` confere
+manifestos, templates, modelos e assets. `make test` executa a suíte de testes.
+
+### 4. Gere uma apresentação
+
+```bash
+make build PRESENTATION=bb-dirco-workshop MODEL=primary
+```
+
+O pacote gerado fica em:
+
+```text
+dist/bb-dirco-workshop/primary/
+├── brief.md
+├── manifest.json
+├── prompt.md
+└── workspace/
+```
+
+### 5. Abra o resultado
+
+Abra no navegador:
+
+```text
+dist/bb-dirco-workshop/primary/workspace/index.html
+```
+
+Esse `workspace` é autocontido: ele reúne o template, o roteiro, os assets e o
+prompt preparados para uso por uma pessoa, runner ou agente.
+
 ## Estrutura
 
 ```text
