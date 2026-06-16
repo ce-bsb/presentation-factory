@@ -1,31 +1,62 @@
 # IBM Presentation Factory
 
-Repositório para montar pacotes reproduzíveis de apresentações HTML e servir
-como base de referência para Bob ou qualquer IA gerar decks dentro dos padrões
-do IBM Client Engineering.
+Base para criar, padronizar e reutilizar apresentações HTML no IBM Client
+Engineering.
 
-O objetivo é concentrar em um só lugar:
+Use este repositório para clonar uma referência local, entregar a pasta para Bob
+ou outra IA, e pedir que uma apresentação seja gerada ou modificada seguindo os
+padrões de estrutura, cores, fontes, responsividade, assets e governança.
 
-- como clonar, validar e usar o repositório;
-- como estruturar apresentações, templates, assets e briefs;
-- quais cores, fontes, tamanhos, espaçamentos e regras responsivas seguir;
-- quando reutilizar um template existente e quando criar outro;
-- como pedir para uma IA usar esta pasta como base antes de gerar ou modificar
-  uma apresentação.
+## Em uma frase
 
-A arquitetura organiza conteúdo por dono: cada cliente mantém suas
-apresentações e seus assets; materiais corporativos ficam na organização
-correspondente.
+O Presentation Factory transforma brief, template, assets e regras visuais em um
+workspace autocontido para gerar apresentações HTML consistentes.
 
-## Primeiro uso
+```mermaid
+flowchart LR
+    A[Brief] --> E[presentation.toml]
+    B[Template HTML] --> E
+    C[Assets e identidade] --> E
+    D[Modelo / alias] --> E
+    E --> F[Builder]
+    F --> G["dist/slug/modelo/workspace"]
+    G --> H["Apresentacao HTML"]
+```
 
-### 1. Instale os pré-requisitos
+## Para Que Serve
 
-- Git.
-- Python 3.11 ou superior.
-- Acesso ao repositório `ce-bsb/presentation-factory` no GitHub.
+- Dar uma base comum para Bob ou qualquer IA criar apresentações.
+- Evitar decks soltos em pastas locais sem padrão.
+- Reutilizar templates, logos, CSS, imagens e prompts.
+- Manter cores, fontes, tamanhos e responsividade documentados.
+- Gerar um pacote reproduzível que qualquer pessoa do time consiga abrir.
 
-Confira as versões:
+## Como Usar
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/ce-bsb/presentation-factory.git
+cd presentation-factory
+```
+
+Ou via SSH:
+
+```bash
+git clone git@github.com:ce-bsb/presentation-factory.git
+cd presentation-factory
+```
+
+Faça um fork se quiser trabalhar em uma cópia própria antes de abrir pull
+request.
+
+### 2. Valide o ambiente
+
+Requisitos:
+
+- Git
+- Python 3.11 ou superior
+- `make`
 
 ```bash
 git --version
@@ -33,24 +64,7 @@ python3 --version
 make --version
 ```
 
-### 2. Clone o repositório
-
-```bash
-git clone https://github.com/ce-bsb/presentation-factory.git
-cd presentation-factory
-```
-
-Se preferir usar SSH:
-
-```bash
-git clone git@github.com:ce-bsb/presentation-factory.git
-cd presentation-factory
-```
-
-Se quiser contribuir em uma cópia própria antes de abrir pull request, faça um
-fork no GitHub e clone a URL do seu fork.
-
-### 3. Valide a instalação local
+Depois rode:
 
 ```bash
 make list
@@ -58,16 +72,13 @@ make validate
 make test
 ```
 
-`make list` mostra as apresentações disponíveis. `make validate` confere
-manifestos, templates, modelos e assets. `make test` executa a suíte de testes.
-
-### 4. Gere uma apresentação
+### 3. Gere uma apresentação
 
 ```bash
 make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
 ```
 
-O pacote gerado fica em:
+O resultado fica em:
 
 ```text
 dist/<slug-da-apresentacao>/primary/
@@ -75,9 +86,8 @@ dist/<slug-da-apresentacao>/primary/
 ├── manifest.json
 ├── prompt.md
 └── workspace/
+    └── index.html
 ```
-
-### 5. Abra o resultado
 
 Abra no navegador:
 
@@ -85,85 +95,98 @@ Abra no navegador:
 dist/<slug-da-apresentacao>/primary/workspace/index.html
 ```
 
-Esse `workspace` é autocontido: ele reúne o template, o roteiro, os assets e o
-prompt preparados para uso por uma pessoa, runner ou agente.
+## Usando Com Bob ou IA
 
-### 6. Use com Bob ou outra IA
-
-Depois de clonar, peça para a IA usar a pasta do repositório como base de
-conhecimento e geração. Exemplo:
+Depois de clonar, peça para a IA usar esta pasta como base.
 
 ```text
-Use esta pasta presentation-factory como referência. Leia a wiki, o README, os
-templates, os assets e os padrões visuais. Gere ou modifique a apresentação
-seguindo os padrões do repositório, sem inventar cores, fontes, tamanhos ou
-estruturas fora do que está documentado.
+Use esta pasta presentation-factory como referência.
+
+Leia o README, a wiki, os templates, os assets e os padrões visuais.
+Gere ou modifique a apresentação seguindo os padrões do repositório.
+Não invente cores, fontes, tamanhos, logos ou estruturas fora do que está
+documentado.
 ```
 
-Para uma apresentação nova, descreva também público, objetivo, mensagens
-principais, cliente, duração esperada e materiais de referência.
+Informe também:
 
-## Estrutura
+- objetivo da apresentação;
+- público;
+- cliente ou organização;
+- mensagens principais;
+- duração esperada;
+- materiais de referência.
 
-```text
-clients/
-├── banco-do-brasil/
-│   ├── assets/
-│   ├── archive/
-│   ├── presentations/
-│   ├── templates/
-│   └── entity.toml
-└── caixa/
-    ├── assets/
-    └── entity.toml
-organizations/
-└── ibm/
-    ├── assets/
-    ├── design-systems/
-    ├── presentations/
-    ├── templates/
-    └── entity.toml
-catalog/models.toml
-src/presentation_factory/
-tests/
-dist/
+## Estrutura Visual
+
+```mermaid
+flowchart TB
+    R["presentation-factory"]
+
+    R --> C["clients/"]
+    R --> O["organizations/"]
+    R --> M["catalog/"]
+    R --> S["src/presentation_factory/"]
+    R --> T["tests/"]
+    R --> D["dist/"]
+
+    C --> CP["presentations/"]
+    C --> CT["templates/"]
+    C --> CA["assets/"]
+
+    O --> OP["presentations/"]
+    O --> OT["templates/"]
+    O --> OA["assets/"]
+
+    M --> MM["models.toml"]
+    S --> CLI["CLI e builder"]
+    D --> OUT["pacotes gerados"]
 ```
 
-## Regra de ownership
+## Onde Colocar Cada Coisa
 
-- Conteúdo do Banco do Brasil fica em `clients/banco-do-brasil/`.
-- Conteúdo da CAIXA fica em `clients/caixa/`.
-- Logos, design systems e apresentações internas IBM ficam em
-  `organizations/ibm/`.
-- `src/` contém apenas o motor genérico.
-- `dist/` contém pacotes gerados e não é versionado.
-- Toda pasta em `presentations/` deve conter `brief.md` e
-  `presentation.toml`; apresentações HTML completas pertencem à camada
-  `templates/`.
+| Item | Onde fica |
+|---|---|
+| Brief da apresentação | `clients/<cliente>/presentations/<slug>/brief.md` |
+| Manifesto | `clients/<cliente>/presentations/<slug>/presentation.toml` |
+| Template HTML | `clients/<cliente>/templates/<template>/` |
+| Assets do cliente | `clients/<cliente>/assets/` |
+| Assets IBM | `organizations/ibm/assets/` |
+| Modelos disponíveis | `catalog/models.toml` |
+| Pacote gerado | `dist/<slug>/<modelo>/` |
 
-Uma apresentação pode usar assets de outra organização sem duplicá-los no
-repositório. A associação é explícita:
+## Fluxo de Trabalho
 
-```toml
-[assets]
-"assets/brand/logo.svg" = "clients/banco-do-brasil/assets/img/logo.svg"
-"assets/partner/logo-dark.svg" = "organizations/ibm/assets/img/logo-dark.svg"
+```mermaid
+sequenceDiagram
+    participant Pessoa
+    participant IA as Bob ou IA
+    participant Repo as Presentation Factory
+    participant Builder
+    participant Deck as HTML gerado
+
+    Pessoa->>Repo: clona ou faz fork
+    Pessoa->>IA: pede para usar a pasta como base
+    IA->>Repo: le README, wiki, templates e assets
+    IA->>Repo: cria ou modifica brief/template/assets
+    Pessoa->>Builder: make validate / make test / make build
+    Builder->>Deck: gera workspace/index.html
+    Pessoa->>Deck: revisa visual, conteúdo e PDF
 ```
 
-O builder copia esses arquivos para o workspace gerado. A origem continua na
-pasta de seu proprietário.
+## Padrões Essenciais
 
-## Arquivos de apresentação
+- Tema sempre claro.
+- Fonte principal: IBM Plex Sans.
+- Fonte técnica: IBM Plex Mono.
+- Texto geral com no mínimo `18px`.
+- Referência principal de teste: `1280 x 720`.
+- Layout responsivo, sem texto cortado.
+- Cores vindas da identidade IBM, do cliente ou dos tokens existentes.
+- Navegação por teclado, toque, índice e impressão em PDF.
+- Nada de caminhos absolutos da máquina local.
 
-Cada apresentação fica dentro do seu dono:
-
-```text
-clients/<cliente>/presentations/<slug>/
-├── brief.md
-└── presentation.toml
-```
-
-Exemplo:
+## Exemplo de Manifesto
 
 ```toml
 name = "Nome da apresentação"
@@ -174,15 +197,10 @@ default_model = "primary"
 [assets]
 "assets/brand/styles.css" = "clients/<cliente>/assets/css/styles.css"
 "assets/brand/logo.svg" = "clients/<cliente>/assets/img/logo.svg"
+"assets/partner/logo-light.svg" = "organizations/ibm/assets/img/logo-light.svg"
 ```
 
-Os slugs devem ser únicos no repositório. O validador rejeita slugs ambíguos,
-modelos inexistentes, assets ausentes, caminhos externos e pastas de
-apresentação sem manifesto.
-
-## Comandos
-
-Requer Python 3.11 ou superior.
+## Comandos Úteis
 
 ```bash
 make list
@@ -191,7 +209,7 @@ make test
 make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
 ```
 
-Uso direto:
+Uso direto da CLI:
 
 ```bash
 PYTHONPATH=src python3 -m presentation_factory build \
@@ -199,22 +217,22 @@ PYTHONPATH=src python3 -m presentation_factory build \
   --model alternate
 ```
 
-Saída:
+## Documentação Completa
 
-```text
-dist/<apresentação>/<modelo>/
-├── brief.md
-├── manifest.json
-├── prompt.md
-└── workspace/
-```
+A wiki detalha como usar, criar e modificar apresentações:
 
-## Modelos
+- Primeiro uso
+- Usando com Bob ou IA
+- Criando uma apresentação
+- Templates e assets
+- Padrões visuais
+- Comandos e automação
+- Qualidade e governança
 
-Os aliases ficam em `catalog/models.toml`. IDs e credenciais reais permanecem
-em variáveis de ambiente ou secrets do runner e não são gravados no manifesto.
+Wiki: https://github.com/ce-bsb/presentation-factory/wiki
 
 ## GitHub Actions
 
-O workflow executa validação e testes em pushes e pull requests. Na execução
-manual, recebe apresentação e modelo e publica o pacote como artifact.
+O workflow valida pushes e pull requests. Na execução manual, ele recebe
+apresentação e modelo, monta o pacote e publica `dist/<slug>/<modelo>` como
+artifact.
