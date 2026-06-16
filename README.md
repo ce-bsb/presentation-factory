@@ -1,70 +1,205 @@
 # IBM Presentation Factory
 
-Base para criar, padronizar e reutilizar apresentações HTML no IBM Client
-Engineering.
+Base de referência para criar apresentações HTML com Bob, Codex, Claude ou
+qualquer IA que consiga ler uma pasta local.
 
-Use este repositório para clonar uma referência local, entregar a pasta para Bob
-ou outra IA, e pedir que uma apresentação seja gerada ou modificada seguindo os
-padrões de estrutura, cores, fontes, responsividade, assets e governança.
+O uso principal é simples: clone este repositório, abra a pasta no seu
+computador e peça para a IA usar tudo aqui como referência e requisitos para
+gerar ou modificar uma apresentação.
 
-## Em uma frase
-
-O Presentation Factory transforma brief, template, assets e regras visuais em um
-workspace autocontido para gerar apresentações HTML consistentes.
+## Ideia Principal
 
 ```mermaid
 flowchart LR
-    A[Brief] --> E[presentation.toml]
-    B[Template HTML] --> E
-    C[Assets e identidade] --> E
-    D[Modelo / alias] --> E
-    E --> F[Builder]
-    F --> G["dist/slug/modelo/workspace"]
-    G --> H["Apresentacao HTML"]
+    A["Clone a pasta"] --> B["Abra no Bob, Codex, Claude ou outra IA"]
+    B --> C["A IA lê README, wiki, templates e assets"]
+    C --> D["Você passa o objetivo da apresentação"]
+    D --> E["A IA gera ou modifica o deck"]
+    E --> F["Você revisa e valida o HTML"]
 ```
 
-## Para Que Serve
+## O Que Tem Nesta Pasta
 
-- Dar uma base comum para Bob ou qualquer IA criar apresentações.
-- Evitar decks soltos em pastas locais sem padrão.
-- Reutilizar templates, logos, CSS, imagens e prompts.
-- Manter cores, fontes, tamanhos e responsividade documentados.
-- Gerar um pacote reproduzível que qualquer pessoa do time consiga abrir.
+Este repositório reúne os requisitos para uma IA criar apresentações no padrão
+do IBM Client Engineering:
 
-## Como Usar
+- estrutura de pastas para apresentações, templates e assets;
+- padrões de cores, fontes, tamanhos e responsividade;
+- templates HTML reutilizáveis;
+- assets de clientes e IBM;
+- exemplos de `brief.md` e `presentation.toml`;
+- documentação de como criar, modificar e revisar um deck;
+- comandos opcionais para validar e gerar pacotes reproduzíveis.
 
-### 1. Clone o repositório
+## 1. Clone Para Seu Computador
+
+Via HTTPS:
 
 ```bash
 git clone https://github.com/ce-bsb/presentation-factory.git
 cd presentation-factory
 ```
 
-Ou via SSH:
+Via SSH:
 
 ```bash
 git clone git@github.com:ce-bsb/presentation-factory.git
 cd presentation-factory
 ```
 
-Faça um fork se quiser trabalhar em uma cópia própria antes de abrir pull
-request.
+Se quiser adaptar antes de contribuir, faça um fork no GitHub e clone a URL do
+seu fork.
 
-### 2. Valide o ambiente
+## 2. Abra a Pasta na IA
 
-Requisitos:
+Use a ferramenta que preferir:
 
-- Git
-- Python 3.11 ou superior
-- `make`
+- Bob
+- Codex
+- Claude
+- Cursor
+- VS Code com agente de IA
+- outra IA com acesso aos arquivos locais
 
-```bash
-git --version
-python3 --version
-make --version
+O importante é a IA conseguir ler a pasta `presentation-factory`.
+
+## 3. Peça Para a IA Usar Como Referência
+
+Use este prompt inicial:
+
+```text
+Use esta pasta presentation-factory como base de referência e requisitos para
+criar ou modificar uma apresentação HTML.
+
+Antes de alterar qualquer coisa:
+- leia o README;
+- leia a wiki;
+- leia os templates disponíveis;
+- leia os assets e CSS existentes;
+- siga os padrões de cores, fontes, tamanhos, responsividade, navegação e PDF;
+- não invente logos, cores, fontes ou estrutura visual fora do que está aqui;
+- mantenha caminhos relativos;
+- preserve a separação entre presentations, templates e assets.
 ```
 
-Depois rode:
+Depois envie o pedido da apresentação:
+
+```text
+Crie uma apresentação para:
+- objetivo: <objetivo>;
+- público: <público>;
+- cliente ou organização: <cliente/organização>;
+- mensagens principais: <mensagens>;
+- duração esperada: <tempo>;
+- materiais de referência: <arquivos, links ou contexto>.
+```
+
+## 4. Como Usar Com Bob
+
+Há duas formas recomendadas.
+
+### Opção A: Usar a pasta diretamente
+
+1. Clone o repositório.
+2. Abra a pasta `presentation-factory` no ambiente onde o Bob consegue acessar
+   arquivos.
+3. Peça para o Bob ler a pasta e usar como referência.
+4. Passe o objetivo da apresentação.
+5. Peça para ele gerar ou modificar os arquivos seguindo os padrões.
+
+Prompt para Bob:
+
+```text
+Bob, use a pasta presentation-factory como referência oficial para gerar esta
+apresentação.
+
+Leia README, wiki, templates, assets, CSS e exemplos antes de propor mudanças.
+Siga os padrões visuais e técnicos documentados. Quando faltar informação,
+pergunte ou marque como lacuna. Não invente dados, logos, cores ou fontes.
+```
+
+### Opção B: Criar um modo/projeto do Bob
+
+Crie um projeto ou modo chamado, por exemplo, `Presentation Factory`.
+
+Configure as instruções do projeto com este texto:
+
+```text
+Você é um assistente para criar e modificar apresentações HTML usando o
+Presentation Factory.
+
+Sempre use a pasta presentation-factory como fonte de requisitos:
+- README;
+- wiki;
+- templates;
+- assets;
+- CSS;
+- exemplos de apresentações;
+- padrões visuais.
+
+Regras obrigatórias:
+- tema sempre claro;
+- IBM Plex Sans como fonte principal;
+- IBM Plex Mono para código ou conteúdo técnico;
+- texto geral com no mínimo 18px;
+- layout testado em 1280 x 720;
+- responsividade sem texto cortado;
+- cores vindas dos assets, CSS ou identidade documentada;
+- navegação por teclado e toque;
+- impressão em PDF sem controles;
+- caminhos relativos;
+- sem dados inventados.
+
+Antes de gerar, confirme objetivo, público, cliente, mensagens principais,
+materiais de referência e lacunas.
+```
+
+Depois, em cada nova solicitação, informe apenas o contexto da apresentação e os
+materiais de referência.
+
+## 5. O Que a IA Deve Gerar ou Alterar
+
+Para uma apresentação nova, a IA normalmente deve criar:
+
+```text
+clients/<cliente>/presentations/<slug>/
+├── brief.md
+└── presentation.toml
+```
+
+Se precisar de uma estrutura HTML nova, ela deve criar ou adaptar um template:
+
+```text
+clients/<cliente>/templates/<template>/
+├── index.html
+├── README.md
+└── assets/
+```
+
+Assets reutilizáveis devem ficar em:
+
+```text
+clients/<cliente>/assets/
+organizations/ibm/assets/
+```
+
+## 6. Regras Que a IA Deve Seguir
+
+| Tema | Regra |
+|---|---|
+| Cores | Usar identidade IBM, identidade do cliente ou tokens CSS existentes |
+| Fonte | IBM Plex Sans; IBM Plex Mono para código |
+| Tamanho | Texto geral com no mínimo `18px` |
+| Tema | Sempre claro |
+| Responsividade | Testar principalmente em `1280 x 720` |
+| Assets | Não duplicar logos, CSS ou imagens existentes |
+| Caminhos | Usar caminhos relativos |
+| Dados | Não inventar fatos, números ou nomes |
+| PDF | Impressão sem controles de navegação |
+
+## 7. Validação Opcional
+
+Se tiver Python 3.11 ou superior e `make`, rode:
 
 ```bash
 make list
@@ -72,52 +207,19 @@ make validate
 make test
 ```
 
-### 3. Gere uma apresentação
+Para montar um workspace:
 
 ```bash
 make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
 ```
 
-O resultado fica em:
-
-```text
-dist/<slug-da-apresentacao>/primary/
-├── brief.md
-├── manifest.json
-├── prompt.md
-└── workspace/
-    └── index.html
-```
-
-Abra no navegador:
+Abra o resultado:
 
 ```text
 dist/<slug-da-apresentacao>/primary/workspace/index.html
 ```
 
-## Usando Com Bob ou IA
-
-Depois de clonar, peça para a IA usar esta pasta como base.
-
-```text
-Use esta pasta presentation-factory como referência.
-
-Leia o README, a wiki, os templates, os assets e os padrões visuais.
-Gere ou modifique a apresentação seguindo os padrões do repositório.
-Não invente cores, fontes, tamanhos, logos ou estruturas fora do que está
-documentado.
-```
-
-Informe também:
-
-- objetivo da apresentação;
-- público;
-- cliente ou organização;
-- mensagens principais;
-- duração esperada;
-- materiais de referência.
-
-## Estrutura Visual
+## Estrutura da Pasta
 
 ```mermaid
 flowchart TB
@@ -127,7 +229,6 @@ flowchart TB
     R --> O["organizations/"]
     R --> M["catalog/"]
     R --> S["src/presentation_factory/"]
-    R --> T["tests/"]
     R --> D["dist/"]
 
     C --> CP["presentations/"]
@@ -138,88 +239,14 @@ flowchart TB
     O --> OT["templates/"]
     O --> OA["assets/"]
 
-    M --> MM["models.toml"]
-    S --> CLI["CLI e builder"]
-    D --> OUT["pacotes gerados"]
+    M --> MM["modelos"]
+    S --> CLI["validação e builder"]
+    D --> OUT["saída gerada"]
 ```
 
-## Onde Colocar Cada Coisa
+## Onde Ler Mais
 
-| Item | Onde fica |
-|---|---|
-| Brief da apresentação | `clients/<cliente>/presentations/<slug>/brief.md` |
-| Manifesto | `clients/<cliente>/presentations/<slug>/presentation.toml` |
-| Template HTML | `clients/<cliente>/templates/<template>/` |
-| Assets do cliente | `clients/<cliente>/assets/` |
-| Assets IBM | `organizations/ibm/assets/` |
-| Modelos disponíveis | `catalog/models.toml` |
-| Pacote gerado | `dist/<slug>/<modelo>/` |
-
-## Fluxo de Trabalho
-
-```mermaid
-sequenceDiagram
-    participant Pessoa
-    participant IA as Bob ou IA
-    participant Repo as Presentation Factory
-    participant Builder
-    participant Deck as HTML gerado
-
-    Pessoa->>Repo: clona ou faz fork
-    Pessoa->>IA: pede para usar a pasta como base
-    IA->>Repo: le README, wiki, templates e assets
-    IA->>Repo: cria ou modifica brief/template/assets
-    Pessoa->>Builder: make validate / make test / make build
-    Builder->>Deck: gera workspace/index.html
-    Pessoa->>Deck: revisa visual, conteúdo e PDF
-```
-
-## Padrões Essenciais
-
-- Tema sempre claro.
-- Fonte principal: IBM Plex Sans.
-- Fonte técnica: IBM Plex Mono.
-- Texto geral com no mínimo `18px`.
-- Referência principal de teste: `1280 x 720`.
-- Layout responsivo, sem texto cortado.
-- Cores vindas da identidade IBM, do cliente ou dos tokens existentes.
-- Navegação por teclado, toque, índice e impressão em PDF.
-- Nada de caminhos absolutos da máquina local.
-
-## Exemplo de Manifesto
-
-```toml
-name = "Nome da apresentação"
-template = "clients/<cliente>/templates/<template>"
-brief = "clients/<cliente>/presentations/<slug>/brief.md"
-default_model = "primary"
-
-[assets]
-"assets/brand/styles.css" = "clients/<cliente>/assets/css/styles.css"
-"assets/brand/logo.svg" = "clients/<cliente>/assets/img/logo.svg"
-"assets/partner/logo-light.svg" = "organizations/ibm/assets/img/logo-light.svg"
-```
-
-## Comandos Úteis
-
-```bash
-make list
-make validate
-make test
-make build PRESENTATION=<slug-da-apresentacao> MODEL=primary
-```
-
-Uso direto da CLI:
-
-```bash
-PYTHONPATH=src python3 -m presentation_factory build \
-  <slug-da-apresentacao> \
-  --model alternate
-```
-
-## Documentação Completa
-
-A wiki detalha como usar, criar e modificar apresentações:
+A wiki detalha os padrões e fluxos:
 
 - Primeiro uso
 - Usando com Bob ou IA
@@ -230,9 +257,3 @@ A wiki detalha como usar, criar e modificar apresentações:
 - Qualidade e governança
 
 Wiki: https://github.com/ce-bsb/presentation-factory/wiki
-
-## GitHub Actions
-
-O workflow valida pushes e pull requests. Na execução manual, ele recebe
-apresentação e modelo, monta o pacote e publica `dist/<slug>/<modelo>` como
-artifact.
