@@ -1,5 +1,5 @@
 name = "BB DIJUR - IA para avaliação de sentenças"
-template = "clients/banco-do-brasil/templates/dirco-deck"
+template = "clients/banco-do-brasil/templates/standard-deck"
 brief = "clients/banco-do-brasil/presentations/bb-dijur-sentencas/brief.md"
 default_model = "primary"
 

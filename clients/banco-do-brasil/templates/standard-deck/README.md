@@ -1,7 +1,7 @@
-# BB DIRCO Deck
+# BB Standard Deck
 
-Template de apresentação específico do Banco do Brasil, derivado do roteiro
-DIRCO.
+Template de apresentação do Banco do Brasil para decks HTML no padrão IBM
+Client Engineering.
 
 O diretório contém somente a estrutura HTML e o controlador do deck. Estilos,
 logos e imagens são injetados pelo mapa `[assets]` de cada

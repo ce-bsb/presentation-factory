@@ -122,7 +122,7 @@ class BuilderTest(unittest.TestCase):
 
         template = (
             ROOT
-            / "clients/banco-do-brasil/templates/dirco-deck/index.html"
+            / "clients/banco-do-brasil/templates/standard-deck/index.html"
         ).read_text(encoding="utf-8")
         self.assertIn('name="color-scheme" content="light"', template)
 
