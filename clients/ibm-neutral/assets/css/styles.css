@@ -1,18 +1,15 @@
 /* =========================================================================
-   IBM — Slide deck
-   IBM Design Language / Carbon Design System. 8px base grid. IBM Plex typography.
-   Identidade visual institucional: IBM
+   IBM Neutral · Unidade de negócio — Slide deck
+   IBM Design Language / Carbon-inspired. 8px base grid. IBM Plex typography.
+   Identidade visual institucional: IBM Neutral Econômica Federal
    Enhanced with improved accessibility, performance, and design consistency.
    ========================================================================= */
 
 /* ---------- Tokens ---------- */
-/* Aligned with IBM Carbon Design System v11 (design-2.md).
-   Carbon-spec tokens are mirrored as CSS custom properties; legacy aliases
-   are preserved to avoid breaking the existing slide deck markup. */
 :root {
   color-scheme: light;
 
-  /* ---- IBM Carbon grayscale ---- */
+  /* IBM Carbon grayscale */
   --white:       #ffffff;
   --gray-10:     #f4f4f4;
   --gray-20:     #e0e0e0;
@@ -24,102 +21,35 @@
   --gray-90:     #262626;
   --gray-100:    #161616;
 
-  /* ---- IBM Blue — primary brand color ---- */
+  /* IBM Carbon accents */
   --ibm-blue:    #0f62fe;
   --ibm-blue-h:  #0043ce;
   --ibm-blue-d:  #002d9c;
-
-  /* ---- IBM Core Colors — Carbon Design System ---- */
   --ibm-cyan:    #1192e8;
-  --ibm-cyan-h:  #0072c3;
-  --ibm-magenta: #ee5396;
-  --ibm-purple:  #8a3ffc;
-  --ibm-teal:    #009d9a;
+  --ibm-green:   #24a148;
+  --ibm-accent-blue: var(--ibm-blue);
+  --ibm-accent-cyan: var(--ibm-cyan);
 
-  /* ---- Support / status colors (Carbon v11) ---- */
-  --red-50:      #fa4d56;   /* error  */
-  --red-60:      #da1e28;   /* error on light bg */
-  --green-50:    #24a148;   /* success */
-  --green-60:    #198038;
-  --yellow-30:   #f1c21b;   /* warning */
-  --blue-50:     #4589ff;   /* info / dark-mode interactive */
+  /* Semantic */
+  --bg:          var(--white);
+  --bg-alt:      var(--gray-10);
+  --ink:         var(--gray-100);
+  --ink-muted:   var(--gray-70);
+  --ink-faint:   var(--gray-50);
+  --line:        var(--gray-20);
+  --line-strong: var(--gray-30);
+  --accent:      var(--ibm-blue);
+  --accent-h:    var(--ibm-blue-d);
 
-  /* ---- Aliases retrocompatíveis ---- */
-  --ibm-accent-blue:     var(--ibm-blue);
-  --ibm-accent-cyan:   var(--ibm-cyan);
+  /* 8px grid */
+  --u-1: 4px;  --u-2: 8px;  --u-3: 12px; --u-4: 16px;
+  --u-5: 24px; --u-6: 32px; --u-7: 40px; --u-8: 48px;
+  --u-9: 64px; --u-10: 80px; --u-11: 96px; --u-12: 128px;
 
-  /* ---- Carbon semantic role tokens (per design-2.md §Color System) ---- */
-  --interactive:     var(--ibm-blue);     /* $interactive — primary actions, links, focus */
-  --background:      var(--white);        /* $background — page background */
-  --layer:           var(--gray-10);      /* $layer — cards, inputs, dropdowns */
-  --layer-accent:    var(--gray-20);      /* $layer-accent — hover/secondary surface */
-  --border-subtle:   var(--gray-20);      /* $border-subtle — dividers, input rest */
-  --border-strong:   var(--gray-30);      /* $border-strong — focus/active borders */
-  --text-primary:    var(--gray-100);     /* $text-primary — body, headings */
-  --text-secondary:  var(--gray-70);      /* $text-secondary — labels, helper */
-  --text-helper:     var(--gray-60);      /* $text-helper */
-  --text-disabled:   var(--gray-50);      /* $text-disabled */
-  --text-on-color:   var(--white);        /* text rendered on filled buttons */
-  --support-error:   var(--red-60);       /* $support-error */
-  --support-success: var(--green-60);     /* $support-success */
-  --support-warning: var(--yellow-30);    /* $support-warning */
-  --support-info:    var(--ibm-blue);     /* $support-info */
-
-  /* AI-specific tokens — apply ONLY on genuine AI surfaces (design-2.md §Color) */
-  --ai-border-start: rgba(69, 137, 255, 0.36);
-  --ai-border-end:   rgba(166, 200, 255, 0.36);
-  --ai-aura-start:   rgba(69, 137, 255, 0.10);
-  --ai-aura-end:     rgba(166, 200, 255, 0.00);
-
-  /* ---- Legacy semantic aliases (kept for existing components) ---- */
-  --bg:          var(--background);
-  --bg-alt:      var(--layer);
-  --ink:         var(--text-primary);
-  --ink-muted:   var(--text-secondary);
-  --ink-faint:   var(--text-disabled);
-  --line:        var(--border-subtle);
-  --line-strong: var(--border-strong);
-  --accent:      var(--interactive);
-  --accent-h:    var(--ibm-blue-h);
-  --accent-alt:  var(--ibm-cyan);
-
-  /* ---- Carbon spacing scale (base-8, design-2.md §Spacing) ---- */
-  --spacing-01:  2px;
-  --spacing-02:  4px;
-  --spacing-03:  8px;
-  --spacing-04:  12px;
-  --spacing-05:  16px;
-  --spacing-06:  24px;
-  --spacing-07:  32px;
-  --spacing-08:  40px;
-  --spacing-09:  48px;
-  --spacing-10:  64px;
-  --spacing-11:  80px;
-  --spacing-12:  96px;
-  --spacing-13:  160px;
-
-  /* Legacy spacing aliases — mapped 1:1 to Carbon scale */
-  --u-1:  var(--spacing-02);   /* 4px  */
-  --u-2:  var(--spacing-03);   /* 8px  */
-  --u-3:  var(--spacing-04);   /* 12px */
-  --u-4:  var(--spacing-05);   /* 16px */
-  --u-5:  var(--spacing-06);   /* 24px */
-  --u-6:  var(--spacing-07);   /* 32px */
-  --u-7:  var(--spacing-08);   /* 40px */
-  --u-8:  var(--spacing-09);   /* 48px */
-  --u-9:  var(--spacing-10);   /* 64px */
-  --u-10: var(--spacing-11);   /* 80px */
-  --u-11: var(--spacing-12);   /* 96px */
-  --u-12: 128px;               /* non-Carbon legacy step (kept for back-compat) */
-
-  /* ---- Typography — IBM Plex (design-2.md §Typography) ---- */
+  /* Type scale — IBM Plex Sans (Productive + Expressive) */
   --font-sans:  'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:  'IBM Plex Mono', 'IBM Plex Sans', 'Helvetica Neue', monospace;
 
-  /* Presentation type set uses an 18px reading base. */
-  --type-set: productive;
-
-  /* Legacy numeric type scale */
   --text-12: 0.75rem;
   --text-14: 0.875rem;
   --text-16: 1rem;
@@ -132,53 +62,18 @@
   --text-54: 3.375rem;
   --text-76: 4.75rem;
 
-  /* Carbon type tokens (size · line-height · weight) */
-  --label-01-size: 0.75rem;        --label-01-lh: 1rem;        --label-01-weight: 400;
-  --helper-text-01-size: 0.75rem;  --helper-text-01-lh: 1rem;  --helper-text-01-weight: 400;
-  --body-compact-01-size: 1rem;    --body-compact-01-lh: 1.375rem;--body-compact-01-weight: 400;
-  --body-01-size: 1rem;            --body-01-lh: 1.5rem;       --body-01-weight: 400;
-  --body-02-size: 1.125rem;        --body-02-lh: 1.625rem;     --body-02-weight: 400;
-  --heading-compact-01-size: 0.875rem; --heading-compact-01-lh: 1.125rem; --heading-compact-01-weight: 600;
-  --heading-01-size: 0.875rem;     --heading-01-lh: 1.25rem;   --heading-01-weight: 600;
-  --heading-02-size: 1rem;         --heading-02-lh: 1.5rem;    --heading-02-weight: 600;
-  --heading-03-size: 1.25rem;      --heading-03-lh: 1.625rem;  --heading-03-weight: 400;
-  --heading-04-size: 1.75rem;      --heading-04-lh: 2.25rem;   --heading-04-weight: 400;
-  --heading-05-size: 2rem;         --heading-05-lh: 2.5rem;    --heading-05-weight: 400;
-
-  /* ---- Layout (design-2.md §Layout Grid) ---- */
+  /* Layout */
   --topbar-h: 56px;
   --navbar-h: 56px;
-  --grid-columns: 16;
-  --grid-gutter:  2rem;     /* 32px */
-  --grid-margin:  16px;     /* 5% or 16px minimum */
 
-  /* Breakpoints (informational — used by media queries below) */
-  --bp-sm:  320px;
-  --bp-md:  672px;
-  --bp-lg:  1056px;
-  --bp-xlg: 1312px;
-  --bp-max: 1584px;
+  /* Carbon motion tokens */
+  --ease: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --ease-out: cubic-bezier(0, 0, 0.38, 0.9);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
 
-  /* ---- Carbon motion tokens (design-2.md §Motion) ---- */
-  --ease-standard:  cubic-bezier(0.2, 0, 0.38, 0.9);  /* productive standard */
-  --ease-entrance:  cubic-bezier(0, 0, 0.38, 0.9);    /* entrance */
-  --ease-exit:      cubic-bezier(0.2, 0, 1, 0.9);     /* exit */
-
-  --duration-fast-01:     70ms;
-  --duration-fast-02:     110ms;
-  --duration-moderate-01: 150ms;
-  --duration-moderate-02: 240ms;
-  --duration-slow-01:     400ms;
-  --duration-slow-02:     700ms;
-
-  /* Legacy motion aliases */
-  --ease:     var(--ease-standard);
-  --ease-out: var(--ease-entrance);
-  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
-
-  /* ---- Focus outline (WCAG 2.1 AA) ---- */
-  --focus-color:  var(--interactive);
-  --focus-width:  2px;
+  /* Focus outline */
+  --focus-color: var(--ibm-blue);
+  --focus-width: 2px;
   --focus-offset: 2px;
 }
 
@@ -195,12 +90,9 @@ html {
 }
 body {
   font-family: var(--font-sans);
-  /* Presentation default: body-01 → 18px / 400. */
-  font-size: var(--body-01-size);
-  line-height: var(--body-01-lh);
-  font-weight: var(--body-01-weight);
-  color: var(--text-primary);
-  background: var(--background);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -208,31 +100,6 @@ body {
   overflow: hidden;
   min-height: 100vh;
   min-height: 100dvh;
-}
-
-/* ---------- Carbon type utility classes (design-2.md §Typography) ---------- */
-.cds-label-01          { font-size: var(--label-01-size);          line-height: var(--label-01-lh);          font-weight: var(--label-01-weight); }
-.cds-helper-text-01    { font-size: var(--helper-text-01-size);    line-height: var(--helper-text-01-lh);    font-weight: var(--helper-text-01-weight); color: var(--text-secondary); }
-.cds-body-compact-01   { font-size: var(--body-compact-01-size);   line-height: var(--body-compact-01-lh);   font-weight: var(--body-compact-01-weight); }
-.cds-body-01           { font-size: var(--body-01-size);           line-height: var(--body-01-lh);           font-weight: var(--body-01-weight); }
-.cds-body-02           { font-size: var(--body-02-size);           line-height: var(--body-02-lh);           font-weight: var(--body-02-weight); }
-.cds-heading-compact-01{ font-size: var(--heading-compact-01-size);line-height: var(--heading-compact-01-lh);font-weight: var(--heading-compact-01-weight); }
-.cds-heading-01        { font-size: var(--heading-01-size);        line-height: var(--heading-01-lh);        font-weight: var(--heading-01-weight); }
-.cds-heading-02        { font-size: var(--heading-02-size);        line-height: var(--heading-02-lh);        font-weight: var(--heading-02-weight); }
-.cds-heading-03        { font-size: var(--heading-03-size);        line-height: var(--heading-03-lh);        font-weight: var(--heading-03-weight); }
-.cds-heading-04        { font-size: var(--heading-04-size);        line-height: var(--heading-04-lh);        font-weight: var(--heading-04-weight); }
-.cds-heading-05        { font-size: var(--heading-05-size);        line-height: var(--heading-05-lh);        font-weight: var(--heading-05-weight); }
-
-/* ---------- Carbon support-state utility classes ---------- */
-.cds-support-error   { color: var(--support-error); }
-.cds-support-success { color: var(--support-success); }
-.cds-support-warning { color: var(--support-warning); }
-.cds-support-info    { color: var(--support-info); }
-
-/* ---------- Global focus outline (WCAG 2.1 AA) ---------- */
-:focus-visible {
-  outline: var(--focus-width) solid var(--focus-color);
-  outline-offset: var(--focus-offset);
 }
 
 img, svg {
@@ -292,8 +159,8 @@ button {
 .progress__bar {
   height: 100%;
   width: 14.2857%; /* 1/7 default */
-  background: var(--interactive);
-  transition: width var(--duration-moderate-02) var(--ease-standard);
+  background: var(--ibm-blue);
+  transition: width 240ms var(--ease);
   will-change: width;
 }
 
@@ -376,11 +243,7 @@ button {
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
-  /* Carbon moderate-02 / slow-01 envelope for slide transitions */
-  transition:
-    opacity var(--duration-moderate-02) var(--ease-standard),
-    transform var(--duration-slow-01) var(--ease-standard),
-    visibility 0s var(--duration-slow-01);
+  transition: opacity 240ms var(--ease), transform 320ms var(--ease), visibility 0s 320ms;
   overflow: auto;
   will-change: opacity, transform;
 }
@@ -388,10 +251,7 @@ button {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition:
-    opacity var(--duration-moderate-02) var(--ease-entrance),
-    transform var(--duration-slow-01) var(--ease-entrance),
-    visibility 0s;
+  transition: opacity 280ms var(--ease-out), transform 360ms var(--ease-out), visibility 0s;
 }
 .slide__inner {
   max-width: 1280px;
@@ -950,13 +810,11 @@ button {
   border: 1px solid var(--line-strong);
   background: var(--bg);
   margin-top: 2px;
-  transition:
-    background var(--duration-moderate-01) var(--ease-standard),
-    border-color var(--duration-moderate-01) var(--ease-standard);
+  transition: background 160ms var(--ease), border-color 160ms var(--ease);
 }
 .check input:checked + label::before {
-  background: var(--interactive);
-  border-color: var(--interactive);
+  background: var(--ibm-blue);
+  border-color: var(--ibm-blue);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M4 10l4 4 8-8' fill='none' stroke='%23fff' stroke-width='2.2'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
@@ -971,11 +829,11 @@ button {
   text-decoration-color: var(--line-strong);
 }
 .inline-link {
-  color: var(--interactive);
+  color: var(--accent);
   text-decoration: none;
   border-bottom: 1px solid currentColor;
   padding-bottom: 1px;
-  transition: color var(--duration-fast-02) var(--ease-standard);
+  transition: color 120ms var(--ease);
 }
 .inline-link:hover {
   color: var(--accent-h);
@@ -1050,14 +908,11 @@ button {
   padding: 0 var(--u-4);
   border: 1px solid transparent;
   background: var(--gray-100);
-  color: var(--text-on-color);
-  font-size: var(--body-01-size);
-  line-height: var(--body-01-lh);
+  color: var(--white);
+  font-size: var(--text-14);
   font-weight: 400;
   cursor: pointer;
-  transition:
-    background var(--duration-fast-02) var(--ease-standard),
-    border-color var(--duration-fast-02) var(--ease-standard);
+  transition: background 120ms var(--ease), border-color 120ms var(--ease);
   border-radius: 0;
 }
 .btn:hover {
@@ -1069,10 +924,10 @@ button {
 }
 
 .btn--primary {
-  background: var(--interactive);
+  background: var(--ibm-blue);
 }
 .btn--primary:hover {
-  background: var(--ibm-blue-h);
+  background: var(--ibm-blue-d);
 }
 
 .btn--ghost {
@@ -1174,7 +1029,7 @@ button {
   cursor: pointer;
   font-size: var(--text-14);
   color: var(--ink);
-  transition: background var(--duration-fast-02) var(--ease-standard);
+  transition: background 120ms var(--ease);
 }
 .index-item:hover {
   background: var(--bg-alt);
@@ -1229,56 +1084,6 @@ button {
   to   { opacity: 1; }
 }
 
-/* =========================================================================
-   Carbon Grid — 16-column responsive grid (design-2.md §Layout Grid)
-   Breakpoints: sm 320 / md 672 / lg 1056 / xlg 1312 / max 1584.
-   Gutter 32px (2rem). Margin 16px minimum, 5% otherwise.
-   ========================================================================= */
-.cds-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  column-gap: var(--grid-gutter);
-  row-gap: var(--grid-gutter);
-  padding-left: max(var(--grid-margin), 5%);
-  padding-right: max(var(--grid-margin), 5%);
-  width: 100%;
-}
-.cds-grid--narrow { column-gap: var(--spacing-05); }   /* 16px */
-.cds-grid--condensed { column-gap: 1px; row-gap: 1px; }
-
-/* Column-span helpers — follow Carbon's col-{breakpoint}-{span} naming */
-.cds-col-sm-4  { grid-column: span 4; }
-.cds-col-md-8  { grid-column: span 8; }
-.cds-col-lg-16 { grid-column: span 16; }
-
-@media (min-width: 672px)  { .cds-col-md-4  { grid-column: span 4; }
-                             .cds-col-md-8  { grid-column: span 8; }
-                             .cds-col-md-16 { grid-column: span 16; } }
-@media (min-width: 1056px) { .cds-col-lg-4  { grid-column: span 4; }
-                             .cds-col-lg-8  { grid-column: span 8; }
-                             .cds-col-lg-12 { grid-column: span 12; }
-                             .cds-col-lg-16 { grid-column: span 16; } }
-@media (min-width: 1312px) { .cds-col-xlg-4 { grid-column: span 4; }
-                             .cds-col-xlg-8 { grid-column: span 8; } }
-
-/* =========================================================================
-   AI surfaces (design-2.md §Color System — use ONLY for genuine AI UI)
-   ========================================================================= */
-.cds--ai-label {
-  position: relative;
-  isolation: isolate;
-}
-.cds--ai-label::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, var(--ai-aura-start), var(--ai-aura-end));
-  border: 1px solid transparent;
-  border-image: linear-gradient(180deg, var(--ai-border-start), var(--ai-border-end)) 1;
-  z-index: -1;
-}
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1331,8 +1136,6 @@ button {
   }
 }
 
-/* Enhanced with IBM Design Language principles — 2026
-   Aligned with Carbon Design System v11 (per design-2.md). See README.md
-   for the full changelog of token, motion, typography and grid additions. */
+/* Enhanced with IBM Design Language principles - 2026 */
 
 /* Made with agente de IA */

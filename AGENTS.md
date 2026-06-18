@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Start here when using this repository with Bob, Codex, Claude, Cursor or any
+Start here when using this repository with agente de IA, Codex, Claude, Cursor or any
 LLM coding agent.
 
 ## Role

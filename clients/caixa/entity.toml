@@ -1,8 +1,0 @@
-slug = "caixa"
-name = "CAIXA Econômica Federal"
-kind = "client"
-
-[design]
-system = "IBM Carbon Design System v11"
-font = "IBM Plex"
-language = "pt-BR"

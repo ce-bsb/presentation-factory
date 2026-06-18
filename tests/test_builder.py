@@ -30,16 +30,17 @@ class BuilderTest(unittest.TestCase):
         self.assertEqual(
             presentation_slugs(self.repository),
             [
-                "bb-dijur-sentencas",
-                "bb-dirco-workshop",
                 "ia-parceria-produtividade",
+                "ibm-ai-document-review",
+                "ibm-discovery-workshop",
+                "lorem-ipsum-demo",
             ],
         )
 
     def test_builds_package_with_selected_model(self) -> None:
         destination = build_package(
             self.repository,
-            "bb-dirco-workshop",
+            "ibm-discovery-workshop",
             model_alias="alternate",
             output=self.output / "package",
         )
@@ -50,7 +51,7 @@ class BuilderTest(unittest.TestCase):
         self.assertEqual(manifest["schema_version"], 2)
         self.assertEqual(manifest["model"]["alias"], "alternate")
         self.assertNotIn("model_id", manifest["model"])
-        self.assertEqual(manifest["owner"]["slug"], "banco-do-brasil")
+        self.assertEqual(manifest["owner"]["slug"], "ibm-enterprise")
         self.assertTrue((destination / "workspace/index.html").is_file())
         self.assertTrue(
             (destination / "workspace/assets/brand/styles.css").is_file()
@@ -80,7 +81,7 @@ class BuilderTest(unittest.TestCase):
         with self.assertRaises(ConfigurationError):
             build_package(
                 self.repository,
-                "bb-dirco-workshop",
+                "ibm-discovery-workshop",
                 model_alias="missing",
                 output=self.output / "package",
             )
@@ -95,8 +96,8 @@ class BuilderTest(unittest.TestCase):
 
     def test_entities_own_their_assets(self) -> None:
         expected = [
-            ROOT / "clients/banco-do-brasil/entity.toml",
-            ROOT / "clients/caixa/entity.toml",
+            ROOT / "clients/ibm-enterprise/entity.toml",
+            ROOT / "clients/ibm-neutral/entity.toml",
             ROOT / "organizations/ibm/entity.toml",
         ]
         self.assertTrue(all(path.is_file() for path in expected))
@@ -122,14 +123,14 @@ class BuilderTest(unittest.TestCase):
 
         template = (
             ROOT
-            / "clients/banco-do-brasil/templates/standard-deck/index.html"
+            / "clients/ibm-enterprise/templates/standard-deck/index.html"
         ).read_text(encoding="utf-8")
         self.assertIn('name="color-scheme" content="light"', template)
 
     def test_presentation_body_base_is_18px(self) -> None:
         stylesheets = [
-            ROOT / "clients/banco-do-brasil/assets/css/styles.css",
-            ROOT / "clients/caixa/assets/css/styles.css",
+            ROOT / "clients/ibm-enterprise/assets/css/styles.css",
+            ROOT / "clients/ibm-neutral/assets/css/styles.css",
             ROOT / "organizations/ibm/assets/css/styles.css",
         ]
         for path in stylesheets:

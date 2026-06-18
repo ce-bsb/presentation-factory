@@ -1,5 +1,5 @@
 PYTHON ?= python3
-PRESENTATION ?= bb-dirco-workshop
+PRESENTATION ?= ibm-discovery-workshop
 MODEL ?= primary
 CLI = PYTHONPATH=src $(PYTHON) -m presentation_factory
 

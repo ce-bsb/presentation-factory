@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Conversando com documentos e dados históricos — IBM · Unidade de negócio</title>
+  <meta name="description" content="Apresentação IBM para o IBM Enterprise — Unidade de negócio: Discovery e cocriação de uma solução de IA para conversar com documentos e dados históricos." />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="assets/brand/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#slide-1">Pular para o conteúdo</a>
+
+  <!-- Progress bar -->
+  <div class="progress" role="progressbar" aria-label="Progresso da apresentação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <span class="brand__ibm">
+          <img src="assets/partner/logo-dark.svg" alt="IBM" height="14" />
+        </span>
+        <span class="brand__sep" aria-hidden="true">×</span>
+        <span class="brand__bb">
+          <img src="assets/brand/logo.svg" alt="IBM Enterprise" height="14" />
+        </span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">IBM Experience Engineering</span>
+    </div>
+    <div class="topbar__right">
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 07</span>
+    </div>
+  </header>
+
+  <!-- Slides -->
+  <main class="deck" id="deck">
+
+    <!-- Slide 1 — Abertura -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-label="Slide 1 de 7: Abertura">
+      <div class="slide__inner">
+        <div class="cover-grid">
+          <div class="cover-grid__meta">
+            <span class="eyebrow eyebrow--accent">01 — Abertura</span>
+            <div class="cover-grid__rule" aria-hidden="true"></div>
+            <span class="kicker">IBM Experience Engineering</span>
+          </div>
+          <div class="cover-grid__title">
+            <h1 class="display">
+              Conversando com<br/>
+              <span class="display__alt">documentos e dados<br/>históricos</span>
+            </h1>
+          </div>
+          <div class="cover-grid__footer">
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">IBM Experience Engineering Leader</span>
+              <span class="presenter__name">Especialista IBM</span>
+              <span class="presenter__role cds-helper-text-01">Senior AI Engineer · IBM</span>
+            </div>
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">IBM Experience Engineering Designer</span>
+              <span class="presenter__name">Liderança IBM</span>
+              <span class="presenter__role cds-helper-text-01">Strategy Designer · IBM</span>
+            </div>
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Para</span>
+              <span class="presenter__name">IBM Enterprise</span>
+              <span class="presenter__role cds-helper-text-01">Unidade de negócio</span>
+            </div>
+          </div>
+        </div>
+        <div class="cover-mark" aria-hidden="true">
+          <!-- Composição segue a paleta Carbon. Cores via tokens semânticos sempre que possível. -->
+          <svg viewBox="0 0 320 320" width="100%" height="100%" role="img" aria-label="Marca gráfica IBM × Unidade de negócio">
+            <defs>
+              <pattern id="grid8" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+              </pattern>
+            </defs>
+            <rect width="320" height="320" fill="url(#grid8)" />
+            <rect x="32" y="32" width="128" height="128" fill="var(--ibm-blue-d)" />
+            <rect x="160" y="32" width="128" height="128" fill="var(--ibm-cyan)" />
+            <rect x="32" y="160" width="128" height="128" fill="var(--text-primary)" />
+            <rect x="160" y="160" width="128" height="128" fill="var(--interactive)" />
+            <line x1="160" y1="0" x2="160" y2="320" stroke="var(--text-primary)" stroke-width="1" />
+            <line x1="0" y1="160" x2="320" y2="160" stroke="var(--text-primary)" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 — Contexto / Hipótese -->
+    <section class="slide" id="slide-2" data-slide="2" aria-label="Slide 2 de 7: Contexto e hipótese">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Cenário</span>
+          <h2 class="title">Contexto e hipótese</h2>
+        </header>
+
+        <div class="two-col">
+          <article class="panel" aria-labelledby="panel-contexto-title">
+            <h3 class="panel__title cds-label-01" id="panel-contexto-title">Contexto</h3>
+            <p class="lede">
+              Vários perfis solicitam ou acessam informações disponíveis em documentos
+              produzidos pela Unidade de negócio. A busca por esse conteúdo é complexa e depende do
+              conhecimento prévio do interessado sobre em qual documento a informação
+              se encontra.
+            </p>
+          </article>
+
+          <article class="panel panel--accent" aria-labelledby="panel-hipotese-title">
+            <h3 class="panel__title cds-label-01" id="panel-hipotese-title">Hipótese</h3>
+            <p class="lede">
+              Acreditamos que é possível usar IA para <em>conversar</em> com esses
+              documentos, em linguagem natural, e produzir respostas alinhadas ao
+              perfil do demandante.
+            </p>
+            <p class="note">
+              Para avançar numa experimentação dessa hipótese, é necessário realizar
+              um <strong>Discovery</strong> e criar um <strong>caso de uso</strong>.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 — Pilot Engineering Method -->
+    <section class="slide" id="slide-3" data-slide="3" aria-label="Slide 3 de 7: Pilot Engineering Method">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — Pilot Engineering Method</span>
+          <h2 class="title">O que é um Discovery?</h2>
+        </header>
+
+        <div class="method">
+          <p class="lede method__text">
+            Discovery é o conjunto de atividades que realizamos para aprofundar nosso
+            conhecimento sobre um problema ou esclarecer dúvidas em processos
+            mapeados. Essas atividades são realizadas na <strong>fase inicial</strong>
+            do Pilot Engineering Method e coletam informações para definir o problema
+            e o escopo de experimentação.
+          </p>
+
+          <figure class="method-figure" aria-label="Pilot Engineering Method">
+            <img
+              src="assets/content/pilot-method.jpg"
+              alt="Pilot Engineering Method"
+              class="method-figure__image"
+              loading="lazy"
+              decoding="async"
+              width="2002"
+              height="1080"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 — Workshop Caso de Uso -->
+    <section class="slide slide--dense" id="slide-4" data-slide="4" aria-label="Slide 4 de 7: Workshop para Discovery do caso de uso">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — Preparação do Workshop</span>
+          <h2 class="title">Workshop para Discovery do caso de uso</h2>
+          <p class="subtitle">O que precisamos</p>
+        </header>
+
+        <div class="workshop">
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Um encontro de <strong>2h30</strong> com representantes dos perfis envolvidos no processo de confecção dos documentos e dos perfis que consomem essa informação.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Formato: <strong>presencial</strong>.</span>
+            </li>
+          </ul>
+
+          <table class="spec">
+            <caption class="sr-only">Itens a definir para o workshop de Discovery do caso de uso</caption>
+            <thead>
+              <tr>
+                <th scope="col">Definir</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pontos focais</th>
+                <td>Responsáveis pela logística do workshop: convites, avisos e alertas. <span class="muted">Na IBM:</span> <strong>Liderança IBM</strong>.</td>
+              </tr>
+              <tr>
+                <th scope="row">Convidados</th>
+                <td>Listar os perfis necessários e quem vai representá-los.</td>
+              </tr>
+              <tr>
+                <th scope="row">Data e hora</th>
+                <td><span class="pill pill--accent">Proposta</span> <time datetime="2026-05-22T09:30">22/05 — sexta-feira, das <strong>9h30 às 12h</strong></time>.</td>
+              </tr>
+              <tr>
+                <th scope="row">Local</th>
+                <td>IBM Studio ou ambiente corporativo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 — Workshop Discovery Técnico -->
+    <section class="slide slide--dense" id="slide-5" data-slide="5" aria-label="Slide 5 de 7: Workshop para Discovery Técnico">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">05 — Preparação do Workshop</span>
+          <h2 class="title">Workshop para Discovery Técnico</h2>
+          <p class="subtitle">O que é o Discovery Técnico</p>
+        </header>
+
+        <div class="workshop">
+          <p class="lede">
+            É o momento de esclarecer pontos do problema e aprofundar o conhecimento
+            sobre o cenário e os sistemas envolvidos no processo atual. Para esse
+            Discovery, é necessário:
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Um encontro de <strong>1h30</strong> com representantes das áreas técnicas responsáveis pelos sistemas envolvidos na produção, no armazenamento e na distribuição das informações.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Formato: <strong>presencial</strong>.</span>
+            </li>
+          </ul>
+
+          <table class="spec">
+            <caption class="sr-only">Itens a definir para o workshop de Discovery Técnico</caption>
+            <thead>
+              <tr>
+                <th scope="col">O que precisamos</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pontos focais</th>
+                <td>Responsáveis pela logística do workshop: convites, avisos e alertas. <span class="muted">Na IBM:</span> <strong>Liderança IBM</strong> (<a class="inline-link" href="mailto:contato@ibm.example">contato@ibm.example</a>).</td>
+              </tr>
+              <tr>
+                <th scope="row">Convidados</th>
+                <td>Listar os perfis necessários e quem vai representá-los.</td>
+              </tr>
+              <tr>
+                <th scope="row">Data e hora</th>
+                <td>
+                  <span class="pill pill--accent">Proposta</span>
+                  <time datetime="2026-05-28T16:00">28/05 (quinta-feira), das <strong>16h às 17h30</strong></time>
+                  <span class="muted">— ou —</span>
+                  <time datetime="2026-06-04T15:00">04/06 (quinta-feira), das <strong>15h às 16h30</strong></time>.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Local</th>
+                <td>IBM Studio ou ambiente corporativo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 — Próximos passos -->
+    <section class="slide" id="slide-6" data-slide="6" aria-label="Slide 6 de 7: Próximos passos">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">06 — Próximos passos</span>
+          <h2 class="title">O que acontece após o Discovery?</h2>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__step">
+            <span class="timeline__index">01</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Proposta de escopo</h3>
+              <p>
+                Com base nas informações compartilhadas e alinhadas no Discovery, a
+                IBM prepara uma <strong>proposta de escopo</strong> e apresenta um
+                <strong>cronograma de experimentação</strong>.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">02</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Alinhamento e cocriação</h3>
+              <p>
+                Alinhamos e preparamos o <strong>escopo final</strong> do trabalho e
+                iniciamos a <strong>fase de cocriação</strong>.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">03</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Quando acontece</h3>
+              <p>
+                O encontro de alinhamento do escopo ocorre <strong>uma semana após
+                a conclusão do Discovery</strong>.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Slide 7 — Tasks -->
+    <section class="slide" id="slide-7" data-slide="7" aria-label="Slide 7 de 7: Tasks para próximos passos">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">07 — Tasks</span>
+          <h2 class="title">Próximos passos antes do início da cocriação</h2>
+        </header>
+
+        <ul class="checklist" role="list">
+          <li class="check">
+            <input type="checkbox" id="task-1" />
+            <label for="task-1">
+              <span class="check__text">Definir as datas do <a href="#slide-4" class="inline-link" data-go="4">Discovery do Caso</a> e do <a href="#slide-5" class="inline-link" data-go="5">Discovery técnico</a></span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-2" />
+            <label for="task-2">
+              <span class="check__text">Definir participantes — perfis para o <a href="#slide-4" class="inline-link" data-go="4">workshop de caso</a> e o <a href="#slide-5" class="inline-link" data-go="5">workshop técnico</a></span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-3" />
+            <label for="task-3">
+              <span class="check__text">Definir local (IBM Studio ou ambiente corporativo)</span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-4" />
+            <label for="task-4">
+              <span class="check__text">Enviar convites</span>
+            </label>
+          </li>
+        </ul>
+
+        <footer class="closing">
+          <div class="closing__rule" aria-hidden="true"></div>
+          <p class="closing__text">
+            <span class="muted">Ponto focal IBM</span>
+            <strong>Liderança IBM — <a class="inline-link" href="mailto:contato@ibm.example">contato@ibm.example</a></strong>
+          </p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 3h12v1.5H2zM2 7.25h12v1.5H2zM2 11.5h12V13H2z"/></svg>
+      <span>Índice</span>
+    </button>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 3 4 8l5.5 5 1-1L6 8l4.5-4z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="m6.5 3-1 1L10 8l-4.5 4 1 1L12 8z"/></svg>
+      </button>
+    </div>
+    <span class="navbar__hint" aria-hidden="true">Use 1–7 para ir direto ao slide</span>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice da apresentação">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="index-title">
+      <header class="index-panel__head">
+        <h2 id="index-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">Abertura</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Contexto e hipótese</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">O que é um Discovery</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Workshop — Discovery do caso</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">Workshop — Discovery técnico</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">Próximos passos</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">Tasks</span></button></li>
+      </ol>
+      <footer class="index-panel__foot">
+        <span class="kbd">←</span><span class="kbd">→</span> navegar
+        &nbsp;·&nbsp;
+        <span class="kbd">1</span>–<span class="kbd">7</span> ir para slide
+        &nbsp;·&nbsp;
+        <span class="kbd">Esc</span> abrir / fechar índice
+        &nbsp;·&nbsp;
+        <span class="kbd">F</span> tela cheia
+      </footer>
+    </div>
+  </aside>
+
+  <script src="assets/js/deck.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

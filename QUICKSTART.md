@@ -9,7 +9,7 @@ cd presentation-factory
 
 ## 2. Open in an AI Tool
 
-Open this folder in Bob, Codex, Claude, Cursor or another agent.
+Open this folder in agente de IA, Codex, Claude, Cursor or another agent.
 
 Tell the agent:
 
@@ -24,7 +24,7 @@ Do not implement before proposing a narrative and implementation plan.
 ```text
 Objective:
 Audience:
-Client/organization:
+Organization:
 Main messages:
 Expected duration:
 Reference materials:

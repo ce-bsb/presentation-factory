@@ -3,17 +3,17 @@
 Framework leve para gerar e revisar apresentações HTML com IA, mantendo
 templates, assets, prompts e regras visuais em uma única fonte versionada.
 
-Clone o repositório, abra a pasta em Bob, Codex, Claude, Cursor ou outro agente
+Clone o repositório, abra a pasta em agente de IA, Codex, Claude, Cursor ou outro agente
 e peça para a IA usar os arquivos daqui como requisitos.
 
 ```mermaid
 flowchart LR
     A["Clonar"] --> B["Abrir na IA"]
     B --> C["IA lê AGENTS, prompts, templates e assets"]
-    C --> D["Pessoa passa objetivo e materiais"]
+    C --> D["Usuário passa objetivo e materiais"]
     D --> E["IA propõe plano"]
     E --> F["IA gera ou modifica o deck"]
-    F --> G["Pessoa revisa"]
+    F --> G["Usuário revisa"]
 ```
 
 ## Como Usar
@@ -23,7 +23,7 @@ git clone https://github.com/ce-bsb/presentation-factory.git
 cd presentation-factory
 ```
 
-Abra a pasta em Bob, Codex, Claude, Cursor ou outro agente.
+Abra a pasta em agente de IA, Codex, Claude, Cursor ou outro agente.
 
 Leia primeiro:
 
@@ -43,7 +43,7 @@ git clone https://github.com/ce-bsb/presentation-factory.wiki.git
 presentation-factory/
 ├── README.md
 ├── prompts/                 # prompts-base para IA
-├── clients/                 # clientes, assets, templates e apresentações
+├── clients/                 # organizações, assets, templates e apresentações
 ├── organizations/           # IBM, design systems e materiais corporativos
 ├── catalog/                 # aliases de modelos
 ├── src/presentation_factory/ # validação e builder
@@ -55,10 +55,10 @@ presentation-factory/
 
 | Item | Local |
 |---|---|
-| Conteúdo da apresentação | `clients/<cliente>/presentations/<slug>/brief.md` |
-| Manifesto | `clients/<cliente>/presentations/<slug>/presentation.toml` |
-| Template HTML | `clients/<cliente>/templates/<template>/` |
-| Logos, CSS e imagens | `clients/<cliente>/assets/` ou `organizations/ibm/assets/` |
+| Conteúdo da apresentação | `clients/<organização>/presentations/<slug>/brief.md` |
+| Manifesto | `clients/<organização>/presentations/<slug>/presentation.toml` |
+| Template HTML | `clients/<organização>/templates/<template>/` |
+| Logos, CSS e imagens | `clients/<organização>/assets/` ou `organizations/ibm/assets/` |
 | Prompt-base | `prompts/` |
 | Código do builder | `src/presentation_factory/` |
 | Saída gerada | `dist/` |

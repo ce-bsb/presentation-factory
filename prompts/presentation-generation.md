@@ -1,6 +1,6 @@
 # Prompt Base: Presentation Factory
 
-Use este prompt com Bob, Codex, Claude, Cursor ou qualquer agente que consiga
+Use este prompt com agente de IA, Codex, Claude, Cursor ou qualquer agente que consiga
 ler a pasta `presentation-factory`.
 
 ```text
@@ -51,7 +51,7 @@ Antes de implementar, entregue:
 Pedido da apresentação:
 - objetivo: <objetivo>;
 - público-alvo: <público>;
-- cliente/organização: <cliente>;
+- organização/organização: <organização>;
 - mensagens principais: <mensagens>;
 - duração esperada: <tempo>;
 - materiais de referência: <arquivos, links ou contexto>;

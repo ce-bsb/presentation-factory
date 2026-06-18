@@ -14,7 +14,7 @@ produtividade, futuro do trabalho e aplicações práticas de IA.
 ## Mensagem central
 
 Toda grande transformação aconteceu quando uma ferramenta expandiu uma
-capacidade humana. A IA representa uma nova etapa dessa trajetória: pessoas
+capacidade humana. A IA representa uma nova etapa dessa trajetória: usuários
 continuam direcionando, julgando e decidindo, enquanto a tecnologia organiza,
 resume, automatiza e acelera.
 
@@ -26,13 +26,13 @@ resume, automatiza e acelera.
 4. Pausa narrativa: ferramenta, capacidade e transformação.
 5. Capacidades da IA: perceber, entender e agir.
 6. Sinergia humano + IA: direção humana e execução acelerada.
-7. Aplicações no banco: análise, materiais, operação e apoio à decisão.
+7. Aplicações no ambiente corporativo: análise, materiais, operação e apoio à decisão.
 8. Futuro do trabalho: liderança, escala, estratégia e parceria.
 9. Encerramento: produtividade com direção humana.
 
 ## Diretrizes
 
-- Manter a apresentadora Laura Gris Mota.
+- Manter a apresentadora Liderança IBM.
 - Usar IBM Design Language, Carbon Design System v11 e IBM Plex.
 - Preservar o tema claro independentemente do modo do sistema.
 - Usar `18px` como tamanho-base e `20px` em textos longos ou destacados.
