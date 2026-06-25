@@ -2,7 +2,7 @@
 
 ## Deck simples (HTML/CSS/JS direto)
 
-1. Leia o exemplo da arquitetura escolhida.
+1. Leia o template real mais próximo.
 2. Crie os arquivos em `templates/<slug>/`.
 3. Verifique sintaxe JS e paths absolutos proibidos.
 

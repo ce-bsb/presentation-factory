@@ -10,12 +10,12 @@
 ## Design
 
 - Tema claro fixo; IBM Plex Sans; base 18 px; WCAG 2.1 AA.
-- Logos e assets IBM vêm de `.bob/presentation-factory/assets/ibm/logos/`.
-  Copie o arquivo para `assets/` do deck e use path relativo.
+- Logos e assets IBM vêm de `organizations/ibm/assets/`.
+  Mapeie o arquivo no `presentation.toml` e use path relativo no deck.
 - Não recrie logo IBM com CSS ou SVG manual.
 
 ## Referências sob demanda
 
-- Modelos de apresentação → `references/presentation-models.md`
-- Narrativa e conteúdo → `references/content-and-narrative.md`
-- Assets compartilhados → `assets/README.md`
+- Regras Carbon → `organizations/ibm/design-systems/carbon/`
+- Assets compartilhados → `organizations/ibm/assets/assets.yaml`
+- Templates reais → `clients/*/templates/` e `organizations/*/templates/`

@@ -9,8 +9,9 @@
 ```text
 Crie um deck HTML de teste com três slides em bob-smoke-test/.
 
-Consulte somente o exemplo de slide ativo e implemente sem parar em uma
-proposta longa.
+Consulte somente um template real próximo, por exemplo
+`clients/ibm-enterprise/templates/standard-deck/`, e implemente sem parar em
+uma proposta longa.
 
 Crie:
 - index.html
@@ -30,5 +31,5 @@ prefers-reduced-motion e impressão.
 Valide o JavaScript e procure caminhos absolutos proibidos.
 ```
 
-O teste passa se o Bob consultar arquivos dentro de `presentation-factory/`,
-criar os quatro arquivos e implementar os requisitos sem depender de Skill.
+O teste passa se o Bob consultar arquivos reais do repositório, criar os quatro
+arquivos e implementar os requisitos sem depender de Skill.

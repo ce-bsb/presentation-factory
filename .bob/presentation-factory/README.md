@@ -9,30 +9,30 @@ Aprofunde a leitura somente quando a tarefa pedir registro, build, redesign ampl
 2. Raiz atual (se contiver `catalog/models.toml` e `pyproject.toml`)
 3. Diretórios irmãos com esses arquivos
 
-## Exemplos de arquitetura
+## Referências reais
 
-- **Slide ativo** → `examples/active-slide/` (index.html, styles.css, deck.js)
-- **Sidebar com scroll** → `examples/scroll-sidebar/`
-- **Referência visual IBM** → `examples/ibm-complete-deck.html`
+- Templates registrados → `clients/*/templates/` e `organizations/*/templates/`
+- Assets → `clients/*/assets/` e `organizations/ibm/assets/`
+- Design system → `organizations/ibm/design-systems/carbon/`
+- Builder → `src/presentation_factory/`
+- Testes → `tests/`
 
-Leia o exemplo da arquitetura escolhida. Não copie conteúdo de negócio dos exemplos.
+Use templates reais como referência. Não mantenha cópias paralelas em `.bob`.
 
 ## Assets IBM
 
-Logos e lockups IBM ficam em `assets/ibm/logos/`. Copie para `assets/` do deck final.
+Logos e imagens IBM ficam em `organizations/ibm/assets/`. Copie para o pacote
+final via `[assets]` no `presentation.toml`.
 
-## Referências sob demanda
+## Roteamento
 
 | Necessidade | Arquivo |
 |---|---|
-| Arquitetura do repositório | `references/repository-architecture.md` |
-| Modelos de apresentação | `references/presentation-models.md` |
-| Narrativa e conteúdo | `references/content-and-narrative.md` |
-| Registrar entidade | `workflows/register-entity.md` |
-| Registrar apresentação | `workflows/register-presentation.md` |
-| Criar template | `workflows/create-template.md` |
-| Gerar pacote | `workflows/build-package.md` |
-| Revisar deck completo | `checklists/deck-quality.md` |
+| Criar ou alterar deck | template HTML/CSS/JS real |
+| Regras visuais IBM | `organizations/ibm/design-systems/carbon/` |
+| Registrar apresentação | `presentations/<slug>/presentation.toml` existente como modelo |
+| Assets compartilhados | `organizations/ibm/assets/assets.yaml` |
+| Builder ou validação | `src/presentation_factory/` e `tests/` |
 
 ## Regras inegociáveis
 

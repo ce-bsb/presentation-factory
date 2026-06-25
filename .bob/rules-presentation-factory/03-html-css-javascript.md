@@ -3,11 +3,12 @@
 ## Arquitetura — escolha uma
 
 1. **Slide ativo** — um slide visível; JS controla `.is-active`.
-   Exemplo: `examples/active-slide/`
+   Referência: templates existentes em `clients/*/templates/` e
+   `organizations/*/templates/`.
 2. **Sidebar com scroll** — todos os slides no fluxo; `IntersectionObserver`.
-   Exemplo: `examples/scroll-sidebar/`
+   Use apenas se o template real ou o pedido justificar.
 
-Leia o exemplo da arquitetura escolhida antes de criar o deck.
+Leia o template real mais próximo antes de criar ou alterar o deck.
 
 ## HTML
 
