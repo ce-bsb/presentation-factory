@@ -1,0 +1,81 @@
+:root {
+  color-scheme: light;
+  --blue-60: #0f62fe;
+  --gray-100: #161616;
+  --gray-30: #e0e0e0;
+  --gray-80: #393939;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+html { font-size: 18px; scroll-behavior: smooth; }
+body { margin: 0; font-family: "IBM Plex Sans", sans-serif; background: var(--gray-80); }
+.skip-link { position: fixed; left: -9999px; }
+.skip-link:focus { left: 8px; z-index: 10; background: white; padding: 8px; }
+.layout { display: flex; min-height: 100vh; }
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex: 0 0 300px;
+  flex-direction: column;
+  height: 100vh;
+  color: white;
+  background: var(--blue-60);
+}
+.sidebar__head, .sidebar-controls { padding: 24px; }
+.sidebar-nav { flex: 1; overflow-y: auto; }
+.nav-item { display: block; padding: 10px 24px; color: white; text-decoration: none; }
+.nav-item.active { border-left: 3px solid white; background: rgb(255 255 255 / 18%); }
+.sidebar-controls { display: grid; gap: 8px; }
+.sidebar-controls button {
+  min-height: 40px;
+  border: 1px solid rgb(255 255 255 / 55%);
+  background: transparent;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+.sidebar-controls button:hover,
+.sidebar-controls button[aria-pressed="true"] {
+  background: rgb(255 255 255 / 18%);
+}
+.sidebar-controls button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+.viewer { flex: 1; min-width: 0; padding: 48px; }
+.slide {
+  display: flex;
+  width: min(100%, 1280px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto 32px;
+  color: var(--gray-100);
+  background: var(--white);
+  box-shadow: 0 4px 24px rgb(0 0 0 / 18%);
+  transition: filter .6s ease, opacity .6s ease;
+}
+.slide__content { padding: 64px; }
+.blur-ready .slide:not(.in-view) { filter: blur(3px); opacity: .28; }
+@media (max-width: 900px) {
+  .layout { display: block; }
+  .sidebar { position: static; width: 100%; height: auto; }
+  .sidebar-nav { display: flex; overflow-x: auto; }
+  .sidebar-controls { display: none; }
+  .viewer { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slide { transition: none; }
+}
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  .sidebar { display: none; }
+  .viewer { padding: 0; background: white; }
+  .slide {
+    margin: 0;
+    box-shadow: none;
+    filter: none !important;
+    opacity: 1 !important;
+    break-after: page;
+  }
+}

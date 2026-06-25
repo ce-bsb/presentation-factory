@@ -1,20 +1,10 @@
 # Bob Project: Presentation Factory
 
-Use this repository as the source of truth for HTML presentations.
+Regra de ouro: tarefa clara → leia o mínimo → implemente.
 
-Always read first:
+1. Leia `.bob/presentation-factory/README.md`.
+2. Leia os arquivos reais diretamente afetados pela tarefa.
+3. Informe em 2–3 linhas o que será feito e implemente.
 
-1. `AGENTS.md`
-2. `README.md`
-3. `prompts/presentation-generation.md`
-4. `organizations/ibm/design-systems/carbon/`
-
-Never implement immediately. First provide:
-
-- narrative structure;
-- selected template and why;
-- assets to reuse;
-- files to create or modify;
-- missing information.
-
-Never invent logos, colors, fonts, components, data or assets.
+Pergunte somente quando uma decisão ausente bloquear a execução.
+Não pare em uma proposta quando a implementação for viável.

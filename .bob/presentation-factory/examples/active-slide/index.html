@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Conversando com documentos e dados históricos — IBM skin neutra</title>
+  <meta name="description" content="Apresentação IBM neutra: Discovery e cocriação de uma solução de IA para conversar com documentos e dados históricos." />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#slide-1">Pular para o conteúdo</a>
+
+  <!-- Progress bar -->
+  <div class="progress" role="progressbar" aria-label="Progresso da apresentação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <span class="brand__ibm">
+          <img src="../../assets/ibm/logos/logo_IBM_preto.svg" alt="IBM" width="64" height="24" />
+        </span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">IBM Client Engineering</span>
+    </div>
+    <div class="topbar__right">
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 07</span>
+    </div>
+  </header>
+
+  <!-- Slides -->
+  <main class="deck" id="deck">
+
+    <!-- Slide 1 — Abertura -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-label="Slide 1 de 7: Abertura">
+      <div class="slide__inner">
+        <div class="cover-grid">
+          <div class="cover-grid__meta">
+            <span class="eyebrow eyebrow--accent">01 — Abertura</span>
+            <div class="cover-grid__rule" aria-hidden="true"></div>
+            <span class="kicker">IBM Client Engineering</span>
+          </div>
+          <div class="cover-grid__title">
+            <h1 class="display">
+              Conversando com<br/>
+              <span class="display__alt">documentos e dados<br/>históricos</span>
+            </h1>
+          </div>
+          <div class="cover-grid__footer">
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Apresentador IBM</span>
+              <span class="presenter__name">[A definir]</span>
+              <span class="presenter__role cds-helper-text-01">IBM Client Engineering</span>
+            </div>
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Facilitador IBM</span>
+              <span class="presenter__name">[A definir]</span>
+              <span class="presenter__role cds-helper-text-01">IBM Consulting</span>
+            </div>
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Para</span>
+              <span class="presenter__name">Cliente exemplo</span>
+              <span class="presenter__role cds-helper-text-01">Área exemplo</span>
+            </div>
+          </div>
+        </div>
+        <div class="cover-mark" aria-hidden="true">
+          <!-- Composição segue a paleta Carbon. Cores via tokens semânticos sempre que possível. -->
+          <svg viewBox="0 0 320 320" width="100%" height="100%" role="img" aria-label="Marca gráfica IBM neutra">
+            <defs>
+              <pattern id="grid8" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+              </pattern>
+            </defs>
+            <rect width="320" height="320" fill="url(#grid8)" />
+            <rect x="32" y="32" width="128" height="128" fill="var(--ibm-blue-h)" />
+            <rect x="160" y="32" width="128" height="128" fill="var(--ibm-cyan)" />
+            <rect x="32" y="160" width="128" height="128" fill="var(--gray-100)" />
+            <rect x="160" y="160" width="128" height="128" fill="var(--ibm-blue)" />
+            <line x1="160" y1="0" x2="160" y2="320" stroke="var(--gray-100)" stroke-width="1" />
+            <line x1="0" y1="160" x2="320" y2="160" stroke="var(--gray-100)" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 — Contexto / Hipótese -->
+    <section class="slide" id="slide-2" data-slide="2" aria-label="Slide 2 de 7: Contexto e hipótese">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Cenário</span>
+          <h2 class="title">Contexto e hipótese</h2>
+        </header>
+
+        <div class="two-col">
+          <article class="panel" aria-labelledby="panel-contexto-title">
+            <h3 class="panel__title cds-label-01" id="panel-contexto-title">Contexto</h3>
+            <p class="lede">
+              Vários perfis solicitam ou acessam informações disponíveis em documentos
+              produzidos pela organização. A busca por esse conteúdo é complexa e depende do
+              conhecimento prévio do interessado sobre em qual documento a informação
+              se encontra.
+            </p>
+          </article>
+
+          <article class="panel panel--accent" aria-labelledby="panel-hipotese-title">
+            <h3 class="panel__title cds-label-01" id="panel-hipotese-title">Hipótese</h3>
+            <p class="lede">
+              Acreditamos que é possível usar IA para <em>conversar</em> com esses
+              documentos, em linguagem natural, e produzir respostas alinhadas ao
+              perfil do demandante.
+            </p>
+            <p class="note">
+              Para avançar numa experimentação dessa hipótese, é necessário realizar
+              um <strong>Discovery</strong> e criar um <strong>caso de uso</strong>.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 — Pilot Engineering Method -->
+    <section class="slide" id="slide-3" data-slide="3" aria-label="Slide 3 de 7: Pilot Engineering Method">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — Pilot Engineering Method</span>
+          <h2 class="title">O que é um Discovery?</h2>
+        </header>
+
+        <div class="method">
+          <p class="lede method__text">
+            Discovery é o conjunto de atividades que realizamos para aprofundar nosso
+            conhecimento sobre um problema ou esclarecer dúvidas em processos
+            mapeados. Essas atividades são realizadas na <strong>fase inicial</strong>
+            do Pilot Engineering Method e coletam informações para definir o problema
+            e o escopo de experimentação.
+          </p>
+
+          <figure class="pipeline" aria-label="Pilot Engineering Method">
+            <div class="pipeline__rail" aria-hidden="true"></div>
+            <ol class="pipeline__phases">
+              <li class="phase phase--active">
+                <span class="phase__index">01</span>
+                <span class="phase__name">Discovery</span>
+                <span class="phase__desc">Definir problema, usuários, dados e critérios.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">02</span>
+                <span class="phase__name">Experimentação</span>
+                <span class="phase__desc">Validar hipótese com escopo controlado.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">03</span>
+                <span class="phase__name">Validação</span>
+                <span class="phase__desc">Medir aderência, riscos e aprendizados.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">04</span>
+                <span class="phase__name">Próximo passo</span>
+                <span class="phase__desc">Decidir evolução, escala ou encerramento.</span>
+              </li>
+            </ol>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 — Workshop Caso de Uso -->
+    <section class="slide slide--dense" id="slide-4" data-slide="4" aria-label="Slide 4 de 7: Workshop para Discovery do caso de uso">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — Preparação do Workshop</span>
+          <h2 class="title">Workshop para Discovery do caso de uso</h2>
+          <p class="subtitle">O que precisamos</p>
+        </header>
+
+        <div class="workshop">
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Um encontro de <strong>2h30</strong> com representantes dos perfis envolvidos no processo de confecção dos documentos e dos perfis que consomem essa informação.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Formato: <strong>presencial</strong>.</span>
+            </li>
+          </ul>
+
+          <table class="spec">
+            <caption class="sr-only">Itens a definir para o workshop de Discovery do caso de uso</caption>
+            <thead>
+              <tr>
+                <th scope="col">Definir</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pontos focais</th>
+                <td>Responsáveis pela logística do workshop: convites, avisos e alertas. <span class="muted">Na IBM:</span> <strong>[A definir]</strong>.</td>
+              </tr>
+              <tr>
+                <th scope="row">Convidados</th>
+                <td>Listar os perfis necessários e quem vai representá-los.</td>
+              </tr>
+              <tr>
+                <th scope="row">Data e hora</th>
+                <td><span class="pill pill--accent">Proposta</span> [A definir].</td>
+              </tr>
+              <tr>
+                <th scope="row">Local</th>
+                <td>Cliente ou IBM.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 — Workshop Discovery Técnico -->
+    <section class="slide slide--dense" id="slide-5" data-slide="5" aria-label="Slide 5 de 7: Workshop para Discovery Técnico">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">05 — Preparação do Workshop</span>
+          <h2 class="title">Workshop para Discovery Técnico</h2>
+          <p class="subtitle">O que é o Discovery Técnico</p>
+        </header>
+
+        <div class="workshop">
+          <p class="lede">
+            É o momento de esclarecer pontos do problema e aprofundar o conhecimento
+            sobre o cenário e os sistemas envolvidos no processo atual. Para esse
+            Discovery, é necessário:
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Um encontro de <strong>1h30</strong> com representantes das áreas técnicas responsáveis pelos sistemas envolvidos na produção, no armazenamento e na distribuição das informações.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span>Formato: <strong>presencial</strong>.</span>
+            </li>
+          </ul>
+
+          <table class="spec">
+            <caption class="sr-only">Itens a definir para o workshop de Discovery Técnico</caption>
+            <thead>
+              <tr>
+                <th scope="col">O que precisamos</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pontos focais</th>
+                <td>Responsáveis pela logística do workshop: convites, avisos e alertas. <span class="muted">Na IBM:</span> <strong>[A definir]</strong>.</td>
+              </tr>
+              <tr>
+                <th scope="row">Convidados</th>
+                <td>Listar os perfis necessários e quem vai representá-los.</td>
+              </tr>
+              <tr>
+                <th scope="row">Data e hora</th>
+                <td>
+                  <span class="pill pill--accent">Proposta</span>
+                  [A definir].
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Local</th>
+                <td>Cliente ou IBM.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 — Próximos passos -->
+    <section class="slide" id="slide-6" data-slide="6" aria-label="Slide 6 de 7: Próximos passos">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">06 — Próximos passos</span>
+          <h2 class="title">O que acontece após o Discovery?</h2>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__step">
+            <span class="timeline__index">01</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Proposta de escopo</h3>
+              <p>
+                Com base nas informações compartilhadas e alinhadas no Discovery, a
+                IBM prepara uma <strong>proposta de escopo</strong> e apresenta um
+                <strong>cronograma de experimentação</strong>.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">02</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Alinhamento e cocriação</h3>
+              <p>
+                Alinhamos e preparamos o <strong>escopo final</strong> do trabalho e
+                iniciamos a <strong>fase de cocriação</strong>.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">03</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Quando acontece</h3>
+              <p>
+                O encontro de alinhamento do escopo ocorre <strong>uma semana após
+                a conclusão do Discovery</strong>.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Slide 7 — Tasks -->
+    <section class="slide" id="slide-7" data-slide="7" aria-label="Slide 7 de 7: Tasks para próximos passos">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">07 — Tasks</span>
+          <h2 class="title">Próximos passos antes do início da cocriação</h2>
+        </header>
+
+        <ul class="checklist" role="list">
+          <li class="check">
+            <input type="checkbox" id="task-1" />
+            <label for="task-1">
+              <span class="check__text">Definir as datas do <a href="#slide-4" class="inline-link" data-go="4">Discovery do Caso</a> e do <a href="#slide-5" class="inline-link" data-go="5">Discovery técnico</a></span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-2" />
+            <label for="task-2">
+              <span class="check__text">Definir participantes — perfis para o <a href="#slide-4" class="inline-link" data-go="4">workshop de caso</a> e o <a href="#slide-5" class="inline-link" data-go="5">workshop técnico</a></span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-3" />
+            <label for="task-3">
+              <span class="check__text">Definir local (cliente ou IBM)</span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-4" />
+            <label for="task-4">
+              <span class="check__text">Enviar convites</span>
+            </label>
+          </li>
+        </ul>
+
+        <footer class="closing">
+          <div class="closing__rule" aria-hidden="true"></div>
+          <p class="closing__text">
+            <span class="muted">Ponto focal IBM</span>
+            <strong>[A definir]</strong>
+          </p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <div class="navbar__tools">
+      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 3h12v1.5H2zM2 7.25h12v1.5H2zM2 11.5h12V13H2z"/></svg>
+        <span>Índice</span>
+      </button>
+      <button class="btn btn--ghost" id="btn-fullscreen" aria-label="Alternar tela cheia (F)" aria-pressed="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 2h4v1.5H3.5V6H2zm8 0h4v4h-1.5V3.5H10zM3.5 10v2.5H6V14H2v-4zm9 2.5V10H14v4h-4v-1.5z"/></svg>
+        <span>Tela cheia</span>
+      </button>
+      <button class="btn btn--ghost" id="btn-loop" aria-label="Ativar loop automático (L)" aria-pressed="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 4h6.6L8.8 2.2 9.9 1 14 5.1 9.9 9.2 8.8 8l1.8-1.8H4.1A2.1 2.1 0 0 0 2 8.3 2.1 2.1 0 0 0 4.1 10H5v1.5h-.9A3.6 3.6 0 0 1 .5 8.3 3.6 3.6 0 0 1 4 4zm8 8H5.4l1.8 1.8L6.1 15 2 10.9l4.1-4.1 1.1 1.2-1.8 1.8h6.5a2.1 2.1 0 0 0 2.1-2.1A2.1 2.1 0 0 0 11.9 6H11V4.5h.9a3.6 3.6 0 0 1 3.6 3.2A3.6 3.6 0 0 1 12 12z"/></svg>
+        <span>Loop</span>
+      </button>
+    </div>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 3 4 8l5.5 5 1-1L6 8l4.5-4z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="m6.5 3-1 1L10 8l-4.5 4 1 1L12 8z"/></svg>
+      </button>
+    </div>
+    <span class="navbar__hint" aria-hidden="true">1–7 slides · F tela cheia · L loop</span>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice da apresentação">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="index-title">
+      <header class="index-panel__head">
+        <h2 id="index-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">Abertura</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Contexto e hipótese</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">O que é um Discovery</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Workshop — Discovery do caso</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">Workshop — Discovery técnico</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">Próximos passos</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">Tasks</span></button></li>
+      </ol>
+      <footer class="index-panel__foot">
+        <span class="kbd">←</span><span class="kbd">→</span> navegar
+        &nbsp;·&nbsp;
+        <span class="kbd">1</span>–<span class="kbd">7</span> ir para slide
+        &nbsp;·&nbsp;
+        <span class="kbd">Esc</span> abrir / fechar índice
+        &nbsp;·&nbsp;
+        <span class="kbd">F</span> tela cheia
+        &nbsp;·&nbsp;
+        <span class="kbd">L</span> loop
+      </footer>
+    </div>
+  </aside>
+
+  <script src="deck.js"></script>
+</body>
+</html>
