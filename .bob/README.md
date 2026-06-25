@@ -1,31 +1,26 @@
-# Presentation Factory Mode
+# Presentation Factory Mode — Bob
 
-Este diretório configura o Custom Mode de projeto `Presentation Factory`.
+Este diretório configura o modo de projeto `Presentation Factory` no Bob.
 
-## Arquivos carregados automaticamente
+## O que é carregado automaticamente
 
-- `custom_modes.yaml`
-- `rules-presentation-factory/*.md`, em ordem alfabética
+- `custom_modes.yaml` — definição do modo
+- `rules-presentation-factory/*.md` — regras essenciais (em ordem alfabética)
 
-## Biblioteca consultada sob demanda
+## Biblioteca sob demanda
 
-Toda a documentação detalhada fica em `presentation-factory/`.
+Documentação detalhada fica em `.bob/presentation-factory/`:
 
-```text
+```
 .bob/
 ├── custom_modes.yaml
-├── rules-presentation-factory/
+├── rules-presentation-factory/   ← carregadas automaticamente
 ├── presentation-factory/
-│   ├── README.md
-│   ├── references/
-│   ├── assets/
-│   ├── examples/
-│   ├── workflows/
-│   ├── checklists/
-│   └── brief-examples/
+│   ├── README.md                 ← lido sempre
+│   ├── examples/                 ← active-slide/ e scroll-sidebar/
+│   ├── references/               ← guias sob demanda
+│   ├── workflows/                ← fluxos registro/build
+│   ├── checklists/               ← qualidade e governança
+│   └── assets/                   ← logos IBM e assets compartilhados
 └── SMOKE_TEST.md
 ```
-
-O modo deve começar pelo índice em
-`.bob/presentation-factory/README.md` e carregar apenas os arquivos relevantes
-à tarefa atual.
