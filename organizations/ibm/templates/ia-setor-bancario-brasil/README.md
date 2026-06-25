@@ -49,7 +49,8 @@ Template de apresentação executiva sobre os impactos da inteligência artifici
 
 ## Assets necessários
 
-- `assets/logo_IBM_preto.svg`: Logo IBM para topbar
+- `assets/brand/logo-dark.svg`: logo IBM para topbar, copiado de
+  `organizations/ibm/assets/img/logo-dark.svg`
 
 ## Público
 

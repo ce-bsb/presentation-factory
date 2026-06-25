@@ -31,6 +31,7 @@ class BuilderTest(unittest.TestCase):
             presentation_slugs(self.repository),
             [
                 "ia-parceria-produtividade",
+                "ia-setor-bancario-brasil",
                 "ibm-ai-document-review",
                 "ibm-discovery-workshop",
                 "lorem-ipsum-demo",
@@ -97,7 +98,6 @@ class BuilderTest(unittest.TestCase):
     def test_entities_own_their_assets(self) -> None:
         expected = [
             ROOT / "clients/ibm-enterprise/entity.toml",
-            ROOT / "clients/ibm-neutral/entity.toml",
             ROOT / "organizations/ibm/entity.toml",
         ]
         self.assertTrue(all(path.is_file() for path in expected))
@@ -130,7 +130,6 @@ class BuilderTest(unittest.TestCase):
     def test_presentation_body_base_is_18px(self) -> None:
         stylesheets = [
             ROOT / "clients/ibm-enterprise/assets/css/styles.css",
-            ROOT / "clients/ibm-neutral/assets/css/styles.css",
             ROOT / "organizations/ibm/assets/css/styles.css",
         ]
         for path in stylesheets:

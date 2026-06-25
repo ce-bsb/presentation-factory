@@ -19,7 +19,7 @@ class Repository:
 
     @property
     def prompt(self) -> Path:
-        return self.root / "prompts/presentation-generation.md"
+        return self.root / "AGENTS.md"
 
     def presentation_configs(self) -> list[Path]:
         configs: list[Path] = []
