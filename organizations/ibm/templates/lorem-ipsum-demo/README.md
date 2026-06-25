@@ -6,7 +6,8 @@ Template de demonstração com 10 slides utilizando conteúdo Lorem Ipsum e skin
 
 - `index.html` — 10 slides com arquitetura active-slide
 - `styles.css` — Tokens Carbon, componentes e responsividade
-- `deck.js` — Navegação, teclado, hash routing e swipe
+- `template.toml` — Assets compartilhados do template
+- `assets/js/deck.js` — Navegação, teclado, hash routing e swipe no pacote gerado
 
 ## Slides
 

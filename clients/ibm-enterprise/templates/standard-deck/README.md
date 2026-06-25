@@ -3,9 +3,9 @@
 Template de apresentação do IBM Enterprise para decks HTML no padrão IBM
 Experience Engineering.
 
-O diretório contém somente a estrutura HTML e o controlador do deck. Estilos,
-logos e imagens são injetados pelo mapa `[assets]` de cada
-`presentation.toml`.
+O diretório contém a estrutura HTML do deck e um `template.toml` com o runtime
+compartilhado. Estilos, logos e imagens de conteúdo são injetados pelo mapa
+`[assets]` de cada `presentation.toml`.
 
 Os ativos originais permanecem sob responsabilidade de seus donos:
 

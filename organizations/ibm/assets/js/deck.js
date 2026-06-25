@@ -101,6 +101,15 @@
     }
     if (key === 'Home') { e.preventDefault(); go(1); return; }
     if (key === 'End')  { e.preventDefault(); go(total); return; }
+    if (key === 'f' || key === 'F') {
+      e.preventDefault();
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen();
+      }
+      return;
+    }
     // Number keys 1-9
     if (/^[1-9]$/.test(key)) {
       var n = parseInt(key, 10);
@@ -181,3 +190,4 @@
   /* ---- Init ---- */
   go(readInitial(), { force: true });
 })();
+

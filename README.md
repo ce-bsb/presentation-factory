@@ -17,7 +17,7 @@ Abra a pasta no **Bob** (modo Presentation Factory) ou em qualquer agente de IA 
 presentation-factory/
 ├── clients/<org>/            ← apresentações de clientes
 │   ├── assets/               ← logos, CSS, imagens
-│   ├── templates/            ← HTML/CSS/JS do deck
+│   ├── templates/            ← HTML/CSS do deck + template.toml opcional
 │   └── presentations/<slug>/ ← brief.md + presentation.toml
 ├── organizations/ibm/        ← assets e templates IBM
 ├── catalog/models.toml       ← aliases de modelos de IA
@@ -37,6 +37,14 @@ make build PRESENTATION=<slug> MODEL=primary
 ```
 
 Abra o resultado em `dist/<slug>/primary/workspace/index.html`.
+
+## Contrato de assets
+
+- `template.toml` declara assets necessários ao template, como runtime JS.
+- `presentation.toml` declara assets específicos da apresentação, como logos,
+  imagens e estilos de marca.
+- O builder copia ambos para `workspace/`; assets da apresentação podem
+  sobrescrever assets do template quando o destino é o mesmo.
 
 ## Documentação completa
 

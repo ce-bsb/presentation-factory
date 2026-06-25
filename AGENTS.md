@@ -21,6 +21,7 @@ Não leia tudo de uma vez. Localize o alvo e implemente.
 | Roteiro da apresentação | `clients/<org>/presentations/<slug>/brief.md` |
 | Configuração da apresentação | `clients/<org>/presentations/<slug>/presentation.toml` |
 | HTML do deck | `clients/<org>/templates/<template>/` ou `organizations/<org>/templates/<template>/` |
+| Assets fixos do template | `templates/<template>/template.toml` |
 | Logos, CSS, imagens | `clients/<org>/assets/` ou `organizations/ibm/assets/` |
 | Saída gerada | `dist/` — nunca edite diretamente |
 

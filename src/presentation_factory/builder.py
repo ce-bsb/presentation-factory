@@ -4,6 +4,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -64,6 +65,17 @@ def workspace_target(workspace: Path, relative_path: str) -> Path:
     return target
 
 
+def template_assets(repository: Repository, template_dir: Path) -> dict[str, Path]:
+    template_config = template_dir / "template.toml"
+    if not template_config.is_file():
+        return {}
+    template = load_toml(template_config)
+    return {
+        target: repository.resolve(source)
+        for target, source in template.get("assets", {}).items()
+    }
+
+
 def build_package(
     repository: Repository,
     presentation_slug: str,
@@ -91,10 +103,12 @@ def build_package(
 
     template_dir = repository.resolve(presentation["template"])
     brief_path = repository.resolve(presentation["brief"])
-    assets = {
+    assets = template_assets(repository, template_dir)
+    presentation_assets = {
         target: repository.resolve(source)
         for target, source in presentation.get("assets", {}).items()
     }
+    assets.update(presentation_assets)
 
     required = [
         template_dir / "index.html",
@@ -119,7 +133,7 @@ def build_package(
     shutil.copytree(
         template_dir,
         workspace,
-        ignore=shutil.ignore_patterns(".DS_Store", "__MACOSX"),
+        ignore=shutil.ignore_patterns(".DS_Store", "__MACOSX", "template.toml"),
     )
     for target, source in assets.items():
         target_path = workspace_target(workspace, target)
@@ -193,13 +207,15 @@ def validate_repository(repository: Repository) -> list[str]:
         errors.append("nenhuma apresentação cadastrada")
         return errors
 
-    for slug in slugs:
-        try:
-            build_package(
-                repository,
-                slug,
-                output=Path("/tmp/presentation-factory-validation") / slug,
-            )
-        except (KeyError, ConfigurationError) as error:
-            errors.append(f"{slug}: {error}")
+    with tempfile.TemporaryDirectory(prefix="presentation-factory-validation-") as tmp:
+        validation_root = Path(tmp)
+        for slug in slugs:
+            try:
+                build_package(
+                    repository,
+                    slug,
+                    output=validation_root / slug,
+                )
+            except (KeyError, ConfigurationError) as error:
+                errors.append(f"{slug}: {error}")
     return errors

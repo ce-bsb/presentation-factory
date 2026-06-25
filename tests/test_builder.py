@@ -58,6 +58,9 @@ class BuilderTest(unittest.TestCase):
             (destination / "workspace/assets/brand/styles.css").is_file()
         )
         self.assertTrue(
+            (destination / "workspace/assets/js/deck.js").is_file()
+        )
+        self.assertTrue(
             (destination / "workspace/assets/partner/logo-dark.svg").is_file()
         )
 
@@ -77,6 +80,23 @@ class BuilderTest(unittest.TestCase):
             "organizations/ibm/templates/ia-productivity-deck",
         )
         self.assertTrue((destination / "workspace/index.html").is_file())
+
+    def test_template_assets_are_packaged(self) -> None:
+        destination = build_package(
+            self.repository,
+            "ia-setor-bancario-brasil",
+            output=self.output / "banking-package",
+        )
+
+        self.assertTrue(
+            (destination / "workspace/assets/js/deck.js").is_file()
+        )
+        self.assertTrue(
+            (destination / "workspace/assets/brand/logo-dark.svg").is_file()
+        )
+        self.assertFalse(
+            (destination / "workspace/template.toml").exists()
+        )
 
     def test_rejects_unknown_model(self) -> None:
         with self.assertRaises(ConfigurationError):

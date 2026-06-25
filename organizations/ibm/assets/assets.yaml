@@ -27,3 +27,9 @@ assets:
     use_when:
       - process explanation
       - discovery or co-creation flow
+  - path: assets/js/deck.js
+    type: runtime
+    owner: IBM
+    purpose: shared active-slide deck navigation runtime
+    use_when:
+      - templates that use slide sections with data-slide navigation
