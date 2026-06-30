@@ -17,7 +17,7 @@ Aprofunde a leitura somente quando a tarefa pedir registro, build, redesign ampl
 - Builder → `src/presentation_factory/`
 - Testes → `tests/`
 
-Use templates reais como referência. Não mantenha cópias paralelas em `.bob`.
+Use templates reais como referência.
 
 ## Assets IBM
 
@@ -34,10 +34,10 @@ final via `[assets]` no `presentation.toml`.
 | Assets compartilhados | `organizations/ibm/assets/assets.yaml` |
 | Builder ou validação | `src/presentation_factory/` e `tests/` |
 
-## Regras inegociáveis
+## Guardrails rápidos
 
 - Não invente dados, logos ou assets.
 - Sem paths absolutos no deck.
 - Não edite `dist/` diretamente.
-- Tema claro fixo, 18 px base, WCAG 2.1 AA.
-- Todo deck: botão fullscreen (`F`) + botão loop (`L`).
+- Para regras visuais e acessibilidade, siga `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
+- Para estrutura do deck e atalhos obrigatórios, siga `.bob/rules-presentation-factory/03-html-css-javascript.md`.
