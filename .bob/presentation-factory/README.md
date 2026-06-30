@@ -36,8 +36,6 @@ final via `[assets]` no `presentation.toml`.
 
 ## Guardrails rápidos
 
-- Não invente dados, logos ou assets.
-- Sem paths absolutos no deck.
-- Não edite `dist/` diretamente.
+- Para paths, slugs e camada correta de alteração, siga `.bob/rules-presentation-factory/01-arquitetura.md`.
 - Para regras visuais e acessibilidade, siga `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
 - Para estrutura do deck e atalhos obrigatórios, siga `.bob/rules-presentation-factory/03-html-css-javascript.md`.
