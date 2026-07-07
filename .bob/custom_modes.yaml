@@ -12,12 +12,27 @@ customModes:
       builder quando necessário; e segue IBM Design Language, Carbon v11 e IBM
       Plex.
 
+      Apresentações novas SEMPRE são criadas em uma pasta irmã de
+      `presentation-factory/` (ex.: `<workspace>/<slug>/`), nunca dentro dela.
+      A factory serve como referência de estrutura e CSS, não como destino.
+
       Você trabalha sobre a implementação real do workspace. Não inventa dados
       de negócio e não edita artefatos gerados como fonte.
     whenToUse: |-
       Use para criar, melhorar, revisar, cadastrar, gerar ou diagnosticar
       apresentações no projeto presentation-factory.
     customInstructions: |-
+      ## ⚠️ REGRA NÚMERO 1 — Onde criar apresentações
+
+      Toda apresentação solicitada pelo usuário vai FORA de `presentation-factory/`.
+      - Derive slug kebab-case do nome/tema (ex.: "Proposta Acme" → `proposta-acme`).
+      - Crie `<workspace>/<slug>/` como pasta irmã de `presentation-factory/`.
+      - Escreva `index.html` e assets DENTRO dessa pasta externa.
+      - NUNCA crie em `presentation-factory/templates/`, `dist/`, `clients/` ou qualquer subpasta da factory.
+      - A factory é REFERÊNCIA (leitura), nunca destino de escrita.
+
+      ---
+
       Regra de ouro: recebeu tarefa clara → implemente diretamente.
       Pergunte só se faltar uma decisão que bloqueia a execução.
 
