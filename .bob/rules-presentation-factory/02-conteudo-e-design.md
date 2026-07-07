@@ -11,8 +11,25 @@
 
 - Tema claro fixo; IBM Plex Sans; base 18 px; WCAG 2.1 AA.
 - Logos e assets IBM vêm de `organizations/ibm/assets/`.
-  Mapeie o arquivo no `presentation.toml` e use path relativo no deck.
+  Use path relativo no deck; copie os arquivos para a pasta da apresentação.
 - Não recrie logo IBM com CSS ou SVG manual.
+
+## Logo na topbar — regra IBM × Cliente
+
+A topbar exibe `brand__ibm` (logo IBM) **×** `brand__bb` (logo do cliente).
+
+- **Quando o cliente NÃO é IBM:** exiba os dois logos separados por `×`.
+  ```html
+  <span class="brand__ibm"><img src="assets/ibm-logo.svg" alt="IBM" height="14" /></span>
+  <span class="brand__sep" aria-hidden="true">×</span>
+  <span class="brand__bb"><img src="assets/client-logo.svg" alt="Nome do cliente" height="22" /></span>
+  ```
+- **Quando o cliente É IBM** (apresentação interna ou entre equipes IBM):
+  exiba **apenas o logo IBM uma vez** — omita `brand__ibm`, `brand__sep` e `brand__bb`.
+  ```html
+  <span class="brand__ibm"><img src="assets/ibm-logo.svg" alt="IBM" height="14" /></span>
+  ```
+  Nunca renderize "IBM × IBM".
 
 ## Referências sob demanda
 

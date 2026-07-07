@@ -22,6 +22,10 @@ Leia o template real mais próximo antes de criar ou alterar o deck.
 - Tokens no `:root`; tema claro; base 18 px; responsivo (desktop/tablet/mobile).
 - `prefers-reduced-motion`; `@media print` (uma página por slide).
 - Todo elemento visível tem CSS intencional.
+- **CSS de referência:** `clients/ibm-enterprise/assets/css/styles.css` (clientes IBM)
+  e `organizations/ibm/assets/css/styles.css` (IBM institucional).
+  Copie o arquivo integralmente para `<pasta-da-apresentação>/assets/css/styles.css`.
+  O `<link>` no HTML deve apontar para esse path relativo — nunca deixe o CSS de fora.
 
 ## JavaScript
 
