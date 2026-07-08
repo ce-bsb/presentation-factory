@@ -1,0 +1,32 @@
+[meta]
+name        = "IBM Edge Template"
+slug        = "ibm-edge-template"
+version     = "1.0.0"
+description = "Template de deck IBM com 8 layouts distintos: cover assimétrico, stat grid, two-col panels, timeline, fundo azul sólido, texturizado + cards, split azul/branco e encerramento claro."
+author      = "IBM Presentation Factory"
+
+[design]
+system      = "IBM Carbon Design System v11"
+fonts       = ["IBM Plex Sans", "IBM Plex Mono"]
+base_size   = "18px"
+grid        = "8px"
+theme       = "light"
+contrast    = "WCAG 2.1 AA"
+
+[slides]
+count  = 8
+labels = [
+  "cover",
+  "stat-grid",
+  "two-col",
+  "timeline",
+  "blue",
+  "textured",
+  "split",
+  "closing"
+]
+
+[assets]
+# Nenhum asset externo — logo IBM, JS de navegação e CSS estão inline no index.html
+# Para usar com assets separados, copie organizations/ibm/assets/js/deck.js
+# para a pasta da apresentação e referencie via <script src="assets/js/deck.js">

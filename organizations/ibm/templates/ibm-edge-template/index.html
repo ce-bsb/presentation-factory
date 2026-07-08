@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <title>{{TITULO}} — IBM · {{CLIENTE}}</title>
+  <meta name="description" content="{{DESCRICAO}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap" />
+  <style>
+    :root {
+      color-scheme: light;
+      --white:       #ffffff;
+      --gray-10:     #f4f4f4;
+      --gray-20:     #e0e0e0;
+      --gray-30:     #c6c6c6;
+      --gray-50:     #8d8d8d;
+      --gray-60:     #6f6f6f;
+      --gray-70:     #525252;
+      --gray-80:     #393939;
+      --gray-90:     #262626;
+      --gray-100:    #161616;
+      --ibm-blue:    #0f62fe;
+      --ibm-blue-h:  #0043ce;
+      --ibm-blue-d:  #002d9c;
+      --ibm-blue-l:  #4589ff;
+      --ibm-cyan:    #1192e8;
+      --ibm-cyan-l:  #33b1ff;
+      --ibm-purple:  #8a3ffc;
+      --ibm-teal:    #009d9a;
+      --bg:          var(--white);
+      --bg-2:        var(--gray-10);
+      --bg-3:        var(--gray-20);
+      --ink:         var(--gray-100);
+      --ink-muted:   var(--gray-70);
+      --ink-faint:   var(--gray-50);
+      --line:        var(--gray-20);
+      --line-strong: var(--gray-30);
+      --font-sans:   'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono:   'IBM Plex Mono', monospace;
+      --text-12: .75rem; --text-14: .875rem; --text-16: 1rem;
+      --text-18: 1.125rem; --text-20: 1.25rem; --text-24: 1.5rem;
+      --text-32: 2rem; --text-42: 2.625rem; --text-54: 3.375rem; --text-76: 4.75rem;
+      --u-1:4px; --u-2:8px; --u-3:12px; --u-4:16px;
+      --u-5:24px; --u-6:32px; --u-7:40px; --u-8:48px; --u-9:64px;
+      --topbar-h: 52px; --navbar-h: 52px;
+      --ease:     cubic-bezier(0.2,0,0.38,0.9);
+      --ease-out: cubic-bezier(0,0,0.38,0.9);
+      --focus-color: var(--ibm-blue); --focus-width: 2px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; overflow: hidden; min-height: 100dvh; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    :focus-visible { outline: var(--focus-width) solid var(--focus-color); outline-offset: 2px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* ── Progress ── */
+    .progress { position:fixed; top:0; left:0; right:0; height:3px; background:var(--gray-20); z-index:50; }
+    .progress__bar { height:100%; width:11.11%; background:linear-gradient(90deg,var(--ibm-blue) 0%,var(--ibm-cyan-l) 100%); transition:width 300ms var(--ease); }
+
+    /* ── Topbar ── */
+    .topbar { position:fixed; top:3px; left:0; right:0; height:var(--topbar-h); display:flex; align-items:center; justify-content:space-between; padding:0 var(--u-6); background:var(--bg); border-bottom:1px solid var(--line); z-index:40; }
+    .topbar__left, .topbar__right { display:flex; align-items:center; gap:var(--u-4); }
+    .brand { display:inline-flex; align-items:center; gap:var(--u-3); }
+    .brand__ibm { display:inline-flex; align-items:center; color:var(--gray-100); }
+    .brand__ibm svg { height:13px; width:auto; }
+    .brand__sep { font-family:var(--font-mono); font-size:var(--text-12); color:var(--ink-faint); }
+    .brand__client { display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.05em; color:var(--ink-muted); text-transform:uppercase; }
+    .meta-divider { width:1px; height:18px; background:var(--line-strong); }
+    .meta-label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.05em; color:var(--ink-faint); text-transform:uppercase; }
+    .topbar__dot { display:inline-block; width:6px; height:6px; background:var(--ibm-blue); }
+
+    /* ── Deck / slides ── */
+    .deck { position:fixed; top:calc(3px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
+    .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:auto; background:var(--white); }
+    .slide.is-active { opacity:1; visibility:visible; clip-path:inset(0 0% 0 0); transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
+    .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
+    @media(max-width:820px){ .slide__inner { padding:var(--u-6) var(--u-5) var(--u-7); } }
+
+    /* ── Typography ── */
+    .eyebrow { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.08em; text-transform:uppercase; color:var(--ibm-blue); padding-bottom:var(--u-2); border-bottom:1px solid var(--ibm-blue); display:inline-block; }
+    .eyebrow--light { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.35); }
+    .title { font-weight:300; font-size:clamp(1.75rem,3.8vw,2.75rem); line-height:1.1; letter-spacing:-.02em; color:var(--ink); margin:var(--u-4) 0 0; }
+    .title--light { color:var(--white); }
+    .subtitle { font-size:var(--text-18); color:var(--ink-muted); font-weight:300; margin:var(--u-3) 0 0; }
+    .subtitle--light { color:rgba(255,255,255,.65); }
+    .lede { font-size:var(--text-18); line-height:1.6; color:var(--ink); max-width:68ch; }
+    .lede--light { color:rgba(255,255,255,.85); }
+    .muted { color:var(--ink-muted); }
+    .kicker { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+
+    /* ── Slide head ── */
+    .slide-head { display:flex; flex-direction:column; gap:0; }
+
+    /* ══════════════════════════════════════════
+       SLIDE COVER — Assimétrico (barra lateral azul)
+       ══════════════════════════════════════════ */
+    .slide--cover { background:var(--bg); }
+    .slide--cover .slide__inner { padding:0; max-width:none; flex-direction:row; gap:0; min-height:100%; }
+    .cover-bar { width:clamp(180px,20vw,300px); background:var(--ibm-blue); display:flex; flex-direction:column; justify-content:space-between; padding:var(--u-8) var(--u-6); flex-shrink:0; position:relative; overflow:hidden; }
+    .cover-bar::before { content:""; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px); background-size:20px 20px; pointer-events:none; }
+    .cover-bar__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); writing-mode:vertical-rl; transform:rotate(180deg); align-self:flex-start; position:relative; z-index:1; }
+    .cover-bar__num { font-family:var(--font-mono); font-size:var(--text-76); font-weight:200; color:rgba(255,255,255,.1); line-height:1; letter-spacing:-.04em; position:relative; z-index:1; user-select:none; }
+    .cover-bar__tags { display:flex; flex-direction:column; gap:var(--u-2); position:relative; z-index:1; }
+    .cover-bar__tag { font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; background:rgba(255,255,255,.12); color:rgba(255,255,255,.7); border:1px solid rgba(255,255,255,.2); width:fit-content; }
+    .cover-main { flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:var(--u-9) var(--u-9) var(--u-8); }
+    .cover-main__head { display:flex; flex-direction:column; gap:var(--u-5); }
+    .cover-eyebrow { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:var(--ibm-blue); display:flex; align-items:center; gap:var(--u-3); }
+    .cover-eyebrow::before { content:""; display:block; width:32px; height:1px; background:var(--ibm-blue); }
+    .cover-display { font-weight:200; font-size:clamp(2.6rem,6vw,4.75rem); line-height:1; letter-spacing:-.03em; color:var(--ink); max-width:16ch; }
+    .cover-display em { font-style:normal; color:var(--ibm-blue); font-weight:600; }
+    .cover-main__foot { padding-top:var(--u-6); border-top:1px solid var(--line); }
+    .cover-meta-row { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--u-6); }
+    .cover-meta { display:flex; flex-direction:column; gap:2px; }
+    .cover-meta__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    .cover-meta__value { font-size:var(--text-16); font-weight:600; color:var(--ink); margin-top:var(--u-1); }
+    .cover-meta__sub { font-size:var(--text-14); color:var(--ink-muted); }
+    @media(max-width:768px){
+      .slide--cover .slide__inner { flex-direction:column; }
+      .cover-bar { width:100%; height:72px; flex-direction:row; align-items:center; padding:0 var(--u-5); }
+      .cover-bar__num { font-size:var(--text-32); }
+      .cover-bar__label { writing-mode:horizontal-tb; transform:none; }
+      .cover-main { padding:var(--u-6) var(--u-5); }
+      .cover-meta-row { grid-template-columns:1fr; gap:var(--u-4); }
+    }
+
+    /* ══════════════════════════════════════════
+       STAT GRID — 4 colunas
+       ══════════════════════════════════════════ */
+    .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .stat { background:var(--bg); padding:var(--u-6) var(--u-5); display:flex; flex-direction:column; gap:var(--u-2); position:relative; overflow:hidden; }
+    .stat:nth-child(1)::before { background:var(--ibm-blue); }
+    .stat:nth-child(2)::before { background:var(--ibm-cyan); }
+    .stat:nth-child(3)::before { background:var(--ibm-purple); }
+    .stat:nth-child(4)::before { background:var(--ibm-teal); }
+    .stat::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; }
+    .stat__value { font-size:clamp(2rem,4vw,3.25rem); font-weight:200; letter-spacing:-.03em; color:var(--ink); line-height:1; }
+    .stat__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); }
+    .stat__desc { font-size:var(--text-14); line-height:1.5; color:var(--ink-muted); margin-top:var(--u-2); }
+    .stat__bg-num { position:absolute; bottom:-8px; right:var(--u-3); font-family:var(--font-mono); font-size:5rem; font-weight:700; color:var(--gray-20); line-height:1; user-select:none; pointer-events:none; }
+    @media(max-width:900px){ .stat-grid { grid-template-columns:repeat(2,1fr); } }
+
+    /* ══════════════════════════════════════════
+       TWO-COL PANELS
+       ══════════════════════════════════════════ */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:var(--u-4); }
+    .panel { background:var(--bg); padding:var(--u-6); display:flex; flex-direction:column; gap:var(--u-4); }
+    .panel--accent { background:var(--bg-2); border-left:3px solid var(--ibm-blue); padding-left:calc(var(--u-6) - 3px); }
+    .panel__title { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:500; }
+    .panel--accent .panel__title { color:var(--ibm-blue); }
+    .panel em { font-style:italic; color:var(--ibm-blue); }
+    @media(max-width:820px){ .two-col { grid-template-columns:1fr; } }
+
+    /* ══════════════════════════════════════════
+       TIMELINE — 3 colunas
+       ══════════════════════════════════════════ */
+    .timeline { list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .timeline__step { background:var(--bg); padding:var(--u-6); display:flex; flex-direction:column; gap:var(--u-4); position:relative; }
+    .timeline__step:nth-child(1)::before { background:var(--ibm-blue); }
+    .timeline__step:nth-child(2)::before { background:var(--ibm-cyan); }
+    .timeline__step:nth-child(3)::before { background:var(--ibm-teal); }
+    .timeline__step::before { content:""; position:absolute; top:0; left:0; width:40px; height:3px; }
+    .timeline__index { font-family:var(--font-mono); font-size:var(--text-14); color:var(--ink-faint); letter-spacing:.06em; }
+    .timeline__title { font-size:var(--text-20); font-weight:600; color:var(--ink); letter-spacing:-.01em; }
+    .timeline__body p { font-size:var(--text-16); line-height:1.6; color:var(--ink-muted); }
+    @media(max-width:900px){ .timeline { grid-template-columns:1fr; } }
+
+    /* ══════════════════════════════════════════
+       SLIDE BLUE — Fundo azul sólido IBM
+       ══════════════════════════════════════════ */
+    .slide--blue { background:var(--ibm-blue); overflow:hidden; }
+    .slide--blue .slide__inner {
+      overflow:hidden;
+      padding:var(--u-8) var(--u-9);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:var(--u-5);
+      max-width:860px;
+    }
+    .blue-eyebrow-row { display:flex; align-items:center; gap:var(--u-4); }
+    .blue-hero__stat { font-family:var(--font-mono); font-size:clamp(2.2rem,4.5vw,3.75rem); font-weight:300; color:var(--white); line-height:1.05; letter-spacing:-.02em; }
+    .blue-hero__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+    .blue-rule { width:40px; height:2px; background:rgba(255,255,255,.3); }
+    .blue-hero__body { font-size:var(--text-18); font-weight:300; color:rgba(255,255,255,.85); line-height:1.6; max-width:58ch; }
+    .blue-pills { display:flex; flex-wrap:wrap; gap:var(--u-2); }
+    .blue-pill { font-family:var(--font-mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; padding:5px 12px; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.7); background:rgba(255,255,255,.07); }
+    .blue-footer-row { border-top:1px solid rgba(255,255,255,.12); padding-top:var(--u-4); display:flex; justify-content:space-between; align-items:center; }
+    .blue-footer__text { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.3); }
+    @media(max-width:800px){ .slide--blue .slide__inner { padding:var(--u-6) var(--u-5); } }
+
+    /* ══════════════════════════════════════════
+       SLIDE TEXTURED — Gray-10 com grade SVG
+       ══════════════════════════════════════════ */
+    .slide--textured { background-color:var(--gray-10); }
+    .slide--textured .slide__inner { position:relative; }
+    .textured-bg { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .textured-bg svg { width:100%; height:100%; }
+    .textured-content { position:relative; z-index:1; display:flex; flex-direction:column; gap:var(--u-6); }
+    .card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--u-5); }
+    .card { background:var(--white); border:1px solid var(--line); padding:var(--u-6); display:flex; flex-direction:column; gap:var(--u-3); position:relative; }
+    .card::after { content:""; position:absolute; bottom:0; left:0; right:0; height:3px; }
+    .card:nth-child(1)::after { background:var(--ibm-blue); }
+    .card:nth-child(2)::after { background:var(--ibm-cyan); }
+    .card:nth-child(3)::after { background:var(--ibm-purple); }
+    .card__icon { width:40px; height:40px; background:var(--ibm-blue); display:flex; align-items:center; justify-content:center; }
+    .card__icon svg { color:white; }
+    .card__title { font-size:var(--text-18); font-weight:600; color:var(--ink); letter-spacing:-.01em; margin-top:var(--u-2); }
+    .card__body { font-size:var(--text-14); line-height:1.6; color:var(--ink-muted); }
+    @media(max-width:900px){ .card-grid { grid-template-columns:1fr; } }
+
+    /* ══════════════════════════════════════════
+       SLIDE SPLIT — Metade azul / metade branca
+       ══════════════════════════════════════════ */
+    .slide--split .slide__inner { padding:0; max-width:none; flex-direction:row; gap:0; min-height:100%; }
+    .split-left { flex:1; background:var(--ibm-blue); display:flex; flex-direction:column; justify-content:center; padding:var(--u-9) var(--u-8); position:relative; overflow:hidden; }
+    .split-left::before { content:""; position:absolute; width:420px; height:420px; border-radius:50%; border:1px solid rgba(255,255,255,.1); top:-80px; right:-120px; pointer-events:none; }
+    .split-left::after { content:""; position:absolute; width:240px; height:240px; border-radius:50%; border:1px solid rgba(255,255,255,.08); bottom:-60px; left:40px; pointer-events:none; }
+    .split-left__content { position:relative; z-index:1; display:flex; flex-direction:column; gap:var(--u-5); }
+    .split-right { flex:1; background:var(--white); display:flex; flex-direction:column; justify-content:center; padding:var(--u-9) var(--u-8); border-left:1px solid var(--line); }
+    .split-list { list-style:none; display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .split-item { background:var(--bg); display:grid; grid-template-columns:48px 1fr; align-items:start; gap:var(--u-4); padding:var(--u-5); }
+    .split-item__num { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; color:var(--ibm-blue); padding-top:3px; }
+    .split-item__title { font-size:var(--text-16); font-weight:600; color:var(--ink); }
+    .split-item__desc { font-size:var(--text-14); color:var(--ink-muted); line-height:1.5; margin-top:4px; }
+    @media(max-width:800px){ .slide--split .slide__inner { flex-direction:column; } .split-left,.split-right { padding:var(--u-7) var(--u-5); } }
+
+    /* ══════════════════════════════════════════
+       SLIDE CLOSING — Encerramento claro
+       ══════════════════════════════════════════ */
+    .slide--closing { background:var(--bg-2); }
+    .slide--closing .slide__inner { justify-content:space-between; }
+    .closing-main { display:flex; flex-direction:column; gap:var(--u-5); }
+    .closing-display { font-weight:200; font-size:clamp(3rem,7vw,5.5rem); line-height:.95; letter-spacing:-.04em; color:var(--ink); }
+    .closing-display em { font-style:normal; color:var(--ibm-blue); font-weight:400; }
+    .closing-sub { font-size:var(--text-18); color:var(--ink-muted); font-weight:300; max-width:42ch; line-height:1.55; }
+    .closing-contacts { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .closing-contact { background:var(--white); padding:var(--u-5) var(--u-6); display:flex; flex-direction:column; gap:4px; }
+    .closing-contact__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    .closing-contact__name { font-size:var(--text-16); font-weight:600; color:var(--ink); }
+    .closing-contact__role { font-size:var(--text-14); color:var(--ink-muted); }
+    .closing-rule { width:100%; height:1px; background:var(--line); }
+    .closing-brand { display:flex; align-items:center; gap:var(--u-4); }
+    .closing-brand svg { height:14px; color:var(--ink-faint); }
+    .closing-brand__text { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    @media(max-width:700px){ .closing-contacts { grid-template-columns:1fr; } }
+
+    /* ══════════════════════════════════════════
+       Navbar — grid 3 colunas (botões centralizados)
+       ══════════════════════════════════════════ */
+    .navbar { position:fixed; bottom:0; left:0; right:0; height:var(--navbar-h); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 var(--u-6); background:var(--bg); border-top:1px solid var(--line); z-index:40; }
+    .navbar__left { display:flex; align-items:center; }
+    .navbar__center { display:flex; align-items:center; justify-content:center; gap:var(--u-3); }
+    .navbar__right { display:flex; align-items:center; justify-content:flex-end; }
+    .navbar__hint { font-family:var(--font-mono); font-size:var(--text-12); color:var(--ink-faint); letter-spacing:.02em; }
+    .btn { display:inline-flex; align-items:center; gap:var(--u-2); height:38px; padding:0 var(--u-4); border:1px solid var(--gray-100); background:var(--gray-100); color:var(--white); font-size:var(--text-14); cursor:pointer; transition:background 120ms var(--ease),border-color 120ms var(--ease); }
+    .btn:hover { background:var(--gray-80); border-color:var(--gray-80); }
+    .btn--primary { background:var(--ibm-blue); border-color:var(--ibm-blue); }
+    .btn--primary:hover { background:var(--ibm-blue-h); border-color:var(--ibm-blue-h); }
+    .btn--ghost { background:transparent; border-color:var(--line-strong); color:var(--ink-muted); }
+    .btn--ghost:hover { background:var(--bg-2); color:var(--ink); }
+    @media(max-width:560px){ .navbar { padding:0 var(--u-3); } .navbar__hint { display:none; } }
+
+    /* ── Index panel ── */
+    .index-panel { position:fixed; inset:0; background:rgba(22,22,22,.55); z-index:60; display:flex; align-items:stretch; justify-content:flex-end; backdrop-filter:blur(4px); }
+    .index-panel[hidden] { display:none; }
+    .index-panel__inner { width:min(420px,100%); background:var(--bg); border-left:1px solid var(--line); display:flex; flex-direction:column; padding:var(--u-6); }
+    .index-panel__head { display:flex; align-items:center; justify-content:space-between; padding-bottom:var(--u-4); border-bottom:1px solid var(--line); margin-bottom:var(--u-4); }
+    .index-panel__title { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ibm-blue); margin:0; font-weight:500; }
+    .index-list { list-style:none; display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .index-item { background:var(--bg); width:100%; border:0; text-align:left; display:grid; grid-template-columns:48px 1fr; align-items:center; gap:var(--u-3); padding:var(--u-3) var(--u-4); cursor:pointer; font-size:var(--text-14); color:var(--ink); transition:background 100ms var(--ease); }
+    .index-item:hover { background:var(--bg-2); }
+    .index-item.is-current { background:var(--bg-2); box-shadow:inset 3px 0 0 var(--ibm-blue); }
+    .index-item__num { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; color:var(--ink-faint); }
+    .index-item.is-current .index-item__num { color:var(--ibm-blue); }
+    .index-item__label { font-weight:500; }
+    .index-panel__foot { margin-top:auto; padding-top:var(--u-5); border-top:1px solid var(--line); font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); display:flex; flex-wrap:wrap; align-items:center; gap:2px; }
+    .kbd { display:inline-block; font-family:var(--font-mono); font-size:11px; padding:2px 5px; border:1px solid var(--line-strong); background:var(--bg-2); color:var(--ink); margin:0 2px; }
+
+    /* ── Animações stagger ── */
+    @keyframes slideUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+    .slide.is-active .cover-eyebrow    { animation:slideUp 400ms 80ms  var(--ease-out) both; }
+    .slide.is-active .cover-display    { animation:slideUp 500ms 180ms var(--ease-out) both; }
+    .slide.is-active .cover-main__foot { animation:slideUp 400ms 320ms var(--ease-out) both; }
+    .slide.is-active .cover-bar__num   { animation:fadeIn  600ms 60ms  var(--ease-out) both; }
+    .slide.is-active .stat:nth-child(1){ animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .stat:nth-child(2){ animation:slideUp 360ms 130ms var(--ease-out) both; }
+    .slide.is-active .stat:nth-child(3){ animation:slideUp 360ms 200ms var(--ease-out) both; }
+    .slide.is-active .stat:nth-child(4){ animation:slideUp 360ms 270ms var(--ease-out) both; }
+    .slide.is-active .timeline__step:nth-child(1){ animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .timeline__step:nth-child(2){ animation:slideUp 360ms 160ms var(--ease-out) both; }
+    .slide.is-active .timeline__step:nth-child(3){ animation:slideUp 360ms 260ms var(--ease-out) both; }
+    .slide.is-active .panel:nth-child(1){ animation:slideUp 360ms 80ms  var(--ease-out) both; }
+    .slide.is-active .panel:nth-child(2){ animation:slideUp 360ms 200ms var(--ease-out) both; }
+    .slide.is-active .card:nth-child(1){ animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .card:nth-child(2){ animation:slideUp 360ms 150ms var(--ease-out) both; }
+    .slide.is-active .card:nth-child(3){ animation:slideUp 360ms 240ms var(--ease-out) both; }
+    .slide.is-active .slide-head       { animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .split-left__content{ animation:slideUp 420ms 80ms  var(--ease-out) both; }
+    .slide.is-active .split-right      { animation:slideUp 420ms 200ms var(--ease-out) both; }
+    .slide.is-active .blue-hero        { animation:slideUp 480ms 80ms  var(--ease-out) both; }
+    .slide.is-active .closing-main     { animation:slideUp 460ms 80ms  var(--ease-out) both; }
+    .slide.is-active .closing-contacts { animation:slideUp 400ms 260ms var(--ease-out) both; }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+      .slide{clip-path:none!important;}
+    }
+    @media print{
+      @page{size:A4 landscape;margin:12mm;}
+      html,body{overflow:visible;height:auto;}
+      .progress,.topbar,.navbar,.index-panel{display:none!important;}
+      .deck{position:static;}
+      .slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}
+      .slide:last-child{page-break-after:auto;}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#slide-1">Pular para o conteúdo</a>
+
+  <div class="progress" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="12">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Topbar
+       Regra de logo:
+       - Cliente IBM → exiba só brand__ibm (sem ×)
+       - Cliente externo → exiba brand__ibm + brand__sep + brand__client
+  -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <!-- Logo IBM inline (sem dependência de arquivo externo) -->
+        <span class="brand__ibm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 424.66 158.45" aria-label="IBM" role="img">
+            <path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/>
+          </svg>
+        </span>
+        <!-- Remova as duas linhas abaixo quando cliente for IBM -->
+        <span class="brand__sep" aria-hidden="true">×</span>
+        <span class="brand__client">{{CLIENTE}}</span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">{{AREA_OU_SERVICO}}</span>
+    </div>
+    <div class="topbar__right">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 08</span>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 01 — COVER assimétrico
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
+      <div class="slide__inner">
+        <div class="cover-bar" aria-hidden="true">
+          <span class="cover-bar__label">{{LABEL_BARRA}}</span>
+          <span class="cover-bar__num">01</span>
+          <div class="cover-bar__tags">
+            <span class="cover-bar__tag">{{TAG_1}}</span>
+            <span class="cover-bar__tag">{{TAG_2}}</span>
+          </div>
+        </div>
+        <div class="cover-main">
+          <div class="cover-main__head">
+            <span class="cover-eyebrow">{{EYEBROW_COVER}}</span>
+            <h1 id="s1-title" class="cover-display">{{TITULO_LINHA_1}}<br/><em>{{TITULO_LINHA_2}}</em></h1>
+          </div>
+          <div class="cover-main__foot">
+            <div class="cover-meta-row">
+              <div class="cover-meta">
+                <span class="cover-meta__label">{{META_1_LABEL}}</span>
+                <span class="cover-meta__value">{{META_1_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_1_SUB}}</span>
+              </div>
+              <div class="cover-meta">
+                <span class="cover-meta__label">{{META_2_LABEL}}</span>
+                <span class="cover-meta__value">{{META_2_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_2_SUB}}</span>
+              </div>
+              <div class="cover-meta">
+                <span class="cover-meta__label">{{META_3_LABEL}}</span>
+                <span class="cover-meta__value">{{META_3_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_3_SUB}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 02 — STAT GRID (4 métricas)
+         ═══════════════════════════════════════ -->
+    <section class="slide" id="slide-2" data-slide="2" aria-labelledby="s2-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
+          <h2 id="s2-title" class="title">{{TITULO_S2}}</h2>
+          <p class="subtitle">{{SUBTITULO_S2}}</p>
+        </header>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat__value">{{STAT_1_VALOR}}</span>
+            <span class="stat__label">{{STAT_1_LABEL}}</span>
+            <p class="stat__desc">{{STAT_1_DESC}}</p>
+            <span class="stat__bg-num" aria-hidden="true">1</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">{{STAT_2_VALOR}}</span>
+            <span class="stat__label">{{STAT_2_LABEL}}</span>
+            <p class="stat__desc">{{STAT_2_DESC}}</p>
+            <span class="stat__bg-num" aria-hidden="true">2</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">{{STAT_3_VALOR}}</span>
+            <span class="stat__label">{{STAT_3_LABEL}}</span>
+            <p class="stat__desc">{{STAT_3_DESC}}</p>
+            <span class="stat__bg-num" aria-hidden="true">3</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">{{STAT_4_VALOR}}</span>
+            <span class="stat__label">{{STAT_4_LABEL}}</span>
+            <p class="stat__desc">{{STAT_4_DESC}}</p>
+            <span class="stat__bg-num" aria-hidden="true">4</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 03 — TWO-COL panels
+         ═══════════════════════════════════════ -->
+    <section class="slide" id="slide-3" data-slide="3" aria-labelledby="s3-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — {{EYEBROW_S3}}</span>
+          <h2 id="s3-title" class="title">{{TITULO_S3}}</h2>
+        </header>
+        <div class="two-col">
+          <article class="panel" aria-labelledby="p3-a">
+            <h3 class="panel__title" id="p3-a">{{PANEL_A_TITULO}}</h3>
+            <p class="lede">{{PANEL_A_TEXTO}}</p>
+          </article>
+          <article class="panel panel--accent" aria-labelledby="p3-b">
+            <h3 class="panel__title" id="p3-b">{{PANEL_B_TITULO}}</h3>
+            <p class="lede">{{PANEL_B_TEXTO}}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 04 — TIMELINE (3 etapas)
+         ═══════════════════════════════════════ -->
+    <section class="slide" id="slide-4" data-slide="4" aria-labelledby="s4-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
+          <h2 id="s4-title" class="title">{{TITULO_S4}}</h2>
+        </header>
+        <ol class="timeline">
+          <li class="timeline__step">
+            <span class="timeline__index">01</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">{{ETAPA_1_TITULO}}</h3>
+              <p>{{ETAPA_1_TEXTO}}</p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">02</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">{{ETAPA_2_TITULO}}</h3>
+              <p>{{ETAPA_2_TEXTO}}</p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">03</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">{{ETAPA_3_TITULO}}</h3>
+              <p>{{ETAPA_3_TEXTO}}</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 05 — FUNDO AZUL IBM (impacto / quote)
+         Sem scroll — tudo cabe na viewport.
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--blue" id="slide-5" data-slide="5" aria-labelledby="s5-title">
+      <div class="slide__inner">
+        <div class="blue-eyebrow-row">
+          <span class="eyebrow eyebrow--light">05 — {{EYEBROW_S5}}</span>
+        </div>
+        <h2 id="s5-title" class="blue-hero__stat">{{TITULO_S5}}</h2>
+        <span class="blue-hero__label">{{LABEL_S5}}</span>
+        <div class="blue-rule"></div>
+        <p class="blue-hero__body">{{CORPO_S5}}</p>
+        <div class="blue-pills">
+          <span class="blue-pill">{{PILL_1}}</span>
+          <span class="blue-pill">{{PILL_2}}</span>
+          <span class="blue-pill">{{PILL_3}}</span>
+        </div>
+        <div class="blue-footer-row">
+          <span class="blue-footer__text">{{FOOTER_S5_ESQUERDA}}</span>
+          <span class="blue-footer__text">{{FOOTER_S5_DIREITA}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 06 — FUNDO TEXTURIZADO + cards
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--textured" id="slide-6" data-slide="6" aria-labelledby="s6-title">
+      <div class="slide__inner">
+        <div class="textured-bg" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+              <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#c6c6c6" opacity="0.5"/>
+              </pattern>
+              <pattern id="grid" x="0" y="0" width="56" height="56" patternUnits="userSpaceOnUse">
+                <path d="M56 0H0V56" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+            <rect width="100%" height="100%" fill="url(#dots)"/>
+          </svg>
+        </div>
+        <div class="textured-content">
+          <header class="slide-head">
+            <span class="eyebrow">06 — {{EYEBROW_S6}}</span>
+            <h2 id="s6-title" class="title">{{TITULO_S6}}</h2>
+            <p class="subtitle">{{SUBTITULO_S6}}</p>
+          </header>
+          <div class="card-grid">
+            <div class="card" aria-labelledby="c6-a">
+              <div class="card__icon">
+                <!-- Substitua pelo ícone adequado (SVG 20×20, fill white) -->
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="6" height="6" fill="white"/>
+                  <rect x="11" y="3" width="6" height="6" fill="white" opacity=".5"/>
+                  <rect x="3" y="11" width="6" height="6" fill="white" opacity=".5"/>
+                  <rect x="11" y="11" width="6" height="6" fill="white" opacity=".25"/>
+                </svg>
+              </div>
+              <h3 class="card__title" id="c6-a">{{CARD_1_TITULO}}</h3>
+              <p class="card__body">{{CARD_1_CORPO}}</p>
+            </div>
+            <div class="card" aria-labelledby="c6-b">
+              <div class="card__icon" style="background:var(--ibm-cyan)">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="2" y="8" width="16" height="2" fill="white"/>
+                  <rect x="8" y="2" width="2" height="16" fill="white"/>
+                </svg>
+              </div>
+              <h3 class="card__title" id="c6-b">{{CARD_2_TITULO}}</h3>
+              <p class="card__body">{{CARD_2_CORPO}}</p>
+            </div>
+            <div class="card" aria-labelledby="c6-c">
+              <div class="card__icon" style="background:var(--ibm-teal)">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="6" stroke="white" stroke-width="1.5" fill="none"/>
+                  <circle cx="10" cy="10" r="2" fill="white"/>
+                </svg>
+              </div>
+              <h3 class="card__title" id="c6-c">{{CARD_3_TITULO}}</h3>
+              <p class="card__body">{{CARD_3_CORPO}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 07 — SPLIT azul / branco
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--split" id="slide-7" data-slide="7" aria-labelledby="s7-title">
+      <div class="slide__inner">
+        <div class="split-left">
+          <div class="split-left__content">
+            <span class="eyebrow eyebrow--light">07 — {{EYEBROW_S7}}</span>
+            <h2 id="s7-title" class="title title--light">{{TITULO_S7}}</h2>
+            <p class="lede lede--light">{{CORPO_S7}}</p>
+          </div>
+        </div>
+        <div class="split-right">
+          <ul class="split-list" aria-label="{{ARIA_SPLIT_LIST}}">
+            <li class="split-item">
+              <span class="split-item__num">01</span>
+              <div>
+                <div class="split-item__title">{{ITEM_1_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_1_DESC}}</div>
+              </div>
+            </li>
+            <li class="split-item">
+              <span class="split-item__num">02</span>
+              <div>
+                <div class="split-item__title">{{ITEM_2_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_2_DESC}}</div>
+              </div>
+            </li>
+            <li class="split-item">
+              <span class="split-item__num">03</span>
+              <div>
+                <div class="split-item__title">{{ITEM_3_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_3_DESC}}</div>
+              </div>
+            </li>
+            <li class="split-item">
+              <span class="split-item__num">04</span>
+              <div>
+                <div class="split-item__title">{{ITEM_4_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_4_DESC}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 08 — ENCERRAMENTO claro
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--closing" id="slide-8" data-slide="8" aria-labelledby="s8-title">
+      <div class="slide__inner">
+        <div class="closing-main">
+          <span class="eyebrow">08 — {{EYEBROW_S8}}</span>
+          <h2 id="s8-title" class="closing-display">{{CLOSING_LINHA_1}}<br/><em>{{CLOSING_LINHA_2}}</em></h2>
+          <p class="closing-sub">{{CLOSING_SUB}}</p>
+        </div>
+        <div>
+          <div class="closing-contacts" aria-label="Contatos">
+            <div class="closing-contact">
+              <span class="closing-contact__label">{{CONTATO_1_LABEL}}</span>
+              <span class="closing-contact__name">{{CONTATO_1_NOME}}</span>
+              <span class="closing-contact__role">{{CONTATO_1_CARGO}}</span>
+            </div>
+            <div class="closing-contact">
+              <span class="closing-contact__label">{{CONTATO_2_LABEL}}</span>
+              <span class="closing-contact__name">{{CONTATO_2_NOME}}</span>
+              <span class="closing-contact__role">{{CONTATO_2_CARGO}}</span>
+            </div>
+          </div>
+          <div style="margin-top:var(--u-6)">
+            <div class="closing-rule"></div>
+            <div class="closing-brand" style="margin-top:var(--u-4)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 424.66 158.45" aria-label="IBM" role="img">
+                <path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/>
+              </svg>
+              <span class="closing-brand__text">IBM Presentation Factory</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navbar com grid 3 colunas -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <div class="navbar__left">
+      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 3h12v1.5H2zM2 7.25h12v1.5H2zM2 11.5h12V13H2z"/></svg>
+        <span>Índice</span>
+      </button>
+    </div>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 3 4 8l5.5 5 1-1L6 8l4.5-4z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="m6.5 3-1 1L10 8l-4.5 4 1 1L12 8z"/></svg>
+      </button>
+    </div>
+    <div class="navbar__right">
+      <span class="navbar__hint" aria-hidden="true">Use 1–8 para ir direto ao slide</span>
+    </div>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="idx-title">
+      <header class="index-panel__head">
+        <h2 id="idx-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">{{IDX_1}}</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">{{IDX_2}}</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">{{IDX_3}}</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">{{IDX_4}}</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">{{IDX_5}}</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">{{IDX_6}}</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">{{IDX_7}}</span></button></li>
+        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">{{IDX_8}}</span></button></li>
+      </ol>
+      <footer class="index-panel__foot">
+        <span class="kbd">←</span><span class="kbd">→</span> navegar &nbsp;·&nbsp;
+        <span class="kbd">1</span>–<span class="kbd">8</span> ir para slide &nbsp;·&nbsp;
+        <span class="kbd">Esc</span> índice &nbsp;·&nbsp;
+        <span class="kbd">F</span> tela cheia
+      </footer>
+    </div>
+  </aside>
+
+  <script>
+  (function(){
+    'use strict';
+    var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total   = slides.length;
+    var bar     = document.getElementById('progress-bar');
+    var counter = document.getElementById('slide-counter');
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var btnIdx  = document.getElementById('btn-index');
+    var btnClose= document.getElementById('btn-index-close');
+    var idxPanel= document.getElementById('index-panel');
+    var idxItems= Array.prototype.slice.call(document.querySelectorAll('.index-item'));
+    var current = 1;
+    function pad(n){ return n<10?'0'+n:''+n; }
+    function go(n,opts){
+      opts=opts||{};
+      if(n<1)n=1; if(n>total)n=total;
+      if(n===current&&!opts.force)return;
+      slides.forEach(function(s){
+        var sn=parseInt(s.getAttribute('data-slide'),10);
+        if(sn===n){ s.classList.add('is-active'); s.removeAttribute('aria-hidden'); s.scrollTop=0; }
+        else { s.classList.remove('is-active'); s.setAttribute('aria-hidden','true'); }
+      });
+      current=n;
+      var pct=(n/total)*100;
+      if(bar) bar.style.width=pct+'%';
+      var prog=document.querySelector('.progress');
+      if(prog) prog.setAttribute('aria-valuenow',Math.round(pct));
+      if(counter) counter.textContent=pad(n)+' / '+pad(total);
+      idxItems.forEach(function(b){ parseInt(b.getAttribute('data-go'),10)===n?b.classList.add('is-current'):b.classList.remove('is-current'); });
+      if(btnPrev) btnPrev.disabled=(n===1);
+      if(btnNext) btnNext.disabled=(n===total);
+      var h='#slide-'+n; if(window.location.hash!==h) history.replaceState(null,'',h);
+    }
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+    function openIdx(){  if(!idxPanel)return; idxPanel.hidden=false; idxPanel.setAttribute('aria-hidden','false'); if(btnClose)btnClose.focus(); }
+    function closeIdx(){ if(!idxPanel)return; idxPanel.hidden=true;  idxPanel.setAttribute('aria-hidden','true');  if(btnIdx)btnIdx.focus(); }
+    function toggleIdx(){ idxPanel&&(idxPanel.hidden?openIdx():closeIdx()); }
+    if(btnPrev)  btnPrev.addEventListener('click',prev);
+    if(btnNext)  btnNext.addEventListener('click',next);
+    if(btnIdx)   btnIdx.addEventListener('click',toggleIdx);
+    if(btnClose) btnClose.addEventListener('click',closeIdx);
+    if(idxPanel) idxPanel.addEventListener('click',function(e){ if(e.target===idxPanel)closeIdx(); });
+    idxItems.forEach(function(b){ b.addEventListener('click',function(){ var n=parseInt(b.getAttribute('data-go'),10); if(!isNaN(n)){closeIdx();go(n);} }); });
+    document.addEventListener('keydown',function(e){
+      var tag=e.target&&e.target.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA'||(e.target&&e.target.isContentEditable))return;
+      var k=e.key;
+      if(k==='Escape'){e.preventDefault();toggleIdx();}
+      else if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();next();}
+      else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev();}
+      else if(k==='Home'){e.preventDefault();go(1);}
+      else if(k==='End'){e.preventDefault();go(total);}
+      else if(k==='f'||k==='F'){e.preventDefault();document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+      else if(/^[1-9]$/.test(k)){var n=parseInt(k,10);if(n<=total){e.preventDefault();go(n);}}
+    });
+    var tx=null,ty=null;
+    document.addEventListener('touchstart',function(e){if(e.touches[0]){tx=e.touches[0].clientX;ty=e.touches[0].clientY;}},{passive:true});
+    document.addEventListener('touchend',function(e){
+      if(tx===null)return;
+      var t=e.changedTouches[0]; if(!t)return;
+      var dx=t.clientX-tx,dy=t.clientY-ty;
+      if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev();}
+      tx=ty=null;
+    },{passive:true});
+    var hash=(window.location.hash||'').replace('#','');
+    var m=/^slide-(\d+)$/.exec(hash);
+    var init=m?parseInt(m[1],10):1;
+    if(init<1||init>total)init=1;
+    go(init,{force:true});
+  })();
+  </script>
+</body>
+</html>
