@@ -31,6 +31,11 @@ A topbar exibe `brand__ibm` (logo IBM) **×** `brand__bb` (logo do cliente).
   ```
   Nunca renderize "IBM × IBM".
 
+## Tipos de gráfico por contexto
+
+- **Gráfico de crescimento** (evolução ao longo do tempo, tendência, projeção) → sempre **gráfico de linha**.
+- **Gráfico de total** (comparação de valores absolutos, distribuição, ranking) → sempre **gráfico de colunas**.
+
 ## Referências sob demanda
 
 - Regras Carbon → `organizations/ibm/design-systems/carbon/`
