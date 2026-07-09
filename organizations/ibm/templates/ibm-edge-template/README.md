@@ -25,26 +25,27 @@ e logo IBM SVG inline — abre sem servidor, sem build, sem dependências.
 - **Acessibilidade** — ARIA completo, skip link, foco visível WCAG 2.1 AA, `prefers-reduced-motion`
 - **Print** — `@media print` que expande todos os slides em A4 landscape
 
-## Placeholders `{{CHAVE}}`
+## Textos de referência
 
-O `index.html` usa placeholders `{{CHAVE}}` em maiúsculas para todo conteúdo variável.
-Substitua cada `{{CHAVE}}` pelo conteúdo real da apresentação.
+O `index.html` usa textos genéricos legíveis para todo conteúdo variável, como
+`Título 1`, `Título 2`, `Status 1`, `Status 2`, `Texto 1` e `Item 1`.
+Substitua esses textos pelo conteúdo real da apresentação.
 
 ### Topbar
-| Placeholder | Uso |
+| Texto | Uso |
 |---|---|
-| `{{TITULO}}` | Título do `<title>` |
-| `{{CLIENTE}}` | Nome do cliente (se for IBM, remover `brand__sep` e `brand__client`) |
-| `{{AREA_OU_SERVICO}}` | Label mono à direita do divisor |
+| `Título 1` | Título do `<title>` e slide de capa |
+| `Cliente` | Nome do cliente (se for IBM, remover `brand__sep` e `brand__client`) |
+| `Área ou serviço` | Label mono à direita do divisor |
 
 ### Cover (slide 01)
-| Placeholder | Uso |
+| Texto | Uso |
 |---|---|
-| `{{LABEL_BARRA}}` | Texto vertical na barra lateral |
-| `{{TAG_1}}`, `{{TAG_2}}` | Tags pequenas na barra lateral |
-| `{{EYEBROW_COVER}}` | Texto eyebrow acima do display |
-| `{{TITULO_LINHA_1}}`, `{{TITULO_LINHA_2}}` | Título display (linha 2 fica em IBM Blue bold) |
-| `{{META_x_LABEL/VALOR/SUB}}` | 3 células de metadados no rodapé |
+| `Categoria` | Texto vertical na barra lateral |
+| `Tag 1`, `Tag 2` | Tags pequenas na barra lateral |
+| `Introdução` | Texto eyebrow acima do display |
+| `Título 1`, `Título 2` | Título display (linha 2 fica em IBM Blue bold) |
+| `Status N`, `Valor N`, `Detalhe N` | Células de metadados no rodapé |
 
 ### Regra de logo (topbar)
 - **Cliente IBM** → remova `brand__sep` e `brand__client`; mantenha só `brand__ibm`
@@ -54,7 +55,7 @@ Substitua cada `{{CHAVE}}` pelo conteúdo real da apresentação.
 
 1. Derive o slug da apresentação (ex.: `proposta-cliente-2025`)
 2. Crie `<workspace>/<slug>/index.html` **fora** de `presentation-factory/`
-3. Copie este `index.html` como base e substitua todos os `{{PLACEHOLDER}}`
+3. Copie este `index.html` como base e substitua os textos genéricos
 4. Abra `index.html` diretamente no browser
 
 > ⚠️ Nunca crie a apresentação final dentro de `presentation-factory/`.
