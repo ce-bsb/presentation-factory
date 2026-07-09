@@ -1,4 +1,0 @@
-name = "IA no Setor Bancário Brasileiro"
-template = "organizations/ibm/templates/ia-setor-bancario-brasil"
-brief = "organizations/ibm/presentations/ia-setor-bancario-brasil/brief.md"
-default_model = "primary"
