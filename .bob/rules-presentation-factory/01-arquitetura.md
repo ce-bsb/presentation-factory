@@ -5,7 +5,7 @@
 - `clients/` — entidades cliente; `organizations/` — entidades corporativas.
 - Cada entidade tem `entity.toml` e sua pasta `assets/`.
 - `presentations/<slug>/` — `brief.md` e `presentation.toml`.
-- `templates/<slug>/` — HTML, CSS e JS do deck (referência interna da factory).
+- `templates/<slug>/` — `index.html`, assets e manifesto do template.
 - `dist/` — saída gerada; nunca edite diretamente.
 
 ## Onde criar apresentações novas
@@ -16,7 +16,8 @@ Quando o usuário pedir uma apresentação:
 1. Derive um slug kebab-case do nome/tema fornecido (ex.: "Proposta Acme 2025" → `proposta-acme-2025`).
 2. Crie a pasta **fora** do `presentation-factory`, como irmã dele:
    - `../<slug>/` relativo à raiz do workspace (ex.: `/Users/eguchi/VsCode/IBM/<slug>/`).
-3. Coloque todos os arquivos do deck (`index.html`, `style.css`, `script.js`, assets) dentro dessa pasta.
+3. Copie `index.html` e `assets/` do template escolhido para essa pasta; preserve
+   CSS e JavaScript inline quando o template for autocontido.
 4. **Nunca** crie a apresentação em `presentation-factory/templates/`, `presentation-factory/dist/` ou qualquer subpasta da factory.
 
 A factory (`presentation-factory/`) serve apenas como **referência** — leia seus templates para copiar estrutura e CSS, mas escreva os arquivos finais na pasta externa.

@@ -23,8 +23,8 @@ O Bob irá:
 
 1. Derivar um slug kebab-case do nome (ex.: `proposta-acme-2025`).
 2. **Criar a pasta da apresentação fora do `presentation-factory/`**, como irmã dele — ex.: `/IBM/proposta-acme-2025/`.
-3. Copiar o CSS e o JS de referência da factory para dentro da pasta criada.
-4. Gerar o `index.html` completo com todos os slides, navegação e acessibilidade.
+3. Copiar o template escolhido, incluindo `index.html` e `assets/`.
+4. Substituir os placeholders mantendo navegação, responsividade e acessibilidade.
 
 > ⚠️ **Nunca peça ao Bob para criar dentro de `presentation-factory/templates/` ou `dist/`.** A factory é somente referência de estilo e estrutura.
 
@@ -39,7 +39,7 @@ O Bob irá:
 presentation-factory/        ← referência de templates, assets e regras
 ├── clients/<org>/
 │   ├── assets/              ← logos, CSS, imagens de referência
-│   ├── templates/           ← HTML/CSS do deck
+│   ├── templates/           ← index.html autocontido + assets
 │   └── presentations/<slug>/← brief.md + presentation.toml
 ├── organizations/ibm/       ← assets e templates IBM
 ├── catalog/models.toml      ← aliases de modelos de IA
@@ -49,9 +49,10 @@ presentation-factory/        ← referência de templates, assets e regras
 <nome-da-apresentacao>/      ← apresentação criada pelo Bob (fora da factory)
 ├── index.html
 └── assets/
-    ├── css/styles.css
-    ├── js/deck.js
-    └── img/
+    ├── ibm-logo.svg
+    ├── logo-dark.svg
+    ├── logo-light.svg
+    └── demais imagens e ícones oficiais
 ```
 
 ## Comandos (builder, uso avançado)

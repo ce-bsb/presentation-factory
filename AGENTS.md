@@ -12,8 +12,8 @@ Tarefa clara → leia o mínimo → implemente. Pergunte só se uma decisão aus
 
 - Derive o slug kebab-case do nome pedido (ex.: `proposta-acme-2025`).
 - Crie `<workspace>/<slug>/` — nunca dentro de `presentation-factory/`.
-- Coloque `index.html`, `assets/css/styles.css`, `assets/js/deck.js` e assets lá.
-- Esta pasta (`presentation-factory/`) é **somente leitura** para o agente ao criar decks: use-a como referência de CSS, JS e estrutura, nunca como destino de escrita.
+- Copie o template escolhido para a nova pasta, preservando `index.html` e `assets/`.
+- Esta pasta é **somente leitura** para o agente ao criar decks.
 
 ## O que ler antes de agir
 
@@ -28,15 +28,19 @@ Não leia tudo de uma vez. Localize o alvo e implemente.
 | Item | Local |
 |---|---|
 | **Nova apresentação (deck HTML)** | **`<workspace>/<slug>/` — fora da factory** |
-| Roteiro da apresentação (uso avançado) | `clients/<org>/presentations/<slug>/brief.md` |
-| Configuração da apresentação (uso avançado) | `clients/<org>/presentations/<slug>/presentation.toml` |
-| CSS e JS de referência | `clients/<org>/assets/` ou `organizations/ibm/assets/` — apenas leitura |
+| Roteiro da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/brief.md` |
+| Configuração da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/presentation.toml` |
+| Templates IBM ativos | `organizations/ibm/templates/ibm-template/`, `ibm-brief-template/`, `ibm-edge-template/` |
 | Saída gerada | `dist/` — nunca edite diretamente |
 
 ## Regras inegociáveis
 
 - Não invente logos, cores, fontes, componentes, dados ou assets.
+- Logo IBM: copie `organizations/ibm/assets/img/logo-dark.svg` (fundo claro) ou
+  `logo-light.svg` (fundo escuro) para `<workspace>/<slug>/assets/ibm-logo.svg`
+  e use `<img src="assets/ibm-logo.svg" alt="IBM">`. Regras completas em
+  `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
+- Ícones: somente `@carbon/icons` oficiais, copiados para o deck. Nunca gere com IA, SVG manual, CSS ou emoji.
 - Sem caminhos absolutos (`/Users/`, `Desktop`, `file://`).
 - Não ponha HTML executável dentro de `presentations/`.
 - Não edite `dist/` como fonte.
-- Nunca crie o deck dentro de `presentation-factory/templates/` ou `presentation-factory/dist/`.

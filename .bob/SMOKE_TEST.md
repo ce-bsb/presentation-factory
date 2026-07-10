@@ -1,6 +1,9 @@
 # Teste do modo Presentation Factory
 
-1. Reabra o workspace no Bob.
+> Workspace assumido: `/IBM` (raiz que contém `presentation-factory/`).
+> O deck deve ser criado em `/IBM/bob-smoke-test/` — fora da factory.
+
+1. Reabra o workspace raiz (`/IBM`) no Bob.
 2. Abra **Settings → Modes**.
 3. Selecione o modo de projeto **Presentation Factory**.
 4. Inicie uma conversa nova.
@@ -9,14 +12,13 @@
 ```text
 Crie um deck HTML de teste com três slides em bob-smoke-test/.
 
-Consulte somente um template real próximo, por exemplo
-`clients/ibm-enterprise/templates/standard-deck/`, e implemente sem parar em
-uma proposta longa.
+Use o template default
+`presentation-factory/organizations/ibm/templates/ibm-template/` e implemente
+sem parar em uma proposta longa.
 
 Crie:
 - index.html
-- assets/css/styles.css
-- assets/js/deck.js
+- assets/ com as cópias locais dos logos oficiais
 - README.md
 
 Slides:
@@ -31,5 +33,6 @@ prefers-reduced-motion e impressão.
 Valide o JavaScript e procure caminhos absolutos proibidos.
 ```
 
-O teste passa se o Bob consultar arquivos reais do repositório, criar os quatro
-arquivos e implementar os requisitos sem depender de Skill.
+O teste passa se o Bob usar o novo template default, manter CSS e JavaScript
+dentro de `index.html`, copiar os logos oficiais para `assets/` e implementar
+os requisitos sem depender de Skill.

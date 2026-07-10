@@ -1,0 +1,34 @@
+[meta]
+name        = "IBM Brief"
+slug        = "ibm-brief-template"
+version     = "1.0.0"
+description = "Template IBM editorial para dossiês e relatórios técnicos, com sumário, ledger de métricas, marginália, comparação e colofão."
+author      = "IBM Presentation Factory"
+
+[design]
+system      = "IBM Carbon Design System v11"
+fonts       = ["IBM Plex Sans", "IBM Plex Mono"]
+base_size   = "18px"
+grid        = "8px"
+theme       = "light"
+contrast    = "WCAG 2.1 AA"
+
+[slides]
+count  = 8
+labels = [
+  "cover",
+  "agenda",
+  "metric-ledger",
+  "brief-marginalia",
+  "signal-chain",
+  "comparison-table",
+  "statement",
+  "closing-colophon"
+]
+
+[assets]
+# Logo IBM real duplicado fisicamente em assets/ (ibm-logo.svg = logo-dark.svg,
+# mais logo-light.svg para uso em fundos escuros).
+# Ícones oficiais do Carbon Design System (@carbon/icons) copiados em assets/icons/
+# e aplicados via CSS mask-image (permite recolorir mantendo a geometria original).
+# CSS e JavaScript de navegação estão incorporados no próprio index.html.

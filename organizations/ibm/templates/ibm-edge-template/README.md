@@ -1,7 +1,7 @@
 # Template: IBM Edge
 
-Template de deck HTML com 8 layouts distintos, CSS inline, JS de navegação embutido
-e logo IBM SVG inline — abre sem servidor, sem build, sem dependências.
+Template de deck HTML com 8 layouts distintos, CSS e JavaScript incorporados.
+Logos IBM e ícones Carbon oficiais ficam em `assets/`.
 
 ## Slides e layouts
 
@@ -18,7 +18,8 @@ e logo IBM SVG inline — abre sem servidor, sem build, sem dependências.
 
 ## Características técnicas
 
-- **Tudo inline** — CSS, JS, logo IBM SVG embutidos; sem assets externos obrigatórios
+- **Autocontido** — CSS e JavaScript dentro do `index.html`; logos IBM e ícones
+  Carbon copiados localmente em `assets/`
 - **Transição de slide** — `clip-path: inset()` wipe horizontal (não fade)
 - **Animações stagger** — entrada escalonada por elemento ao ativar o slide
 - **Navegação** — teclado completo (setas, PageUp/Down, Home, End, teclas 1–8), swipe touch, hash routing, fullscreen com `F`
