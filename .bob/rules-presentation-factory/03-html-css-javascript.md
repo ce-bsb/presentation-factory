@@ -8,8 +8,7 @@
 2. **Sidebar com scroll** — todos os slides no fluxo; `IntersectionObserver`.
    Use apenas se o template real ou o pedido justificar.
 
-Leia o template real mais próximo **apenas se o pedido envolver redesign amplo,
-novo padrão de layout ou decisão de narrativa** — não para criações simples.
+Leia o template real mais próximo antes de criar ou alterar o deck.
 
 ## HTML
 
@@ -25,10 +24,8 @@ novo padrão de layout ou decisão de narrativa** — não para criações simpl
 - Todo elemento visível tem CSS intencional.
 - **CSS de referência:** `clients/ibm-enterprise/assets/css/styles.css` (clientes IBM)
   e `organizations/ibm/assets/css/styles.css` (IBM institucional).
-  No `<link>` do HTML, aponte para o path relativo a partir da pasta da apresentação
-  (ex.: `../presentation-factory/clients/ibm-enterprise/assets/css/styles.css`).
-  **Só copie o arquivo** para dentro da pasta da apresentação se o usuário pedir
-  distribuição offline/standalone. Nunca leia o conteúdo completo do CSS antes de agir.
+  Copie o arquivo integralmente para `<pasta-da-apresentação>/assets/css/styles.css`.
+  O `<link>` no HTML deve apontar para esse path relativo — nunca deixe o CSS de fora.
 
 ## JavaScript
 

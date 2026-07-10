@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Lorem Ipsum Demo — IBM Presentation Factory</title>
+  <meta name="description" content="Demonstração da Presentation Factory utilizando conteúdo Lorem Ipsum em 10 slides com skin IBM." />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#slide-1">Pular para o conteúdo</a>
+
+  <!-- Progress bar -->
+  <div class="progress" role="progressbar" aria-label="Progresso da apresentação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <span class="brand__ibm">IBM</span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">Presentation Factory</span>
+    </div>
+    <div class="topbar__right">
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 10</span>
+    </div>
+  </header>
+
+  <!-- Slides -->
+  <main class="deck" id="deck">
+
+    <!-- Slide 1 — Abertura -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-label="Slide 1 de 10: Abertura">
+      <div class="slide__inner">
+        <div class="cover-grid">
+          <div class="cover-grid__meta">
+            <span class="eyebrow eyebrow--accent">01 — Abertura</span>
+            <div class="cover-grid__rule" aria-hidden="true"></div>
+            <span class="kicker">Presentation Factory</span>
+          </div>
+          <div class="cover-grid__title">
+            <h1 class="display">
+              Lorem Ipsum<br/>
+              <span class="display__alt">Demonstração</span>
+            </h1>
+          </div>
+          <div class="cover-grid__footer">
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Apresentação</span>
+              <span class="presenter__name">IBM Presentation Factory</span>
+              <span class="presenter__role cds-helper-text-01">Template de demonstração</span>
+            </div>
+          </div>
+        </div>
+        <div class="cover-mark" aria-hidden="true">
+          <svg viewBox="0 0 320 320" width="100%" height="100%" role="img" aria-label="Marca gráfica IBM">
+            <defs>
+              <pattern id="grid8" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+              </pattern>
+            </defs>
+            <rect width="320" height="320" fill="url(#grid8)" />
+            <rect x="32" y="32" width="128" height="128" fill="var(--ibm-blue-h)" />
+            <rect x="160" y="32" width="128" height="128" fill="var(--ibm-cyan)" />
+            <rect x="32" y="160" width="128" height="128" fill="var(--gray-100)" />
+            <rect x="160" y="160" width="128" height="128" fill="var(--ibm-blue)" />
+            <line x1="160" y1="0" x2="160" y2="320" stroke="var(--gray-100)" stroke-width="1" />
+            <line x1="0" y1="160" x2="320" y2="160" stroke="var(--gray-100)" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 — Introdução -->
+    <section class="slide" id="slide-2" data-slide="2" aria-label="Slide 2 de 10: Introdução">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Introdução</span>
+          <h2 class="title">Lorem ipsum dolor sit amet</h2>
+        </header>
+
+        <div class="two-col">
+          <article class="panel" aria-labelledby="panel-context-title">
+            <h3 class="panel__title cds-label-01" id="panel-context-title">Contexto</h3>
+            <p class="lede">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris.
+            </p>
+          </article>
+
+          <article class="panel panel--accent" aria-labelledby="panel-objective-title">
+            <h3 class="panel__title cds-label-01" id="panel-objective-title">Objetivo</h3>
+            <p class="lede">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+              dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
+              proident, sunt in culpa qui officia deserunt mollit anim.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 — Conceitos -->
+    <section class="slide" id="slide-3" data-slide="3" aria-label="Slide 3 de 10: Conceitos fundamentais">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — Conceitos</span>
+          <h2 class="title">Conceitos fundamentais</h2>
+        </header>
+
+        <div class="content-area">
+          <p class="lede">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Sed ut perspiciatis</strong> unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Totam rem aperiam</strong> eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Nemo enim ipsam</strong> voluptatem quia voluptas sit aspernatur aut odit aut fugit.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Neque porro quisquam</strong> est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 — Arquitetura -->
+    <section class="slide" id="slide-4" data-slide="4" aria-label="Slide 4 de 10: Arquitetura">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — Arquitetura</span>
+          <h2 class="title">Visão geral da estrutura</h2>
+          <p class="subtitle">Sed ut perspiciatis unde omnis</p>
+        </header>
+
+        <div class="method">
+          <p class="lede method__text">
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis 
+            praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias 
+            excepturi sint occaecati cupiditate non provident.
+          </p>
+
+          <figure class="pipeline" aria-label="Pipeline de processos">
+            <div class="pipeline__rail" aria-hidden="true"></div>
+            <ol class="pipeline__phases">
+              <li class="phase phase--active">
+                <span class="phase__index">01</span>
+                <span class="phase__name">Initium</span>
+                <span class="phase__desc">Lorem ipsum dolor sit amet consectetur.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">02</span>
+                <span class="phase__name">Processus</span>
+                <span class="phase__desc">Adipiscing elit sed do eiusmod tempor.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">03</span>
+                <span class="phase__name">Validatio</span>
+                <span class="phase__desc">Incididunt ut labore et dolore magna.</span>
+              </li>
+              <li class="phase">
+                <span class="phase__index">04</span>
+                <span class="phase__name">Completio</span>
+                <span class="phase__desc">Aliqua ut enim ad minim veniam quis.</span>
+              </li>
+            </ol>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 — Componentes -->
+    <section class="slide slide--dense" id="slide-5" data-slide="5" aria-label="Slide 5 de 10: Componentes">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">05 — Componentes</span>
+          <h2 class="title">Elementos visuais disponíveis</h2>
+        </header>
+
+        <div class="workshop">
+          <table class="spec">
+            <caption class="sr-only">Componentes e suas características</caption>
+            <thead>
+              <tr>
+                <th scope="col">Componente</th>
+                <th scope="col">Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Panels</th>
+                <td>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</td>
+              </tr>
+              <tr>
+                <th scope="row">Bullets</th>
+                <td>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi.</td>
+              </tr>
+              <tr>
+                <th scope="row">Timeline</th>
+                <td>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</td>
+              </tr>
+              <tr>
+                <th scope="row">Tables</th>
+                <td>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.</td>
+              </tr>
+              <tr>
+                <th scope="row">Cards</th>
+                <td>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 — Tipografia -->
+    <section class="slide" id="slide-6" data-slide="6" aria-label="Slide 6 de 10: Tipografia">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">06 — Tipografia</span>
+          <h2 class="title">Hierarquia e escalas tipográficas</h2>
+        </header>
+
+        <div class="content-area">
+          <div class="type-sample">
+            <h3 class="type-sample__label cds-label-01">Display</h3>
+            <p class="display" style="margin-bottom: var(--u-6);">Lorem ipsum dolor</p>
+          </div>
+
+          <div class="type-sample">
+            <h3 class="type-sample__label cds-label-01">Title</h3>
+            <p class="title" style="margin-bottom: var(--u-6);">Consectetur adipiscing elit</p>
+          </div>
+
+          <div class="type-sample">
+            <h3 class="type-sample__label cds-label-01">Lede</h3>
+            <p class="lede" style="margin-bottom: var(--u-6);">
+              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+            </p>
+          </div>
+
+          <div class="type-sample">
+            <h3 class="type-sample__label cds-label-01">Body</h3>
+            <p style="margin-bottom: var(--u-4);">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7 — Grid e Layout -->
+    <section class="slide" id="slide-7" data-slide="7" aria-label="Slide 7 de 10: Grid e Layout">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">07 — Grid e Layout</span>
+          <h2 class="title">Sistema de grid e espaçamento</h2>
+        </header>
+
+        <div class="content-area">
+          <p class="lede">
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+            sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          </p>
+
+          <div class="grid-demo" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--u-4); margin-top: var(--u-6);">
+            <div style="background: var(--bg-alt); padding: var(--u-5); border-left: 3px solid var(--ibm-blue);">
+              <h3 class="cds-label-01" style="margin-bottom: var(--u-3);">Grid 8px</h3>
+              <p style="font-size: var(--text-14); color: var(--ink-muted);">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit.
+              </p>
+            </div>
+            <div style="background: var(--bg-alt); padding: var(--u-5); border-left: 3px solid var(--ibm-cyan);">
+              <h3 class="cds-label-01" style="margin-bottom: var(--u-3);">Spacing</h3>
+              <p style="font-size: var(--text-14); color: var(--ink-muted);">
+                Sed do eiusmod tempor incididunt ut labore et dolore.
+              </p>
+            </div>
+            <div style="background: var(--bg-alt); padding: var(--u-5); border-left: 3px solid var(--ibm-purple);">
+              <h3 class="cds-label-01" style="margin-bottom: var(--u-3);">Alignment</h3>
+              <p style="font-size: var(--text-14); color: var(--ink-muted);">
+                Magna aliqua ut enim ad minim veniam quis nostrud.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 — Navegação -->
+    <section class="slide" id="slide-8" data-slide="8" aria-label="Slide 8 de 10: Navegação">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">08 — Navegação</span>
+          <h2 class="title">Recursos de navegação e interação</h2>
+        </header>
+
+        <div class="content-area">
+          <p class="lede">
+            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam 
+            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas.
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Setas do teclado</strong> — Lorem ipsum dolor sit amet consectetur adipiscing elit.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Teclas numéricas</strong> — Sed do eiusmod tempor incididunt ut labore et dolore magna.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Índice (Esc)</strong> — Aliqua ut enim ad minim veniam quis nostrud exercitation.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Swipe horizontal</strong> — Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Hash routing</strong> — Duis aute irure dolor in reprehenderit in voluptate velit.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9 — Acessibilidade -->
+    <section class="slide" id="slide-9" data-slide="9" aria-label="Slide 9 de 10: Acessibilidade">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">09 — Acessibilidade</span>
+          <h2 class="title">Recursos de acessibilidade implementados</h2>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__step">
+            <span class="timeline__index">01</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Semântica HTML</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">02</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">ARIA labels</h3>
+              <p>
+                Ut enim ad minim veniam quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">03</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Contraste WCAG AA</h3>
+              <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse 
+                cillum dolore eu fugiat nulla pariatur.
+              </p>
+            </div>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__index">04</span>
+            <div class="timeline__body">
+              <h3 class="timeline__title">Navegação por teclado</h3>
+              <p>
+                Excepteur sint occaecat cupidatat non proident sunt in culpa qui 
+                officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Slide 10 — Conclusão -->
+    <section class="slide" id="slide-10" data-slide="10" aria-label="Slide 10 de 10: Conclusão">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">10 — Conclusão</span>
+          <h2 class="title">Próximos passos</h2>
+        </header>
+
+        <ul class="checklist" role="list">
+          <li class="check">
+            <input type="checkbox" id="task-1" />
+            <label for="task-1">
+              <span class="check__text">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-2" />
+            <label for="task-2">
+              <span class="check__text">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-3" />
+            <label for="task-3">
+              <span class="check__text">Ut enim ad minim veniam quis nostrud exercitation ullamco</span>
+            </label>
+          </li>
+          <li class="check">
+            <input type="checkbox" id="task-4" />
+            <label for="task-4">
+              <span class="check__text">Duis aute irure dolor in reprehenderit in voluptate velit</span>
+            </label>
+          </li>
+        </ul>
+
+        <footer class="closing">
+          <div class="closing__rule" aria-hidden="true"></div>
+          <p class="closing__text">
+            <span class="muted">IBM Presentation Factory</span>
+            <strong>Template de demonstração</strong>
+          </p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 3h12v1.5H2zM2 7.25h12v1.5H2zM2 11.5h12V13H2z"/></svg>
+      <span>Índice</span>
+    </button>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 3 4 8l5.5 5 1-1L6 8l4.5-4z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="m6.5 3-1 1L10 8l-4.5 4 1 1L12 8z"/></svg>
+      </button>
+    </div>
+    <span class="navbar__hint" aria-hidden="true">Use 1–10 para ir direto ao slide</span>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice da apresentação">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="index-title">
+      <header class="index-panel__head">
+        <h2 id="index-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">Abertura</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Introdução</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">Conceitos fundamentais</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Arquitetura</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">Componentes</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">Tipografia</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">Grid e Layout</span></button></li>
+        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">Navegação</span></button></li>
+        <li><button class="index-item" data-go="9"><span class="index-item__num">09</span><span class="index-item__label">Acessibilidade</span></button></li>
+        <li><button class="index-item" data-go="10"><span class="index-item__num">10</span><span class="index-item__label">Conclusão</span></button></li>
+      </ol>
+      <footer class="index-panel__foot">
+        <span class="kbd">←</span><span class="kbd">→</span> navegar
+        &nbsp;·&nbsp;
+        <span class="kbd">1</span>–<span class="kbd">10</span> ir para slide
+        &nbsp;·&nbsp;
+        <span class="kbd">Esc</span> abrir / fechar índice
+        &nbsp;·&nbsp;
+        <span class="kbd">F</span> tela cheia
+      </footer>
+    </div>
+  </aside>
+
+  <script src="assets/js/deck.js"></script>
+</body>
+</html>

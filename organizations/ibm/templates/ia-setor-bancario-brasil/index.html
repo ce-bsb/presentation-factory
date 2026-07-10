@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>IA no Setor Bancário Brasileiro</title>
+  <meta name="description" content="Apresentação sobre os impactos da inteligência artificial no setor bancário brasileiro." />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#slide-1">Pular para o conteúdo</a>
+
+  <!-- Progress bar -->
+  <div class="progress" role="progressbar" aria-label="Progresso da apresentação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="11">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <span class="brand__ibm">
+          <img src="assets/brand/logo-dark.svg" alt="IBM" width="64" height="24" />
+        </span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">IBM</span>
+    </div>
+    <div class="topbar__right">
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 09</span>
+    </div>
+  </header>
+
+  <!-- Slides -->
+  <main class="deck" id="deck">
+
+    <!-- Slide 1 — Capa -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="slide-1-title">
+      <div class="slide__inner">
+        <div class="cover-grid">
+          <div class="cover-grid__meta">
+            <span class="eyebrow eyebrow--accent">01 — Abertura</span>
+            <div class="cover-grid__rule" aria-hidden="true"></div>
+            <span class="kicker">IBM</span>
+          </div>
+          <div class="cover-grid__title">
+            <h1 class="display" id="slide-1-title">
+              IA no Setor<br/>
+              <span class="display__alt">Bancário Brasileiro</span>
+            </h1>
+          </div>
+          <div class="cover-grid__footer">
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Apresentador</span>
+              <span class="presenter__name">[A definir]</span>
+              <span class="presenter__role cds-helper-text-01">IBM</span>
+            </div>
+            <div class="presenter">
+              <span class="presenter__label cds-label-01">Data</span>
+              <span class="presenter__name">[A definir]</span>
+            </div>
+          </div>
+        </div>
+        <div class="cover-mark" aria-hidden="true">
+          <svg viewBox="0 0 320 320" width="100%" height="100%" role="img" aria-label="Marca gráfica IBM">
+            <defs>
+              <pattern id="grid8" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+              </pattern>
+            </defs>
+            <rect width="320" height="320" fill="url(#grid8)" />
+            <rect x="32" y="32" width="128" height="128" fill="var(--ibm-blue-h)" />
+            <rect x="160" y="32" width="128" height="128" fill="var(--ibm-cyan)" />
+            <rect x="32" y="160" width="128" height="128" fill="var(--gray-100)" />
+            <rect x="160" y="160" width="128" height="128" fill="var(--ibm-blue)" />
+            <line x1="160" y1="0" x2="160" y2="320" stroke="var(--gray-100)" stroke-width="1" />
+            <line x1="0" y1="160" x2="320" y2="160" stroke="var(--gray-100)" stroke-width="1" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 — Contexto -->
+    <section class="slide" id="slide-2" data-slide="2" aria-labelledby="slide-2-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Contexto</span>
+          <h2 class="title" id="slide-2-title">Transformação digital acelerada no setor financeiro</h2>
+        </header>
+
+        <div class="two-col">
+          <article class="panel" aria-labelledby="panel-cenario-title">
+            <h3 class="panel__title cds-label-01" id="panel-cenario-title">Cenário brasileiro</h3>
+            <p class="lede">
+              O Brasil possui um dos sistemas bancários mais digitalizados da América Latina. 
+              O Pix revolucionou pagamentos instantâneos, o Open Banking está em implementação 
+              desde 2021, e fintechs e bancos digitais crescem rapidamente.
+            </p>
+          </article>
+
+          <article class="panel panel--accent" aria-labelledby="panel-ia-title">
+            <h3 class="panel__title cds-label-01" id="panel-ia-title">O papel da IA</h3>
+            <p class="lede">
+              A inteligência artificial está no centro dessa transformação, automatizando 
+              operações, personalizando experiências e criando novos modelos de serviço 
+              financeiro baseados em dados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 — Áreas de impacto -->
+    <section class="slide" id="slide-3" data-slide="3" aria-labelledby="slide-3-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — Panorama</span>
+          <h2 class="title" id="slide-3-title">Onde a IA está transformando bancos</h2>
+        </header>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2L4 8v12c0 7.5 5.2 14.5 12 16 6.8-1.5 12-8.5 12-16V8L16 2zm0 2.3l10 5V20c0 6.4-4.5 12.4-10 13.9-5.5-1.5-10-7.5-10-13.9V9.3l10-5z"/><path fill="currentColor" d="M14 21.5l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L23 12.5z"/></svg>
+            </div>
+            <h3 class="card__title">Operações</h3>
+            <p class="card__text">Automação de processos, redução de custos e aumento de eficiência operacional</p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M16 4c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4zm0 22c-5.5 0-10-4.5-10-10S10.5 6 16 6s10 4.5 10 10-4.5 10-10 10z"/><path fill="currentColor" d="M16 10c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></svg>
+            </div>
+            <h3 class="card__title">Experiência do cliente</h3>
+            <p class="card__text">Personalização, atendimento 24/7 e jornadas digitais inteligentes</p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M28 6H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h24c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 2v4H4V8h24zM4 24V14h24v10H4z"/><path fill="currentColor" d="M6 18h4v2H6zm6 0h4v2h-4z"/></svg>
+            </div>
+            <h3 class="card__title">Gestão de risco</h3>
+            <p class="card__text">Detecção de fraudes, análise de crédito e prevenção de perdas</p>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M26 6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 18H6V8h20v16z"/><path fill="currentColor" d="M8 10h16v2H8zm0 4h16v2H8zm0 4h10v2H8z"/></svg>
+            </div>
+            <h3 class="card__title">Novos modelos</h3>
+            <p class="card__text">Open banking, serviços baseados em dados e produtos inovadores</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 — Operações -->
+    <section class="slide" id="slide-4" data-slide="4" aria-labelledby="slide-4-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — Operações</span>
+          <h2 class="title" id="slide-4-title">Automação e eficiência operacional</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            A IA está automatizando processos que antes demandavam intervenção humana 
+            intensiva, liberando equipes para atividades de maior valor agregado.
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>RPA + IA:</strong> Automação inteligente de processos repetitivos como abertura de contas, análise de documentos e reconciliação de transações</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Processamento de documentos:</strong> Extração e validação automática de informações de contratos, comprovantes e formulários</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Otimização de recursos:</strong> Previsão de demanda e alocação inteligente de equipes e infraestrutura</span>
+            </li>
+            <li>
+              <span class="bullets__marker" aria-hidden="true"></span>
+              <span><strong>Compliance automatizado:</strong> Monitoramento contínuo de conformidade regulatória e geração de relatórios</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 — Experiência do cliente -->
+    <section class="slide" id="slide-5" data-slide="5" aria-labelledby="slide-5-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">05 — Experiência do cliente</span>
+          <h2 class="title" id="slide-5-title">Personalização e atendimento inteligente</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            A IA permite que bancos ofereçam experiências personalizadas em escala, 
+            antecipando necessidades e oferecendo soluções relevantes para cada cliente.
+          </p>
+
+          <div class="two-col two-col--balanced">
+            <div>
+              <h3 class="section-label">Atendimento</h3>
+              <ul class="bullets">
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Chatbots e assistentes virtuais disponíveis 24/7</span>
+                </li>
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Resolução automática de dúvidas frequentes</span>
+                </li>
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Roteamento inteligente para atendimento humano</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="section-label">Personalização</h3>
+              <ul class="bullets">
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Ofertas de produtos baseadas em perfil e comportamento</span>
+                </li>
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Recomendações financeiras personalizadas</span>
+                </li>
+                <li>
+                  <span class="bullets__marker" aria-hidden="true"></span>
+                  <span>Alertas e notificações contextualizadas</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 — Gestão de risco -->
+    <section class="slide" id="slide-6" data-slide="6" aria-labelledby="slide-6-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">06 — Gestão de risco</span>
+          <h2 class="title" id="slide-6-title">Detecção de fraudes e análise de crédito</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            Modelos de machine learning analisam padrões em tempo real, identificando 
+            anomalias e avaliando riscos com maior precisão e velocidade.
+          </p>
+
+          <table class="spec">
+            <caption class="sr-only">Aplicações de IA em gestão de risco</caption>
+            <thead>
+              <tr>
+                <th scope="col">Área</th>
+                <th scope="col">Aplicação</th>
+                <th scope="col">Benefício</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Detecção de fraudes</th>
+                <td>Análise de transações em tempo real com identificação de padrões suspeitos</td>
+                <td>Redução de perdas e proteção do cliente</td>
+              </tr>
+              <tr>
+                <th scope="row">Análise de crédito</th>
+                <td>Avaliação de risco baseada em múltiplas variáveis e histórico comportamental</td>
+                <td>Decisões mais precisas e inclusão financeira</td>
+              </tr>
+              <tr>
+                <th scope="row">Prevenção de inadimplência</th>
+                <td>Modelos preditivos que identificam clientes em risco</td>
+                <td>Ações proativas e redução de perdas</td>
+              </tr>
+              <tr>
+                <th scope="row">Lavagem de dinheiro</th>
+                <td>Monitoramento de transações e identificação de padrões suspeitos</td>
+                <td>Conformidade regulatória e segurança</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7 — Novos modelos -->
+    <section class="slide" id="slide-7" data-slide="7" aria-labelledby="slide-7-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">07 — Novos modelos</span>
+          <h2 class="title" id="slide-7-title">Open banking e serviços baseados em dados</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            A combinação de Open Banking com IA está criando novos modelos de negócio 
+            e oportunidades de serviço no setor financeiro brasileiro.
+          </p>
+
+          <div class="highlight-box">
+            <h3 class="highlight-box__title">Oportunidades emergentes</h3>
+            <ul class="bullets">
+              <li>
+                <span class="bullets__marker" aria-hidden="true"></span>
+                <span><strong>Gestão financeira inteligente:</strong> Análise consolidada de contas e recomendações automáticas de otimização</span>
+              </li>
+              <li>
+                <span class="bullets__marker" aria-hidden="true"></span>
+                <span><strong>Crédito personalizado:</strong> Ofertas baseadas em dados de múltiplas instituições e comportamento financeiro real</span>
+              </li>
+              <li>
+                <span class="bullets__marker" aria-hidden="true"></span>
+                <span><strong>Investimentos democratizados:</strong> Assessoria financeira automatizada acessível a diferentes perfis</span>
+              </li>
+              <li>
+                <span class="bullets__marker" aria-hidden="true"></span>
+                <span><strong>Serviços embarcados:</strong> Produtos financeiros integrados a plataformas de e-commerce, varejo e serviços</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 — Desafios -->
+    <section class="slide" id="slide-8" data-slide="8" aria-labelledby="slide-8-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">08 — Desafios</span>
+          <h2 class="title" id="slide-8-title">Regulação, segurança e governança</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            A adoção de IA no setor bancário brasileiro enfrenta desafios importantes 
+            que precisam ser endereçados de forma estratégica.
+          </p>
+
+          <div class="card-grid card-grid--compact">
+            <article class="card card--outlined">
+              <h3 class="card__title">Regulação e compliance</h3>
+              <p class="card__text">LGPD, normas do Banco Central e regulamentação específica para uso de IA em decisões financeiras</p>
+            </article>
+
+            <article class="card card--outlined">
+              <h3 class="card__title">Governança de modelos</h3>
+              <p class="card__text">Transparência, explicabilidade e auditabilidade de decisões automatizadas</p>
+            </article>
+
+            <article class="card card--outlined">
+              <h3 class="card__title">Viés e fairness</h3>
+              <p class="card__text">Garantir que modelos não perpetuem discriminação ou exclusão financeira</p>
+            </article>
+
+            <article class="card card--outlined">
+              <h3 class="card__title">Segurança de dados</h3>
+              <p class="card__text">Proteção de informações sensíveis e prevenção de vazamentos</p>
+            </article>
+
+            <article class="card card--outlined">
+              <h3 class="card__title">Sistemas legados</h3>
+              <p class="card__text">Integração de IA com infraestrutura tecnológica existente</p>
+            </article>
+
+            <article class="card card--outlined">
+              <h3 class="card__title">Capacitação</h3>
+              <p class="card__text">Desenvolvimento de competências em IA nas equipes bancárias</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9 — Próximos passos -->
+    <section class="slide" id="slide-9" data-slide="9" aria-labelledby="slide-9-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">09 — Próximos passos</span>
+          <h2 class="title" id="slide-9-title">Jornada de adoção estratégica</h2>
+        </header>
+
+        <div class="content-block">
+          <p class="lede">
+            A adoção bem-sucedida de IA no setor bancário requer uma abordagem 
+            estratégica, incremental e centrada em valor.
+          </p>
+
+          <ol class="timeline">
+            <li class="timeline__step">
+              <span class="timeline__index">01</span>
+              <div class="timeline__body">
+                <h3 class="timeline__title">Identificar casos de uso prioritários</h3>
+                <p>
+                  Mapear oportunidades de maior impacto alinhadas aos objetivos 
+                  estratégicos da organização
+                </p>
+              </div>
+            </li>
+            <li class="timeline__step">
+              <span class="timeline__index">02</span>
+              <div class="timeline__body">
+                <h3 class="timeline__title">Estabelecer governança</h3>
+                <p>
+                  Definir políticas, processos e responsabilidades para uso ético 
+                  e seguro de IA
+                </p>
+              </div>
+            </li>
+            <li class="timeline__step">
+              <span class="timeline__index">03</span>
+              <div class="timeline__body">
+                <h3 class="timeline__title">Experimentar e validar</h3>
+                <p>
+                  Implementar pilotos controlados para testar hipóteses e medir 
+                  resultados antes de escalar
+                </p>
+              </div>
+            </li>
+            <li class="timeline__step">
+              <span class="timeline__index">04</span>
+              <div class="timeline__body">
+                <h3 class="timeline__title">Escalar com segurança</h3>
+                <p>
+                  Expandir soluções validadas com monitoramento contínuo e 
+                  capacitação de equipes
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <footer class="closing">
+            <div class="closing__rule" aria-hidden="true"></div>
+            <p class="closing__text">
+              A IA está redefinindo o setor bancário brasileiro. Bancos que adotam 
+              essa tecnologia de forma estratégica ganham vantagem competitiva 
+              sustentável.
+            </p>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 3h12v1.5H2zM2 7.25h12v1.5H2zM2 11.5h12V13H2z"/></svg>
+      <span>Índice</span>
+    </button>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M9.5 3 4 8l5.5 5 1-1L6 8l4.5-4z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="m6.5 3-1 1L10 8l-4.5 4 1 1L12 8z"/></svg>
+      </button>
+    </div>
+    <span class="navbar__hint" aria-hidden="true">Use 1–9 para ir direto ao slide</span>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice da apresentação">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="index-title">
+      <header class="index-panel__head">
+        <h2 id="index-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">IA no Setor Bancário Brasileiro</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Transformação digital acelerada</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">Áreas de impacto</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Operações</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">Experiência do cliente</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">Gestão de risco</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">Novos modelos</span></button></li>
+        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">Desafios</span></button></li>
+        <li><button class="index-item" data-go="9"><span class="index-item__num">09</span><span class="index-item__label">Próximos passos</span></button></li>
+      </ol>
+      <footer class="index-panel__foot">
+        <span class="kbd">←</span><span class="kbd">→</span> navegar
+        &nbsp;·&nbsp;
+        <span class="kbd">1</span>–<span class="kbd">9</span> ir para slide
+        &nbsp;·&nbsp;
+        <span class="kbd">Esc</span> abrir / fechar índice
+        &nbsp;·&nbsp;
+        <span class="kbd">F</span> tela cheia
+      </footer>
+    </div>
+  </aside>
+
+  <script src="assets/js/deck.js"></script>
+</body>
+</html>

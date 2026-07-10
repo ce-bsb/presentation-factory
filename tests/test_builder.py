@@ -31,8 +31,10 @@ class BuilderTest(unittest.TestCase):
             presentation_slugs(self.repository),
             [
                 "ia-parceria-produtividade",
+                "ia-setor-bancario-brasil",
                 "ibm-ai-document-review",
                 "ibm-discovery-workshop",
+                "lorem-ipsum-demo",
             ],
         )
 
@@ -82,15 +84,15 @@ class BuilderTest(unittest.TestCase):
     def test_template_assets_are_packaged(self) -> None:
         destination = build_package(
             self.repository,
-            "ibm-discovery-workshop",
-            output=self.output / "standard-package",
+            "ia-setor-bancario-brasil",
+            output=self.output / "banking-package",
         )
 
         self.assertTrue(
             (destination / "workspace/assets/js/deck.js").is_file()
         )
         self.assertTrue(
-            (destination / "workspace/assets/partner/logo-dark.svg").is_file()
+            (destination / "workspace/assets/brand/logo-dark.svg").is_file()
         )
         self.assertFalse(
             (destination / "workspace/template.toml").exists()

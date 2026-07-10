@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
   <meta name="design-system" content="IBM Carbon Design System v11" />
-  <title>Título 1 — IBM · Cliente</title>
-  <meta name="description" content="Template IBM Edge" />
+  <title>{{TITULO}} — IBM · {{CLIENTE}}</title>
+  <meta name="description" content="{{DESCRICAO}}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap" />
@@ -345,10 +345,10 @@
         </span>
         <!-- Remova as duas linhas abaixo quando cliente for IBM -->
         <span class="brand__sep" aria-hidden="true">×</span>
-        <span class="brand__client">Cliente</span>
+        <span class="brand__client">{{CLIENTE}}</span>
       </span>
       <span class="meta-divider" aria-hidden="true"></span>
-      <span class="meta-label">Área ou serviço</span>
+      <span class="meta-label">{{AREA_OU_SERVICO}}</span>
     </div>
     <div class="topbar__right">
       <span class="topbar__dot" aria-hidden="true"></span>
@@ -364,34 +364,34 @@
     <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
       <div class="slide__inner">
         <div class="cover-bar" aria-hidden="true">
-          <span class="cover-bar__label">Categoria</span>
+          <span class="cover-bar__label">{{LABEL_BARRA}}</span>
           <span class="cover-bar__num">01</span>
           <div class="cover-bar__tags">
-            <span class="cover-bar__tag">Tag 1</span>
-            <span class="cover-bar__tag">Tag 2</span>
+            <span class="cover-bar__tag">{{TAG_1}}</span>
+            <span class="cover-bar__tag">{{TAG_2}}</span>
           </div>
         </div>
         <div class="cover-main">
           <div class="cover-main__head">
-            <span class="cover-eyebrow">Introdução</span>
-            <h1 id="s1-title" class="cover-display">Título 1<br/><em>Título 2</em></h1>
+            <span class="cover-eyebrow">{{EYEBROW_COVER}}</span>
+            <h1 id="s1-title" class="cover-display">{{TITULO_LINHA_1}}<br/><em>{{TITULO_LINHA_2}}</em></h1>
           </div>
           <div class="cover-main__foot">
             <div class="cover-meta-row">
               <div class="cover-meta">
-                <span class="cover-meta__label">Status 1</span>
-                <span class="cover-meta__value">Valor 1</span>
-                <span class="cover-meta__sub">Detalhe 1</span>
+                <span class="cover-meta__label">{{META_1_LABEL}}</span>
+                <span class="cover-meta__value">{{META_1_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_1_SUB}}</span>
               </div>
               <div class="cover-meta">
-                <span class="cover-meta__label">Status 2</span>
-                <span class="cover-meta__value">Valor 2</span>
-                <span class="cover-meta__sub">Detalhe 2</span>
+                <span class="cover-meta__label">{{META_2_LABEL}}</span>
+                <span class="cover-meta__value">{{META_2_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_2_SUB}}</span>
               </div>
               <div class="cover-meta">
-                <span class="cover-meta__label">Status 3</span>
-                <span class="cover-meta__value">Valor 3</span>
-                <span class="cover-meta__sub">Detalhe 3</span>
+                <span class="cover-meta__label">{{META_3_LABEL}}</span>
+                <span class="cover-meta__value">{{META_3_VALOR}}</span>
+                <span class="cover-meta__sub">{{META_3_SUB}}</span>
               </div>
             </div>
           </div>
@@ -405,33 +405,33 @@
     <section class="slide" id="slide-2" data-slide="2" aria-labelledby="s2-title">
       <div class="slide__inner">
         <header class="slide-head">
-          <span class="eyebrow">02 — Status</span>
-          <h2 id="s2-title" class="title">Título 3</h2>
-          <p class="subtitle">Subtítulo 1</p>
+          <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
+          <h2 id="s2-title" class="title">{{TITULO_S2}}</h2>
+          <p class="subtitle">{{SUBTITULO_S2}}</p>
         </header>
         <div class="stat-grid">
           <div class="stat">
-            <span class="stat__value">Status 1</span>
-            <span class="stat__label">Métrica 1</span>
-            <p class="stat__desc">Descrição 1</p>
+            <span class="stat__value">{{STAT_1_VALOR}}</span>
+            <span class="stat__label">{{STAT_1_LABEL}}</span>
+            <p class="stat__desc">{{STAT_1_DESC}}</p>
             <span class="stat__bg-num" aria-hidden="true">1</span>
           </div>
           <div class="stat">
-            <span class="stat__value">Status 2</span>
-            <span class="stat__label">Métrica 2</span>
-            <p class="stat__desc">Descrição 2</p>
+            <span class="stat__value">{{STAT_2_VALOR}}</span>
+            <span class="stat__label">{{STAT_2_LABEL}}</span>
+            <p class="stat__desc">{{STAT_2_DESC}}</p>
             <span class="stat__bg-num" aria-hidden="true">2</span>
           </div>
           <div class="stat">
-            <span class="stat__value">Status 3</span>
-            <span class="stat__label">Métrica 3</span>
-            <p class="stat__desc">Descrição 3</p>
+            <span class="stat__value">{{STAT_3_VALOR}}</span>
+            <span class="stat__label">{{STAT_3_LABEL}}</span>
+            <p class="stat__desc">{{STAT_3_DESC}}</p>
             <span class="stat__bg-num" aria-hidden="true">3</span>
           </div>
           <div class="stat">
-            <span class="stat__value">Status 4</span>
-            <span class="stat__label">Métrica 4</span>
-            <p class="stat__desc">Descrição 4</p>
+            <span class="stat__value">{{STAT_4_VALOR}}</span>
+            <span class="stat__label">{{STAT_4_LABEL}}</span>
+            <p class="stat__desc">{{STAT_4_DESC}}</p>
             <span class="stat__bg-num" aria-hidden="true">4</span>
           </div>
         </div>
@@ -444,17 +444,17 @@
     <section class="slide" id="slide-3" data-slide="3" aria-labelledby="s3-title">
       <div class="slide__inner">
         <header class="slide-head">
-          <span class="eyebrow">03 — Comparação</span>
-          <h2 id="s3-title" class="title">Título 4</h2>
+          <span class="eyebrow">03 — {{EYEBROW_S3}}</span>
+          <h2 id="s3-title" class="title">{{TITULO_S3}}</h2>
         </header>
         <div class="two-col">
           <article class="panel" aria-labelledby="p3-a">
-            <h3 class="panel__title" id="p3-a">Título 5</h3>
-            <p class="lede">Texto 1</p>
+            <h3 class="panel__title" id="p3-a">{{PANEL_A_TITULO}}</h3>
+            <p class="lede">{{PANEL_A_TEXTO}}</p>
           </article>
           <article class="panel panel--accent" aria-labelledby="p3-b">
-            <h3 class="panel__title" id="p3-b">Título 6</h3>
-            <p class="lede">Texto 2</p>
+            <h3 class="panel__title" id="p3-b">{{PANEL_B_TITULO}}</h3>
+            <p class="lede">{{PANEL_B_TEXTO}}</p>
           </article>
         </div>
       </div>
@@ -466,29 +466,29 @@
     <section class="slide" id="slide-4" data-slide="4" aria-labelledby="s4-title">
       <div class="slide__inner">
         <header class="slide-head">
-          <span class="eyebrow">04 — Timeline</span>
-          <h2 id="s4-title" class="title">Título 7</h2>
+          <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
+          <h2 id="s4-title" class="title">{{TITULO_S4}}</h2>
         </header>
         <ol class="timeline">
           <li class="timeline__step">
             <span class="timeline__index">01</span>
             <div class="timeline__body">
-              <h3 class="timeline__title">Etapa 1</h3>
-              <p>Texto 3</p>
+              <h3 class="timeline__title">{{ETAPA_1_TITULO}}</h3>
+              <p>{{ETAPA_1_TEXTO}}</p>
             </div>
           </li>
           <li class="timeline__step">
             <span class="timeline__index">02</span>
             <div class="timeline__body">
-              <h3 class="timeline__title">Etapa 2</h3>
-              <p>Texto 4</p>
+              <h3 class="timeline__title">{{ETAPA_2_TITULO}}</h3>
+              <p>{{ETAPA_2_TEXTO}}</p>
             </div>
           </li>
           <li class="timeline__step">
             <span class="timeline__index">03</span>
             <div class="timeline__body">
-              <h3 class="timeline__title">Etapa 3</h3>
-              <p>Texto 5</p>
+              <h3 class="timeline__title">{{ETAPA_3_TITULO}}</h3>
+              <p>{{ETAPA_3_TEXTO}}</p>
             </div>
           </li>
         </ol>
@@ -502,20 +502,20 @@
     <section class="slide slide--blue" id="slide-5" data-slide="5" aria-labelledby="s5-title">
       <div class="slide__inner">
         <div class="blue-eyebrow-row">
-          <span class="eyebrow eyebrow--light">05 — Impacto</span>
+          <span class="eyebrow eyebrow--light">05 — {{EYEBROW_S5}}</span>
         </div>
-        <h2 id="s5-title" class="blue-hero__stat">Título 8</h2>
-        <span class="blue-hero__label">Status 5</span>
+        <h2 id="s5-title" class="blue-hero__stat">{{TITULO_S5}}</h2>
+        <span class="blue-hero__label">{{LABEL_S5}}</span>
         <div class="blue-rule"></div>
-        <p class="blue-hero__body">Texto 6</p>
+        <p class="blue-hero__body">{{CORPO_S5}}</p>
         <div class="blue-pills">
-          <span class="blue-pill">Item 1</span>
-          <span class="blue-pill">Item 2</span>
-          <span class="blue-pill">Item 3</span>
+          <span class="blue-pill">{{PILL_1}}</span>
+          <span class="blue-pill">{{PILL_2}}</span>
+          <span class="blue-pill">{{PILL_3}}</span>
         </div>
         <div class="blue-footer-row">
-          <span class="blue-footer__text">Status 6</span>
-          <span class="blue-footer__text">Status 7</span>
+          <span class="blue-footer__text">{{FOOTER_S5_ESQUERDA}}</span>
+          <span class="blue-footer__text">{{FOOTER_S5_DIREITA}}</span>
         </div>
       </div>
     </section>
@@ -541,9 +541,9 @@
         </div>
         <div class="textured-content">
           <header class="slide-head">
-            <span class="eyebrow">06 — Cards</span>
-            <h2 id="s6-title" class="title">Título 9</h2>
-            <p class="subtitle">Subtítulo 2</p>
+            <span class="eyebrow">06 — {{EYEBROW_S6}}</span>
+            <h2 id="s6-title" class="title">{{TITULO_S6}}</h2>
+            <p class="subtitle">{{SUBTITULO_S6}}</p>
           </header>
           <div class="card-grid">
             <div class="card" aria-labelledby="c6-a">
@@ -556,8 +556,8 @@
                   <rect x="11" y="11" width="6" height="6" fill="white" opacity=".25"/>
                 </svg>
               </div>
-              <h3 class="card__title" id="c6-a">Título 10</h3>
-              <p class="card__body">Texto 7</p>
+              <h3 class="card__title" id="c6-a">{{CARD_1_TITULO}}</h3>
+              <p class="card__body">{{CARD_1_CORPO}}</p>
             </div>
             <div class="card" aria-labelledby="c6-b">
               <div class="card__icon" style="background:var(--ibm-cyan)">
@@ -566,8 +566,8 @@
                   <rect x="8" y="2" width="2" height="16" fill="white"/>
                 </svg>
               </div>
-              <h3 class="card__title" id="c6-b">Título 11</h3>
-              <p class="card__body">Texto 8</p>
+              <h3 class="card__title" id="c6-b">{{CARD_2_TITULO}}</h3>
+              <p class="card__body">{{CARD_2_CORPO}}</p>
             </div>
             <div class="card" aria-labelledby="c6-c">
               <div class="card__icon" style="background:var(--ibm-teal)">
@@ -576,8 +576,8 @@
                   <circle cx="10" cy="10" r="2" fill="white"/>
                 </svg>
               </div>
-              <h3 class="card__title" id="c6-c">Título 12</h3>
-              <p class="card__body">Texto 9</p>
+              <h3 class="card__title" id="c6-c">{{CARD_3_TITULO}}</h3>
+              <p class="card__body">{{CARD_3_CORPO}}</p>
             </div>
           </div>
         </div>
@@ -591,39 +591,39 @@
       <div class="slide__inner">
         <div class="split-left">
           <div class="split-left__content">
-            <span class="eyebrow eyebrow--light">07 — Lista</span>
-            <h2 id="s7-title" class="title title--light">Título 13</h2>
-            <p class="lede lede--light">Texto 10</p>
+            <span class="eyebrow eyebrow--light">07 — {{EYEBROW_S7}}</span>
+            <h2 id="s7-title" class="title title--light">{{TITULO_S7}}</h2>
+            <p class="lede lede--light">{{CORPO_S7}}</p>
           </div>
         </div>
         <div class="split-right">
-          <ul class="split-list" aria-label="Lista de itens">
+          <ul class="split-list" aria-label="{{ARIA_SPLIT_LIST}}">
             <li class="split-item">
               <span class="split-item__num">01</span>
               <div>
-                <div class="split-item__title">Item 1</div>
-                <div class="split-item__desc">Descrição 5</div>
+                <div class="split-item__title">{{ITEM_1_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_1_DESC}}</div>
               </div>
             </li>
             <li class="split-item">
               <span class="split-item__num">02</span>
               <div>
-                <div class="split-item__title">Item 2</div>
-                <div class="split-item__desc">Descrição 6</div>
+                <div class="split-item__title">{{ITEM_2_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_2_DESC}}</div>
               </div>
             </li>
             <li class="split-item">
               <span class="split-item__num">03</span>
               <div>
-                <div class="split-item__title">Item 3</div>
-                <div class="split-item__desc">Descrição 7</div>
+                <div class="split-item__title">{{ITEM_3_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_3_DESC}}</div>
               </div>
             </li>
             <li class="split-item">
               <span class="split-item__num">04</span>
               <div>
-                <div class="split-item__title">Item 4</div>
-                <div class="split-item__desc">Descrição 8</div>
+                <div class="split-item__title">{{ITEM_4_TITULO}}</div>
+                <div class="split-item__desc">{{ITEM_4_DESC}}</div>
               </div>
             </li>
           </ul>
@@ -637,21 +637,21 @@
     <section class="slide slide--closing" id="slide-8" data-slide="8" aria-labelledby="s8-title">
       <div class="slide__inner">
         <div class="closing-main">
-          <span class="eyebrow">08 — Encerramento</span>
-          <h2 id="s8-title" class="closing-display">Título 14<br/><em>Título 15</em></h2>
-          <p class="closing-sub">Texto 11</p>
+          <span class="eyebrow">08 — {{EYEBROW_S8}}</span>
+          <h2 id="s8-title" class="closing-display">{{CLOSING_LINHA_1}}<br/><em>{{CLOSING_LINHA_2}}</em></h2>
+          <p class="closing-sub">{{CLOSING_SUB}}</p>
         </div>
         <div>
           <div class="closing-contacts" aria-label="Contatos">
             <div class="closing-contact">
-              <span class="closing-contact__label">Contato 1</span>
-              <span class="closing-contact__name">Nome 1</span>
-              <span class="closing-contact__role">Cargo 1</span>
+              <span class="closing-contact__label">{{CONTATO_1_LABEL}}</span>
+              <span class="closing-contact__name">{{CONTATO_1_NOME}}</span>
+              <span class="closing-contact__role">{{CONTATO_1_CARGO}}</span>
             </div>
             <div class="closing-contact">
-              <span class="closing-contact__label">Contato 2</span>
-              <span class="closing-contact__name">Nome 2</span>
-              <span class="closing-contact__role">Cargo 2</span>
+              <span class="closing-contact__label">{{CONTATO_2_LABEL}}</span>
+              <span class="closing-contact__name">{{CONTATO_2_NOME}}</span>
+              <span class="closing-contact__role">{{CONTATO_2_CARGO}}</span>
             </div>
           </div>
           <div style="margin-top:var(--u-6)">
@@ -700,14 +700,14 @@
         <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
       </header>
       <ol class="index-list">
-        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">Título 1</span></button></li>
-        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Status 1</span></button></li>
-        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">Título 4</span></button></li>
-        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Título 7</span></button></li>
-        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">Título 8</span></button></li>
-        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">Título 9</span></button></li>
-        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">Título 13</span></button></li>
-        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">Título 14</span></button></li>
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">{{IDX_1}}</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">{{IDX_2}}</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">{{IDX_3}}</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">{{IDX_4}}</span></button></li>
+        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">{{IDX_5}}</span></button></li>
+        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">{{IDX_6}}</span></button></li>
+        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">{{IDX_7}}</span></button></li>
+        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">{{IDX_8}}</span></button></li>
       </ol>
       <footer class="index-panel__foot">
         <span class="kbd">←</span><span class="kbd">→</span> navegar &nbsp;·&nbsp;

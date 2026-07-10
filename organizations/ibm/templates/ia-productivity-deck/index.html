@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -6,438 +6,85 @@
   <meta name="slides-format" content="viewport" />
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#ffffff" />
-  <title>Título 1 · IBM</title>
+  <title>IA — Uma parceria para produtividade · IBM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-/* =====================================================================
-   IBM Design Language · Carbon Design System — LIGHT MODE
-   ---------------------------------------------------------------------
-   Tipografia : IBM Plex Sans (UI) · IBM Plex Mono (labels/dados) · IBM Plex Serif (citações)
-   Paleta     : Carbon v11 (White base, Blue 60 primário, accents oficiais)
-   Grade      : 16 colunas · unidade base 8px (spacing tokens Carbon)
-   Superfície : light por padrão + `.surface-inverse` para painéis de ênfase (marinho/texto claro)
-   ===================================================================== */
-
-:root{
-  color-scheme:light;
-
-  /* ---- Carbon Gray ---- */
-  --gray-10:#f4f4f4;  --gray-20:#e0e0e0;  --gray-30:#c6c6c6;  --gray-40:#a8a8a8;
-  --gray-50:#8d8d8d;  --gray-60:#6f6f6f;  --gray-70:#525252;  --gray-80:#393939;
-  --gray-90:#262626;  --gray-100:#161616;
-
-  /* ---- Carbon Blue (primary ramp) ---- */
-  --blue-20:#bae6ff;  --blue-30:#82cfff;  --blue-40:#33b1ff;  --blue-50:#1192e8;
-  --blue-60:#0f62fe;  --blue-70:#0043ce;  --blue-80:#002d9c;  --blue-90:#001d6c;
-  --blue-100:#001141;
-
-  /* ---- Data-viz accents ---- */
-  --cyan-30:#82cfff;  --cyan-50:#1192e8;  --teal-40:#08bdba;  --teal-60:#005d5d;
-  --magenta-50:#ee5396; --purple-50:#a56eff; --yellow-30:#f1c21b;
-
-  /* ---- Semantic (light) ---- */
-  --bg:#ffffff;
-  --bg-elevated:#f4f4f4;   /* Carbon layer-01 */
-  --bg-layer:#e0e0e0;      /* Carbon layer-02 */
-  --line:#e0e0e0;
-  --line-strong:#c6c6c6;
-  --text:#161616;
-  --text-secondary:#525252;
-  --text-muted:#6f6f6f;
-  --primary:#0f62fe;
-  --primary-hover:#0353e9;
-  --focus:#0f62fe;
-
-  /* ---- Emphasis surface (brand navy) ---- */
-  --surface-inverse:#001141;
-
-  /* ---- Carbon spacing tokens ---- */
-  --sp-03:8px; --sp-04:12px; --sp-05:16px; --sp-06:24px; --sp-07:32px;
-  --sp-08:40px; --sp-09:48px; --sp-10:64px;
-
-  /* ---- Motion (Carbon productive easing) ---- */
-  --ease:cubic-bezier(.2,.8,.2,1);
-}
-
-/* Inverse scope: redefine tokens so ANY descendant using --text/--text-secondary/
-   --line/--bg-layer (including inline styles) resolves to the light-on-dark set. */
-.surface-inverse{
-  --bg:var(--surface-inverse);
-  --bg-elevated:rgba(255,255,255,.06);
-  --bg-layer:rgba(255,255,255,.16);
-  --line:rgba(255,255,255,.16);
-  --line-strong:rgba(255,255,255,.28);
-  --text:#ffffff;
-  --text-secondary:#c6c6c6;
-  --text-muted:#a8a8a8;
-  background:var(--surface-inverse);
-  color:var(--text);
-}
-
-*,*::before,*::after{box-sizing:border-box;}
-html,body{margin:0;background:var(--bg);}
-body{
-  font-family:'IBM Plex Sans', system-ui, sans-serif;
-  font-size:18px; line-height:1.5; font-weight:400; letter-spacing:0;
-  color:var(--text);
-  overflow:hidden; height:100vh; width:100vw;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-}
-
-/* Utilities */
-.sr-only{
-  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-}
-
-/* ---------- Deck & slides ---------- */
-.deck{width:100vw; height:100vh; position:relative;}
-.slide{
-  position:absolute; inset:0;
-  background:var(--bg);
-  display:flex; flex-direction:column;
-  opacity:0; transition:opacity .45s ease;
-  pointer-events:none; overflow:hidden;
-}
-.slide.active{opacity:1; pointer-events:auto;}
-.slide:focus{outline:none;}
-
-/* ---------- Top progress bar ---------- */
-.deck-progress{
-  position:fixed; top:0; left:0; right:0; height:3px;
-  background:transparent; z-index:60; pointer-events:none;
-}
-.deck-progress > span{
-  display:block; height:100%; width:0;
-  background:var(--primary);
-  transition:width .45s var(--ease);
-}
-
-/* ---------- Top bar ---------- */
-.topbar{
-  position:absolute; top:0; left:0; right:0; height:48px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 var(--sp-07);
-  border-bottom:1px solid var(--line);
-  background:var(--bg); z-index:5;
-  font-size:12px; letter-spacing:.02em;
-}
-.topbar .left{display:flex; align-items:center; gap:var(--sp-06);}
-.topbar .right{
-  display:flex; align-items:center; gap:var(--sp-05);
-  color:var(--text-muted); font-family:'IBM Plex Mono', monospace; font-size:11px;
-}
-.topbar .divider{width:1px; height:16px; background:var(--line-strong);}
-.topbar .crumb{color:var(--text-secondary); font-size:12px;}
-
-/* IBM logotype — inline SVG from shared assets, tinted with currentColor */
-.ibm-logo{display:inline-flex; align-items:center; color:var(--text);}
-.ibm-mark{width:44px; height:18px; display:block; color:inherit;}
-.ibm-mark path, .ibm-mark rect{fill:currentColor;}
-
-/* ---------- Content & grid ---------- */
-.slide .content{
-  position:relative; z-index:2; flex:1; width:100%;
-  padding:72px var(--sp-10) 84px;
-  display:flex; flex-direction:column; overflow:hidden;
-}
-.grid-16{display:grid; grid-template-columns:repeat(16,1fr); gap:var(--sp-05);}
-.col-4{grid-column:span 4;}   .col-5{grid-column:span 5;}
-.col-6{grid-column:span 6;}   .col-8{grid-column:span 8;}
-.col-10{grid-column:span 10;} .col-12{grid-column:span 12;}
-.col-16{grid-column:span 16;}
-
-/* ---------- Type scale (Carbon) ---------- */
-.productive-heading-01{font-size:14px; line-height:18px; font-weight:600;}
-.productive-heading-02{font-size:16px; line-height:22px; font-weight:600;}
-.productive-heading-03{font-size:20px; line-height:28px; font-weight:400;}
-.productive-heading-04{font-size:28px; line-height:36px; font-weight:400;}
-.productive-heading-05{font-size:32px; line-height:40px; font-weight:400;}
-.expressive-heading-04{font-size:32px; line-height:40px; font-weight:400;}
-.expressive-heading-05{font-size:42px; line-height:50px; font-weight:400;}
-.expressive-heading-06{font-size:60px; line-height:70px; font-weight:300; letter-spacing:-.5px;}
-.display-01{font-size:42px; line-height:50px; font-weight:300;}
-.display-02{font-size:54px; line-height:62px; font-weight:300; letter-spacing:-.5px;}
-.display-03{font-size:72px; line-height:78px; font-weight:300; letter-spacing:-1px;}
-.display-04{font-size:96px; line-height:102px; font-weight:300; letter-spacing:-1.5px;}
-.body-01,.body-02{font-size:18px; line-height:26px;}
-.body-long{font-size:20px; line-height:30px; font-weight:300;}
-.label-01{
-  font-family:'IBM Plex Mono', monospace; font-size:12px; line-height:16px;
-  letter-spacing:.32px; text-transform:uppercase; color:var(--text-muted);
-}
-.helper{
-  font-family:'IBM Plex Mono', monospace; font-size:11px;
-  color:var(--text-muted); letter-spacing:.02em;
-}
-
-/* ---------- Tile ---------- */
-.tile{
-  background:var(--bg-elevated); border:1px solid transparent; padding:var(--sp-06);
-  position:relative; transition:background .2s ease, border-color .2s ease;
-}
-.tile:hover{background:var(--bg-layer);}
-.tile.outline{background:transparent; border-color:var(--line);}
-.tile.surface-inverse,
-.tile.surface-inverse:hover{background:var(--surface-inverse);}
-.tile .tile-corner{
-  position:absolute; top:0; left:0; width:12px; height:12px;
-  border-top:2px solid var(--primary); border-left:2px solid var(--primary);
-}
-.surface-inverse .tile-corner{border-color:var(--cyan-30);}
-
-/* ---------- Accent bar ---------- */
-.accent-bar{width:48px; height:2px; background:var(--primary); margin-bottom:var(--sp-06);}
-.accent-bar.cyan{background:var(--cyan-50);}
-.accent-bar.teal{background:var(--teal-40);}
-.accent-bar.magenta{background:var(--magenta-50);}
-.accent-bar.yellow{background:var(--yellow-30);}
-.accent-bar.long{width:120px;}
-.surface-inverse .accent-bar{background:var(--cyan-30);}
-
-/* ---------- Eyebrow ---------- */
-.eyebrow{
-  font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.32px;
-  text-transform:uppercase; color:var(--text-muted);
-  display:inline-flex; align-items:center; gap:var(--sp-03); margin-bottom:var(--sp-06);
-}
-.eyebrow::before{content:''; width:24px; height:1px; background:var(--primary);}
-
-.step-num{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--text-muted); letter-spacing:.04em;}
-
-/* ---------- Meter ---------- */
-.meter{height:4px; background:var(--bg-layer); position:relative; overflow:hidden;}
-.meter > span{display:block; height:100%; background:var(--primary); width:0; transition:width 1s var(--ease);}
-
-/* ---------- Pictograms ---------- */
-.picto{width:64px; height:64px; color:var(--primary); display:flex; align-items:center; justify-content:center;}
-.picto svg{width:100%; height:100%; stroke:currentColor; fill:none; stroke-width:1.5;}
-
-/* ---------- Decorative grid ---------- */
-.grid-bg{
-  position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:
-    linear-gradient(to right, rgba(141,141,141,.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(141,141,141,.06) 1px, transparent 1px);
-  background-size:64px 64px;
-}
-.grid-bg.subtle{opacity:.5;}
-
-/* ---------- Bottom navigation ---------- */
-.nav-controls{
-  position:fixed; bottom:0; left:0; right:0; height:48px;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 var(--sp-07);
-  background:var(--bg); border-top:1px solid var(--line);
-  z-index:50; font-family:'IBM Plex Mono', monospace; font-size:12px;
-}
-.nav-controls .nav-left{display:flex; align-items:center; gap:var(--sp-06); color:var(--text-muted);}
-.nav-controls .nav-right{display:flex; align-items:center; gap:var(--sp-03);}
-.nav-btn{
-  width:32px; height:32px; background:transparent; border:none; color:var(--text);
-  cursor:pointer; display:flex; align-items:center; justify-content:center;
-  transition:background .15s ease;
-}
-.nav-btn:hover{background:var(--bg-elevated);}
-.nav-btn:focus-visible{outline:2px solid var(--focus); outline-offset:-2px;}
-.nav-btn[disabled]{opacity:.3; cursor:not-allowed;}
-.slide-counter{color:var(--text-secondary); min-width:56px; text-align:right;}
-
-/* ---------- Reveal animation ---------- */
-.reveal{opacity:0; transform:translateY(8px); transition:opacity .5s ease, transform .5s ease;}
-.slide.active .reveal{opacity:1; transform:translateY(0);}
-.slide.active .reveal:nth-child(1){transition-delay:.05s;}
-.slide.active .reveal:nth-child(2){transition-delay:.12s;}
-.slide.active .reveal:nth-child(3){transition-delay:.19s;}
-.slide.active .reveal:nth-child(4){transition-delay:.26s;}
-.slide.active .reveal:nth-child(5){transition-delay:.33s;}
-.slide.active .reveal:nth-child(6){transition-delay:.40s;}
-
-/* ---------- Cover ---------- */
-.cover-bg{
-  position:absolute; inset:0; z-index:0;
-  background:
-    radial-gradient(900px 600px at 82% 26%, rgba(15,98,254,.10) 0, transparent 60%),
-    radial-gradient(700px 500px at 16% 84%, rgba(17,146,232,.08) 0, transparent 60%),
-    var(--bg);
-}
-.cover-mono{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.04em; color:var(--text-muted);}
-
-/* Subtle dark dot texture (was invisible white dots on white) */
-.dot-pattern{
-  position:absolute; inset:0; z-index:1; pointer-events:none;
-  background-image:radial-gradient(rgba(15,98,254,.16) 1px, transparent 1px);
-  background-size:24px 24px;
-  -webkit-mask-image:radial-gradient(ellipse at 82% 26%, black 0%, transparent 68%);
-  mask-image:radial-gradient(ellipse at 82% 26%, black 0%, transparent 68%);
-}
-
-/* ---------- Agenda ---------- */
-.agenda-item{
-  display:grid; grid-template-columns:56px 1fr auto; align-items:center;
-  padding:12px 0; border-bottom:1px solid var(--line); gap:var(--sp-06);
-}
-.agenda-item:last-child{border-bottom:none;}
-.agenda-num{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--text-muted);}
-.agenda-title{font-size:18px; font-weight:400; line-height:26px;}
-.agenda-tag{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-muted); letter-spacing:.02em;}
-
-/* ---------- Timeline ---------- */
-.timeline-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); margin-top:var(--sp-07);}
-.timeline-cell{background:var(--bg); padding:24px 20px; min-height:200px; display:flex; flex-direction:column; gap:var(--sp-04); position:relative;}
-.timeline-cell .tl-num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-muted); letter-spacing:.04em;}
-.timeline-cell .tl-bar{width:24px; height:2px; background:var(--primary);}
-.timeline-cell.active{background:var(--bg-elevated);}
-.timeline-cell.active .tl-bar{background:var(--cyan-50); width:48px;}
-
-/* ---------- Comparison split ---------- */
-.vs-split{display:grid; grid-template-columns:1fr 1px 1fr; gap:0;}
-.vs-split .vs-line{background:var(--line);}
-.vs-side{padding:var(--sp-07); background:var(--bg-elevated);}
-.vs-side.b{background:var(--surface-inverse);}
-.vs-side h3{margin:0 0 var(--sp-06); font-size:24px; font-weight:400;}
-.vs-side ul{margin:0; padding:0; list-style:none;}
-.vs-side li{
-  padding:12px 0; border-bottom:1px solid var(--line);
-  font-size:16px; line-height:24px; display:flex; gap:var(--sp-04); align-items:flex-start;
-}
-.vs-side li::before{content:''; width:16px; height:1px; background:var(--primary); margin-top:11px; flex-shrink:0;}
-.vs-side li:last-child{border-bottom:none;}
-
-/* ---------- Quote ---------- */
-.pull-quote{
-  font-family:'IBM Plex Serif', serif; font-weight:300;
-  font-size:34px; line-height:46px; letter-spacing:-.2px; color:var(--text);
-}
-.pull-quote .accent{color:var(--blue-50);}
-
-/* ---------- Stat ---------- */
-.stat{display:flex; flex-direction:column; gap:var(--sp-03);}
-.stat .num{
-  font-weight:300; font-size:64px; line-height:70px; letter-spacing:-1px; color:var(--text);
-}
-.stat .num .unit{font-size:32px; color:var(--text-muted); margin-left:4px;}
-.stat .label{font-size:14px; color:var(--text-secondary); line-height:20px;}
-
-/* ---------- Footer marker ---------- */
-.slide-footer{
-  position:absolute; bottom:56px; left:var(--sp-10); right:var(--sp-10);
-  display:flex; justify-content:space-between; align-items:center;
-  font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-muted);
-  letter-spacing:.04em; padding-top:14px; border-top:1px solid var(--line);
-}
-
-/* ---------- Section divider (optional layout) ---------- */
-.section-divider{display:flex; flex-direction:column; justify-content:center; padding:var(--sp-10); background:var(--bg); position:relative;}
-.section-num-huge{font-weight:200; font-size:200px; line-height:1; letter-spacing:-4px; color:var(--primary); opacity:.9;}
-
-/* ---------- Meter rows ---------- */
-.meter-row{display:grid; grid-template-columns:1fr 80px; gap:var(--sp-06); align-items:center; padding:14px 0; border-bottom:1px solid var(--line);}
-.meter-row:last-child{border-bottom:none;}
-.meter-row .label-row{font-size:14px; font-weight:400;}
-.meter-row .helper-row{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-muted); margin-top:4px;}
-.meter-row .val{font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--text); text-align:right;}
-
-/* ---------- Closing ---------- */
-.closing-bg{
-  position:absolute; inset:0; z-index:0;
-  background:
-    radial-gradient(1000px 700px at 88% 12%, rgba(15,98,254,.10) 0, transparent 62%),
-    radial-gradient(680px 520px at 8% 92%, rgba(17,146,232,.07) 0, transparent 60%),
-    var(--bg);
-}
-
-/* ---------- CTA pill ---------- */
-.cta-tile{
-  display:inline-flex; align-items:center; gap:var(--sp-05);
-  padding:16px var(--sp-06); background:var(--primary); color:#fff;
-  font-size:14px; font-weight:400; cursor:default;
-}
-.cta-tile .arrow{font-family:'IBM Plex Mono', monospace; font-size:16px;}
-
-/* ---------- Responsive ---------- */
-@media (max-width:1100px){
-  .slide .content{padding:72px var(--sp-07) 72px;}
-  .slide-footer{left:var(--sp-07); right:var(--sp-07); bottom:56px;}
-  .topbar,.nav-controls{padding:0 var(--sp-05);}
-  .timeline-grid{grid-template-columns:1fr 1fr;}
-  .vs-split{grid-template-columns:1fr;}
-  .vs-split .vs-line{display:none;}
-  .col-4,.col-5,.col-6,.col-8,.col-10,.col-12{grid-column:span 16;}
-  .section-num-huge{font-size:120px;}
-  .pull-quote{font-size:24px; line-height:34px;}
-  .display-03{font-size:48px; line-height:54px;}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.2s !important;}
-  .reveal{transform:none;}
-}
-
-/* ---------- Print / PDF export (one slide per page) ---------- */
-@media print{
-  @page{size:1280px 720px; margin:0;}
-  html,body{overflow:visible; height:auto; width:auto;}
-  .deck-progress,.nav-controls{display:none !important;}
-  .deck{height:auto;}
-  .slide{
-    position:relative; inset:auto; opacity:1 !important; pointer-events:auto;
-    width:1280px; height:720px; page-break-after:always; break-after:page;
-  }
-  .slide .reveal{opacity:1 !important; transform:none !important;}
-}
-
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <div class="deck-progress" aria-hidden="true"><span id="progress-bar"></span></div>
-  <div class="sr-only" role="status" aria-live="polite" id="live-region"></div>
-
   <div class="deck">
 
     <!-- ===================================================
-         SLIDE 1 · TÍTULO 1
+         SLIDE 1 · CAPA
          =================================================== -->
-    <section class="slide active" data-slide="1" data-label="Título 1">
+    <section class="slide active" data-slide="1">
       <div class="cover-bg"></div>
       <div class="dot-pattern"></div>
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo">
+            <svg width="58" height="24" viewBox="0 0 58 24" xmlns="http://www.w3.org/2000/svg" aria-label="IBM">
+              <g fill="#f4f4f4">
+                <!-- Simplified 8-bar IBM logotype -->
+                <rect x="0"  y="0"  width="14" height="2"/>
+                <rect x="0"  y="4"  width="14" height="2"/>
+                <rect x="0"  y="8"  width="14" height="2"/>
+                <rect x="0"  y="12" width="14" height="2"/>
+                <rect x="0"  y="16" width="14" height="2"/>
+                <rect x="0"  y="20" width="14" height="2"/>
+
+                <rect x="20" y="0"  width="14" height="2"/>
+                <rect x="20" y="4"  width="14" height="2"/>
+                <rect x="20" y="8"  width="14" height="2"/>
+                <rect x="22" y="12" width="10" height="2"/>
+                <rect x="22" y="16" width="10" height="2"/>
+                <rect x="20" y="20" width="14" height="2"/>
+
+                <rect x="40" y="0"  width="14" height="2"/>
+                <rect x="40" y="4"  width="14" height="2"/>
+                <rect x="42" y="8"  width="2"  height="2"/>
+                <rect x="46" y="8"  width="2"  height="2"/>
+                <rect x="50" y="8"  width="2"  height="2"/>
+                <rect x="42" y="12" width="2"  height="2"/>
+                <rect x="46" y="12" width="2"  height="2"/>
+                <rect x="50" y="12" width="2"  height="2"/>
+                <rect x="42" y="16" width="10" height="2"/>
+                <rect x="42" y="20" width="10" height="2"/>
+              </g>
+            </svg>
+          </span>
           <span class="divider"></span>
-          <span class="crumb">Status 1</span>
+          <span class="crumb">Apresentação executiva</span>
         </div>
         <div class="right">
-          <span>Status 2</span>
+          <span>v2.0 · 2026</span>
         </div>
       </div>
 
       <div class="content" style="justify-content:flex-end; padding-bottom:96px;">
         <div class="grid-16" style="margin-bottom:24px;">
           <div class="col-16 reveal">
-            <div class="cover-mono">Status 3</div>
+            <div class="cover-mono">01 / 09 · Cover</div>
           </div>
         </div>
         <div class="grid-16">
           <div class="col-10 reveal">
             <div class="accent-bar long"></div>
             <h1 class="display-03" style="margin:0 0 24px;">
-              Título 1<br/>
-              Título 2 <span style="color:var(--blue-40);">Status 4</span>
+              IA — Uma parceria<br/>
+              para <span style="color:var(--blue-40);">produtividade</span>
             </h1>
             <p class="body-long" style="color:var(--text-secondary); max-width:640px; margin:0;">
-              Texto 1
+              Como a inteligência artificial amplia capacidades humanas, acelera tarefas operacionais e libera mais espaço para análise, criatividade e decisão.
             </p>
           </div>
           <div class="col-5 reveal" style="grid-column-start:12; align-self:end;">
             <div class="tile outline" style="padding:24px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:16px;">Status 5</div>
-              <div style="font-size:18px; font-weight:500; margin-bottom:4px;">Contato 1</div>
-              <div class="helper">Status 6</div>
+              <div class="label-01" style="margin-bottom:16px;">Apresentadora</div>
+              <div style="font-size:18px; font-weight:500; margin-bottom:4px;">Liderança IBM</div>
+              <div class="helper">Strategy Designer · IBM Consulting</div>
               <div class="meter" style="margin-top:24px;"><span style="width:100%; background:var(--blue-40);"></span></div>
             </div>
           </div>
@@ -445,238 +92,254 @@ body{
       </div>
 
       <div class="slide-footer">
-        <span>Texto 2</span>
-        <span>Texto 3</span>
+        <span>IBM Confidential · For internal use</span>
+        <span>Carbon Design System v11 · IBM Plex</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 2 · TÍTULO 2
+         SLIDE 2 · AGENDA
          =================================================== -->
-    <section class="slide" data-slide="2" data-label="Status 1">
+    <section class="slide" data-slide="2">
       <div class="grid-bg subtle"></div>
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 7</span>
+          <span class="crumb">Agenda</span>
         </div>
-        <div class="right"><span>Status 8</span></div>
+        <div class="right"><span>02 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16" style="flex:1;">
           <div class="col-6 reveal">
-            <div class="eyebrow">Status 9</div>
-            <h2 class="productive-heading-05" style="margin:0 0 20px; font-size:34px; line-height:42px; font-weight:300;">Título 3<br/>Título 4</h2>
+            <div class="eyebrow">Agenda</div>
+            <h2 class="productive-heading-05" style="margin:0 0 20px; font-size:34px; line-height:42px; font-weight:300;">O que vamos<br/>percorrer juntos</h2>
             <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">
-              Texto 4
+              Da evolução das ferramentas humanas até a sinergia entre usuários e IA aplicada ao ambiente corporativo — um caminho em sete movimentos.
             </p>
             <div class="accent-bar" style="margin-top:24px;"></div>
-            <div class="helper">Status 10</div>
+            <div class="helper">Tempo estimado · 18 min</div>
           </div>
           <div class="col-10 reveal">
             <div class="agenda-item">
-              <div class="agenda-num">Item 1</div>
-              <div class="agenda-title">Título 5</div>
-              <div class="agenda-tag">Status 11</div>
+              <div class="agenda-num">01</div>
+              <div class="agenda-title">Os caminhos da humanidade</div>
+              <div class="agenda-tag">Seção</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 2</div>
-              <div class="agenda-title">Título 6</div>
-              <div class="agenda-tag">Status 12</div>
+              <div class="agenda-num">02</div>
+              <div class="agenda-title">A virada das ferramentas</div>
+              <div class="agenda-tag">Insight</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 3</div>
-              <div class="agenda-title">Título 7</div>
-              <div class="agenda-tag">Status 13</div>
+              <div class="agenda-num">03</div>
+              <div class="agenda-title">Vamos falar de inteligência artificial</div>
+              <div class="agenda-tag">Conceito</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 4</div>
-              <div class="agenda-title">Título 8</div>
-              <div class="agenda-tag">Status 14</div>
+              <div class="agenda-num">04</div>
+              <div class="agenda-title">A sinergia que amplifica seu potencial</div>
+              <div class="agenda-tag">Comparação</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 5</div>
-              <div class="agenda-title">Título 9</div>
-              <div class="agenda-tag">Status 15</div>
+              <div class="agenda-num">05</div>
+              <div class="agenda-title">Como isso pode acontecer no ambiente corporativo</div>
+              <div class="agenda-tag">Aplicação</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 6</div>
-              <div class="agenda-title">Título 10</div>
-              <div class="agenda-tag">Status 16</div>
+              <div class="agenda-num">06</div>
+              <div class="agenda-title">Então, como será seu futuro com IA</div>
+              <div class="agenda-tag">Visão</div>
             </div>
             <div class="agenda-item">
-              <div class="agenda-num">Item 7</div>
-              <div class="agenda-title">Título 11</div>
-              <div class="agenda-tag">Status 17</div>
+              <div class="agenda-num">07</div>
+              <div class="agenda-title">Produtividade com direção humana</div>
+              <div class="agenda-tag">Encerramento</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Texto 5</span>
-        <span>Status 18</span>
+        <span>IA — Uma parceria para produtividade</span>
+        <span>Agenda · 7 movimentos</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 3 · TÍTULO 3
+         SLIDE 3 · OS CAMINHOS DA HUMANIDADE
          =================================================== -->
-    <section class="slide" data-slide="3" data-label="Título 2">
+    <section class="slide" data-slide="3">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 19</span>
+          <span class="crumb">Seção 01 · Os caminhos da humanidade</span>
         </div>
-        <div class="right"><span>Status 20</span></div>
+        <div class="right"><span>03 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16">
           <div class="col-16 reveal">
-            <div class="eyebrow">Status 21</div>
+            <div class="eyebrow">Seção 01</div>
             <h2 class="expressive-heading-05" style="margin:0 0 16px; font-weight:300; max-width:920px;">
-              Título 12 <span style="color:var(--blue-40);">Status 22</span> Título 13
+              Nós evoluímos à medida que as nossas <span style="color:var(--blue-40);">ferramentas</span> evoluíram.
             </h2>
             <p class="body-long" style="color:var(--text-secondary); margin:0; max-width:880px;">
-              Texto 6
+              Da pedra à nuvem, cada salto tecnológico ampliou uma capacidade humana. A inteligência artificial marca uma nova virada porque acelera não só o fazer, mas também o aprender, o interpretar e o decidir.
             </p>
           </div>
         </div>
 
         <div class="timeline-grid reveal">
           <div class="timeline-cell">
-            <div class="tl-num">Status 23</div>
+            <div class="tl-num">01 / 05</div>
             <div class="picto">
               <!-- Pictograma: ferramenta primitiva -->
               <svg viewBox="0 0 64 64"><path d="M8 56 L24 40 M20 36 L36 20 a8 8 0 0 1 12 0 a8 8 0 0 1 0 12 L32 48 Z M40 12 L52 24"/></svg>
             </div>
             <div class="tl-bar"></div>
-            <div class="productive-heading-03" style="margin:0;">Título 14</div>
-            <div class="body-01" style="color:var(--text-secondary);">Texto 7</div>
+            <div class="productive-heading-03" style="margin:0;">Ferramentas primitivas</div>
+            <div class="body-01" style="color:var(--text-secondary);">Extensão da força e da sobrevivência.</div>
           </div>
           <div class="timeline-cell">
-            <div class="tl-num">Status 24</div>
+            <div class="tl-num">02 / 05</div>
             <div class="picto">
               <!-- Pictograma: escrita -->
               <svg viewBox="0 0 64 64"><path d="M12 14 L52 14 L52 50 L12 50 Z M20 24 L44 24 M20 32 L44 32 M20 40 L36 40"/></svg>
             </div>
             <div class="tl-bar"></div>
-            <div class="productive-heading-03" style="margin:0;">Título 15</div>
-            <div class="body-01" style="color:var(--text-secondary);">Texto 8</div>
+            <div class="productive-heading-03" style="margin:0;">Escrita</div>
+            <div class="body-01" style="color:var(--text-secondary);">Expansão da memória e do conhecimento.</div>
           </div>
           <div class="timeline-cell">
-            <div class="tl-num">Status 25</div>
+            <div class="tl-num">03 / 05</div>
             <div class="picto">
               <!-- Pictograma: computação -->
               <svg viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="30"/><path d="M22 44 L22 52 M42 44 L42 52 M16 52 L48 52 M22 24 L42 24 M22 30 L34 30 M22 36 L38 36"/></svg>
             </div>
             <div class="tl-bar"></div>
-            <div class="productive-heading-03" style="margin:0;">Título 16</div>
-            <div class="body-01" style="color:var(--text-secondary);">Status 26</div>
+            <div class="productive-heading-03" style="margin:0;">Computação</div>
+            <div class="body-01" style="color:var(--text-secondary);">Processamento rápido e em escala.</div>
           </div>
           <div class="timeline-cell">
-            <div class="tl-num">Status 27</div>
+            <div class="tl-num">04 / 05</div>
             <div class="picto">
               <!-- Pictograma: internet / rede -->
               <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><path d="M10 32 L54 32 M32 10 C 22 18, 22 46, 32 54 M32 10 C 42 18, 42 46, 32 54"/></svg>
             </div>
             <div class="tl-bar"></div>
-            <div class="productive-heading-03" style="margin:0;">Título 17</div>
-            <div class="body-01" style="color:var(--text-secondary);">Texto 9</div>
+            <div class="productive-heading-03" style="margin:0;">Internet e Web</div>
+            <div class="body-01" style="color:var(--text-secondary);">Conexão, acesso e circulação de informação.</div>
           </div>
           <div class="timeline-cell active">
-            <div class="tl-num" style="color:var(--cyan-30);">Status 28</div>
+            <div class="tl-num" style="color:var(--cyan-30);">05 / 05 · agora</div>
             <div class="picto" style="color:var(--cyan-30);">
               <!-- Pictograma: IA / circuito -->
               <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="2" fill="currentColor"/><path d="M32 8 L32 18 M32 46 L32 56 M8 32 L18 32 M46 32 L56 32 M14 14 L22 22 M42 42 L50 50 M50 14 L42 22 M22 42 L14 50"/></svg>
             </div>
             <div class="tl-bar"></div>
-            <div class="productive-heading-03" style="margin:0;">Título 18</div>
-            <div class="body-01" style="color:var(--text-secondary);">Texto 10</div>
+            <div class="productive-heading-03" style="margin:0;">Inteligência artificial</div>
+            <div class="body-01" style="color:var(--text-secondary);">Ampliação do raciocínio operacional e da execução.</div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Texto 11</span>
-        <span>Texto 12</span>
+        <span>Seção 01 · Os caminhos da humanidade</span>
+        <span>Ferramenta → Capacidade → Transformação</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 4 · TÍTULO 4
+         SLIDE 4 · MENSAGEM CENTRAL
          =================================================== -->
-    <section class="slide" data-slide="4" data-label="Título 3">
+    <section class="slide" data-slide="4">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 29</span>
+          <span class="crumb">Mensagem central</span>
         </div>
-        <div class="right"><span>Status 30</span></div>
+        <div class="right"><span>04 / 09</span></div>
       </div>
 
       <div class="content" style="justify-content:center;">
         <div class="grid-16" style="align-items:center;">
           <div class="col-10 reveal">
-            <div class="eyebrow">Status 31</div>
+            <div class="eyebrow">Mensagem central</div>
             <div class="pull-quote">
-              Título 19 <span class="accent">Status 32</span> Título 20 <span class="accent">Status 33</span>
+              Toda grande virada aconteceu quando uma <span class="accent">ferramenta</span> expandiu uma <span class="accent">capacidade humana.</span>
             </div>
             <div class="accent-bar" style="margin:32px 0 24px; width:120px;"></div>
             <p class="body-long" style="color:var(--text-secondary); margin:0; max-width:680px;">
-              Texto 13
+              A IA pode marcar a próxima etapa dessa trajetória ao ampliar não apenas o que fazemos, mas a forma como aprendemos, decidimos e evoluímos.
             </p>
           </div>
           <div class="col-5 reveal" style="grid-column-start:12;">
-            <div class="tile surface-inverse" style="border-left:2px solid var(--blue-40);">
-              <div class="label-01" style="color:var(--blue-30); margin-bottom:16px;">Status 34</div>
+            <div class="tile" style="background:var(--blue-100); border-left:2px solid var(--blue-40);">
+              <div class="label-01" style="color:var(--blue-30); margin-bottom:16px;">Conceito-chave</div>
               <div style="font-family:'IBM Plex Mono', monospace; font-size:14px; line-height:24px; color:var(--text);">
-                Status 35<br/>
-                <span style="color:var(--blue-30);">Status 36</span><br/>
-                Status 37<br/>
-                <span style="color:var(--blue-30);">Status 38</span><br/>
-                Status 39
+                ferramenta<br/>
+                <span style="color:var(--blue-30);">↓</span><br/>
+                capacidade<br/>
+                <span style="color:var(--blue-30);">↓</span><br/>
+                transformação
               </div>
               <div class="meter" style="margin-top:24px;"><span style="width:100%; background:var(--blue-40);"></span></div>
-              <div class="helper" style="margin-top:12px; color:var(--text-secondary);">Status 40</div>
+              <div class="helper" style="margin-top:12px; color:var(--text-secondary);">Pausa narrativa — conectar passado, presente e futuro.</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Status 41</span>
-        <span>Status 42</span>
+        <span>Insight estratégico</span>
+        <span>04 · Pausa narrativa</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 5 · TÍTULO 5perceber/entender/agir)
+         SLIDE 5 · VAMOS FALAR DE IA (perceber/entender/agir)
          =================================================== -->
-    <section class="slide" data-slide="5" data-label="Título 4">
+    <section class="slide" data-slide="5">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 43</span>
+          <span class="crumb">Seção 02 · Inteligência artificial</span>
         </div>
-        <div class="right"><span>Status 44</span></div>
+        <div class="right"><span>05 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16">
           <div class="col-16 reveal">
-            <div class="eyebrow">Status 45</div>
+            <div class="eyebrow">Seção 02</div>
             <h2 class="expressive-heading-05" style="margin:0 0 16px; font-weight:300; max-width:820px;">
-              Título 21 <span style="color:var(--blue-40);">Status 46</span>Título 22
+              Vamos falar de <span style="color:var(--blue-40);">inteligência artificial</span>?
             </h2>
             <p class="body-long" style="color:var(--text-secondary); max-width:880px; margin:0 0 48px;">
-              Texto 14
+              Assim como nós observamos, falamos, testamos hipóteses e agimos, a IA combina raciocínio, leitura de contexto, linguagem e automação para apoiar a resolução de problemas.
             </p>
           </div>
         </div>
@@ -684,75 +347,79 @@ body{
         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--line);">
           <div class="reveal" style="background:var(--bg-elevated); padding:28px; min-height:260px; display:flex; flex-direction:column; gap:16px;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
-              <div class="step-num">Status 47</div>
+              <div class="step-num">01</div>
               <div class="picto" style="width:48px; height:48px;">
                 <svg viewBox="0 0 64 64"><path d="M4 32 C 14 18, 50 18, 60 32 C 50 46, 14 46, 4 32 Z"/><circle cx="32" cy="32" r="8"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
               </div>
             </div>
             <div class="accent-bar cyan" style="margin:0;"></div>
-            <h3 class="productive-heading-04" style="margin:0;">Título 23</h3>
-            <p class="body-02" style="color:var(--text-secondary); margin:0;">Texto 15</p>
-            <div class="helper" style="margin-top:auto;">Status 48</div>
+            <h3 class="productive-heading-04" style="margin:0;">Perceber</h3>
+            <p class="body-02" style="color:var(--text-secondary); margin:0;">Visão computacional e reconhecimento de padrões ajudam a observar sinais, imagens, dados e contextos.</p>
+            <div class="helper" style="margin-top:auto;">Computer vision · Pattern recognition</div>
           </div>
           <div class="reveal" style="background:var(--bg-elevated); padding:28px; min-height:260px; display:flex; flex-direction:column; gap:16px;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
-              <div class="step-num">Status 49</div>
+              <div class="step-num">02</div>
               <div class="picto" style="width:48px; height:48px;">
                 <svg viewBox="0 0 64 64"><path d="M8 14 L56 14 L56 44 L34 44 L24 54 L24 44 L8 44 Z"/><path d="M18 26 L46 26 M18 34 L36 34"/></svg>
               </div>
             </div>
             <div class="accent-bar teal" style="margin:0;"></div>
-            <h3 class="productive-heading-04" style="margin:0;">Título 24</h3>
-            <p class="body-02" style="color:var(--text-secondary); margin:0;">Texto 16</p>
-            <div class="helper" style="margin-top:auto;">Status 50</div>
+            <h3 class="productive-heading-04" style="margin:0;">Entender</h3>
+            <p class="body-02" style="color:var(--text-secondary); margin:0;">Processamento de linguagem natural permite interpretar pedidos, resumir conteúdo e dialogar com clareza.</p>
+            <div class="helper" style="margin-top:auto;">NLP · Large language models</div>
           </div>
           <div class="reveal" style="background:var(--bg-elevated); padding:28px; min-height:260px; display:flex; flex-direction:column; gap:16px;">
             <div style="display:flex; align-items:center; justify-content:space-between;">
-              <div class="step-num">Status 51</div>
+              <div class="step-num">03</div>
               <div class="picto" style="width:48px; height:48px;">
                 <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="10"/><path d="M32 6 L32 14 M32 50 L32 58 M6 32 L14 32 M50 32 L58 32 M14 14 L20 20 M44 44 L50 50 M50 14 L44 20 M20 44 L14 50"/></svg>
               </div>
             </div>
             <div class="accent-bar magenta" style="margin:0;"></div>
-            <h3 class="productive-heading-04" style="margin:0;">Título 25</h3>
-            <p class="body-02" style="color:var(--text-secondary); margin:0;">Texto 17</p>
-            <div class="helper" style="margin-top:auto;">Status 52</div>
+            <h3 class="productive-heading-04" style="margin:0;">Agir</h3>
+            <p class="body-02" style="color:var(--text-secondary); margin:0;">Automação e execução dinâmica transformam análise em ação operacional com velocidade e consistência.</p>
+            <div class="helper" style="margin-top:auto;">Automation · Agentic workflows</div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Status 53</span>
-        <span>Status 54</span>
+        <span>Seção 02 · Inteligência artificial</span>
+        <span>Perceber · Entender · Agir</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 6 · TÍTULO 6
+         SLIDE 6 · COMPARAÇÃO VISUAL · SINERGIA HUMANO + IA
          =================================================== -->
-    <section class="slide" data-slide="6" data-label="Título 5">
+    <section class="slide" data-slide="6">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 55</span>
+          <span class="crumb">Seção 03 · Sinergia humano + IA</span>
         </div>
-        <div class="right"><span>Status 56</span></div>
+        <div class="right"><span>06 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16" style="margin-bottom:32px;">
           <div class="col-10 reveal">
-            <div class="eyebrow">Status 57</div>
-            <h2 class="expressive-heading-05" style="margin:0 0 12px; font-weight:300;">Título 26<br/>Título 27</h2>
+            <div class="eyebrow">Comparação visual</div>
+            <h2 class="expressive-heading-05" style="margin:0 0 12px; font-weight:300;">A sinergia que amplifica<br/>seu potencial</h2>
             <p class="body-long" style="color:var(--text-secondary); margin:0;">
-              Texto 18
+              1 + 1 = infinitas possibilidades. Cada papel sustenta o outro.
             </p>
           </div>
           <div class="col-5 reveal" style="grid-column-start:12; align-self:end;">
             <div class="stat">
-              <div class="num">Valor 1<span style="color:var(--blue-40);">Status 58</span>Valor 2</div>
-              <div class="label">Status 59</div>
+              <div class="num">1<span style="color:var(--blue-40);">+</span>1</div>
+              <div class="label">Sinergia, não substituição</div>
             </div>
           </div>
         </div>
@@ -760,34 +427,34 @@ body{
         <div class="vs-split reveal">
           <div class="vs-side">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-              <div class="label-01" style="color:var(--blue-40);">Status 60</div>
+              <div class="label-01" style="color:var(--blue-40);">Você</div>
               <div class="picto" style="width:40px; height:40px;">
                 <svg viewBox="0 0 64 64"><circle cx="32" cy="22" r="10"/><path d="M14 56 C 14 42, 50 42, 50 56"/></svg>
               </div>
             </div>
-            <h3>Título 28</h3>
+            <h3>Direciona e decide</h3>
             <ul>
-              <li>Item 8</li>
-              <li>Item 9</li>
-              <li>Item 10</li>
-              <li>Item 11</li>
+              <li>Define o objetivo.</li>
+              <li>Aplica contexto e julgamento.</li>
+              <li>Valida a qualidade do resultado.</li>
+              <li>Toma a decisão final.</li>
             </ul>
             <div class="meter" style="margin-top:24px;"><span style="width:100%; background:var(--blue-40);"></span></div>
           </div>
           <div class="vs-line"></div>
-          <div class="vs-side b surface-inverse">
+          <div class="vs-side b">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-              <div class="label-01" style="color:var(--cyan-30);">Status 61</div>
+              <div class="label-01" style="color:var(--cyan-30);">IA</div>
               <div class="picto" style="width:40px; height:40px; color:var(--cyan-30);">
                 <svg viewBox="0 0 64 64"><rect x="14" y="14" width="36" height="36" rx="4"/><circle cx="32" cy="32" r="6"/><path d="M32 4 L32 14 M32 50 L32 60 M4 32 L14 32 M50 32 L60 32"/></svg>
               </div>
             </div>
-            <h3>Título 29</h3>
+            <h3>Executa e acelera</h3>
             <ul>
-              <li>Item 12</li>
-              <li>Item 13</li>
-              <li>Item 14</li>
-              <li>Item 15</li>
+              <li>Organiza informações rapidamente.</li>
+              <li>Resume, estrutura e sugere caminhos.</li>
+              <li>Automatiza tarefas repetitivas.</li>
+              <li>Reduz atrito operacional.</li>
             </ul>
             <div class="meter" style="margin-top:24px;"><span style="width:100%; background:var(--cyan-30);"></span></div>
           </div>
@@ -795,29 +462,33 @@ body{
       </div>
 
       <div class="slide-footer">
-        <span>Status 62</span>
-        <span>Texto 19</span>
+        <span>Seção 03 · Sinergia humano + IA</span>
+        <span>Direção humana · Execução acelerada</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 7 · TÍTULO 7
+         SLIDE 7 · APLICAÇÃO NO BANCO
          =================================================== -->
-    <section class="slide" data-slide="7" data-label="Título 6">
+    <section class="slide" data-slide="7">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 63</span>
+          <span class="crumb">Seção 04 · Aplicação no ambiente corporativo</span>
         </div>
-        <div class="right"><span>Status 64</span></div>
+        <div class="right"><span>07 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16" style="margin-bottom:24px;">
           <div class="col-16 reveal">
-            <div class="eyebrow">Status 65</div>
-            <h2 class="productive-heading-05" style="margin:0; font-size:38px; line-height:46px; font-weight:300;">Título 30 <span style="color:var(--blue-40);">Status 66</span></h2>
+            <div class="eyebrow">Aplicação prática</div>
+            <h2 class="productive-heading-05" style="margin:0; font-size:38px; line-height:46px; font-weight:300;">Como isso pode acontecer <span style="color:var(--blue-40);">no ambiente corporativo</span></h2>
           </div>
         </div>
 
@@ -825,101 +496,105 @@ body{
           <div class="col-10 reveal">
             <div class="tile outline" style="padding:24px;">
               <span class="tile-corner"></span>
-              <h3 class="productive-heading-04" style="margin:0 0 8px;">Título 31</h3>
-              <div class="helper" style="margin-bottom:24px;">Status 67</div>
+              <h3 class="productive-heading-04" style="margin:0 0 8px;">Onde a IA pode apoiar</h3>
+              <div class="helper" style="margin-bottom:24px;">Aderência por domínio · escala 0–100</div>
 
               <div class="meter-row" style="padding:10px 0;">
                 <div>
-                  <div class="label-row">Título 32</div>
-                  <div class="helper-row">Status 68</div>
+                  <div class="label-row">Análise e consolidação</div>
+                  <div class="helper-row">Relatórios, painéis, leitura cruzada</div>
                   <div class="meter" style="margin-top:8px;"><span data-w="92"></span></div>
                 </div>
-                <div class="val">Valor 3<span style="color:var(--text-muted);">Status 69</span></div>
+                <div class="val">92<span style="color:var(--text-muted);">/100</span></div>
               </div>
 
               <div class="meter-row" style="padding:10px 0;">
                 <div>
-                  <div class="label-row">Título 33</div>
-                  <div class="helper-row">Status 70</div>
+                  <div class="label-row">Preparação de materiais</div>
+                  <div class="helper-row">Apresentações, resumos, drafts</div>
                   <div class="meter" style="margin-top:8px;"><span data-w="86"></span></div>
                 </div>
-                <div class="val">Valor 4<span style="color:var(--text-muted);">Status 71</span></div>
+                <div class="val">86<span style="color:var(--text-muted);">/100</span></div>
               </div>
 
               <div class="meter-row" style="padding:10px 0;">
                 <div>
-                  <div class="label-row">Título 34</div>
-                  <div class="helper-row">Status 72</div>
+                  <div class="label-row">Atividades operacionais</div>
+                  <div class="helper-row">Rotinas, follow-ups, automações</div>
                   <div class="meter" style="margin-top:8px;"><span data-w="88"></span></div>
                 </div>
-                <div class="val">Valor 5<span style="color:var(--text-muted);">Status 73</span></div>
+                <div class="val">88<span style="color:var(--text-muted);">/100</span></div>
               </div>
 
               <div class="meter-row" style="padding:10px 0;">
                 <div>
-                  <div class="label-row">Título 35</div>
-                  <div class="helper-row">Status 74</div>
+                  <div class="label-row">Suporte à decisão</div>
+                  <div class="helper-row">Cenários, simulações, comparativos</div>
                   <div class="meter" style="margin-top:8px;"><span data-w="74"></span></div>
                 </div>
-                <div class="val">Valor 6<span style="color:var(--text-muted);">Status 75</span></div>
+                <div class="val">74<span style="color:var(--text-muted);">/100</span></div>
               </div>
             </div>
           </div>
 
           <div class="col-6 reveal" style="display:flex; flex-direction:column; gap:16px;">
-            <div class="tile surface-inverse" style="padding:20px;">
+            <div class="tile" style="background:var(--blue-100); padding:20px;">
               <span class="tile-corner" style="border-color:var(--cyan-30);"></span>
-              <div class="label-01" style="margin-bottom:12px; color:var(--cyan-30);">Status 76</div>
-              <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Título 36</div>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 20</p>
+              <div class="label-01" style="margin-bottom:12px; color:var(--cyan-30);">Exemplo · Investimentos</div>
+              <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Proposta de portfólio em minutos</div>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Com base em perfil, regras de produto e cenário macro, a IA monta uma primeira versão revisável.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:12px;">Status 77</div>
-              <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Título 37</div>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 21</p>
+              <div class="label-01" style="margin-bottom:12px;">Resultado</div>
+              <div class="productive-heading-03" style="margin:0 0 10px; font-size:22px; line-height:28px;">Menos tempo operacional</div>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Mais tempo para análise crítica, conversa com o organização e decisão qualificada.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Texto 22</span>
-        <span>Status 78</span>
+        <span>Seção 04 · Aplicação no ambiente corporativo</span>
+        <span>Operação → análise → decisão</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 8 · TÍTULO 8
+         SLIDE 8 · FUTURO COM IA
          =================================================== -->
-    <section class="slide" data-slide="8" data-label="Título 7">
+    <section class="slide" data-slide="8">
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 79</span>
+          <span class="crumb">Seção 05 · Futuro do trabalho</span>
         </div>
-        <div class="right"><span>Status 80</span></div>
+        <div class="right"><span>08 / 09</span></div>
       </div>
 
       <div class="content">
         <div class="grid-16" style="margin-bottom:24px;">
           <div class="col-16 reveal">
-            <div class="eyebrow">Status 81</div>
-            <h2 class="productive-heading-05" style="margin:0; font-size:38px; line-height:46px; font-weight:300;">Título 38 <span style="color:var(--blue-40);">Status 82</span> Título 39</h2>
+            <div class="eyebrow">Visão · futuro do trabalho</div>
+            <h2 class="productive-heading-05" style="margin:0; font-size:38px; line-height:46px; font-weight:300;">Então, como será seu <span style="color:var(--blue-40);">futuro</span> com IA</h2>
           </div>
         </div>
 
         <div class="grid-16">
           <div class="col-6 reveal">
-            <div class="tile surface-inverse" style="padding:24px; min-height:320px; display:flex; flex-direction:column;">
+            <div class="tile" style="background:var(--blue-100); padding:24px; min-height:320px; display:flex; flex-direction:column;">
               <span class="tile-corner" style="border-color:var(--cyan-30);"></span>
               <div class="picto" style="color:var(--cyan-30); width:40px; height:40px; margin-bottom:16px;">
                 <svg viewBox="0 0 64 64"><path d="M32 6 C 22 16, 22 32, 32 42 C 42 32, 42 16, 32 6 Z M22 38 L14 50 L26 46 M42 38 L50 50 L38 46"/><circle cx="32" cy="24" r="4"/></svg>
               </div>
-              <div class="label-01" style="color:var(--cyan-30); margin-bottom:12px;">Status 83</div>
+              <div class="label-01" style="color:var(--cyan-30); margin-bottom:12px;">Presente, não futuro</div>
               <p class="body-02" style="color:var(--text); margin:0; font-size:18px; line-height:26px;">
-                Texto 23
+                IA como parceira de trabalho é o presente. Nessa sinergia, a IA executa atividades operacionais e repetitivas, enquanto você amplia seu potencial criativo e estratégico.
               </p>
               <div class="accent-bar cyan" style="margin-top:auto;"></div>
             </div>
@@ -928,214 +603,117 @@ body{
           <div class="col-10 reveal" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:16px;">
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:12px;">Status 84</div>
-              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Título 40</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 24</p>
+              <div class="label-01" style="margin-bottom:12px;">Humano no centro</div>
+              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Liderança</h3>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Você define prioridade, direciona esforço e responde pelo resultado.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:12px;">Status 85</div>
-              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Título 41</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 25</p>
+              <div class="label-01" style="margin-bottom:12px;">Capacidade expandida</div>
+              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Escala</h3>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">A IA multiplica velocidade, consistência e alcance das entregas.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:12px;">Status 86</div>
-              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Título 42</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 26</p>
+              <div class="label-01" style="margin-bottom:12px;">Novo foco</div>
+              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Estratégia</h3>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Menos tempo com rotina, mais tempo com análise, relacionamento e decisão.</p>
             </div>
             <div class="tile" style="padding:20px;">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:12px;">Status 87</div>
-              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Título 43</h3>
-              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Texto 27</p>
+              <div class="label-01" style="margin-bottom:12px;">Mensagem final</div>
+              <h3 class="productive-heading-03" style="margin:0 0 8px; font-size:22px;">Parceria</h3>
+              <p class="body-02" style="color:var(--text-secondary); margin:0; font-size:18px; line-height:26px;">Você lidera e ela trabalha com você.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Status 88</span>
-        <span>Texto 28</span>
+        <span>Seção 05 · Futuro do trabalho</span>
+        <span>Liderança · Escala · Estratégia · Parceria</span>
       </div>
     </section>
 
     <!-- ===================================================
-         SLIDE 9 · TÍTULO 9
+         SLIDE 9 · FECHAMENTO
          =================================================== -->
-    <section class="slide" data-slide="9" data-label="Título 8">
+    <section class="slide" data-slide="9">
       <div class="closing-bg"></div>
       <div class="dot-pattern"></div>
       <div class="topbar">
         <div class="left">
-          <span class="ibm-logo"><svg class="ibm-mark" viewBox="0 0 424.66 158.45" role="img" aria-label="IBM"><path fill="currentColor" d="M407.85,149.79c0-4.91,3.74-8.65,8.4-8.65s8.4,3.74,8.4,8.65-3.74,8.65-8.4,8.65-8.4-3.74-8.4-8.65ZM422.68,150.34v-1.09c0-3.53-2.77-6.3-6.43-6.3s-6.43,2.77-6.43,6.3v1.09c0,3.53,2.77,6.3,6.43,6.3s6.43-2.77,6.43-6.3ZM414.99,154.25h-2.14v-8.78h3.99c1.97,0,2.98,1.18,2.98,2.77,0,1.39-.63,2.27-1.6,2.65l1.97,3.36h-2.35l-1.64-3.02h-1.22v3.02ZM416.59,149.63c.67,0,1.05-.29,1.05-.92v-.63c0-.63-.38-.92-1.05-.92h-1.6v2.48h1.6ZM0,147h77v11H0v-11ZM0,137h77v-11H0v11ZM22,116h33v-11H22v11ZM22,95h33v-11H22v11ZM22,74h33v-11H22v11ZM55,42H22v11h33v-11ZM0,32h77v-11H0v11ZM0,11h77V0H0v11ZM88,137h117.37c1.97-3.4,3.47-7.09,4.43-11h-121.79v11ZM196.18,84h-86.18v11h95.36c-2.42-4.17-5.52-7.89-9.18-11ZM110,63v11h86.18c3.65-3.11,6.76-6.83,9.18-11h-95.36ZM205.37,21h-117.37v11h121.79c-.96-3.91-2.46-7.6-4.43-11ZM169,0h-81v11h109.33c-7.47-6.83-17.41-11-28.33-11ZM110,53h33v-11h-33v11ZM174,53h35.53c.95-3.51,1.47-7.19,1.47-11h-37v11ZM110,116h33v-11h-33v11ZM174,105v11h37c0-3.81-.52-7.49-1.47-11h-35.53ZM88,158h81c11,0,20.86-4.17,28.33-11h-109.33v11ZM308,158l3.82-11h-7.65l3.82,11ZM300.67,137h14.67l3.86-11h-22.39l3.86,11ZM293.29,116h29.41l3.86-11h-37.14l3.86,11ZM285.92,95h44.16l3.86-11h-51.88l3.86,11ZM242,53h59.43l-3.83-11h-55.61v11ZM321.87,32h74.13v-11h-70.3s-3.83,11-3.83,11ZM333,0l-3.82,11h66.82V0h-63ZM220,158h55v-11h-55v11ZM220,137h55v-11h-55v11ZM242,116h33v-11h-33v11ZM242,95h33v-11h-33v11ZM374,42h-55.6l-3.83,11h59.43v-11ZM341,74h33v-11h-62.91l-3.09,8.89-3.09-8.89h-62.91v11h33v-10.11l3.55,10.11h58.9l3.55-10.11v10.11ZM374,84h-33v11h33v-11ZM341,116h33v-11h-33v11ZM341,137h55v-11h-55v11ZM341,158h55v-11h-55v11ZM294.13,32l-3.83-11h-70.3v11h74.13ZM286.83,11l-3.83-11h-63v11h66.83Z"/></svg></span>
+          <span class="ibm-logo"><svg width="58" height="24" viewBox="0 0 58 24"><g fill="#f4f4f4">
+            <rect x="0" y="0" width="14" height="2"/><rect x="0" y="4" width="14" height="2"/><rect x="0" y="8" width="14" height="2"/><rect x="0" y="12" width="14" height="2"/><rect x="0" y="16" width="14" height="2"/><rect x="0" y="20" width="14" height="2"/>
+            <rect x="20" y="0" width="14" height="2"/><rect x="20" y="4" width="14" height="2"/><rect x="20" y="8" width="14" height="2"/><rect x="22" y="12" width="10" height="2"/><rect x="22" y="16" width="10" height="2"/><rect x="20" y="20" width="14" height="2"/>
+            <rect x="40" y="0" width="14" height="2"/><rect x="40" y="4" width="14" height="2"/><rect x="42" y="8" width="2" height="2"/><rect x="46" y="8" width="2" height="2"/><rect x="50" y="8" width="2" height="2"/><rect x="42" y="12" width="2" height="2"/><rect x="46" y="12" width="2" height="2"/><rect x="50" y="12" width="2" height="2"/><rect x="42" y="16" width="10" height="2"/><rect x="42" y="20" width="10" height="2"/>
+          </g></svg></span>
           <span class="divider"></span>
-          <span class="crumb">Status 89</span>
+          <span class="crumb">Encerramento</span>
         </div>
-        <div class="right"><span>Status 90</span></div>
+        <div class="right"><span>09 / 09</span></div>
       </div>
 
       <div class="content" style="justify-content:center;">
         <div class="grid-16" style="align-items:center;">
           <div class="col-10 reveal">
-            <div class="eyebrow">Status 91</div>
+            <div class="eyebrow">Encerramento</div>
             <div class="accent-bar long"></div>
             <h2 class="display-03" style="margin:0 0 24px;">
-              Título 44<br/>
-              Título 45 <span style="color:var(--blue-40);">Status 92</span>
+              Produtividade<br/>
+              com <span style="color:var(--blue-40);">direção humana.</span>
             </h2>
             <p class="body-long" style="color:var(--text-secondary); margin:0 0 32px; max-width:620px;">
-              Texto 29
+              A inteligência artificial não substitui o protagonismo humano. Ela potencializa o trabalho quando existe clareza de propósito, criticidade e decisão.
             </p>
             <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
               <div class="cta-tile">
-                Item 16
+                Obrigada
                 <span class="arrow">→</span>
               </div>
-              <div class="helper" style="margin-left:12px;">Status 93&A; Status 94</div>
+              <div class="helper" style="margin-left:12px;">Q&A · perguntas e debate</div>
             </div>
           </div>
           <div class="col-5 reveal" style="grid-column-start:12;">
             <div class="tile outline" style="padding:32px; border-color:var(--line-strong);">
               <span class="tile-corner"></span>
-              <div class="label-01" style="margin-bottom:16px;">Status 95</div>
-              <div style="font-size:20px; font-weight:400; margin-bottom:8px;">Contato 2</div>
-              <div class="helper" style="margin-bottom:24px;">Status 96</div>
-              <div class="helper" style="color:var(--text-secondary); margin-bottom:6px;">Status 97</div>
-              <div class="helper" style="color:var(--text-secondary);">Status 98</div>
+              <div class="label-01" style="margin-bottom:16px;">Contato</div>
+              <div style="font-size:20px; font-weight:400; margin-bottom:8px;">Liderança IBM</div>
+              <div class="helper" style="margin-bottom:24px;">Strategy Designer · IBM Consulting</div>
+              <div class="helper" style="color:var(--text-secondary); margin-bottom:6px;">lauragris@me.com</div>
+              <div class="helper" style="color:var(--text-secondary);">Brasília, DF · BR</div>
               <div class="meter" style="margin-top:24px;"><span style="width:100%; background:var(--blue-40);"></span></div>
-              <div class="helper" style="margin-top:16px;">Status 99</div>
+              <div class="helper" style="margin-top:16px;">v2.0 · Carbon Design System</div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="slide-footer">
-        <span>Texto 30</span>
-        <span>Status 100</span>
+        <span>IA — Uma parceria para produtividade · v2.0</span>
+        <span>Let's create — IBM</span>
       </div>
     </section>
 
   </div>
 
-  <div class="nav-controls" role="navigation" aria-label="Controles de navegação">
+  <div class="nav-controls" aria-label="Controles de navegação">
     <div class="nav-left">
-      <span>Texto 31</span>
+      <span>IA — Uma parceria para produtividade</span>
       <span style="opacity:.4;">|</span>
-      <span id="section-label">Status 101</span>
+      <span id="section-label">Cover</span>
     </div>
     <div class="nav-right">
-      <button class="nav-btn" data-dir="-1" aria-label="Slide anterior" type="button">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="nav-btn" aria-label="Slide anterior" onclick="changeSlide(-1)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="1.5"/></svg>
       </button>
-      <button class="nav-btn" data-dir="1" aria-label="Próximo slide" type="button">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8 4 L14 10 L8 16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="nav-btn" aria-label="Próximo slide" onclick="changeSlide(1)">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 4 L14 10 L8 16" stroke="currentColor" stroke-width="1.5"/></svg>
       </button>
-      <span class="slide-counter" id="counter">Status 102</span>
+      <span class="slide-counter" id="counter">01 / 09</span>
     </div>
   </div>
-  <script>
-/* =====================================================================
-   IBM Carbon Deck — controlador de navegação
-   Tudo é derivado do DOM: para adicionar/remover slides, basta editar o
-   HTML (cada <section class="slide"> com data-slide e data-label).
-   ===================================================================== */
-(() => {
-  'use strict';
 
-  const slides   = Array.from(document.querySelectorAll('.slide'));
-  const total    = slides.length;
-  const counter  = document.getElementById('counter');
-  const label    = document.getElementById('section-label');
-  const progress = document.getElementById('progress-bar');
-  const live     = document.getElementById('live-region');
-  const prevBtn  = document.querySelector('.nav-btn[data-dir="-1"]');
-  const nextBtn  = document.querySelector('.nav-btn[data-dir="1"]');
-
-  const pad = (n) => String(n).padStart(2, '0');
-  let current = 1;
-
-  // Prepare ARIA + hide inactive slides
-  slides.forEach((s, i) => {
-    s.setAttribute('role', 'group');
-    s.setAttribute('aria-roledescription', 'slide');
-    s.setAttribute('tabindex', '-1');
-    s.setAttribute('aria-hidden', s.classList.contains('active') ? 'false' : 'true');
-    s.setAttribute('aria-label', `${i + 1} de ${total} — ${s.dataset.label || ''}`);
-  });
-
-  function animateMeters(slide) {
-    slide.querySelectorAll('.meter > span[data-w]').forEach((bar, i) => {
-      bar.style.width = '0%';
-      setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, 120 + i * 80);
-    });
-  }
-
-  function goToSlide(n, { focus = false } = {}) {
-    n = Math.min(Math.max(n, 1), total);
-    const prev = slides[current - 1];
-    const next = slides[n - 1];
-    if (prev && prev !== next) {
-      prev.classList.remove('active');
-      prev.setAttribute('aria-hidden', 'true');
-    }
-    next.classList.add('active');
-    next.setAttribute('aria-hidden', 'false');
-    animateMeters(next);
-
-    current = n;
-    const name = next.dataset.label || '';
-    counter.textContent = `${pad(current)} / ${pad(total)}`;
-    if (label) label.textContent = name;
-    if (progress) progress.style.width = (current / total) * 100 + '%';
-    if (live) live.textContent = `Slide ${current} de ${total}: ${name}`;
-    if (history.replaceState) history.replaceState(null, '', '#' + current);
-    if (focus) next.focus({ preventScroll: true });
-  }
-
-  function changeSlide(dir) {
-    let n = current + dir;
-    if (n < 1) n = total;      // wrap around for continuous presenting
-    if (n > total) n = 1;
-    goToSlide(n, { focus: true });
-  }
-  window.changeSlide = changeSlide;   // used by inline onclick fallback
-  window.goToSlide = goToSlide;
-
-  // Buttons
-  if (prevBtn) prevBtn.addEventListener('click', () => changeSlide(-1));
-  if (nextBtn) nextBtn.addEventListener('click', () => changeSlide(1));
-
-  // Keyboard
-  document.addEventListener('keydown', (e) => {
-    switch (e.key) {
-      case 'ArrowRight': case 'PageDown': case ' ':
-        e.preventDefault(); changeSlide(1); break;
-      case 'ArrowLeft': case 'PageUp':
-        e.preventDefault(); changeSlide(-1); break;
-      case 'Home': e.preventDefault(); goToSlide(1, { focus: true }); break;
-      case 'End':  e.preventDefault(); goToSlide(total, { focus: true }); break;
-      default:
-        if (/^[1-9]$/.test(e.key)) { // jump by number
-          const n = Number(e.key);
-          if (n <= total) goToSlide(n, { focus: true });
-        }
-    }
-  });
-
-  // Touch / swipe
-  let touchStartX = 0;
-  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  document.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
-  }, { passive: true });
-
-  // Deep-link support (#3 opens slide 3; refresh keeps position)
-  const fromHash = parseInt(location.hash.replace('#', ''), 10);
-  goToSlide(Number.isInteger(fromHash) ? fromHash : 1);
-})();
-
-  </script>
+  <script src="deck.js"></script>
 </body>
 </html>
