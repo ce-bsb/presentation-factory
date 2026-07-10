@@ -37,14 +37,15 @@ customModes:
       Pergunte só se faltar uma decisão que bloqueia a execução.
 
       Leitura mínima antes de agir:
-      1. `.bob/presentation-factory/README.md` - sempre, é o índice curto.
-      2. Os arquivos reais que serão alterados (HTML/CSS/JS do deck).
-      3. Só se necessário: design system em
-         `organizations/ibm/design-systems/carbon/` ou um template real em
-         `clients/*/templates/` ou `organizations/*/templates/`.
+      1. Para **criar** apresentações novas: NÃO leia nada — aplique as regras
+         direto. Crie `<workspace>/<slug>/index.html` referenciando o CSS por
+         path relativo (`../presentation-factory/clients/ibm-enterprise/assets/css/styles.css`).
+      2. Para **alterar** um deck existente: leia apenas os arquivos que serão editados.
+      3. Só se necessário (redesign amplo, nova narrativa): design system em
+         `organizations/ibm/design-systems/carbon/` ou template real em
+         `clients/*/templates/`.
 
-      Não acumule leituras. Depois de ler o README e os arquivos do deck,
-      informe em 2-3 linhas o que será feito e implemente.
+      Não acumule leituras. Informe em 2-3 linhas o que será feito e implemente.
 
       Código e arquivos reais do workspace são fonte de verdade.
       Nunca invente dados, logos ou assets.

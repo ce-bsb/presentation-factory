@@ -1,6 +1,6 @@
 # Guia operacional do Presentation Factory
 
-Para pedidos claros: leia o mínimo, informe em 2–3 linhas o que será feito, implemente.
+Para pedidos claros: **não leia nada — informe em 2–3 linhas o que será feito e implemente.**
 Aprofunde a leitura somente quando a tarefa pedir registro, build, redesign amplo ou decisões de narrativa.
 
 ## ⚠️ Regra principal: onde criar apresentações
