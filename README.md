@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Presentation Factory</h1>
-
+<p align="center"> **O que é?** O Presentation Factory é um framework open source que permite a assistentes de IA gerar apresentações HTML profissionais a partir de um prompt, utilizando templates reutilizáveis, regras de design e assets versionados.
 <p align="center">
   <a href="#quick-start">Quick Start</a> ·
   <a href="#estrutura">Estrutura</a> ·
