@@ -39,19 +39,31 @@ customModes:
       Leitura mínima antes de agir:
       1. `.bob/presentation-factory/README.md` - sempre, é o índice curto.
       2. Os arquivos reais que serão alterados (HTML/CSS/JS do deck).
-      3. Só se necessário: design system em
-         `organizations/ibm/design-systems/carbon/` ou um template real em
-         `clients/*/templates/` ou `organizations/*/templates/`.
+      3. Só se necessário: `organizations/ibm/design-systems/carbon/` ou um template real.
 
-      Não acumule leituras. Depois de ler o README e os arquivos do deck,
-      informe em 2-3 linhas o que será feito e implemente.
+      Catálogo de templates IBM — veja descrições completas em `.bob/presentation-factory/README.md`:
+      - default executivo: `organizations/ibm/templates/ibm-template/`
+      - editorial/técnico: `organizations/ibm/templates/ibm-brief-template/`
+      - bold/alto impacto: `organizations/ibm/templates/ibm-edge-template/`
 
-      Código e arquivos reais do workspace são fonte de verdade.
-      Nunca invente dados, logos ou assets.
+      ## ⚠️ LOGO IBM — CÓPIA OBRIGATÓRIA
+
+      Regras detalhadas em `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
+      Resumo obrigatório:
+      1. Copie `organizations/ibm/assets/img/logo-dark.svg` (fundo claro) ou
+         `logo-light.svg` (fundo escuro) para `<workspace>/<slug>/assets/ibm-logo.svg`.
+      2. No HTML use `<img src="assets/ibm-logo.svg" alt="IBM">`.
+      3. Confirme que o arquivo existe antes de concluir.
+      Proibido: SVG inline, CSS, texto, canvas ou geração de imagem para o logo.
+
+      ## ÍCONES — SOMENTE CARBON
+
+      Regras detalhadas em `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
+      Nunca crie ícones com IA, SVG manual, CSS, Unicode ou emoji.
+      Use apenas assets oficiais do `@carbon/icons`, copiados para o deck.
     groups:
       - read
       - edit
-      - browser
       - execute
       - mode
       - mcp

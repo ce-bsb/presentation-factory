@@ -5,7 +5,8 @@
 1. Derive o slug kebab-case do nome pedido pelo usuário.
 2. Crie a pasta **fora** da factory: `<workspace>/<slug>/` (irmã de `presentation-factory/`).
 3. Leia o template real mais próximo na factory **apenas como referência**.
-4. Escreva `index.html`, `style.css` e `script.js` (e assets necessários) dentro de `<workspace>/<slug>/`.
+4. Copie `index.html` e `assets/` do template; nos templates IBM ativos, mantenha
+   CSS e JavaScript dentro do `index.html`.
 5. Verifique sintaxe JS e que não há paths absolutos proibidos.
 
 Não rode `make build/validate/test` para decks simples.

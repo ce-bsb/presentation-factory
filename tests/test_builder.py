@@ -77,7 +77,7 @@ class BuilderTest(unittest.TestCase):
         self.assertEqual(manifest["owner"]["slug"], "ibm")
         self.assertEqual(
             manifest["template"],
-            "organizations/ibm/templates/ia-productivity-deck",
+            "organizations/ibm/templates/ibm-template",
         )
         self.assertTrue((destination / "workspace/index.html").is_file())
 
@@ -89,11 +89,13 @@ class BuilderTest(unittest.TestCase):
         )
 
         self.assertTrue(
-            (destination / "workspace/assets/js/deck.js").is_file()
+            (destination / "workspace/assets/ibm-logo.svg").is_file()
         )
-        self.assertTrue(
-            (destination / "workspace/assets/brand/logo-dark.svg").is_file()
+        index = (destination / "workspace/index.html").read_text(
+            encoding="utf-8"
         )
+        self.assertIn("<style>", index)
+        self.assertIn("<script>", index)
         self.assertFalse(
             (destination / "workspace/template.toml").exists()
         )

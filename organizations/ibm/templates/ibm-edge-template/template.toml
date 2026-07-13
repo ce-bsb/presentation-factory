@@ -27,6 +27,5 @@ labels = [
 ]
 
 [assets]
-# Nenhum asset externo — logo IBM, JS de navegação e CSS estão inline no index.html
-# Para usar com assets separados, copie organizations/ibm/assets/js/deck.js
-# para a pasta da apresentação e referencie via <script src="assets/js/deck.js">
+# Logos IBM oficiais e Carbon Icons estão copiados fisicamente em assets/.
+# CSS e JavaScript permanecem dentro do index.html.

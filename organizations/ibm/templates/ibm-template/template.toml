@@ -1,0 +1,21 @@
+[meta]
+name        = "IBM Executive"
+slug        = "ibm-template"
+version     = "1.0.0"
+description = "Template IBM executivo autocontido de 12 slides, com conteúdo numerado e mídias neutralizadas."
+author      = "IBM Presentation Factory"
+
+[design]
+system      = "IBM Carbon Design System v11"
+fonts       = ["IBM Plex Sans", "IBM Plex Mono"]
+base_size   = "18px"
+grid        = "8px"
+theme       = "light"
+contrast    = "WCAG 2.1 AA"
+
+[slides]
+count = 12
+
+[assets]
+# Os logos oficiais já estão duplicados fisicamente em assets/.
+# CSS, JavaScript e Carbon Icons ficam incorporados no index.html.

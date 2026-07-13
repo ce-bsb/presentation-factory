@@ -1,60 +1,95 @@
-# IBM Presentation Factory
+<p align="center">
+  <img src="assets/ce-bsb.svg" alt="Presentation Factory" width="100%">
+</p>
 
-Framework para criar apresentações HTML com IA, mantendo templates, assets e regras visuais em um repositório versionado.
+<h1 align="center">Presentation Factory</h1>
 
-## Como usar
+<p align="center">
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#estrutura">Estrutura</a> ·
+  <a href="#avançado">Avançado</a> ·
+  <a href="https://github.com/ce-bsb/presentation-factory/wiki">Docs</a>
+</p>
+
+<br>
+
+```
+clone  →  abra no Bob  →  peça a apresentação  →  abra o index.html no navegador
+```
+
+<br>
+
+## Quick Start
+
+**1 — Git**
+
+Instale o [Git](https://git-scm.com/downloads) e confirme:
+
+```bash
+git --version
+```
+
+**2 — Clone**
 
 ```bash
 git clone https://github.com/ce-bsb/presentation-factory.git
-cd presentation-factory
 ```
 
-Abra a pasta no **Bob** (modo Presentation Factory) ou em qualquer agente de IA com acesso aos arquivos locais.
+**3 — Bob**
 
-## Usando com Bob
+Crie ou abra uma pasta pai como workspace. O modo *Presentation Factory* é detectado sozinho.
 
-Abra o workspace raiz (`/IBM`) no Bob e ative o modo **🏭 Presentation Factory**.
+```
+[SUA_PASTA]/                   ← abra aqui
+└── presentation-factory/
+```
 
-**Para criar uma nova apresentação, diga algo como:**
+**4 — Peça**
 
-> "Cria uma apresentação sobre \<tema\> para o cliente \<nome\>"
+> Crie uma apresentação sobre IA generativa para o Banco ABC.
 
-O Bob irá:
+```
+[SUA_PASTA]/
+├── presentation-factory/
+└── abc-ia-generativa/
+    ├── index.html          ← abra no navegador
+    └── assets/
+```
 
-1. Derivar um slug kebab-case do nome (ex.: `proposta-acme-2025`).
-2. **Criar a pasta da apresentação fora do `presentation-factory/`**, como irmã dele — ex.: `/IBM/proposta-acme-2025/`.
-3. Copiar o CSS e o JS de referência da factory para dentro da pasta criada.
-4. Gerar o `index.html` completo com todos os slides, navegação e acessibilidade.
+<br>
 
-> ⚠️ **Nunca peça ao Bob para criar dentro de `presentation-factory/templates/` ou `dist/`.** A factory é somente referência de estilo e estrutura.
+## Funcionalidades
 
-### Logo na topbar
+Um prompt vira uma apresentação HTML completa — responsiva, sobre templates reutilizáveis, seguindo regras de design embutidas e assets versionados.
 
-- **Cliente ≠ IBM:** a topbar exibe `[logo IBM] × [logo cliente]`.
-- **Cliente = IBM** (apresentação interna): a topbar exibe **apenas um logo IBM**. O Bob nunca renderiza "IBM × IBM".
+Feito para o IBM Bob, mas funciona com qualquer assistente de IA com acesso a arquivos locais.
+
+<br>
 
 ## Estrutura
 
-```text
-presentation-factory/        ← referência de templates, assets e regras
+```
+presentation-factory/
 ├── clients/<org>/
-│   ├── assets/              ← logos, CSS, imagens de referência
-│   ├── templates/           ← HTML/CSS do deck
-│   └── presentations/<slug>/← brief.md + presentation.toml
-├── organizations/ibm/       ← assets e templates IBM
-├── catalog/models.toml      ← aliases de modelos de IA
-├── src/presentation_factory/← código do builder
-└── dist/                    ← saída gerada (não é fonte)
-
-<nome-da-apresentacao>/      ← apresentação criada pelo Bob (fora da factory)
-├── index.html
-└── assets/
-    ├── css/styles.css
-    ├── js/deck.js
-    └── img/
+│   ├── assets/                 logos, CSS, referências
+│   ├── templates/              index.html autocontido
+│   └── presentations/<slug>/   brief.md + presentation.toml
+├── organizations/ibm/          assets e templates IBM
+├── catalog/models.toml         aliases de modelos de IA
+├── src/presentation_factory/   builder
+└── dist/                       saída gerada, não é fonte
 ```
 
-## Comandos (builder, uso avançado)
+A apresentação nasce fora da factory, com `index.html` e `assets/` próprios.
+
+<br>
+
+## Avançado
+
+<details>
+<summary>Usar o builder pela linha de comando</summary>
+
+<br>
 
 Requer Python 3.11+ e `make`.
 
@@ -65,16 +100,14 @@ make test
 make build PRESENTATION=<slug> MODEL=primary
 ```
 
-Abra o resultado em `dist/<slug>/primary/workspace/index.html`.
+O resultado fica em `dist/<slug>/primary/workspace/index.html`.
 
-## Contrato de assets
+</details>
 
-- `template.toml` declara assets necessários ao template, como runtime JS.
-- `presentation.toml` declara assets específicos da apresentação, como logos,
-  imagens e estilos de marca.
-- O builder copia ambos para `workspace/`; assets da apresentação podem
-  sobrescrever assets do template quando o destino é o mesmo.
+<br>
 
-## Documentação completa
+---
 
-https://github.com/ce-bsb/presentation-factory/wiki
+<p align="center">
+  <sub>CE Brasília</sub>
+</p>
