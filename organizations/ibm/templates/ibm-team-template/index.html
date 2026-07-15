@@ -53,15 +53,16 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   border-right:1px solid var(--b20)}
 .tb-logo img{width:48px}
 .tb-title{padding:0 1.25rem;font-size:.78rem;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--b70);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--b70);
   display:flex;align-items:center;border-right:1px solid var(--b20)}
 .tb-right{margin-left:auto;display:flex;align-items:stretch}
 .tb-counter{padding:0 1rem;display:flex;align-items:center;
-  font-family:var(--mono);font-size:.68rem;color:var(--ink3);
+  font-family:var(--mono);font-size:.68rem;color:var(--ink2);
   border-left:1px solid var(--b20)}
 .tb-btn{width:48px;height:100%;display:grid;place-items:center;
   border-left:1px solid var(--b20);color:var(--ink3);
   transition:background .12s,color .12s}
+.tb-btn img{width:22px;height:22px;display:block}
 .tb-btn:hover,.tb-btn:focus-visible{background:var(--b10);color:var(--b70);
   outline:2px solid var(--b40);outline-offset:-2px}
 .prog-rail{position:absolute;inset:auto 0 -2px 0;height:2px;background:var(--b20)}
@@ -94,7 +95,13 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
 /* ══════════════════════════════════════════════════════
    DECK + SLIDES
 ══════════════════════════════════════════════════════ */
-.deck{position:absolute;inset:var(--bar) 0 var(--nav) 0}
+.deck{position:absolute;inset:var(--bar) 0 0 0;isolation:isolate}
+.deck::before{content:"";position:absolute;inset:0;z-index:120;
+  background:rgba(22,22,22,.32);opacity:0;pointer-events:none;
+  -webkit-backdrop-filter:blur(10px) saturate(.9);
+  backdrop-filter:blur(10px) saturate(.9);
+  transition:opacity .2s var(--ease)}
+.app.index-open .deck::before{opacity:1}
 .slide{position:absolute;inset:0;overflow:hidden;
   opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .28s var(--ease),visibility .28s var(--ease)}
@@ -124,11 +131,13 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
 .nav-bar{position:fixed;inset:auto 0 0 0;z-index:150;height:var(--nav);
   display:flex;align-items:center;justify-content:center;pointer-events:none}
 .dots{display:flex;gap:5px;pointer-events:auto;padding:8px 12px;
-  background:var(--white);border:1px solid rgba(22,22,22,.1)}
-.dot{width:16px;height:3px;background:var(--b20);cursor:pointer;
+  background:rgba(22,22,22,.42);border:1px solid rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(14px) saturate(1.15);
+  backdrop-filter:blur(14px) saturate(1.15)}
+.dot{width:16px;height:3px;background:rgba(255,255,255,.42);cursor:pointer;
   position:relative;transition:width .26s var(--ease),background .18s}
 .dot::before{content:"";position:absolute;inset:-10px -5px}
-.dot.active,.dot:hover,.dot:focus-visible{background:var(--b60);width:32px;outline:0}
+.dot.active,.dot:hover,.dot:focus-visible{background:var(--white);width:32px;outline:0}
 
 /* ══════════════════════════════════════════════════════
    SLIDE 01 — CAPA
@@ -259,9 +268,10 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
 
 /* ══════════════════════════════════════════════════════
    SLIDE 02 — TIME
-   Hierarquia esquerda→direita:
-   Manager (grande) | Peers (médio) | Interns (menor)
-   Cada nível separado por conector visual
+   Árvore hierárquica vertical:
+   Manager (topo) → Peers (meio) → Interns (base)
+   Conectores em T ligam cada nível ao seguinte; o nível
+   de Interns usa cor/peso mais leve para marcar que é a base.
 ══════════════════════════════════════════════════════ */
 #slide-02{background:var(--white)}
 
@@ -286,168 +296,274 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   font-weight:300;color:rgba(255,255,255,.5);
 }
 
-/* Área de hierarquia */
-.org-layout{
+/* Área da árvore */
+.org-tree{
   flex:1;
-  display:grid;
-  grid-template-columns:
-    minmax(160px,22vw)
-    minmax(34px,5vw)
-    minmax(360px,1fr)
-    minmax(34px,5vw)
-    minmax(220px,24vw);
-  align-items:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   overflow:hidden;
   background:
-    linear-gradient(rgba(15,98,254,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(15,98,254,.055) 1px,transparent 1px),
+    linear-gradient(rgba(15,98,254,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(15,98,254,.05) 1px,transparent 1px),
     var(--b10);
   background-size:36px 36px;
-  padding:clamp(1rem,2vw,2rem) clamp(1rem,3vw,3rem);
+  padding:clamp(1.35rem,2.7vw,2.7rem) clamp(1.8rem,4.5vw,5rem);
 }
 
-/* Separadores com conector de seta */
-.org-sep{
-  height:2px;width:100%;
-  background:var(--b60);
-  position:relative;
-  align-self:center;
+/* Conector vertical entre níveis */
+.tree-stem{width:2px;height:clamp(25px,3.8vw,43px);background:var(--b60);flex-shrink:0}
+.tree-stem--muted{background:var(--b30)}
+.tree-stem--collective{display:none}
+
+/* Rótulo de nível, entre o conector e a fileira */
+.tree-tier-label{
+  position:relative;z-index:2;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--b70);
+  background:var(--white);border:1px solid var(--b40);
+  padding:.25rem .8rem;margin:.5rem 0;flex-shrink:0;
 }
-.org-sep::after{
-  content:"";
-  position:absolute;right:-1px;top:50%;
-  width:10px;height:10px;
-  border-top:2px solid var(--b60);
-  border-right:2px solid var(--b60);
-  transform:translateY(-50%) rotate(45deg);
+.tree-tier-label::before,
+.tree-tier-label::after{
+  content:"";position:absolute;left:50%;width:2px;background:var(--b40);
+  transform:translateX(-50%);z-index:-1;
+}
+.tree-tier-label::before{top:calc(-.5rem - 2px);height:calc(.5rem + 2px)}
+.tree-tier-label::after{bottom:calc(-.5rem - 2px);height:calc(.5rem + 2px)}
+.tree-tier-label--muted{
+  position:relative;color:var(--ink3);border-color:var(--b20);z-index:2;
+  margin-top:calc(clamp(20px,3.1vw,34px) + .85rem);
+  margin-bottom:.85rem;
+}
+.tree-tier-label--muted::before,
+.tree-tier-label--muted::after{
+  display:block;background:var(--b30);
+  content:"";position:absolute;left:50%;width:2px;
+  transform:translateX(-50%);z-index:-1;
+}
+.tree-tier-label--muted::before{
+  top:calc(-.85rem - 1px);
+  height:.85rem;
+}
+.tree-tier-label--muted::after{
+  display:block;background:var(--b30);
+  bottom:calc(-.85rem - 2px);height:calc(.85rem + 2px);
 }
 
-/* ── Coluna do Manager ── */
-.col-manager{
-  background:var(--b60);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:clamp(1rem,2vw,2rem) clamp(.75rem,1.2vw,1.25rem);
-  gap:clamp(.5rem,.9vw,.9rem);
+/* Nó do manager (topo, sozinho) */
+.tree-manager-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+
+/* Fileira de nós com tronco horizontal ligando os filhos */
+.tree-row{
   position:relative;
-  min-height:clamp(250px,42vh,390px);
-  box-shadow:0 18px 42px rgba(15,98,254,.18);
+  display:grid;
+  align-items:stretch;
+  grid-template-columns:repeat(var(--n),1fr);
+  flex-shrink:0;
 }
-.col-manager::after{
-  content:"MANAGER";
-  position:absolute;top:.8rem;left:50%;transform:translateX(-50%);
-  font-family:var(--mono);font-size:.48rem;font-weight:700;
-  letter-spacing:.16em;color:rgba(255,255,255,.35);
-  text-transform:uppercase;white-space:nowrap;
+.tree-row::before{
+  content:"";position:absolute;top:0;height:2px;background:var(--b60);
+  left:calc(100% / (var(--n) * 2));right:calc(100% / (var(--n) * 2));
 }
-.mgr-photo{
-  width:clamp(80px,9vw,120px);aspect-ratio:1;
-  object-fit:cover;background:var(--b20);
-  border:2px solid var(--white);
-  outline:3px solid rgba(255,255,255,.1);outline-offset:3px;
+/* linha que une as bases de todos os cards da fileira — a mesma linha
+   do tronco continua por trás de cada card e reaparece por baixo dele,
+   em vez de parar no topo do card */
+.tree-row::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  bottom:calc(-1 * clamp(20px,3.1vw,34px));height:2px;background:var(--b30);
+  left:calc(100% / (var(--n) * 2));right:calc(100% / (var(--n) * 2));
 }
-.mgr-info{text-align:center}
-.mgr-name{font-size:clamp(.82rem,1.05vw,1.1rem);font-weight:600;color:var(--white);line-height:1.1}
-.mgr-role{font-size:clamp(.65rem,.8vw,.82rem);font-weight:300;color:rgba(255,255,255,.55);margin-top:.15rem}
-.mgr-badge{
-  display:inline-block;margin-top:.4rem;padding:.12rem .55rem;
+.peers-row{width:100%;z-index:1}
+.interns-row{width:min(576px,50%);z-index:1;margin-top:0}
+/* Interns é a base da árvore — sem tronco/drops entrando por cima
+   e sem conector saindo por baixo dela; só o stem central que vem dos Peers */
+.interns-row::before{display:block;background:var(--b30);z-index:0}
+.interns-row::after,.interns-row .tree-col::after{display:none}
+
+.tree-col{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 clamp(.45rem,1.1vw,1.35rem);
+  z-index:1;
+}
+.tree-drop{width:2px;height:clamp(20px,3.1vw,34px);background:var(--b60);flex-shrink:0}
+.interns-row .tree-drop{
+  display:block;height:clamp(28px,4vw,44px);
+  background:var(--b30);position:relative;z-index:0;
+}
+/* trecho da linha atrás do card — do topo dele até um pouco abaixo,
+   ficando escondido sob o card e reaparecendo na fileira seguinte */
+.tree-col::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  left:50%;transform:translateX(-50%);width:2px;background:var(--b30);
+  top:clamp(20px,3.1vw,34px);bottom:calc(-1 * clamp(20px,3.1vw,34px) + 1px);
+}
+
+/* ── Nó genérico (pessoa) ── */
+.tree-node{
+  position:relative;z-index:2;
+  display:flex;align-items:center;gap:.75rem;
+  width:100%;background:var(--white);
+  border:1px solid var(--b30);
+  box-shadow:0 10px 22px rgba(15,98,254,.08);
+  cursor:pointer;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease);
+}
+.tree-node:hover,.tree-node:focus-visible{
+  transform:translateY(-3px) scale(1.02);
+  border-color:var(--b60);
+  box-shadow:0 18px 38px rgba(15,98,254,.16);
+  outline:0;
+}
+.tree-node.is-selected{border-color:var(--b60);box-shadow:0 0 0 2px rgba(15,98,254,.18)}
+.tn-photo{object-fit:cover;background:var(--b20);flex-shrink:0}
+.tn-info{min-width:0}
+.tn-name{font-weight:600;color:var(--ink);line-height:1.15;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tn-role{font-weight:300;color:var(--ink2);margin-top:.1rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tn-badge{display:inline-block;margin-top:.3rem;
+  font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em}
+
+/* Manager — nível 1, maior, preenchido */
+.mgr-node{
+  width:auto;background:var(--b60);border:0;
+  padding:1.05rem 2rem 1.05rem 1.05rem;
+  box-shadow:0 18px 40px rgba(15,98,254,.22);
+  position:relative;
+}
+.mgr-node::after{
+  content:"★";
+  position:absolute;top:-12px;right:-12px;
+  width:30px;height:30px;display:grid;place-items:center;
   background:var(--white);color:var(--b60);
-  font-family:var(--mono);font-size:.52rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;
+  border:2px solid var(--b60);
+  font-size:1rem;line-height:1;
+  box-shadow:0 8px 18px rgba(15,98,254,.18);
 }
+.mgr-node .tn-photo{width:clamp(67px,6.7vw,94px);aspect-ratio:1;border:2px solid var(--white)}
+.mgr-node .tn-name{font-size:clamp(1.05rem,1.5vw,1.5rem);color:var(--white)}
+.mgr-node .tn-role{font-size:clamp(.74rem,.95vw,.95rem);color:rgba(255,255,255,.6)}
+.mgr-node .tn-badge{background:var(--white);color:var(--b60);
+  font-size:.56rem;font-weight:700;padding:.18rem .58rem}
 
-/* ── Coluna de Peers ── */
-.col-peers{
-  background:transparent;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  grid-template-rows:repeat(2,minmax(110px,1fr));
-  gap:clamp(.7rem,1.2vw,1.1rem);
-  border-right:0;
-  position:relative;overflow:visible;
+/* Peers — nível 2, médio */
+.peer-node{
+  padding:.72rem 1.1rem .72rem .72rem;
+  border-left:3px solid var(--b60);
 }
-.col-peers::before{
-  content:"PEERS";
-  position:absolute;top:calc(clamp(.7rem,1.2vw,1.1rem) * -1 - .5rem);left:0;
-  font-family:var(--mono);font-size:.48rem;font-weight:700;
-  letter-spacing:.16em;color:rgba(15,98,254,.35);
-  text-transform:uppercase;z-index:2;
-}
+.peer-node .tn-photo{width:clamp(49px,4.7vw,68px);aspect-ratio:1;border:1px solid var(--b30)}
+.peer-node .tn-name{font-size:clamp(.74rem,.92vw,.97rem)}
+.peer-node .tn-role{font-size:clamp(.6rem,.72vw,.75rem)}
+.peer-node .tn-badge{font-size:.49rem;font-weight:600;color:var(--b70);
+  border:1px solid var(--b40);padding:.07rem .38rem}
 
-.peer-row{
-  display:grid;grid-template-columns:auto 1fr;
-  border:1px solid var(--b30);
-  border-left:4px solid var(--b60);
-  overflow:hidden;transition:background .16s;
-  cursor:default;
+/* Interns — nível 3, base: propositalmente mais leve/discreto */
+.intern-node{
+  padding:.58rem .95rem .58rem .58rem;
+  border-left:3px solid var(--b30);
+  background:var(--b10);box-shadow:none;
+}
+.intern-node .tn-photo{width:clamp(41px,4vw,56px);aspect-ratio:1;
+  border:1px solid var(--b20);filter:saturate(.5)}
+.intern-node .tn-name{font-size:clamp(.67rem,.81vw,.85rem);font-weight:500}
+.intern-node .tn-role{font-size:clamp(.56rem,.65vw,.67rem)}
+.intern-node .tn-badge{font-size:.43rem;font-weight:600;color:var(--ink3);
+  border:1px solid var(--b20);padding:.05rem .31rem}
+
+/* Detalhe expandido da pessoa */
+.person-modal{
+  position:fixed;inset:0;z-index:260;
+  display:grid;place-items:center;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .22s var(--ease),visibility .22s var(--ease);
+}
+.person-modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.person-modal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(22,22,22,.34);
+  -webkit-backdrop-filter:blur(8px) saturate(.9);
+  backdrop-filter:blur(8px) saturate(.9);
+}
+.person-modal-card{
+  position:relative;z-index:1;
+  width:min(980px,calc(100vw - 5rem));
+  min-height:clamp(420px,62vh,600px);
+  display:grid;grid-template-columns:minmax(280px,38%) 1fr;
   background:var(--white);
-  box-shadow:0 10px 24px rgba(15,98,254,.08);
+  border:2px solid var(--b60);
+  box-shadow:0 34px 100px rgba(0,0,0,.28);
+  transform:scale(.28);
+  transform-origin:center;
+  transition:transform .32s var(--ease-spring),opacity .2s var(--ease);
 }
-.peer-row:hover{background:var(--b20)}
-
-.peer-photo-col{
-  width:clamp(52px,5.5vw,72px);
-  border-right:3px solid var(--b50);overflow:hidden;
-  background:var(--b20);flex-shrink:0;
+.person-modal.open .person-modal-card{transform:scale(1)}
+.person-modal-nav{
+  position:absolute;top:50%;z-index:2;
+  width:48px;height:64px;display:grid;place-items:center;
+  background:rgba(255,255,255,.92);color:var(--ink);
+  border:1px solid rgba(15,98,254,.28);
+  box-shadow:0 14px 36px rgba(0,0,0,.18);
+  transform:translateY(-50%);
+  font-size:1.6rem;line-height:1;
 }
-.peer-photo{width:100%;aspect-ratio:1;object-fit:cover;background:var(--b30)}
-.peer-data{
-  padding:clamp(.45rem,.75vw,.75rem);
+.person-modal-nav:hover,.person-modal-nav:focus-visible{
+  background:var(--b60);color:var(--white);outline:0;
+}
+.person-modal-nav--prev{left:clamp(.7rem,3vw,2rem)}
+.person-modal-nav--next{right:clamp(.7rem,3vw,2rem)}
+.person-modal-close{
+  position:absolute;top:0;right:0;z-index:2;
+  width:44px;height:44px;
+  display:grid;place-items:center;
+  background:var(--ink);color:var(--white);
+  font-size:1.35rem;line-height:1;
+}
+.person-modal-close:hover,.person-modal-close:focus-visible{
+  background:var(--b60);outline:2px solid var(--b30);outline-offset:0;
+}
+.pm-photo{
+  width:100%;height:100%;min-height:inherit;
+  object-fit:cover;background:var(--b20);
+}
+.pm-body{
+  padding:clamp(2rem,3.5vw,3.4rem);
   display:flex;flex-direction:column;justify-content:center;
 }
-.peer-name{font-size:clamp(.72rem,.92vw,.96rem);font-weight:600;color:var(--ink);line-height:1.15}
-.peer-role{font-size:clamp(.58rem,.7vw,.72rem);font-weight:300;color:var(--ink2);margin-top:.1rem}
-.peer-badge{
-  display:inline-block;margin-top:.28rem;padding:.08rem .4rem;
-  border:1px solid var(--b40);
-  font-family:var(--mono);font-size:.5rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--b70);
+.pm-badge{
+  width:max-content;display:inline-block;
+  margin-bottom:.8rem;padding:.12rem .52rem;
+  font-family:var(--mono);font-size:.54rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
 }
-
-/* ── Coluna de Interns ── */
-.col-interns{
-  background:transparent;
-  display:grid;
-  grid-template-rows:repeat(2,minmax(110px,1fr));
-  gap:clamp(.7rem,1.2vw,1.1rem);
-  border-left:0;
-  position:relative;overflow:visible;
-  opacity:1;
+.pm-badge--mgr{background:var(--b60);color:var(--white)}
+.pm-badge--peer{border:1px solid var(--b60);color:var(--b70)}
+.pm-badge--intern{border:1px solid var(--b20);color:var(--ink3)}
+.pm-name{
+  font-size:clamp(2.2rem,4vw,4.4rem);
+  font-weight:700;line-height:.95;color:var(--ink);
 }
-.col-interns::before{
-  content:"INTERNS";
-  position:absolute;top:calc(clamp(.7rem,1.2vw,1.1rem) * -1 - .5rem);left:0;
-  font-family:var(--mono);font-size:.48rem;font-weight:700;
-  letter-spacing:.16em;color:rgba(15,98,254,.35);
-  text-transform:uppercase;z-index:2;
+.pm-role{
+  margin-top:.35rem;
+  font-size:clamp(1.05rem,1.45vw,1.35rem);
+  color:var(--b70);font-weight:400;
 }
-
-.intern-row{
-  display:grid;grid-template-columns:auto 1fr;
-  border:1px solid var(--b30);
-  border-left:4px solid var(--b60);
-  overflow:hidden;transition:background .16s;
-  background:var(--white);
-  box-shadow:0 10px 24px rgba(15,98,254,.08);
+.pm-divider{width:44px;height:3px;background:var(--b60);margin:1.2rem 0}
+.pm-bio{
+  max-width:52ch;
+  font-size:clamp(.9rem,1.08vw,1.12rem);
+  color:var(--ink2);line-height:1.55;
 }
-.intern-row:hover{background:var(--b20)}
-
-.intern-photo-col{
-  width:clamp(48px,4.5vw,62px);
-  border-right:3px solid var(--b60);
-  overflow:hidden;background:var(--b20);
+.pm-field{margin-top:1rem}
+.pm-field:first-of-type{margin-top:0}
+.pm-label{
+  display:block;margin-bottom:.35rem;
+  font-family:var(--mono);font-size:.58rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
 }
-.intern-photo{width:100%;aspect-ratio:1;object-fit:cover;background:var(--b30)}
-.intern-data{
-  padding:clamp(.4rem,.65vw,.65rem);
-  display:flex;flex-direction:column;justify-content:center;
-}
-.intern-name{font-size:clamp(.65rem,.82vw,.86rem);font-weight:600;color:var(--ink);line-height:1.15}
-.intern-role{font-size:clamp(.52rem,.63vw,.66rem);font-weight:300;color:var(--ink2);margin-top:.1rem}
-.intern-badge{
-  display:inline-block;margin-top:.24rem;padding:.07rem .38rem;
-  border:1px solid var(--b60);
-  font-family:var(--mono);font-size:.48rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--b60);
+.pm-count{
+  position:absolute;left:calc(38% + clamp(2rem,3.5vw,3.4rem));bottom:1.2rem;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.12em;color:var(--ink3);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -757,19 +873,17 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   .s01-right,.s04-right{display:none}
   .s03-layout{grid-template-columns:1fr}
   .s03-left{min-height:160px;flex-shrink:0}
-  .org-layout{
-    grid-template-columns:1fr;
-    grid-template-rows:auto auto auto;
-    align-items:stretch;
-    padding:1rem;
-    overflow:auto;
-  }
-  .org-sep{display:none}
-  .col-manager,.col-peers,.col-interns{border:0}
-  .col-manager{min-height:auto}
-  .col-peers{grid-template-columns:1fr;grid-template-rows:repeat(4,auto);margin-top:1rem}
-  .col-interns{grid-template-rows:repeat(2,auto);margin-top:1rem}
-  .col-peers::before,.col-interns::before{position:static;margin-bottom:.4rem}
+  .org-tree{overflow:auto;padding:1rem}
+  .tree-stem,.tree-drop,.tree-row::before,.tree-row::after,.tree-col::after{display:none}
+  .tree-row{display:flex;flex-direction:column;gap:.6rem;width:100%!important}
+  .tree-col{padding:0}
+  .tree-tier-label{margin:.75rem 0 .4rem}
+  .person-modal-card{grid-template-columns:1fr;width:min(420px,calc(100vw - 2rem));max-height:calc(100vh - 2rem);overflow:auto}
+  .pm-photo{height:180px;min-height:0}
+  .person-modal-nav{width:40px;height:52px}
+  .person-modal-nav--prev{left:.5rem}
+  .person-modal-nav--next{right:.5rem}
+  .pm-count{position:static;margin:0 clamp(2rem,3.5vw,3.4rem) 1.2rem}
 }
 </style>
 </head>
@@ -784,11 +898,11 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   </div>
   <div class="tb-right">
     <span class="tb-counter" aria-live="polite" aria-atomic="true" id="counter">1 / 4</span>
-    <button class="tb-btn" id="btn-index" aria-label="Índice de slides" aria-pressed="false" title="Índice (I)">
-      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M28 8H8v2h20zm0 7H8v2h20zm0 7H8v2h20zM4 7h2v2H4zm0 7h2v2H4zm0 7h2v2H4z"/></svg>
-    </button>
     <button class="tb-btn" id="btn-fs" aria-label="Tela cheia" aria-pressed="false" title="Tela cheia (F)">
-      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 2h12v2H4v10H2zm16 0h12v12h-2V4H18zM2 18h2v10h10v2H2zm28 10H18v-2h10V18h2z"/></svg>
+      <img src="assets/icons/fit-to-screen.svg" alt="" aria-hidden="true">
+    </button>
+    <button class="tb-btn" id="btn-index" aria-label="Índice de slides" aria-pressed="false" title="Índice (I)">
+      <img src="assets/icons/menu.svg" alt="" aria-hidden="true">
     </button>
   </div>
   <div class="prog-rail"><div class="prog-fill" id="prog-fill"></div></div>
@@ -861,75 +975,124 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
         <p class="s02-desc">Hierarquia do time — da liderança à base</p>
       </div>
 
-      <div class="org-layout" role="region" aria-label="Hierarquia do time">
+      <div class="org-tree" role="region" aria-label="Hierarquia do time">
 
         <!-- Manager -->
-        <div class="col-manager an" style="--d:1" role="list" aria-label="Gerente">
-          <div role="listitem">
-            <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 1" class="mgr-photo">
-            <div class="mgr-info">
-              <p class="mgr-name">Pessoa 1</p>
-              <p class="mgr-role">Cargo 1</p>
-              <span class="mgr-badge">Manager</span>
+        <div class="tree-manager-wrap" role="list" aria-label="Gerente">
+          <div class="tree-node mgr-node an" style="--d:1" role="listitem" tabindex="0" aria-haspopup="dialog"
+               data-bio="Descrição breve do papel de liderança de Pessoa 1 — visão do time, prioridades e como apoia o squad no dia a dia.">
+            <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 1" class="tn-photo">
+            <div class="tn-info">
+              <p class="tn-name">Pessoa 1</p>
+              <p class="tn-role">Cargo 1</p>
+              <span class="tn-badge">Manager</span>
             </div>
           </div>
+          <div class="tree-stem" aria-hidden="true"></div>
         </div>
 
-        <div class="org-sep" aria-hidden="true"></div>
+        <span class="tree-tier-label an" style="--d:2">Peers</span>
 
         <!-- Peers -->
-        <div class="col-peers" role="list" aria-label="Peers">
-          <div class="peer-row an" style="--d:3" role="listitem">
-            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 2" class="peer-photo"></div>
-            <div class="peer-data">
-              <p class="peer-name">Pessoa 2</p><p class="peer-role">Cargo 2</p>
-              <span class="peer-badge">Peer</span>
+        <div class="tree-row peers-row" style="--n:6" role="list" aria-label="Peers">
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:3" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 2, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 2" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 2</p><p class="tn-role">Cargo 2</p>
+                <span class="tn-badge">Peer</span>
+              </div>
             </div>
           </div>
-          <div class="peer-row an" style="--d:4" role="listitem">
-            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 3" class="peer-photo"></div>
-            <div class="peer-data">
-              <p class="peer-name">Pessoa 3</p><p class="peer-role">Cargo 3</p>
-              <span class="peer-badge">Peer</span>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:4" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 3, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 3" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 3</p><p class="tn-role">Cargo 3</p>
+                <span class="tn-badge">Peer</span>
+              </div>
             </div>
           </div>
-          <div class="peer-row an" style="--d:5" role="listitem">
-            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 4" class="peer-photo"></div>
-            <div class="peer-data">
-              <p class="peer-name">Pessoa 4</p><p class="peer-role">Cargo 4</p>
-              <span class="peer-badge">Peer</span>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:5" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 4, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 4" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 4</p><p class="tn-role">Cargo 4</p>
+                <span class="tn-badge">Peer</span>
+              </div>
             </div>
           </div>
-          <div class="peer-row an" style="--d:6" role="listitem">
-            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 5" class="peer-photo"></div>
-            <div class="peer-data">
-              <p class="peer-name">Pessoa 5</p><p class="peer-role">Cargo 5</p>
-              <span class="peer-badge">Peer</span>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:6" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 5, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 5" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 5</p><p class="tn-role">Cargo 5</p>
+                <span class="tn-badge">Peer</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:7" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 6, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 6" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 6</p><p class="tn-role">Cargo 6</p>
+                <span class="tn-badge">Peer</span>
+              </div>
+            </div>
+          </div>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node peer-node an" style="--d:8" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve das responsabilidades de Pessoa 7, principais entregas e como contribui com o time.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 7" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 7</p><p class="tn-role">Cargo 7</p>
+                <span class="tn-badge">Peer</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="org-sep" aria-hidden="true"></div>
+        <div class="tree-stem tree-stem--muted tree-stem--collective" aria-hidden="true"></div>
+        <span class="tree-tier-label tree-tier-label--muted an" style="--d:9">Interns</span>
 
         <!-- Interns -->
-        <div class="col-interns" role="list" aria-label="Estagiários">
-          <div class="intern-row an" style="--d:8" role="listitem">
-            <div class="intern-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 6" class="intern-photo"></div>
-            <div class="intern-data">
-              <p class="intern-name">Pessoa 6</p><p class="intern-role">Cargo 6</p>
-              <span class="intern-badge">Intern</span>
+        <div class="tree-row interns-row" style="--n:2" role="list" aria-label="Estagiários">
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node intern-node an" style="--d:10" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve da trajetória de Pessoa 8 como estagiário(a), frentes de aprendizado e projetos em andamento.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 8" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 8</p><p class="tn-role">Cargo 8</p>
+                <span class="tn-badge">Intern</span>
+              </div>
             </div>
           </div>
-          <div class="intern-row an" style="--d:9" role="listitem">
-            <div class="intern-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 7" class="intern-photo"></div>
-            <div class="intern-data">
-              <p class="intern-name">Pessoa 7</p><p class="intern-role">Cargo 7</p>
-              <span class="intern-badge">Intern</span>
+          <div class="tree-col" role="listitem">
+            <div class="tree-drop" aria-hidden="true"></div>
+            <div class="tree-node intern-node an" style="--d:11" tabindex="0" aria-haspopup="dialog"
+                 data-bio="Descrição breve da trajetória de Pessoa 9 como estagiário(a), frentes de aprendizado e projetos em andamento.">
+              <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 9" class="tn-photo">
+              <div class="tn-info">
+                <p class="tn-name">Pessoa 9</p><p class="tn-role">Cargo 9</p>
+                <span class="tn-badge">Intern</span>
+              </div>
             </div>
           </div>
         </div>
 
-      </div><!-- /org-layout -->
+      </div><!-- /org-tree -->
     </div>
   </section>
 
@@ -1058,6 +1221,34 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   </div>
 </nav>
 
+<!-- ═══ MODAL DE PESSOA (slide 02) ═══════════════════════════════════════════ -->
+<div class="person-modal" id="person-modal" role="dialog" aria-modal="true" aria-labelledby="pm-name">
+  <div class="person-modal-backdrop" data-pm-close></div>
+  <button class="person-modal-nav person-modal-nav--prev" id="pm-prev" aria-label="Pessoa anterior">‹</button>
+  <button class="person-modal-nav person-modal-nav--next" id="pm-next" aria-label="Próxima pessoa">›</button>
+  <div class="person-modal-card">
+    <button class="person-modal-close" id="pm-close" aria-label="Fechar" data-pm-close>&times;</button>
+    <img src="" alt="" class="pm-photo" id="pm-photo">
+    <div class="pm-body">
+      <span class="pm-badge" id="pm-badge"></span>
+      <div class="pm-field">
+        <span class="pm-label">Nome completo</span>
+        <h3 class="pm-name" id="pm-name"></h3>
+      </div>
+      <div class="pm-field">
+        <span class="pm-label">Cargo</span>
+        <p class="pm-role" id="pm-role"></p>
+      </div>
+      <div class="pm-divider"></div>
+      <div class="pm-field">
+        <span class="pm-label">O que você faz</span>
+        <p class="pm-bio" id="pm-bio"></p>
+      </div>
+    </div>
+    <span class="pm-count" id="pm-count">1 / 1</span>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -1074,6 +1265,7 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
   var btnFS   = document.getElementById('btn-fs');
   var btnIdx  = document.getElementById('btn-index');
   var sideIdx = document.getElementById('side-index');
+  var app     = document.getElementById('app');
   var cur     = 0;
 
   /* ── accordion do processo ───────────────────────────────────────────── */
@@ -1095,6 +1287,99 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
       if (e.key === 'ArrowLeft'  && i > 0)                 { openPanel(i - 1); panels[i - 1].focus(); }
     });
   });
+
+  /* ── modal de pessoa (slide 02) ──────────────────────────────────────── */
+  var personNodes = Array.from(document.querySelectorAll('.tree-node[data-bio]'));
+  var pModal   = document.getElementById('person-modal');
+  var pmPhoto  = document.getElementById('pm-photo');
+  var pmBadge  = document.getElementById('pm-badge');
+  var pmName   = document.getElementById('pm-name');
+  var pmRole   = document.getElementById('pm-role');
+  var pmBio    = document.getElementById('pm-bio');
+  var pmClose  = document.getElementById('pm-close');
+  var pmPrev   = document.getElementById('pm-prev');
+  var pmNext   = document.getElementById('pm-next');
+  var pmCount  = document.getElementById('pm-count');
+  var pmLastFocused = null;
+  var pmActiveNode = null;
+  var pmActiveIndex = 0;
+
+  function tierOf(node) {
+    if (node.classList.contains('mgr-node')) return 'mgr';
+    if (node.classList.contains('intern-node')) return 'intern';
+    return 'peer';
+  }
+
+  function showPerson(idx) {
+    idx = (idx + personNodes.length) % personNodes.length;
+    var node = personNodes[idx];
+    var img = node.querySelector('.tn-photo');
+    if (pmActiveNode) {
+      pmActiveNode.classList.remove('is-selected');
+      pmActiveNode.setAttribute('aria-expanded', 'false');
+    }
+    pmPhoto.src = img.src;
+    pmPhoto.alt = img.alt;
+    pmBadge.textContent = node.querySelector('.tn-badge').textContent;
+    pmBadge.className = 'pm-badge pm-badge--' + tierOf(node);
+    pmName.textContent = node.querySelector('.tn-name').textContent;
+    pmRole.textContent = node.querySelector('.tn-role').textContent;
+    pmBio.textContent = node.dataset.bio || '';
+    pmCount.textContent = (idx + 1) + ' / ' + personNodes.length;
+    pmActiveNode = node;
+    pmActiveIndex = idx;
+    node.classList.add('is-selected');
+    node.setAttribute('aria-expanded', 'true');
+  }
+
+  function openPerson(node) {
+    pmLastFocused = node;
+    showPerson(personNodes.indexOf(node));
+    pModal.classList.add('open');
+    pmClose.focus();
+  }
+
+  function movePerson(delta) {
+    showPerson(pmActiveIndex + delta);
+  }
+
+  function closePerson() {
+    if (!pModal.classList.contains('open')) return;
+    pModal.classList.remove('open');
+    if (pmActiveNode) {
+      pmActiveNode.classList.remove('is-selected');
+      pmActiveNode.setAttribute('aria-expanded', 'false');
+      pmActiveNode = null;
+    }
+    if (pmLastFocused) pmLastFocused.focus();
+  }
+
+  personNodes.forEach(function(node) {
+    node.setAttribute('role', 'button');
+    node.setAttribute('aria-expanded', 'false');
+    node.addEventListener('click', function() { openPerson(node); });
+    node.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPerson(node); }
+    });
+  });
+
+  Array.from(pModal.querySelectorAll('[data-pm-close]')).forEach(function(el) {
+    el.addEventListener('click', closePerson);
+  });
+  pmPrev.addEventListener('click', function() { movePerson(-1); });
+  pmNext.addEventListener('click', function() { movePerson(1); });
+
+  var pmTouchX = null;
+  pModal.addEventListener('touchstart', function(e) {
+    pmTouchX = e.touches[0].clientX;
+  }, { passive:true });
+  pModal.addEventListener('touchend', function(e) {
+    if (pmTouchX === null) return;
+    var dx = e.changedTouches[0].clientX - pmTouchX;
+    pmTouchX = null;
+    if (Math.abs(dx) < 48) return;
+    movePerson(dx < 0 ? 1 : -1);
+  }, { passive:true });
 
   /* ── hash → index ─────────────────────────────────────────────────────── */
   function hashIdx() {
@@ -1137,6 +1422,14 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
 
   /* ── teclado ──────────────────────────────────────────────────────────── */
   document.addEventListener('keydown', function(e) {
+    /* modal de pessoa aberto: Escape fecha, resto do teclado de slide é ignorado */
+    if (pModal.classList.contains('open')) {
+      if (e.key === 'Escape') closePerson();
+      if (e.key === 'ArrowLeft') { e.preventDefault(); movePerson(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); movePerson(1); }
+      return;
+    }
+
     /* não intercepta dentro do accordion no slide 03 */
     if (e.target.classList.contains('proc-panel') &&
         (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
@@ -1165,8 +1458,8 @@ p{font-weight:300;color:var(--ink2);line-height:1.55}
       closeIdx();
     });
   });
-  function openIdx()  { sideIdx.classList.add('open');    btnIdx.setAttribute('aria-pressed', 'true'); }
-  function closeIdx() { sideIdx.classList.remove('open'); btnIdx.setAttribute('aria-pressed', 'false'); }
+  function openIdx()  { sideIdx.classList.add('open'); app.classList.add('index-open'); btnIdx.setAttribute('aria-pressed', 'true'); }
+  function closeIdx() { sideIdx.classList.remove('open'); app.classList.remove('index-open'); btnIdx.setAttribute('aria-pressed', 'false'); }
   function toggleIdx() { sideIdx.classList.contains('open') ? closeIdx() : openIdx(); }
   btnIdx.addEventListener('click', toggleIdx);
   document.addEventListener('click', function(e) {
