@@ -30,7 +30,7 @@ Não leia tudo de uma vez. Localize o alvo e implemente.
 | **Nova apresentação (deck HTML)** | **`<workspace>/<slug>/` — fora da factory** |
 | Roteiro da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/brief.md` |
 | Configuração da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/presentation.toml` |
-| Templates IBM ativos | `organizations/ibm/templates/ibm-template/`, `ibm-brief-template/`, `ibm-edge-template/` |
+| Templates IBM ativos | `organizations/ibm/templates/ibm-template/`, `ibm-brief-template/`, `ibm-edge-template/`, `ibm-team-template/` |
 | Saída gerada | `dist/` — nunca edite diretamente |
 
 ## Regras inegociáveis

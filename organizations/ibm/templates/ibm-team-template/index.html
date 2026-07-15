@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conheça nosso time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════════════════ */
+:root {
+  --b10:#edf5ff;--b20:#d0e2ff;--b30:#a6c8ff;
+  --b40:#0f62fe;--b50:#0f62fe;--b60:#0f62fe;
+  --b70:#0f62fe;--b80:#0f62fe;--b90:#0f62fe;
+  --teal:#0f62fe;
+  --ink:#161616;--ink2:#525252;--ink3:#8d8d8d;
+  --white:#ffffff;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --bar:52px;--nav:36px;
+  --ease:cubic-bezier(.2,0,.38,.9);
+  --ease-spring:cubic-bezier(.34,1.4,.64,1);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESET
+══════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+a{color:inherit;text-decoration:none}img{display:block}
+button{font:inherit;cursor:pointer;touch-action:manipulation;border:0;background:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--white);
+  color:var(--ink);font-family:var(--sans);font-size:18px;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}
+p{font-weight:300;color:var(--ink2);line-height:1.55}
+
+/* ══════════════════════════════════════════════════════
+   SHELL
+══════════════════════════════════════════════════════ */
+.app{width:100vw;height:100vh;height:100dvh;position:relative;overflow:hidden}
+
+/* ══════════════════════════════════════════════════════
+   TOPBAR
+══════════════════════════════════════════════════════ */
+.topbar{position:fixed;inset:0 0 auto 0;z-index:200;height:var(--bar);
+  display:flex;align-items:stretch;background:var(--white);
+  border-bottom:2px solid var(--b60)}
+.tb-brand{display:flex;align-items:center;flex-shrink:0}
+.tb-logo{width:72px;height:100%;display:grid;place-items:center;
+  border-right:1px solid var(--b20)}
+.tb-logo img{width:48px}
+.tb-title{padding:0 1.25rem;font-size:.78rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--b70);
+  display:flex;align-items:center;border-right:1px solid var(--b20)}
+.tb-right{margin-left:auto;display:flex;align-items:stretch}
+.tb-counter{padding:0 1rem;display:flex;align-items:center;
+  font-family:var(--mono);font-size:.68rem;color:var(--ink3);
+  border-left:1px solid var(--b20)}
+.tb-btn{width:48px;height:100%;display:grid;place-items:center;
+  border-left:1px solid var(--b20);color:var(--ink3);
+  transition:background .12s,color .12s}
+.tb-btn:hover,.tb-btn:focus-visible{background:var(--b10);color:var(--b70);
+  outline:2px solid var(--b40);outline-offset:-2px}
+.prog-rail{position:absolute;inset:auto 0 -2px 0;height:2px;background:var(--b20)}
+.prog-fill{height:100%;width:25%;background:var(--b60);transition:width .36s var(--ease)}
+
+/* ══════════════════════════════════════════════════════
+   SIDE INDEX
+══════════════════════════════════════════════════════ */
+.side-index{position:fixed;top:var(--bar);bottom:var(--nav);left:0;z-index:190;
+  width:0;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--b90);color:var(--white);transition:width .2s var(--ease)}
+.side-index.open{width:272px}
+.si-head{padding:2rem 1.5rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.si-head strong{display:block;font-size:.95rem;font-weight:500;line-height:1.3}
+.si-head span{display:block;margin-top:.4rem;font-family:var(--mono);
+  font-size:.62rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em}
+.si-nav{overflow-y:auto;flex:1;padding:.4rem 0}
+.si-item{width:100%;min-height:48px;padding:.75rem 1.5rem;
+  display:flex;align-items:center;gap:.8rem;
+  border-left:3px solid transparent;background:transparent;
+  color:rgba(255,255,255,.7);text-align:left;font-size:.875rem;
+  transition:background .12s,border-color .12s,color .12s}
+.si-item .n{width:2rem;flex-shrink:0;font-family:var(--mono);
+  font-size:.62rem;color:rgba(255,255,255,.3);transition:color .12s}
+.si-item:hover,.si-item:focus-visible,.si-item.active{
+  background:rgba(255,255,255,.08);border-left-color:var(--b40);
+  color:var(--white);outline:0}
+.si-item.active .n{color:var(--b30)}
+
+/* ══════════════════════════════════════════════════════
+   DECK + SLIDES
+══════════════════════════════════════════════════════ */
+.deck{position:absolute;inset:var(--bar) 0 var(--nav) 0}
+.slide{position:absolute;inset:0;overflow:hidden;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .28s var(--ease),visibility .28s var(--ease)}
+.slide.active{opacity:1;visibility:visible;pointer-events:auto}
+.slide::after{content:attr(data-slide);position:absolute;
+  right:clamp(1.5rem,3vw,3rem);bottom:.85rem;z-index:5;
+  font-family:var(--mono);font-size:.58rem;color:rgba(22,22,22,.15);
+  pointer-events:none}
+.slide.dark-num::after{color:rgba(255,255,255,.3)}
+
+/* ══════════════════════════════════════════════════════
+   ANIMAÇÕES
+══════════════════════════════════════════════════════ */
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slide-right{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes expand-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes dash-draw{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+
+.slide.in .an{animation:rise 540ms var(--ease) both;animation-delay:calc(var(--d,0)*75ms)}
+.slide.in .an-r{animation:slide-right 480ms var(--ease) both;animation-delay:calc(var(--d,0)*75ms)}
+.slide.in .an-f{animation:fade 400ms var(--ease) both;animation-delay:calc(var(--d,0)*80ms)}
+
+/* ══════════════════════════════════════════════════════
+   NAV DOTS
+══════════════════════════════════════════════════════ */
+.nav-bar{position:fixed;inset:auto 0 0 0;z-index:150;height:var(--nav);
+  display:flex;align-items:center;justify-content:center;pointer-events:none}
+.dots{display:flex;gap:5px;pointer-events:auto;padding:8px 12px;
+  background:var(--white);border:1px solid rgba(22,22,22,.1)}
+.dot{width:16px;height:3px;background:var(--b20);cursor:pointer;
+  position:relative;transition:width .26s var(--ease),background .18s}
+.dot::before{content:"";position:absolute;inset:-10px -5px}
+.dot.active,.dot:hover,.dot:focus-visible{background:var(--b60);width:32px;outline:0}
+
+/* ══════════════════════════════════════════════════════
+   SLIDE 01 — CAPA
+   Esquerda: texto oversized + tags
+   Direita: painel azul profundo com ornamento e número fantasma
+══════════════════════════════════════════════════════ */
+#slide-01{background:var(--white)}
+
+/* Grade discreta de fundo */
+#slide-01::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(15,98,254,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(15,98,254,.04) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+
+.s01-layout{position:absolute;inset:0;display:grid;grid-template-columns:58fr 42fr}
+
+.s01-left{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,5vw,6rem) clamp(2.5rem,4.5vw,5rem);
+  gap:0;
+}
+.s01-kicker{
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--b60);
+  margin-bottom:clamp(1.5rem,2.5vw,2.8rem);
+}
+.s01-kicker::before{content:"";width:32px;height:2px;background:var(--b60);flex-shrink:0}
+.s01-kicker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--b20),transparent)}
+
+.s01-h1{
+  font-size:clamp(4rem,8.5vw,11rem);
+  font-weight:700;line-height:.88;
+  letter-spacing:-.04em;color:var(--ink);
+  margin-bottom:.35em;
+}
+.s01-h1 em{
+  font-style:normal;color:var(--b60);
+  font-weight:100;display:block;
+  font-size:.55em;letter-spacing:-.01em;
+  margin-top:.15em;
+}
+
+.s01-divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--b60) 0%,var(--b20) 60%,transparent 100%);
+  margin:clamp(1rem,1.8vw,2rem) 0;
+}
+
+.s01-sub{
+  font-size:clamp(1rem,1.5vw,1.55rem);font-weight:300;
+  color:var(--ink2);max-width:48ch;line-height:1.45;
+  margin-bottom:clamp(1.5rem,2.5vw,2.8rem);
+}
+
+.s01-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.s01-tag{
+  padding:.3rem .85rem;
+  border:1px solid var(--b50);color:var(--b70);
+  font-family:var(--mono);font-size:.64rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;transition:background .14s,color .14s;
+  position:relative;overflow:hidden;
+}
+.s01-tag::before{content:"";position:absolute;inset:0;
+  background:var(--b60);transform:translateX(-100%);transition:transform .18s var(--ease)}
+.s01-tag:hover::before{transform:translateX(0)}
+.s01-tag:hover{color:var(--white)}
+.s01-tag span{position:relative;z-index:1}
+
+/* Painel direito */
+.s01-right{
+  background:var(--b90);
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:space-between;
+  padding:clamp(2.5rem,4vw,4.5rem) clamp(2rem,3.5vw,4rem);
+  position:relative;overflow:hidden;
+}
+
+/* Grade interna do painel */
+.s01-right::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:clamp(24px,3.5vw,48px) clamp(24px,3.5vw,48px);
+  pointer-events:none;
+}
+
+/* Número fantasma */
+.s01-phantom{
+  position:absolute;bottom:-.12em;right:-.06em;
+  font-size:clamp(10rem,24vw,32rem);
+  font-weight:700;line-height:.8;letter-spacing:-.06em;
+  color:rgba(255,255,255,.055);
+  pointer-events:none;user-select:none;
+  font-feature-settings:"kern";
+}
+
+.s01-logo{width:clamp(56px,6.5vw,84px);opacity:.9;position:relative;z-index:1}
+
+.s01-panel-content{position:relative;z-index:1;width:100%}
+.s01-panel-label{
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:.75rem;
+}
+.s01-panel-title{
+  font-size:clamp(1.4rem,2.4vw,2.8rem);font-weight:300;
+  line-height:1.1;color:var(--white);margin-bottom:.75rem;
+}
+.s01-panel-rule{
+  width:40px;height:3px;background:var(--b40);margin-bottom:1.25rem;
+}
+.s01-panel-meta{
+  display:flex;flex-direction:column;gap:.35rem;
+}
+.s01-panel-meta span{
+  font-family:var(--mono);font-size:.65rem;color:rgba(255,255,255,.45);
+  letter-spacing:.05em;
+}
+.s01-panel-meta strong{color:rgba(255,255,255,.75);font-weight:400}
+
+/* ══════════════════════════════════════════════════════
+   SLIDE 02 — TIME
+   Hierarquia esquerda→direita:
+   Manager (grande) | Peers (médio) | Interns (menor)
+   Cada nível separado por conector visual
+══════════════════════════════════════════════════════ */
+#slide-02{background:var(--white)}
+
+.s02-layout{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+}
+
+/* Cabeçalho compacto */
+.s02-head{
+  background:var(--b90);
+  padding:clamp(1rem,1.8vw,1.8rem) clamp(1.5rem,3.5vw,4rem);
+  display:flex;align-items:baseline;justify-content:space-between;
+  flex-shrink:0;border-bottom:3px solid var(--b60);
+}
+.s02-title{
+  font-size:clamp(1.4rem,2.6vw,3.2rem);
+  font-weight:700;line-height:.95;letter-spacing:-.02em;color:var(--white);
+}
+.s02-desc{
+  font-size:clamp(.72rem,.85vw,.9rem);
+  font-weight:300;color:rgba(255,255,255,.5);
+}
+
+/* Área de hierarquia */
+.org-layout{
+  flex:1;
+  display:grid;
+  grid-template-columns:
+    minmax(160px,22vw)
+    minmax(34px,5vw)
+    minmax(360px,1fr)
+    minmax(34px,5vw)
+    minmax(220px,24vw);
+  align-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(15,98,254,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(15,98,254,.055) 1px,transparent 1px),
+    var(--b10);
+  background-size:36px 36px;
+  padding:clamp(1rem,2vw,2rem) clamp(1rem,3vw,3rem);
+}
+
+/* Separadores com conector de seta */
+.org-sep{
+  height:2px;width:100%;
+  background:var(--b60);
+  position:relative;
+  align-self:center;
+}
+.org-sep::after{
+  content:"";
+  position:absolute;right:-1px;top:50%;
+  width:10px;height:10px;
+  border-top:2px solid var(--b60);
+  border-right:2px solid var(--b60);
+  transform:translateY(-50%) rotate(45deg);
+}
+
+/* ── Coluna do Manager ── */
+.col-manager{
+  background:var(--b60);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(1rem,2vw,2rem) clamp(.75rem,1.2vw,1.25rem);
+  gap:clamp(.5rem,.9vw,.9rem);
+  position:relative;
+  min-height:clamp(250px,42vh,390px);
+  box-shadow:0 18px 42px rgba(15,98,254,.18);
+}
+.col-manager::after{
+  content:"MANAGER";
+  position:absolute;top:.8rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.48rem;font-weight:700;
+  letter-spacing:.16em;color:rgba(255,255,255,.35);
+  text-transform:uppercase;white-space:nowrap;
+}
+.mgr-photo{
+  width:clamp(80px,9vw,120px);aspect-ratio:1;
+  object-fit:cover;background:var(--b20);
+  border:2px solid var(--white);
+  outline:3px solid rgba(255,255,255,.1);outline-offset:3px;
+}
+.mgr-info{text-align:center}
+.mgr-name{font-size:clamp(.82rem,1.05vw,1.1rem);font-weight:600;color:var(--white);line-height:1.1}
+.mgr-role{font-size:clamp(.65rem,.8vw,.82rem);font-weight:300;color:rgba(255,255,255,.55);margin-top:.15rem}
+.mgr-badge{
+  display:inline-block;margin-top:.4rem;padding:.12rem .55rem;
+  background:var(--white);color:var(--b60);
+  font-family:var(--mono);font-size:.52rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ── Coluna de Peers ── */
+.col-peers{
+  background:transparent;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(2,minmax(110px,1fr));
+  gap:clamp(.7rem,1.2vw,1.1rem);
+  border-right:0;
+  position:relative;overflow:visible;
+}
+.col-peers::before{
+  content:"PEERS";
+  position:absolute;top:calc(clamp(.7rem,1.2vw,1.1rem) * -1 - .5rem);left:0;
+  font-family:var(--mono);font-size:.48rem;font-weight:700;
+  letter-spacing:.16em;color:rgba(15,98,254,.35);
+  text-transform:uppercase;z-index:2;
+}
+
+.peer-row{
+  display:grid;grid-template-columns:auto 1fr;
+  border:1px solid var(--b30);
+  border-left:4px solid var(--b60);
+  overflow:hidden;transition:background .16s;
+  cursor:default;
+  background:var(--white);
+  box-shadow:0 10px 24px rgba(15,98,254,.08);
+}
+.peer-row:hover{background:var(--b20)}
+
+.peer-photo-col{
+  width:clamp(52px,5.5vw,72px);
+  border-right:3px solid var(--b50);overflow:hidden;
+  background:var(--b20);flex-shrink:0;
+}
+.peer-photo{width:100%;aspect-ratio:1;object-fit:cover;background:var(--b30)}
+.peer-data{
+  padding:clamp(.45rem,.75vw,.75rem);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.peer-name{font-size:clamp(.72rem,.92vw,.96rem);font-weight:600;color:var(--ink);line-height:1.15}
+.peer-role{font-size:clamp(.58rem,.7vw,.72rem);font-weight:300;color:var(--ink2);margin-top:.1rem}
+.peer-badge{
+  display:inline-block;margin-top:.28rem;padding:.08rem .4rem;
+  border:1px solid var(--b40);
+  font-family:var(--mono);font-size:.5rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--b70);
+}
+
+/* ── Coluna de Interns ── */
+.col-interns{
+  background:transparent;
+  display:grid;
+  grid-template-rows:repeat(2,minmax(110px,1fr));
+  gap:clamp(.7rem,1.2vw,1.1rem);
+  border-left:0;
+  position:relative;overflow:visible;
+  opacity:1;
+}
+.col-interns::before{
+  content:"INTERNS";
+  position:absolute;top:calc(clamp(.7rem,1.2vw,1.1rem) * -1 - .5rem);left:0;
+  font-family:var(--mono);font-size:.48rem;font-weight:700;
+  letter-spacing:.16em;color:rgba(15,98,254,.35);
+  text-transform:uppercase;z-index:2;
+}
+
+.intern-row{
+  display:grid;grid-template-columns:auto 1fr;
+  border:1px solid var(--b30);
+  border-left:4px solid var(--b60);
+  overflow:hidden;transition:background .16s;
+  background:var(--white);
+  box-shadow:0 10px 24px rgba(15,98,254,.08);
+}
+.intern-row:hover{background:var(--b20)}
+
+.intern-photo-col{
+  width:clamp(48px,4.5vw,62px);
+  border-right:3px solid var(--b60);
+  overflow:hidden;background:var(--b20);
+}
+.intern-photo{width:100%;aspect-ratio:1;object-fit:cover;background:var(--b30)}
+.intern-data{
+  padding:clamp(.4rem,.65vw,.65rem);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.intern-name{font-size:clamp(.65rem,.82vw,.86rem);font-weight:600;color:var(--ink);line-height:1.15}
+.intern-role{font-size:clamp(.52rem,.63vw,.66rem);font-weight:300;color:var(--ink2);margin-top:.1rem}
+.intern-badge{
+  display:inline-block;margin-top:.24rem;padding:.07rem .38rem;
+  border:1px solid var(--b60);
+  font-family:var(--mono);font-size:.48rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--b60);
+}
+
+/* ══════════════════════════════════════════════════════
+   SLIDE 03 — PROCESSO (accordion horizontal)
+   Painel esquerdo: contexto fixo
+   Painel direito: 3 etapas, a ativa ocupa 60%, as outras 20% cada
+══════════════════════════════════════════════════════ */
+#slide-03{background:var(--white)}
+
+.s03-layout{position:absolute;inset:0;display:grid;grid-template-columns:28fr 72fr}
+
+.s03-left{
+  background:var(--b60);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(2rem,4vw,4.5rem) clamp(1.5rem,2.5vw,3rem);
+  position:relative;overflow:hidden;
+}
+.s03-left::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+.s03-phantom{
+  position:absolute;top:-.08em;right:-.1em;
+  font-size:clamp(7rem,16vw,20rem);font-weight:700;line-height:.8;
+  letter-spacing:-.06em;color:rgba(255,255,255,.07);
+  pointer-events:none;user-select:none;
+}
+.s03-eyebrow{
+  display:flex;align-items:center;gap:.6em;
+  font-family:var(--mono);font-size:.65rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  margin-bottom:.9rem;position:relative;z-index:1;
+}
+.s03-eyebrow::before{content:"";width:20px;height:1.5px;background:rgba(255,255,255,.5);flex-shrink:0}
+.s03-h2{
+  font-size:clamp(1.6rem,3.2vw,4rem);font-weight:700;
+  line-height:.93;letter-spacing:-.02em;color:var(--white);
+  position:relative;z-index:1;margin-bottom:.8rem;
+}
+.s03-desc{
+  font-size:clamp(.78rem,.92vw,.95rem);font-weight:300;
+  color:rgba(255,255,255,.6);line-height:1.5;
+  position:relative;z-index:1;max-width:26ch;
+}
+
+/* Accordion */
+.s03-right{
+  display:flex;flex-direction:row;
+  overflow:hidden;
+}
+
+.proc-panel{
+  /* estado colapsado */
+  flex:1;
+  min-width:0;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  cursor:pointer;
+  border-left:1px solid rgba(22,22,22,.07);
+  background:var(--white);
+  transition:flex .38s var(--ease),background .2s;
+  position:relative;
+}
+.proc-panel:first-child{border-left:0}
+
+/* estado expandido (classe .open) */
+.proc-panel.open{
+  flex:3;
+  cursor:default;
+  background:var(--b10);
+}
+
+/* Indicador de número lateral — visível quando colapsado */
+.proc-tab{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:.6rem .3rem;
+  background:var(--b10);
+  border-right:3px solid var(--b60);
+  transition:background .2s,border-color .2s;
+  min-width:clamp(32px,3.5vw,48px);
+  overflow:hidden;
+}
+.proc-panel:nth-child(2) .proc-tab{background:var(--b20);border-color:var(--b70)}
+.proc-panel:nth-child(3) .proc-tab{background:var(--b70);border-color:var(--b40)}
+.proc-panel.open .proc-tab{background:var(--b60);border-color:var(--b40)}
+.proc-panel:nth-child(2).open .proc-tab{background:var(--b70);border-color:var(--b30)}
+.proc-panel:nth-child(3).open .proc-tab{background:var(--b80);border-color:var(--b40)}
+
+.proc-num{
+  font-size:clamp(1.8rem,3.5vw,4.5rem);font-weight:700;line-height:.85;
+  letter-spacing:-.04em;color:rgba(255,255,255,.2);
+  writing-mode:vertical-lr;text-orientation:mixed;
+  user-select:none;
+}
+.proc-panel.open .proc-num{color:rgba(255,255,255,.35)}
+.proc-label-vert{
+  font-family:var(--mono);font-size:.55rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);
+  writing-mode:vertical-lr;text-orientation:mixed;
+  margin-top:.5rem;
+}
+.proc-panel.open .proc-label-vert{color:rgba(255,255,255,.7)}
+
+/* Conteúdo expandido — invisível quando colapsado */
+.proc-content{
+  flex:1;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  min-width:0;
+}
+.proc-img{
+  flex:0 0 clamp(80px,11vw,140px);
+  width:100%;object-fit:cover;object-position:center;
+  background:var(--b20);
+  filter:saturate(.25);
+  transition:filter .3s;
+}
+.proc-panel.open .proc-img{filter:saturate(1)}
+
+.proc-body{
+  flex:1;
+  padding:clamp(.85rem,1.4vw,1.5rem) clamp(1rem,1.8vw,2rem);
+  display:flex;flex-direction:column;justify-content:center;gap:.4rem;
+  overflow:hidden;
+}
+.proc-title{
+  font-size:clamp(1rem,1.8vw,2rem);font-weight:700;
+  letter-spacing:-.01em;color:var(--ink);
+  /* trunca quando colapsado */
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.proc-panel.open .proc-title{white-space:normal}
+.proc-desc{
+  font-size:clamp(.72rem,.88vw,.9rem);font-weight:300;
+  color:var(--ink2);line-height:1.45;max-width:48ch;
+  /* oculta quando colapsado */
+  opacity:0;transform:translateY(8px);
+  transition:opacity .3s .1s,transform .3s .1s;
+  overflow:hidden;
+}
+.proc-panel.open .proc-desc{opacity:1;transform:translateY(0)}
+
+/* Hint "clique para expandir" nos colapsados */
+.proc-hint{
+  position:absolute;bottom:.6rem;right:.5rem;
+  font-family:var(--mono);font-size:.5rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);opacity:.6;
+  transition:opacity .15s;
+}
+.proc-panel.open .proc-hint{display:none}
+
+/* ══════════════════════════════════════════════════════
+   SLIDE 04 — CLOSING
+   Fundo azul escuro. Layout: bloco esquerdo texto + links.
+   Bloco direito: detalhe com quote e regra.
+══════════════════════════════════════════════════════ */
+#slide-04{background:var(--b80)}
+#slide-04::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(115, 17, 17, 0.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+#slide-04::after{color:rgba(255,255,255,.3)!important}
+
+.s04-layout{
+  position:absolute;inset:0;z-index:1;
+  display:grid;grid-template-columns:62fr 38fr;
+}
+
+.s04-left{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(3rem,5.5vw,6.5rem) clamp(2.5rem,4.5vw,5.5rem);
+  border-right:1px solid rgba(255,255,255,.08);
+}
+
+.s04-kicker{
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--b30);
+  margin-bottom:clamp(1.5rem,2.5vw,2.8rem);
+}
+.s04-kicker::before{content:"";width:32px;height:2px;background:var(--b30);flex-shrink:0}
+.s04-kicker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(120,169,255,.35),transparent)}
+
+.s04-h2{
+  font-size:clamp(3.2rem,6.5vw,8.5rem);
+  font-weight:700;line-height:.88;letter-spacing:-.04em;
+  color:var(--white);margin-bottom:.35em;
+}
+.s04-h2 em{
+  font-style:normal;display:block;
+  font-size:.52em;font-weight:100;
+  color:rgba(255,255,255,.55);letter-spacing:-.01em;
+  margin-top:.12em;
+}
+
+.s04-divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--b30) 0%,rgba(120,169,255,.2) 60%,transparent 100%);
+  margin:clamp(1.2rem,2vw,2.2rem) 0;
+}
+
+.s04-sub{
+  font-size:clamp(.9rem,1.2vw,1.25rem);font-weight:300;
+  color:rgba(255,255,255,.5);line-height:1.5;max-width:52ch;
+  margin-bottom:clamp(1.8rem,3vw,3.5rem);
+}
+
+.close-links{display:flex;flex-direction:column;gap:.5rem}
+.close-link{
+  display:flex;align-items:center;gap:.85rem;
+  padding:.9rem 1.15rem;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-left:3px solid var(--b30);
+  color:rgba(255,255,255,.8);
+  font-size:clamp(.82rem,.94vw,.96rem);
+  transition:background .15s,border-left-color .15s,transform .15s;
+}
+.close-link:hover{
+  background:rgba(255,255,255,.12);
+  border-left-color:var(--white);
+  transform:translateX(4px);
+}
+.close-link svg{color:var(--b30);flex-shrink:0}
+.close-link-label{
+  margin-left:auto;font-family:var(--mono);
+  font-size:.62rem;color:rgba(255,255,255,.3);white-space:nowrap;
+}
+
+/* Painel direito — quote + logo + regra */
+.s04-right{
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:space-between;
+  padding:clamp(2.5rem,4vw,5rem) clamp(2rem,3vw,3.5rem);
+  background:var(--white);
+  position:relative;overflow:hidden;
+}
+
+/* Phantom IBM */
+.s04-right::before{
+  content:"IBM";
+  position:absolute;bottom:-.2em;right:-.05em;
+  font-size:clamp(9rem,18vw,24rem);font-weight:700;
+  letter-spacing:-.05em;color:rgba(255,255,255,.04);
+  pointer-events:none;user-select:none;line-height:.8;
+}
+
+.s04-logo-wrap{
+  display:flex;align-items:center;gap:.75rem;
+  position:relative;z-index:1;
+}
+.s04-logo{width:clamp(48px,5.5vw,68px);opacity:.85}
+.s04-logo-label{
+  font-family:var(--mono);font-size:.6rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+
+.s04-quote{
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(1.5rem,2.5vw,2.5rem) 0;
+}
+.s04-quote-mark{
+  font-size:clamp(4rem,7vw,9rem);font-weight:700;
+  line-height:.7;color:var(--b40);
+  font-family:Georgia,serif;margin-bottom:.25rem;
+  display:block;
+}
+.s04-quote-text{
+  font-size:clamp(1rem,1.4vw,1.5rem);font-weight:300;
+  font-style:italic;color:var(--ink2);
+  line-height:1.45;max-width:28ch;
+}
+
+.s04-bottom{position:relative;z-index:1;width:100%}
+.s04-rule{width:40px;height:3px;background:var(--b40);margin-bottom:.75rem}
+.s04-tagline{
+  font-family:var(--mono);font-size:.65rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink2);
+}
+
+/* ══════════════════════════════════════════════════════
+   PRINT + MOTION + RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media print{
+  html,body{overflow:visible;height:auto}
+  .topbar,.nav-bar,.side-index{display:none!important}
+  .app,.deck{position:static;height:auto}
+  .slide{position:relative;opacity:1!important;visibility:visible!important;
+    page-break-after:always;height:100vh}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+@media(max-width:900px){
+  .s01-layout,.s04-layout{grid-template-columns:1fr}
+  .s01-right,.s04-right{display:none}
+  .s03-layout{grid-template-columns:1fr}
+  .s03-left{min-height:160px;flex-shrink:0}
+  .org-layout{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto auto;
+    align-items:stretch;
+    padding:1rem;
+    overflow:auto;
+  }
+  .org-sep{display:none}
+  .col-manager,.col-peers,.col-interns{border:0}
+  .col-manager{min-height:auto}
+  .col-peers{grid-template-columns:1fr;grid-template-rows:repeat(4,auto);margin-top:1rem}
+  .col-interns{grid-template-rows:repeat(2,auto);margin-top:1rem}
+  .col-peers::before,.col-interns::before{position:static;margin-bottom:.4rem}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+<!-- ═══ TOPBAR ═══════════════════════════════════════════════════════════ -->
+<header class="topbar" role="banner">
+  <div class="tb-brand">
+    <div class="tb-logo"><img src="assets/ibm-logo.svg" alt="IBM"></div>
+    <span class="tb-title">Conheça nosso time</span>
+  </div>
+  <div class="tb-right">
+    <span class="tb-counter" aria-live="polite" aria-atomic="true" id="counter">1 / 4</span>
+    <button class="tb-btn" id="btn-index" aria-label="Índice de slides" aria-pressed="false" title="Índice (I)">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M28 8H8v2h20zm0 7H8v2h20zm0 7H8v2h20zM4 7h2v2H4zm0 7h2v2H4zm0 7h2v2H4z"/></svg>
+    </button>
+    <button class="tb-btn" id="btn-fs" aria-label="Tela cheia" aria-pressed="false" title="Tela cheia (F)">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2 2h12v2H4v10H2zm16 0h12v12h-2V4H18zM2 18h2v10h10v2H2zm28 10H18v-2h10V18h2z"/></svg>
+    </button>
+  </div>
+  <div class="prog-rail"><div class="prog-fill" id="prog-fill"></div></div>
+</header>
+
+<!-- ═══ SIDE INDEX ════════════════════════════════════════════════════════ -->
+<nav class="side-index" id="side-index" aria-label="Índice de slides">
+  <div class="si-head">
+    <strong>Conheça nosso time</strong>
+    <span>IBM · Template</span>
+  </div>
+  <div class="si-nav">
+    <button class="si-item" data-goto="0"><span class="n">01</span>Apresentação</button>
+    <button class="si-item" data-goto="1"><span class="n">02</span>Nosso time</button>
+    <button class="si-item" data-goto="2"><span class="n">03</span>Como trabalhamos</button>
+    <button class="si-item" data-goto="3"><span class="n">04</span>Fale conosco</button>
+  </div>
+</nav>
+
+<!-- ═══ DECK ══════════════════════════════════════════════════════════════ -->
+<main class="deck" id="deck">
+
+  <!-- ── SLIDE 01 — Capa ──────────────────────────────────────────────── -->
+  <section class="slide active" data-slide="01" id="slide-01"
+           role="region" aria-labelledby="s01-h" tabindex="-1">
+    <div class="s01-layout">
+
+      <div class="s01-left">
+        <div class="s01-kicker an" style="--d:0">IBM · Squad</div>
+        <h1 class="s01-h1 an" style="--d:1" id="s01-h">
+          Nome do<br>time 1
+          <em>Subtítulo 1</em>
+        </h1>
+        <div class="s01-divider an" style="--d:2"></div>
+        <p class="s01-sub an" style="--d:3">
+          Descrição curta que posiciona o time, seu propósito e o valor que entrega ao cliente.
+        </p>
+        <div class="s01-tags an" style="--d:4">
+          <span class="s01-tag"><span>Tag 1</span></span>
+          <span class="s01-tag"><span>Tag 2</span></span>
+          <span class="s01-tag"><span>Tag 3</span></span>
+        </div>
+      </div>
+
+      <div class="s01-right">
+        <div class="s01-phantom" aria-hidden="true">01</div>
+        <img src="assets/logo-light.svg" alt="IBM" class="s01-logo an" style="--d:1">
+        <div class="s01-panel-content an" style="--d:2">
+          <p class="s01-panel-label">IBM · Team</p>
+          <p class="s01-panel-title">Apresentação do time</p>
+          <div class="s01-panel-rule"></div>
+          <div class="s01-panel-meta">
+            <span><strong>Squad</strong></span>
+            <span><strong>Localização 1</strong></span>
+            <span><strong>Foco 1</strong></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SLIDE 02 — Time ──────────────────────────────────────────────── -->
+  <section class="slide" data-slide="02" id="slide-02"
+           role="region" aria-labelledby="s02-h" tabindex="-1">
+    <div class="s02-layout">
+
+      <div class="s02-head an" style="--d:0">
+        <h2 class="s02-title" id="s02-h">Título 2</h2>
+        <p class="s02-desc">Hierarquia do time — da liderança à base</p>
+      </div>
+
+      <div class="org-layout" role="region" aria-label="Hierarquia do time">
+
+        <!-- Manager -->
+        <div class="col-manager an" style="--d:1" role="list" aria-label="Gerente">
+          <div role="listitem">
+            <img src="assets/person-placeholder.svg" alt="Foto de Pessoa 1" class="mgr-photo">
+            <div class="mgr-info">
+              <p class="mgr-name">Pessoa 1</p>
+              <p class="mgr-role">Cargo 1</p>
+              <span class="mgr-badge">Manager</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-sep" aria-hidden="true"></div>
+
+        <!-- Peers -->
+        <div class="col-peers" role="list" aria-label="Peers">
+          <div class="peer-row an" style="--d:3" role="listitem">
+            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 2" class="peer-photo"></div>
+            <div class="peer-data">
+              <p class="peer-name">Pessoa 2</p><p class="peer-role">Cargo 2</p>
+              <span class="peer-badge">Peer</span>
+            </div>
+          </div>
+          <div class="peer-row an" style="--d:4" role="listitem">
+            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 3" class="peer-photo"></div>
+            <div class="peer-data">
+              <p class="peer-name">Pessoa 3</p><p class="peer-role">Cargo 3</p>
+              <span class="peer-badge">Peer</span>
+            </div>
+          </div>
+          <div class="peer-row an" style="--d:5" role="listitem">
+            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 4" class="peer-photo"></div>
+            <div class="peer-data">
+              <p class="peer-name">Pessoa 4</p><p class="peer-role">Cargo 4</p>
+              <span class="peer-badge">Peer</span>
+            </div>
+          </div>
+          <div class="peer-row an" style="--d:6" role="listitem">
+            <div class="peer-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 5" class="peer-photo"></div>
+            <div class="peer-data">
+              <p class="peer-name">Pessoa 5</p><p class="peer-role">Cargo 5</p>
+              <span class="peer-badge">Peer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-sep" aria-hidden="true"></div>
+
+        <!-- Interns -->
+        <div class="col-interns" role="list" aria-label="Estagiários">
+          <div class="intern-row an" style="--d:8" role="listitem">
+            <div class="intern-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 6" class="intern-photo"></div>
+            <div class="intern-data">
+              <p class="intern-name">Pessoa 6</p><p class="intern-role">Cargo 6</p>
+              <span class="intern-badge">Intern</span>
+            </div>
+          </div>
+          <div class="intern-row an" style="--d:9" role="listitem">
+            <div class="intern-photo-col"><img src="assets/person-placeholder.svg" alt="Foto de Pessoa 7" class="intern-photo"></div>
+            <div class="intern-data">
+              <p class="intern-name">Pessoa 7</p><p class="intern-role">Cargo 7</p>
+              <span class="intern-badge">Intern</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /org-layout -->
+    </div>
+  </section>
+
+  <!-- ── SLIDE 03 — Processo ───────────────────────────────────────────── -->
+  <section class="slide" data-slide="03" id="slide-03"
+           role="region" aria-labelledby="s03-h" tabindex="-1">
+    <div class="s03-layout">
+
+      <div class="s03-left">
+        <div class="s03-phantom" aria-hidden="true">3</div>
+        <p class="s03-eyebrow an" style="--d:0">Como trabalhamos</p>
+        <h2 class="s03-h2 an" style="--d:1" id="s03-h">Título 3</h2>
+        <p class="s03-desc an" style="--d:2">
+          Descrição 3 — como o time opera do diagnóstico à entrega.
+        </p>
+      </div>
+
+      <!-- Accordion: clique em qualquer painel para expandir -->
+      <div class="s03-right" id="proc-accordion" role="tablist" aria-label="Etapas do processo">
+
+        <div class="proc-panel open" data-panel="0" role="tab" aria-selected="true" aria-controls="proc-content-0" tabindex="0">
+          <div class="proc-tab" aria-hidden="true">
+            <div class="proc-num">01</div>
+            <span class="proc-label-vert">Discovery</span>
+          </div>
+          <div class="proc-content" id="proc-content-0">
+            <img src="assets/image-placeholder.svg" alt="Imagem da etapa Discovery" class="proc-img">
+            <div class="proc-body">
+              <h3 class="proc-title">Discovery</h3>
+              <p class="proc-desc">Entendemos o problema, pesquisamos o contexto e alinhamos expectativas com o cliente antes de escrever uma linha de código.</p>
+            </div>
+          </div>
+          <span class="proc-hint">clique para expandir</span>
+        </div>
+
+        <div class="proc-panel" data-panel="1" role="tab" aria-selected="false" aria-controls="proc-content-1" tabindex="0">
+          <div class="proc-tab" aria-hidden="true">
+            <div class="proc-num">02</div>
+            <span class="proc-label-vert">Co-create</span>
+          </div>
+          <div class="proc-content" id="proc-content-1">
+            <img src="assets/image-placeholder.svg" alt="Imagem da etapa Co-create" class="proc-img">
+            <div class="proc-body">
+              <h3 class="proc-title">Co-create</h3>
+              <p class="proc-desc">Prototipamos junto ao cliente, testamos ideias e refinamos a solução em ciclos curtos de feedback e iteração.</p>
+            </div>
+          </div>
+          <span class="proc-hint">clique para expandir</span>
+        </div>
+
+        <div class="proc-panel" data-panel="2" role="tab" aria-selected="false" aria-controls="proc-content-2" tabindex="0">
+          <div class="proc-tab" aria-hidden="true">
+            <div class="proc-num">03</div>
+            <span class="proc-label-vert">Entrega</span>
+          </div>
+          <div class="proc-content" id="proc-content-2">
+            <img src="assets/image-placeholder.svg" alt="Imagem da etapa Entrega" class="proc-img">
+            <div class="proc-body">
+              <h3 class="proc-title">Entrega</h3>
+              <p class="proc-desc">Implementamos, transferimos conhecimento e garantimos a adoção sustentável da solução com suporte pós-entrega.</p>
+            </div>
+          </div>
+          <span class="proc-hint">clique para expandir</span>
+        </div>
+
+      </div><!-- /accordion -->
+    </div>
+  </section>
+
+  <!-- ── SLIDE 04 — Closing ───────────────────────────────────────────── -->
+  <section class="slide dark-num" data-slide="04" id="slide-04"
+           role="region" aria-labelledby="s04-h" tabindex="-1">
+    <div class="s04-layout">
+
+      <div class="s04-left">
+        <div class="s04-kicker an" style="--d:0">Fale conosco</div>
+        <h2 class="s04-h2 an" style="--d:1" id="s04-h">
+          Vamos<br>construir<br>juntos
+          <em>Próximos passos</em>
+        </h2>
+        <div class="s04-divider an" style="--d:2"></div>
+        <p class="s04-sub an" style="--d:3">
+          Descrição 4 — convite ao contato e alinhamento dos próximos passos com o time.
+        </p>
+        <div class="close-links">
+          <a href="mailto:email@ibm.com" class="close-link an" style="--d:4">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M28 6H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-2.2 2L16 14.78 6.2 8zM4 24V9.22l11.38 7.56a1 1 0 0 0 1.24 0L28 9.22V24z"/></svg>
+            email@ibm.com
+            <span class="close-link-label">E-mail</span>
+          </a>
+          <a href="#" class="close-link an" style="--d:5">
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18 6l-1.43 1.393L24.15 15H4v2h20.15l-7.58 7.573L18 26l10-10z"/></svg>
+            Link 1
+            <span class="close-link-label">Recurso</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="s04-right">
+        <div class="s04-logo-wrap an" style="--d:1">
+          <img src="assets/logo-dark.svg" alt="IBM" class="s04-logo">
+          <span class="s04-logo-label">IBM · Team</span>
+        </div>
+        <div class="s04-quote an" style="--d:2">
+          <span class="s04-quote-mark">"</span>
+          <p class="s04-quote-text">Texto de quote 4 — uma frase marcante que representa o time ou o projeto.</p>
+        </div>
+        <div class="s04-bottom an" style="--d:3">
+          <div class="s04-rule"></div>
+          <span class="s04-tagline">IBM Consulting · Squad</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ NAV DOTS ══════════════════════════════════════════════════════════ -->
+<nav class="nav-bar" aria-label="Navegação de slides">
+  <div class="dots" role="tablist">
+    <button class="dot active" role="tab" aria-selected="true"  aria-controls="slide-01" aria-label="Slide 1"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-controls="slide-02" aria-label="Slide 2"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-controls="slide-03" aria-label="Slide 3"></button>
+    <button class="dot"        role="tab" aria-selected="false" aria-controls="slide-04" aria-label="Slide 4"></button>
+  </div>
+</nav>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── refs ─────────────────────────────────────────────────────────────── */
+  var slides  = Array.from(document.querySelectorAll('.slide'));
+  var dots    = Array.from(document.querySelectorAll('.dot'));
+  var items   = Array.from(document.querySelectorAll('.si-item'));
+  var total   = slides.length;
+  var counter = document.getElementById('counter');
+  var fill    = document.getElementById('prog-fill');
+  var btnFS   = document.getElementById('btn-fs');
+  var btnIdx  = document.getElementById('btn-index');
+  var sideIdx = document.getElementById('side-index');
+  var cur     = 0;
+
+  /* ── accordion do processo ───────────────────────────────────────────── */
+  var panels = Array.from(document.querySelectorAll('.proc-panel'));
+
+  function openPanel(idx) {
+    panels.forEach(function(p, i) {
+      var open = i === idx;
+      p.classList.toggle('open', open);
+      p.setAttribute('aria-selected', open ? 'true' : 'false');
+    });
+  }
+
+  panels.forEach(function(p, i) {
+    p.addEventListener('click', function() { openPanel(i); });
+    p.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPanel(i); }
+      if (e.key === 'ArrowRight' && i < panels.length - 1) { openPanel(i + 1); panels[i + 1].focus(); }
+      if (e.key === 'ArrowLeft'  && i > 0)                 { openPanel(i - 1); panels[i - 1].focus(); }
+    });
+  });
+
+  /* ── hash → index ─────────────────────────────────────────────────────── */
+  function hashIdx() {
+    var m = location.hash.match(/^#slide-0*(\d+)$/);
+    if (m) { var n = parseInt(m[1], 10) - 1; if (n >= 0 && n < total) return n; }
+    return 0;
+  }
+
+  /* ── navegar ─────────────────────────────────────────────────────────── */
+  function goTo(n, push) {
+    n = Math.max(0, Math.min(total - 1, n));
+    if (n === cur && slides[cur].classList.contains('active')) return;
+
+    slides[cur].classList.remove('active', 'in');
+    dots[cur].classList.remove('active');
+    dots[cur].setAttribute('aria-selected', 'false');
+    if (items[cur]) items[cur].classList.remove('active');
+
+    cur = n;
+
+    slides[cur].classList.add('active');
+    slides[cur].focus({ preventScroll: true });
+    dots[cur].classList.add('active');
+    dots[cur].setAttribute('aria-selected', 'true');
+    if (items[cur]) items[cur].classList.add('active');
+
+    /* replay animações */
+    slides[cur].classList.remove('in');
+    void slides[cur].offsetWidth;
+    slides[cur].classList.add('in');
+
+    fill.style.width = ((cur + 1) / total * 100) + '%';
+    counter.textContent = (cur + 1) + ' / ' + total;
+
+    if (push !== false)
+      history.replaceState(null, '', '#slide-' + String(cur + 1).padStart(2, '0'));
+  }
+
+  goTo(hashIdx(), false);
+
+  /* ── teclado ──────────────────────────────────────────────────────────── */
+  document.addEventListener('keydown', function(e) {
+    /* não intercepta dentro do accordion no slide 03 */
+    if (e.target.classList.contains('proc-panel') &&
+        (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) return;
+
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    switch (e.key) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ':
+        e.preventDefault(); goTo(cur + 1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); goTo(cur - 1); break;
+      case 'Home': e.preventDefault(); goTo(0); break;
+      case 'End':  e.preventDefault(); goTo(total - 1); break;
+      case 'Escape': if (sideIdx.classList.contains('open')) closeIdx(); break;
+      case 'f': case 'F': toggleFS(); break;
+      case 'i': case 'I': toggleIdx(); break;
+    }
+  });
+
+  /* ── dots ─────────────────────────────────────────────────────────────── */
+  dots.forEach(function(d, i) { d.addEventListener('click', function() { goTo(i); }); });
+
+  /* ── side index ───────────────────────────────────────────────────────── */
+  items.forEach(function(item) {
+    item.addEventListener('click', function() {
+      goTo(parseInt(item.getAttribute('data-goto'), 10));
+      closeIdx();
+    });
+  });
+  function openIdx()  { sideIdx.classList.add('open');    btnIdx.setAttribute('aria-pressed', 'true'); }
+  function closeIdx() { sideIdx.classList.remove('open'); btnIdx.setAttribute('aria-pressed', 'false'); }
+  function toggleIdx() { sideIdx.classList.contains('open') ? closeIdx() : openIdx(); }
+  btnIdx.addEventListener('click', toggleIdx);
+  document.addEventListener('click', function(e) {
+    if (!sideIdx.contains(e.target) && !btnIdx.contains(e.target))
+      if (sideIdx.classList.contains('open')) closeIdx();
+  });
+
+  /* ── fullscreen ───────────────────────────────────────────────────────── */
+  function toggleFS() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(function(){});
+      btnFS.setAttribute('aria-pressed', 'true');
+    } else {
+      document.exitFullscreen().catch(function(){});
+      btnFS.setAttribute('aria-pressed', 'false');
+    }
+  }
+  btnFS.addEventListener('click', toggleFS);
+  document.addEventListener('fullscreenchange', function() {
+    btnFS.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false');
+  });
+
+  /* ── swipe ─────────────────────────────────────────────────────────────── */
+  var tx = null;
+  document.addEventListener('touchstart', function(e) { tx = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 44) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+
+  /* ── hash change ──────────────────────────────────────────────────────── */
+  window.addEventListener('hashchange', function() { goTo(hashIdx(), false); });
+
+}());
+</script>
+</body>
+</html>

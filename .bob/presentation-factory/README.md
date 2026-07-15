@@ -27,6 +27,7 @@ Ao criar uma apresentação IBM nova, escolha somente entre estes templates:
 | `organizations/ibm/templates/ibm-template/` | Padrão default: apresentação executiva, sóbria e orientada a negócio |
 | `organizations/ibm/templates/ibm-brief-template/` | Dossiê, relatório técnico, diagnóstico ou conteúdo editorial denso |
 | `organizations/ibm/templates/ibm-edge-template/` | Narrativa visual bold, assimétrica ou de alto impacto |
+| `organizations/ibm/templates/ibm-team-template/` | Apresentação de time: cards de pessoas (manager/peer/intern), processo Discovery → Co-create → Entrega |
 
 Qualquer outro template IBM foi descontinuado. Nunca tente localizar, recriar ou usá-los como fallback.
 

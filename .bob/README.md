@@ -24,8 +24,6 @@ repositório.
 
 Referências reais ficam em:
 
-- `clients/*/templates/`
 - `organizations/*/templates/`
-- `clients/*/assets/`
 - `organizations/ibm/assets/`
 - `organizations/ibm/design-systems/carbon/`

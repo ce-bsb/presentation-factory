@@ -45,6 +45,7 @@ customModes:
       - default executivo: `organizations/ibm/templates/ibm-template/`
       - editorial/técnico: `organizations/ibm/templates/ibm-brief-template/`
       - bold/alto impacto: `organizations/ibm/templates/ibm-edge-template/`
+      - apresentação de time: `organizations/ibm/templates/ibm-team-template/`
 
       ## ⚠️ LOGO IBM — CÓPIA OBRIGATÓRIA
 

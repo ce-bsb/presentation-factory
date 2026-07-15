@@ -9,8 +9,7 @@
 
 Leia o template real mais próximo antes de criar ou alterar o deck.
 
-Para apresentações IBM novas, use somente `ibm-template`, `ibm-brief-template`
-ou `ibm-edge-template` (catálogo completo em `.bob/presentation-factory/README.md`).
+Para apresentações IBM novas, use o catálogo completo em `.bob/presentation-factory/README.md`.
 Os templates IBM são autocontidos: preserve CSS e JavaScript dentro de `index.html`.
 
 ## HTML

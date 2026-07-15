@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="pp-title pp-desc">
+  <title id="pp-title">Foto placeholder</title>
+  <desc id="pp-desc">Área reservada para foto da pessoa</desc>
+  <rect width="200" height="200" fill="#e0e0e0"/>
+  <circle cx="100" cy="76" r="36" fill="#a8a8a8"/>
+  <ellipse cx="100" cy="172" rx="56" ry="42" fill="#a8a8a8"/>
+  <rect x="8" y="8" width="184" height="184" fill="none" stroke="#8d8d8d" stroke-width="1.5" stroke-dasharray="8 5"/>
+</svg>
