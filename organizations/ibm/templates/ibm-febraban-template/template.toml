@@ -1,0 +1,27 @@
+[meta]
+name        = "IBM Febraban Template"
+slug        = "ibm-febraban-template"
+version     = "1.0.0"
+description = "Template de deck rápido para feiras e eventos presenciais (Febraban e similares). 4 slides: capa com a pergunta do visitante, visão geral do tema, cases IBM e encerramento com QR code de WhatsApp."
+author      = "IBM Presentation Factory"
+
+[design]
+system      = "IBM Carbon Design System v11"
+fonts       = ["IBM Plex Sans", "IBM Plex Mono"]
+base_size   = "18px"
+grid        = "8px"
+theme       = "light"
+contrast    = "WCAG 2.1 AA"
+
+[slides]
+count  = 4
+labels = [
+  "cover-pergunta",
+  "tema-visao-geral",
+  "cases-ibm",
+  "closing-qr"
+]
+
+[assets]
+# QR code do WhatsApp do especialista: coloque assets/qr.png na pasta da apresentação.
+# Logos IBM e ícones estão em assets/ deste template.

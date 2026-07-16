@@ -1,0 +1,2 @@
+[console_scripts]
+presentation-factory = presentation_factory.cli:main

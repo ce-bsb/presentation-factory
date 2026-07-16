@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <title>{{TITULO}} — IBM</title>
+  <meta name="description" content="{{DESCRICAO}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap" />
+  <style>
+    :root {
+      color-scheme: light;
+      --white:       #ffffff;
+      --gray-10:     #f4f4f4;
+      --gray-20:     #e0e0e0;
+      --gray-30:     #c6c6c6;
+      --gray-50:     #8d8d8d;
+      --gray-60:     #6f6f6f;
+      --gray-70:     #525252;
+      --gray-80:     #393939;
+      --gray-90:     #262626;
+      --gray-100:    #161616;
+      --ibm-blue:    #0f62fe;
+      --ibm-blue-h:  #0043ce;
+      --ibm-blue-d:  #002d9c;
+      --ibm-blue-l:  #4589ff;
+      --ibm-cyan:    #1192e8;
+      --ibm-cyan-l:  #33b1ff;
+      --ibm-purple:  #8a3ffc;
+      --ibm-teal:    #009d9a;
+      --bg:          var(--white);
+      --bg-2:        var(--gray-10);
+      --bg-3:        var(--gray-20);
+      --ink:         var(--gray-100);
+      --ink-muted:   var(--gray-70);
+      --ink-faint:   var(--gray-50);
+      --line:        var(--gray-20);
+      --line-strong: var(--gray-30);
+      --font-sans:   'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono:   'IBM Plex Mono', monospace;
+      --text-12: .75rem; --text-14: .875rem; --text-16: 1rem;
+      --text-18: 1.125rem; --text-20: 1.25rem; --text-24: 1.5rem;
+      --text-32: 2rem; --text-42: 2.625rem; --text-54: 3.375rem; --text-76: 4.75rem;
+      --u-1:4px; --u-2:8px; --u-3:12px; --u-4:16px;
+      --u-5:24px; --u-6:32px; --u-7:40px; --u-8:48px; --u-9:64px;
+      --topbar-h: 52px; --navbar-h: 52px;
+      --ease:     cubic-bezier(0.2,0,0.38,0.9);
+      --ease-out: cubic-bezier(0,0,0.38,0.9);
+      --focus-color: var(--ibm-blue); --focus-width: 2px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; overflow: hidden; min-height: 100dvh; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    :focus-visible { outline: var(--focus-width) solid var(--focus-color); outline-offset: 2px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* ── Progress ── */
+    .progress { position:fixed; top:0; left:0; right:0; height:3px; background:var(--gray-20); z-index:50; }
+    .progress__bar { height:100%; width:25%; background:linear-gradient(90deg,var(--ibm-blue) 0%,var(--ibm-cyan-l) 100%); transition:width 300ms var(--ease); }
+
+    /* ── Topbar ── */
+    .topbar { position:fixed; top:3px; left:0; right:0; height:var(--topbar-h); display:flex; align-items:center; justify-content:space-between; padding:0 var(--u-6); background:var(--bg); border-bottom:1px solid var(--line); z-index:40; }
+    .topbar__left, .topbar__right { display:flex; align-items:center; gap:var(--u-4); }
+    .brand { display:inline-flex; align-items:center; gap:var(--u-3); }
+    .brand__ibm { display:inline-flex; align-items:center; color:var(--gray-100); }
+    .brand__ibm img { height:13px; width:auto; }
+    .meta-divider { width:1px; height:18px; background:var(--line-strong); }
+    .meta-label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.05em; color:var(--ink-faint); text-transform:uppercase; }
+    .topbar__dot { display:inline-block; width:6px; height:6px; background:var(--ibm-blue); }
+
+    /* ── Deck / slides ── */
+    .deck { position:fixed; top:calc(3px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
+    .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:auto; background:var(--white); }
+    .slide.is-active { opacity:1; visibility:visible; clip-path:inset(0 0% 0 0); transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
+    .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
+    @media(max-width:820px){ .slide__inner { padding:var(--u-6) var(--u-5) var(--u-7); } }
+
+    /* ── Typography ── */
+    .eyebrow { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.08em; text-transform:uppercase; color:var(--ibm-blue); padding-bottom:var(--u-2); border-bottom:1px solid var(--ibm-blue); display:inline-block; }
+    .eyebrow--light { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.35); }
+    .title { font-weight:300; font-size:clamp(1.75rem,3.8vw,2.75rem); line-height:1.1; letter-spacing:-.02em; color:var(--ink); margin:var(--u-4) 0 0; }
+    .title--light { color:var(--white); }
+    .subtitle { font-size:var(--text-18); color:var(--ink-muted); font-weight:300; margin:var(--u-3) 0 0; }
+    .lede { font-size:var(--text-18); line-height:1.6; color:var(--ink); max-width:68ch; }
+    .lede--light { color:rgba(255,255,255,.85); }
+    .muted { color:var(--ink-muted); }
+    .kicker { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    .slide-head { display:flex; flex-direction:column; gap:0; }
+
+    /* ══════════════════════════════════════════
+       SLIDE 01 — COVER PERGUNTA (tema grande, azul lateral)
+       Pergunta do visitante em destaque total.
+       ══════════════════════════════════════════ */
+    .slide--cover { background:var(--bg); }
+    .slide--cover .slide__inner { padding:0; max-width:none; flex-direction:row; gap:0; min-height:100%; }
+    .cover-bar { width:clamp(160px,18vw,260px); background:var(--ibm-blue); display:flex; flex-direction:column; justify-content:space-between; padding:var(--u-8) var(--u-6); flex-shrink:0; position:relative; overflow:hidden; }
+    .cover-bar::before { content:""; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px); background-size:20px 20px; pointer-events:none; }
+    .cover-bar__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); writing-mode:vertical-rl; transform:rotate(180deg); align-self:flex-start; position:relative; z-index:1; }
+    .cover-bar__badge { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; padding:4px 10px; background:rgba(255,255,255,.12); color:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.2); position:relative; z-index:1; width:fit-content; }
+    .cover-main { flex:1; display:flex; flex-direction:column; justify-content:center; padding:var(--u-9) var(--u-9) var(--u-8); gap:var(--u-6); }
+    .cover-question-label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:var(--ibm-blue); display:flex; align-items:center; gap:var(--u-3); }
+    .cover-question-label::before { content:""; display:block; width:32px; height:1px; background:var(--ibm-blue); }
+    .cover-question { font-weight:200; font-size:clamp(2.2rem,5.5vw,4.2rem); line-height:1.05; letter-spacing:-.03em; color:var(--ink); max-width:18ch; }
+    .cover-question em { font-style:normal; color:var(--ibm-blue); font-weight:600; }
+    .cover-context { font-size:var(--text-18); color:var(--ink-muted); font-weight:300; max-width:52ch; line-height:1.55; border-left:3px solid var(--ibm-blue); padding-left:var(--u-5); }
+    @media(max-width:768px){
+      .slide--cover .slide__inner { flex-direction:column; }
+      .cover-bar { width:100%; height:60px; flex-direction:row; align-items:center; padding:0 var(--u-5); }
+      .cover-bar__label { writing-mode:horizontal-tb; transform:none; }
+      .cover-main { padding:var(--u-6) var(--u-5); }
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE 02 — TEMA / VISÃO GERAL (two-col ou painel largo)
+       Apresenta o tema com contexto + 3 pontos-chave.
+       ══════════════════════════════════════════ */
+    .tema-layout { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:var(--u-4); flex:1; }
+    .tema-panel { background:var(--bg); padding:var(--u-7) var(--u-6); display:flex; flex-direction:column; gap:var(--u-5); }
+    .tema-panel--accent { background:var(--bg-2); border-left:3px solid var(--ibm-blue); padding-left:calc(var(--u-6) - 3px); }
+    .tema-panel__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:500; }
+    .tema-panel--accent .tema-panel__label { color:var(--ibm-blue); }
+    .tema-panel__body { font-size:var(--text-18); line-height:1.65; color:var(--ink-muted); }
+    .tema-points { list-style:none; display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .tema-point { background:var(--bg); display:grid; grid-template-columns:40px 1fr; align-items:start; gap:var(--u-4); padding:var(--u-4) var(--u-5); }
+    .tema-point__num { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; color:var(--ibm-blue); padding-top:3px; }
+    .tema-point__text { font-size:var(--text-16); line-height:1.5; color:var(--ink); }
+    .tema-point__text strong { color:var(--ink); font-weight:600; }
+    @media(max-width:820px){ .tema-layout { grid-template-columns:1fr; } }
+
+    /* ══════════════════════════════════════════
+       SLIDE 03 — CASES IBM (fundo azul com cards)
+       Até 3 referências reais de uso IBM.
+       ══════════════════════════════════════════ */
+    .slide--cases { background:var(--ibm-blue); overflow:hidden; }
+    .slide--cases .slide__inner { padding:var(--u-8) var(--u-9); display:flex; flex-direction:column; gap:var(--u-6); justify-content:center; }
+    .cases-header { display:flex; flex-direction:column; gap:var(--u-3); }
+    .cases-title { font-weight:200; font-size:clamp(1.6rem,3.5vw,2.5rem); line-height:1.1; letter-spacing:-.02em; color:var(--white); }
+    .cases-subtitle { font-size:var(--text-16); color:rgba(255,255,255,.6); font-weight:300; }
+    .cases-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.12); }
+    .case-card { background:rgba(0,0,0,.15); padding:var(--u-6); display:flex; flex-direction:column; gap:var(--u-3); position:relative; }
+    .case-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; }
+    .case-card:nth-child(1)::before { background:var(--ibm-cyan-l); }
+    .case-card:nth-child(2)::before { background:rgba(255,255,255,.4); }
+    .case-card:nth-child(3)::before { background:var(--ibm-blue-l); }
+    .case-card__tag { font-family:var(--font-mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase; padding:3px 8px; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.55); width:fit-content; }
+    .case-card__title { font-size:var(--text-18); font-weight:600; color:var(--white); letter-spacing:-.01em; line-height:1.25; }
+    .case-card__body { font-size:var(--text-14); line-height:1.6; color:rgba(255,255,255,.7); }
+    .case-card__result { font-family:var(--font-mono); font-size:var(--text-12); color:var(--ibm-cyan-l); letter-spacing:.04em; margin-top:auto; padding-top:var(--u-3); border-top:1px solid rgba(255,255,255,.1); }
+    @media(max-width:900px){ .cases-grid { grid-template-columns:1fr; } }
+    @media(max-width:800px){ .slide--cases .slide__inner { padding:var(--u-6) var(--u-5); } }
+
+    /* ══════════════════════════════════════════
+       SLIDE 04 — CLOSING + QR CODE WhatsApp
+       CTA final: "Quer saber mais?" + QR code.
+       ══════════════════════════════════════════ */
+    .slide--closing { background:var(--bg-2); }
+    .slide--closing .slide__inner { flex-direction:row; gap:0; padding:0; max-width:none; }
+    .closing-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:var(--u-9) var(--u-9) var(--u-8); gap:var(--u-6); }
+    .closing-display { font-weight:200; font-size:clamp(2.6rem,6vw,4.5rem); line-height:.95; letter-spacing:-.04em; color:var(--ink); }
+    .closing-display em { font-style:normal; color:var(--ibm-blue); font-weight:400; }
+    .closing-sub { font-size:var(--text-18); color:var(--ink-muted); font-weight:300; max-width:40ch; line-height:1.55; }
+    .closing-specialist { display:flex; flex-direction:column; gap:4px; border-left:3px solid var(--ibm-blue); padding-left:var(--u-5); }
+    .closing-specialist__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    .closing-specialist__name { font-size:var(--text-18); font-weight:600; color:var(--ink); }
+    .closing-specialist__role { font-size:var(--text-14); color:var(--ink-muted); }
+    .closing-brand-row { display:flex; align-items:center; gap:var(--u-3); padding-top:var(--u-6); border-top:1px solid var(--line); }
+    .closing-brand-row img { height:13px; }
+    .closing-brand-row span { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+    /* Painel direito com QR */
+    .closing-right { width:clamp(260px,32vw,380px); background:var(--ibm-blue); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--u-5); padding:var(--u-8) var(--u-6); flex-shrink:0; }
+    .closing-right__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); text-align:center; }
+    .qr-frame { background:var(--white); padding:var(--u-3); display:inline-flex; }
+    .qr-frame img { width:clamp(140px,18vw,200px); height:auto; display:block; }
+    /* Fallback placeholder quando qr.png não existe */
+    .qr-placeholder { width:clamp(140px,18vw,200px); height:clamp(140px,18vw,200px); background:var(--white); display:flex; align-items:center; justify-content:center; }
+    .qr-placeholder svg { width:80%; height:80%; }
+    .closing-right__name { font-size:var(--text-16); font-weight:600; color:var(--white); text-align:center; }
+    .closing-right__phone { font-family:var(--font-mono); font-size:var(--text-14); color:rgba(255,255,255,.65); text-align:center; letter-spacing:.04em; }
+    @media(max-width:820px){
+      .slide--closing .slide__inner { flex-direction:column; }
+      .closing-right { width:100%; padding:var(--u-7) var(--u-5); flex-direction:row; flex-wrap:wrap; gap:var(--u-5); justify-content:center; }
+      .closing-left { padding:var(--u-7) var(--u-5); }
+    }
+
+    /* ══════════════════════════════════════════
+       Navbar
+       ══════════════════════════════════════════ */
+    .navbar { position:fixed; bottom:0; left:0; right:0; height:var(--navbar-h); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 var(--u-6); background:var(--bg); border-top:1px solid var(--line); z-index:40; }
+    .navbar__left { display:flex; align-items:center; }
+    .navbar__center { display:flex; align-items:center; justify-content:center; gap:var(--u-3); }
+    .navbar__right { display:flex; align-items:center; justify-content:flex-end; }
+    .navbar__hint { font-family:var(--font-mono); font-size:var(--text-12); color:var(--ink-faint); letter-spacing:.02em; }
+    .btn { display:inline-flex; align-items:center; gap:var(--u-2); height:38px; padding:0 var(--u-4); border:1px solid var(--gray-100); background:var(--gray-100); color:var(--white); font-size:var(--text-14); cursor:pointer; transition:background 120ms var(--ease),border-color 120ms var(--ease); }
+    .btn:hover { background:var(--gray-80); border-color:var(--gray-80); }
+    .btn--primary { background:var(--ibm-blue); border-color:var(--ibm-blue); }
+    .btn--primary:hover { background:var(--ibm-blue-h); border-color:var(--ibm-blue-h); }
+    .btn--ghost { background:transparent; border-color:var(--line-strong); color:var(--ink-muted); }
+    .btn--ghost:hover { background:var(--bg-2); color:var(--ink); }
+    @media(max-width:560px){ .navbar { padding:0 var(--u-3); } .navbar__hint { display:none; } }
+
+    /* ── Index panel ── */
+    .index-panel { position:fixed; inset:0; background:rgba(22,22,22,.55); z-index:60; display:flex; align-items:stretch; justify-content:flex-end; backdrop-filter:blur(4px); }
+    .index-panel[hidden] { display:none; }
+    .index-panel__inner { width:min(360px,100%); background:var(--bg); border-left:1px solid var(--line); display:flex; flex-direction:column; padding:var(--u-6); }
+    .index-panel__head { display:flex; align-items:center; justify-content:space-between; padding-bottom:var(--u-4); border-bottom:1px solid var(--line); margin-bottom:var(--u-4); }
+    .index-panel__title { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ibm-blue); margin:0; font-weight:500; }
+    .index-list { list-style:none; display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .index-item { background:var(--bg); width:100%; border:0; text-align:left; display:grid; grid-template-columns:48px 1fr; align-items:center; gap:var(--u-3); padding:var(--u-3) var(--u-4); cursor:pointer; font-size:var(--text-14); color:var(--ink); transition:background 100ms var(--ease); }
+    .index-item:hover { background:var(--bg-2); }
+    .index-item.is-current { background:var(--bg-2); box-shadow:inset 3px 0 0 var(--ibm-blue); }
+    .index-item__num { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; color:var(--ink-faint); }
+    .index-item.is-current .index-item__num { color:var(--ibm-blue); }
+    .index-item__label { font-weight:500; }
+
+    /* ── Animações stagger ── */
+    @keyframes slideUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+    .slide.is-active .cover-question-label { animation:slideUp 400ms 80ms  var(--ease-out) both; }
+    .slide.is-active .cover-question       { animation:slideUp 500ms 180ms var(--ease-out) both; }
+    .slide.is-active .cover-context        { animation:slideUp 400ms 320ms var(--ease-out) both; }
+    .slide.is-active .slide-head           { animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .tema-panel:nth-child(1) { animation:slideUp 360ms 80ms  var(--ease-out) both; }
+    .slide.is-active .tema-panel:nth-child(2) { animation:slideUp 360ms 200ms var(--ease-out) both; }
+    .slide.is-active .case-card:nth-child(1)  { animation:slideUp 360ms 60ms  var(--ease-out) both; }
+    .slide.is-active .case-card:nth-child(2)  { animation:slideUp 360ms 160ms var(--ease-out) both; }
+    .slide.is-active .case-card:nth-child(3)  { animation:slideUp 360ms 260ms var(--ease-out) both; }
+    .slide.is-active .closing-left            { animation:slideUp 480ms 80ms  var(--ease-out) both; }
+    .slide.is-active .closing-right           { animation:fadeIn  500ms 200ms var(--ease-out) both; }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+      .slide{clip-path:none!important;}
+    }
+    @media print{
+      @page{size:A4 landscape;margin:12mm;}
+      html,body{overflow:visible;height:auto;}
+      .progress,.topbar,.navbar,.index-panel{display:none!important;}
+      .deck{position:static;}
+      .slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}
+      .slide:last-child{page-break-after:auto;}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#slide-1">Pular para o conteúdo</a>
+
+  <div class="progress" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Topbar — cliente IBM → mantenha só brand__ibm -->
+  <header class="topbar" aria-label="Cabeçalho da apresentação">
+    <div class="topbar__left">
+      <span class="brand">
+        <span class="brand__ibm">
+          <img src="assets/ibm-logo.svg" alt="IBM">
+        </span>
+      </span>
+      <span class="meta-divider" aria-hidden="true"></span>
+      <span class="meta-label">{{EVENTO}}</span>
+    </div>
+    <div class="topbar__right">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 04</span>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 01 — COVER PERGUNTA
+         A questão do visitante em destaque.
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
+      <div class="slide__inner">
+        <div class="cover-bar" aria-hidden="true">
+          <span class="cover-bar__label">{{LABEL_BARRA}}</span>
+          <span class="cover-bar__badge">{{TAG_TEMA}}</span>
+        </div>
+        <div class="cover-main">
+          <span class="cover-question-label">{{EYEBROW_COVER}}</span>
+          <h1 id="s1-title" class="cover-question">{{PERGUNTA_LINHA_1}}<br/><em>{{PERGUNTA_LINHA_2}}</em></h1>
+          <p class="cover-context">{{CONTEXTO_COVER}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 02 — VISÃO GERAL DO TEMA
+         Contexto + 3 pontos-chave.
+         ═══════════════════════════════════════ -->
+    <section class="slide" id="slide-2" data-slide="2" aria-labelledby="s2-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
+          <h2 id="s2-title" class="title">{{TITULO_S2}}</h2>
+        </header>
+        <div class="tema-layout">
+          <article class="tema-panel" aria-labelledby="t2-a">
+            <span class="tema-panel__label" id="t2-a">{{PANEL_A_LABEL}}</span>
+            <p class="tema-panel__body">{{PANEL_A_TEXTO}}</p>
+          </article>
+          <article class="tema-panel tema-panel--accent" aria-labelledby="t2-b">
+            <span class="tema-panel__label" id="t2-b">{{PANEL_B_LABEL}}</span>
+            <ol class="tema-points" aria-label="Pontos principais">
+              <li class="tema-point">
+                <span class="tema-point__num">01</span>
+                <span class="tema-point__text"><strong>{{PONTO_1_TITULO}}</strong> — {{PONTO_1_DESC}}</span>
+              </li>
+              <li class="tema-point">
+                <span class="tema-point__num">02</span>
+                <span class="tema-point__text"><strong>{{PONTO_2_TITULO}}</strong> — {{PONTO_2_DESC}}</span>
+              </li>
+              <li class="tema-point">
+                <span class="tema-point__num">03</span>
+                <span class="tema-point__text"><strong>{{PONTO_3_TITULO}}</strong> — {{PONTO_3_DESC}}</span>
+              </li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 03 — CASES IBM (fundo azul)
+         3 referências reais de uso IBM.
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--cases" id="slide-3" data-slide="3" aria-labelledby="s3-title">
+      <div class="slide__inner">
+        <header class="cases-header">
+          <span class="eyebrow eyebrow--light">03 — {{EYEBROW_S3}}</span>
+          <h2 id="s3-title" class="cases-title">{{TITULO_S3}}</h2>
+          <p class="cases-subtitle">{{SUBTITULO_S3}}</p>
+        </header>
+        <div class="cases-grid">
+          <article class="case-card" aria-labelledby="c3-a">
+            <span class="case-card__tag">{{CASE_1_TAG}}</span>
+            <h3 class="case-card__title" id="c3-a">{{CASE_1_TITULO}}</h3>
+            <p class="case-card__body">{{CASE_1_CORPO}}</p>
+            <span class="case-card__result">{{CASE_1_RESULTADO}}</span>
+          </article>
+          <article class="case-card" aria-labelledby="c3-b">
+            <span class="case-card__tag">{{CASE_2_TAG}}</span>
+            <h3 class="case-card__title" id="c3-b">{{CASE_2_TITULO}}</h3>
+            <p class="case-card__body">{{CASE_2_CORPO}}</p>
+            <span class="case-card__result">{{CASE_2_RESULTADO}}</span>
+          </article>
+          <article class="case-card" aria-labelledby="c3-c">
+            <span class="case-card__tag">{{CASE_3_TAG}}</span>
+            <h3 class="case-card__title" id="c3-c">{{CASE_3_TITULO}}</h3>
+            <p class="case-card__body">{{CASE_3_CORPO}}</p>
+            <span class="case-card__result">{{CASE_3_RESULTADO}}</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 04 — CLOSING + QR CODE WhatsApp
+         "Quer saber mais? Fale com nosso especialista."
+         Coloque qr.png em assets/ (QR code do WhatsApp).
+         ═══════════════════════════════════════ -->
+    <section class="slide slide--closing" id="slide-4" data-slide="4" aria-labelledby="s4-title">
+      <div class="slide__inner">
+        <div class="closing-left">
+          <div>
+            <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
+            <h2 id="s4-title" class="closing-display" style="margin-top:var(--u-4)">{{CLOSING_LINHA_1}}<br/><em>{{CLOSING_LINHA_2}}</em></h2>
+            <p class="closing-sub" style="margin-top:var(--u-5)">{{CLOSING_SUB}}</p>
+          </div>
+          <div class="closing-specialist" aria-label="Especialista IBM">
+            <span class="closing-specialist__label">{{ESPECIALISTA_LABEL}}</span>
+            <span class="closing-specialist__name">{{ESPECIALISTA_NOME}}</span>
+            <span class="closing-specialist__role">{{ESPECIALISTA_CARGO}}</span>
+          </div>
+          <div class="closing-brand-row">
+            <img src="assets/ibm-logo.svg" alt="IBM" />
+            <span>{{EVENTO}}</span>
+          </div>
+        </div>
+        <div class="closing-right" aria-label="QR Code WhatsApp">
+          <span class="closing-right__label">{{QR_LABEL}}</span>
+          <!-- Coloque assets/qr.png com o QR do WhatsApp do especialista -->
+          <div class="qr-frame">
+            <img src="assets/qr.png" alt="QR Code WhatsApp {{ESPECIALISTA_NOME}}" width="200" height="200"
+                 onerror="this.parentNode.innerHTML=document.getElementById('qr-fallback').innerHTML" />
+          </div>
+          <span class="closing-right__name">{{ESPECIALISTA_NOME}}</span>
+          <span class="closing-right__phone">{{ESPECIALISTA_WHATSAPP}}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Template SVG fallback para QR (usado quando qr.png não existe) -->
+    <template id="qr-fallback">
+      <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="QR code placeholder">
+        <rect width="200" height="200" fill="#ffffff"/>
+        <!-- Finder top-left -->
+        <rect x="10" y="10" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="22" y="22" width="36" height="36" fill="#161616"/>
+        <!-- Finder top-right -->
+        <rect x="130" y="10" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="142" y="22" width="36" height="36" fill="#161616"/>
+        <!-- Finder bottom-left -->
+        <rect x="10" y="130" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="22" y="142" width="36" height="36" fill="#161616"/>
+        <!-- Data dots (placeholder pattern) -->
+        <rect x="90" y="10" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="10" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="26" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="122" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="106" width="8" height="8" fill="#161616"/>
+        <rect x="130" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="130" y="106" width="8" height="8" fill="#161616"/>
+        <rect x="146" y="130" width="8" height="8" fill="#161616"/>
+        <rect x="162" y="146" width="8" height="8" fill="#161616"/>
+        <rect x="146" y="162" width="8" height="8" fill="#161616"/>
+        <rect x="162" y="130" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="106" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="130" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="146" width="8" height="8" fill="#161616"/>
+        <!-- Label -->
+        <text x="100" y="192" font-family="monospace" font-size="9" fill="#8d8d8d" text-anchor="middle">Substitua por qr.png</text>
+      </svg>
+    </template>
+
+  </main>
+
+  <!-- Navbar -->
+  <nav class="navbar" aria-label="Controles de navegação">
+    <div class="navbar__left">
+      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M4 6h24v2H4zm0 8h24v2H4zm0 8h24v2H4z"/></svg>
+        <span>Índice</span>
+      </button>
+    </div>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M20 6l-10 10 10 10-1.4 1.4L7.2 16 18.6 4.6z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
+        <span>Próximo</span>
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M12 6l10 10-10 10 1.4 1.4L24.8 16 13.4 4.6z"/></svg>
+      </button>
+    </div>
+    <div class="navbar__right">
+      <span class="navbar__hint" aria-hidden="true">Use 1–4 para ir direto ao slide</span>
+    </div>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="idx-title">
+      <header class="index-panel__head">
+        <h2 id="idx-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">{{IDX_1}}</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">{{IDX_2}}</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">{{IDX_3}}</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">{{IDX_4}}</span></button></li>
+      </ol>
+    </div>
+  </aside>
+
+  <script>
+  (function(){
+    'use strict';
+    var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total   = slides.length;
+    var bar     = document.getElementById('progress-bar');
+    var counter = document.getElementById('slide-counter');
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var btnIdx  = document.getElementById('btn-index');
+    var btnClose= document.getElementById('btn-index-close');
+    var idxPanel= document.getElementById('index-panel');
+    var idxItems= Array.prototype.slice.call(document.querySelectorAll('.index-item'));
+    var current = 1;
+    function pad(n){ return n<10?'0'+n:''+n; }
+    function go(n,opts){
+      opts=opts||{};
+      if(n<1)n=1; if(n>total)n=total;
+      if(n===current&&!opts.force)return;
+      slides.forEach(function(s){
+        var sn=parseInt(s.getAttribute('data-slide'),10);
+        if(sn===n){ s.classList.add('is-active'); s.removeAttribute('aria-hidden'); s.scrollTop=0; }
+        else { s.classList.remove('is-active'); s.setAttribute('aria-hidden','true'); }
+      });
+      current=n;
+      var pct=(n/total)*100;
+      if(bar) bar.style.width=pct+'%';
+      var prog=document.querySelector('.progress');
+      if(prog) prog.setAttribute('aria-valuenow',Math.round(pct));
+      if(counter) counter.textContent=pad(n)+' / '+pad(total);
+      idxItems.forEach(function(b){ parseInt(b.getAttribute('data-go'),10)===n?b.classList.add('is-current'):b.classList.remove('is-current'); });
+      if(btnPrev) btnPrev.disabled=(n===1);
+      if(btnNext) btnNext.disabled=(n===total);
+      var h='#slide-'+n; if(window.location.hash!==h) history.replaceState(null,'',h);
+    }
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+    function openIdx(){  if(!idxPanel)return; idxPanel.hidden=false; idxPanel.setAttribute('aria-hidden','false'); if(btnClose)btnClose.focus(); }
+    function closeIdx(){ if(!idxPanel)return; idxPanel.hidden=true;  idxPanel.setAttribute('aria-hidden','true');  if(btnIdx)btnIdx.focus(); }
+    function toggleIdx(){ idxPanel&&(idxPanel.hidden?openIdx():closeIdx()); }
+    if(btnPrev)  btnPrev.addEventListener('click',prev);
+    if(btnNext)  btnNext.addEventListener('click',next);
+    if(btnIdx)   btnIdx.addEventListener('click',toggleIdx);
+    if(btnClose) btnClose.addEventListener('click',closeIdx);
+    if(idxPanel) idxPanel.addEventListener('click',function(e){ if(e.target===idxPanel)closeIdx(); });
+    idxItems.forEach(function(b){ b.addEventListener('click',function(){ var n=parseInt(b.getAttribute('data-go'),10); if(!isNaN(n)){closeIdx();go(n);} }); });
+    document.addEventListener('keydown',function(e){
+      var tag=e.target&&e.target.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA'||(e.target&&e.target.isContentEditable))return;
+      var k=e.key;
+      if(k==='Escape'){e.preventDefault();toggleIdx();}
+      else if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();next();}
+      else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev();}
+      else if(k==='Home'){e.preventDefault();go(1);}
+      else if(k==='End'){e.preventDefault();go(total);}
+      else if(k==='f'||k==='F'){e.preventDefault();document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+      else if(/^[1-4]$/.test(k)){var n=parseInt(k,10);e.preventDefault();go(n);}
+    });
+    var tx=null,ty=null;
+    document.addEventListener('touchstart',function(e){if(e.touches[0]){tx=e.touches[0].clientX;ty=e.touches[0].clientY;}},{passive:true});
+    document.addEventListener('touchend',function(e){
+      if(tx===null)return;
+      var t=e.changedTouches[0]; if(!t)return;
+      var dx=t.clientX-tx,dy=t.clientY-ty;
+      if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev();}
+      tx=ty=null;
+    },{passive:true});
+    var hash=(window.location.hash||'').replace('#','');
+    var m=/^slide-(\d+)$/.exec(hash);
+    var init=m?parseInt(m[1],10):1;
+    if(init<1||init>total)init=1;
+    go(init,{force:true});
+  })();
+  </script>
+</body>
+</html>

@@ -30,8 +30,26 @@ Não leia tudo de uma vez. Localize o alvo e implemente.
 | **Nova apresentação (deck HTML)** | **`<workspace>/<slug>/` — fora da factory** |
 | Roteiro da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/brief.md` |
 | Configuração da apresentação (uso avançado) | `organizations/ibm/presentations/<slug>/presentation.toml` |
-| Templates IBM ativos | `organizations/ibm/templates/ibm-template/`, `ibm-brief-template/`, `ibm-edge-template/` |
+| Templates IBM ativos | `organizations/ibm/templates/ibm-template/`, `ibm-brief-template/`, `ibm-edge-template/`, `ibm-febraban-template/` |
 | Saída gerada | `dist/` — nunca edite diretamente |
+
+## Modo feira / evento presencial (ibm-febraban-template)
+
+Use `ibm-febraban-template` quando o pedido for para responder a **uma pergunta de visitante em feira ou evento** (Febraban, CIAB, etc.).
+
+| Slide | Layout | Função |
+|---|---|---|
+| 01 | `slide--cover` | A pergunta do visitante em display grande + contexto |
+| 02 | Branco (dois painéis) | Visão geral do tema + 3 pontos-chave numerados |
+| 03 | `slide--cases` (fundo azul) | 3 cases reais IBM com tag, título, corpo e resultado |
+| 04 | `slide--closing` (split) | "Quer saber mais?" + QR code WhatsApp do especialista |
+
+**Fluxo de criação:**
+1. Pergunte ao operador: tema, nome/cargo do especialista e número do WhatsApp.
+2. Gere `https://wa.me/55XXXXXXXXXXX` e instrua a criar `assets/qr.png` (400×400 px, fundo branco).
+3. Crie `<workspace>/<slug>/index.html` a partir do template, substituindo todos os `{{PLACEHOLDER}}`.
+4. Copie `assets/` do template para `<workspace>/<slug>/assets/`.
+5. O deck tem exatamente 4 slides — não adicione nem remova.
 
 ## Regras inegociáveis
 

@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: ibm-presentation-factory
+Version: 0.1.0
+Summary: Reproducible presentation package builder
+Requires-Python: >=3.11

@@ -1,0 +1,4 @@
+name = "IA Generativa para Bancos — Febraban"
+template = "organizations/ibm/templates/ibm-febraban-template"
+brief = "organizations/ibm/presentations/febraban-ia-generativa-bancos/brief.md"
+default_model = "primary"
