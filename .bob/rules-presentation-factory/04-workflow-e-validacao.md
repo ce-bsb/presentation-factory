@@ -1,31 +1,32 @@
-# Workflow e validação
+# Workflow e validação — Modo Febraban
 
-## Criar nova apresentação (caso padrão)
+## Geração automática (comportamento padrão neste modo)
 
-1. Derive o slug kebab-case do nome pedido pelo usuário.
-2. Crie a pasta **fora** da factory: `<workspace>/<slug>/` (irmã de `presentation-factory/`).
-3. Leia o template real mais próximo na factory **apenas como referência**.
-4. Copie `index.html` e `assets/` do template; nos templates IBM ativos, mantenha
-   CSS e JavaScript dentro do `index.html`.
-5. Verifique sintaxe JS e que não há paths absolutos proibidos.
+**Toda mensagem com pergunta ou tema → gere o deck imediatamente.**
+Não espere pedido explícito de "criar apresentação".
 
-Não rode `make build/validate/test` para decks simples.
+## Fluxo único
 
-## Apresentação registrada na factory (uso avançado, apenas quando explicitamente pedido)
+1. Derive slug kebab-case do tema recebido.
+2. Crie `<workspace>/<slug>/` fora da factory.
+3. Copie `organizations/ibm/templates/ibm-febraban-template/index.html` → `<workspace>/<slug>/index.html`.
+4. Copie `organizations/ibm/templates/ibm-febraban-template/assets/` → `<workspace>/<slug>/assets/`.
+5. Copie `organizations/ibm/assets/img/logo-dark.svg` → `<workspace>/<slug>/assets/ibm-logo.svg`.
+6. Substitua todos os `{{PLACEHOLDER}}` com conteúdo real do tema.
+7. Não rode `make build/validate/test` — não é necessário para este fluxo.
 
-1. `make list` → escolha slug único.
-2. Crie `presentations/<slug>/brief.md` e `presentation.toml`.
-3. Mapeie assets no `presentation.toml`.
-4. `make validate && make test`.
-5. `make build PRESENTATION=<slug> MODEL=<alias>`.
+## Conteúdo dos 4 slides
 
-## Nova entidade
+| Slide | O que preencher |
+|---|---|
+| 01 Cover | Tema/pergunta como headline — `{{PERGUNTA_LINHA_1}}` e `{{PERGUNTA_LINHA_2}}` |
+| 02 Visão geral | Contexto do tema + 3 pontos-chave do IBM watsonx ou solução relevante |
+| 03 Cases IBM | 3 cases reais verificáveis; use `[A confirmar]` se sem fonte |
+| 04 Closing | "Quer saber mais?" + `{{ESPECIALISTA_NOME}}` + `{{ESPECIALISTA_WHATSAPP}}` |
 
-1. Escolha `clients/` ou `organizations/`, crie slug kebab-case.
-2. Crie `entity.toml` e pasta `assets/` se necessário.
+`assets/qr.png` é opcional — o template exibe fallback SVG se ausente.
 
 ## Critério de conclusão
 
-- Alteração na camada correta; sem dados inventados; sem paths absolutos.
-- Navegação, acessibilidade e responsividade funcionando.
-- `make validate` e `make test` passando quando aplicável.
+- Todos os `{{PLACEHOLDER}}` substituídos; sem paths absolutos; sem dados inventados sem marcação.
+- Responsividade e navegação funcionando (já garantidas pelo template).
