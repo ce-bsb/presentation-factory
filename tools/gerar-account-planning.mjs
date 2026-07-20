@@ -56,6 +56,7 @@ const esc  = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/
 const varClass = v => v == null ? 'val-neutral' : v > 0 ? 'val-up' : v < 0 ? 'val-down' : 'val-neutral';
 
 const COLORS = ['blue','cyan','teal','purple','green','yellow'];
+const COLORS_CSS = ['#0f62fe','#1192e8','#009d9a','#8a3ffc','#198038','#f1c21b'];
 const maxVal  = (key) => Math.max(...bancos.map(b => b[key] || 0), 1);
 
 // ── Barras de crédito ────────────────────────────────────────────────────
@@ -64,9 +65,11 @@ function buildBars(key) {
   return bancos.map((b, i) => {
     const val = b[key];
     const pct = val != null ? Math.round((val / mx) * 100) : 0;
-    return `<div class="bar-item">
+    const isFocal = b.focal || b.slug === meta.banco_focal;
+    const bankColor = b.cor || COLORS_CSS[i % COLORS_CSS.length];
+    return `<div class="bar-item${isFocal ? ' bar-item--focal' : ''}">
   <span class="bar-item__name">${esc(b.nome)}</span>
-  <div class="bar-track"><div class="bar-fill bar-fill--${COLORS[i % COLORS.length]}" style="width:${pct}%" role="presentation"></div></div>
+  <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${bankColor}" role="presentation"></div></div>
   <span class="bar-item__val">${val != null ? `R$ ${val}bi` : '[A confirmar]'}</span>
 </div>`;
   }).join('\n');
@@ -81,11 +84,17 @@ const METRICS = [
   { key: 'credito_imob_bi',   var: 'credito_imob_var',    label: 'Crédito imobiliário (R$ bi)' },
 ];
 
-const tableHeaders = bancos.map(b => `<th scope="col">${esc(b.nome)}</th>`).join('');
+const tableHeaders = bancos.map(b => {
+  const isFocal = b.focal || b.slug === meta.banco_focal;
+  const bankColor = b.cor;
+  const style = bankColor ? ` style="border-bottom-color:${bankColor}"` : '';
+  return `<th scope="col" class="${isFocal ? 'focal' : ''}"${style}>${esc(b.nome)}</th>`;
+}).join('');
 const tableRows = METRICS.map(m => {
   const cells = bancos.map(b => {
+    const isFocal = b.focal || b.slug === meta.banco_focal;
     const v = b[m.key]; const dv = b[m.var];
-    return `<td>${fmt(v)}<br/><span class="${varClass(dv)} mono" style="font-size:.75rem">${fmtPct(dv)}</span></td>`;
+    return `<td class="${isFocal ? 'focal' : ''}">${fmt(v)}<br/><span class="${varClass(dv)} mono" style="font-size:.75rem">${fmtPct(dv)}</span></td>`;
   }).join('');
   return `<tr><td>${esc(m.label)}</td>${cells}</tr>`;
 }).join('\n');
@@ -161,15 +170,32 @@ bancos.forEach((b, i) => {
       <span class="highlight-item__text">${esc(h)}</span>
     </li>`).join('');
 
+  const isFocal = b.focal || b.slug === meta.banco_focal;
+  const bankColor  = b.cor || COLORS_CSS[i % COLORS_CSS.length];
+  const bankAccent = b.cor_accent || bankColor;
+  const sidebarClass = isFocal ? 'bank-sidebar' : 'bank-sidebar bank-sidebar--compare';
+
+  // Logo do banco na sidebar (opcional)
+  const logoHtml = b.logo
+    ? `<img class="bank-sidebar__logo" src="${esc(b.logo)}" alt="${esc(b.nome)}">`
+    : `<span class="bank-sidebar__name">${esc(b.nome)}</span>`;
+
   profileSlides += `
-    <section class="slide" id="slide-${slideNum}" data-slide="${slideNum}" aria-labelledby="s${slideNum}-title">
-      <div class="slide__inner">
-        <header class="slide-head">
-          <span class="eyebrow">${String(slideNum).padStart(2,'0')} — Perfil</span>
-          <h2 id="s${slideNum}-title" class="slide-title">${esc(b.nome)}</h2>
-          <p class="slide-sub">${esc(b.periodo || meta.periodo || '')} · Fonte: RI / ${esc(b.pdf || '')}</p>
-        </header>
-        <div class="bank-profile">
+    <section class="slide slide--bank" id="slide-${slideNum}" data-slide="${slideNum}"
+      aria-labelledby="s${slideNum}-title"
+      style="--bank-color:${bankColor};--bank-accent:${bankAccent}">
+      <div class="slide__inner" style="padding:0;max-width:none;flex-direction:row;gap:0;">
+        <div class="${sidebarClass}" aria-hidden="true">
+          ${logoHtml}
+          <div class="bank-sidebar__accent"></div>
+          <span class="bank-sidebar__period">${esc(b.periodo || meta.periodo || '')}</span>
+        </div>
+        <div class="bank-main">
+          <header class="slide-head">
+            <span class="eyebrow" style="color:${bankColor};border-color:${bankColor}">${String(slideNum).padStart(2,'0')} — ${isFocal ? 'Foco' : 'Comparativo'}</span>
+            <h2 id="s${slideNum}-title" class="slide-title">${esc(b.nome)}</h2>
+            <p class="slide-sub">Fonte: RI / ${esc(b.pdf || '')} · ${esc(b.periodo || meta.periodo || '')}</p>
+          </header>
           <div class="bank-kpis">${kpiHtml}</div>
           <div class="bank-body">
             <div class="bank-chart">
@@ -184,6 +210,7 @@ bancos.forEach((b, i) => {
         </div>
       </div>
     </section>`;
+  /* fecha bank-main + slide__inner + section */
 });
 
 // ── Cards de oportunidades IBM ───────────────────────────────────────────

@@ -1,10 +1,11 @@
 {
   "meta": {
-    "titulo":            "Account Planning — Setor Bancário Brasileiro",
+    "titulo":            "Account Planning — Caixa Econômica Federal",
     "titulo_linha_1":    "Account Planning",
-    "titulo_linha_2":    "Setor Bancário",
+    "titulo_linha_2":    "Caixa Econômica Federal",
     "segmento":          "Setor Bancário Brasileiro",
     "periodo":           "2024",
+    "banco_focal":       "caixa",
     "contexto_titulo":   "Panorama do setor bancário brasileiro",
     "contexto_panorama": "O setor bancário brasileiro registrou crescimento da carteira de crédito em 2024, com destaque para crédito imobiliário e consignado. A digitalização acelerada amplia pressões competitivas de fintechs e exige investimentos contínuos em tecnologia e governança.",
     "contexto_bullets": [
@@ -29,6 +30,10 @@
     {
       "slug":               "caixa",
       "nome":               "Caixa Econômica Federal",
+      "focal":              true,
+      "cor":                "#005CA9",
+      "cor_accent":         "#F7941D",
+      "logo":               "assets/logo-caixa.svg",
       "pdf":                "caixa-ri-2024.pdf",
       "periodo":            "2024",
       "lucro_liquido_bi":   15.2,
@@ -53,6 +58,10 @@
     {
       "slug":               "bradesco",
       "nome":               "Bradesco",
+      "focal":              false,
+      "cor":                "#CC0000",
+      "cor_accent":         "#CC0000",
+      "logo":               null,
       "pdf":                "bradesco-ri-2024.pdf",
       "periodo":            "2024",
       "lucro_liquido_bi":   19.5,
@@ -77,6 +86,10 @@
     {
       "slug":               "itau",
       "nome":               "Itaú Unibanco",
+      "focal":              false,
+      "cor":                "#EC7000",
+      "cor_accent":         "#003D7A",
+      "logo":               null,
       "pdf":                "itau-ri-2024.pdf",
       "periodo":            "2024",
       "lucro_liquido_bi":   38.6,
