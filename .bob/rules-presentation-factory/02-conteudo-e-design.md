@@ -58,6 +58,39 @@ Use exclusivamente ícones oficiais do Carbon Design System (`@carbon/icons`).
 **Proibido:** criar, desenhar, aproximar ou gerar ícones com IA, SVG manual,
 formas CSS, caracteres Unicode ou emojis.
 
+## ⚠️ Account Planning — banco focal obrigatório
+
+Toda vez que o usuário pedir uma apresentação de account planning (template `ibm-account-planning`)
+ou qualquer deck comparativo de bancos, **você DEVE perguntar antes de gerar**:
+
+> "Qual banco você representa / será o banco focal desta apresentação?"
+
+### Regra de aplicação do banco focal
+
+- Use as **cores oficiais de marca** (HEX) do banco focal em todos os elementos de destaque:
+  borda esquerda das barras (`.bar-row.hl`), badges, KPIs, linha de acento, cover direito.
+- **Nunca use as cores IBM (azul `#0f62fe`) para representar um banco concorrente.**
+- Declare as cores via CSS custom property `--focal-color` e `--focal-accent`
+  no elemento raiz ou no slide, e use-as em vez das variáveis IBM.
+
+### Cores de marca dos principais bancos brasileiros
+
+| Banco | Cor principal | Cor secundária | Logo disponível |
+|-------|--------------|----------------|-----------------|
+| **CAIXA Econômica Federal** | `#005CA5` (Azul Caixa — Pantone 286) | `#F18121` (Laranja Caixa) | `presentation-factory/clients/caixa/caixa-logo.png` (fundo claro) · `caixa-logo-dark.png` · `logo-caixa-white.png` (fundo escuro) |
+| **Banco do Brasil** | `#003882` (azul) | `#F8E400` (amarelo) | `presentation-factory/clients/banco-do-brasil/logo_azul_bb.svg` · `logo_amarela_bb.svg` · `logo_icone_bb.svg` |
+| **Itaú Unibanco** | `#EC7000` (laranja) | `#003D70` (azul escuro) | copiar de `ri-bancos-comparativo/assets/` se disponível |
+| **Bradesco** | `#CC092F` (vermelho) | `#F05A24` (laranja) | copiar de `ri-bancos-comparativo/assets/` se disponível |
+| **Santander** | `#EC0000` (vermelho) | `#CC0000` (vermelho escuro) | sem asset pré-existente |
+| **BTG Pactual** | `#002C71` (azul marinho) | `#005FAD` (azul) | sem asset pré-existente |
+| **Nubank** | `#820AD1` (roxo) | `#44003F` (roxo escuro) | sem asset pré-existente |
+
+### Procedimento de cópia de logos
+
+1. Para CAIXA: copie `presentation-factory/clients/caixa/caixa-logo.png` para `<slug>/assets/caixa-logo.png`
+2. Para BB: copie `presentation-factory/clients/banco-do-brasil/logo_azul_bb.svg` para `<slug>/assets/bb-logo.svg`
+3. Use sempre path relativo no HTML: `<img src="assets/caixa-logo.png" alt="CAIXA">`
+
 ## Referências sob demanda
 
 - Regras Carbon → `organizations/ibm/design-systems/carbon/`
