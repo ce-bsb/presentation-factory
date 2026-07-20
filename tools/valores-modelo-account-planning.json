@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "titulo":            "Account Planning — Setor Bancário Brasileiro",
+    "titulo_linha_1":    "Account Planning",
+    "titulo_linha_2":    "Setor Bancário",
+    "segmento":          "Setor Bancário Brasileiro",
+    "periodo":           "2024",
+    "contexto_titulo":   "Panorama do setor bancário brasileiro",
+    "contexto_panorama": "O setor bancário brasileiro registrou crescimento da carteira de crédito em 2024, com destaque para crédito imobiliário e consignado. A digitalização acelerada amplia pressões competitivas de fintechs e exige investimentos contínuos em tecnologia e governança.",
+    "contexto_bullets": [
+      "Crescimento da carteira de crédito acima do PIB nominal",
+      "Expansão do crédito imobiliário impulsionada pelo MCMV e LCI",
+      "Pressão regulatória crescente: Basileia IV, Resolução CMN 4.966 e LGPD",
+      "Digitalização acelerada e concorrência de fintechs e bancos digitais",
+      "Investimentos em IA e automação como diferencial competitivo"
+    ],
+    "closing_titulo":   "Próximos passos e ações prioritárias",
+    "proximos_passos": [
+      "Agendar discovery sessions com CTO/CIO de cada conta",
+      "Mapear iniciativas de tecnologia declaradas nos RIs vs. portfólio IBM",
+      "Preparar proposta de valor customizada por banco (watsonx, hybrid cloud)",
+      "Definir executivo IBM sponsor e equipe de conta por banco",
+      "Revisão trimestral do account plan com liderança IBM Brasil"
+    ],
+    "time_ibm":          "[Nome do time de vendas IBM]",
+    "periodo_execucao":  "Q1–Q2 2025"
+  },
+  "bancos": [
+    {
+      "slug":               "caixa",
+      "nome":               "Caixa Econômica Federal",
+      "pdf":                "caixa-ri-2024.pdf",
+      "periodo":            "2024",
+      "lucro_liquido_bi":   15.2,
+      "lucro_liquido_var":  8.3,
+      "ativos_totais_bi":   1890.0,
+      "ativos_totais_var":  6.1,
+      "roe":                12.4,
+      "roe_var":            0.5,
+      "carteira_total_bi":  1020.0,
+      "carteira_total_var": 9.2,
+      "credito_imob_bi":    820.0,
+      "credito_imob_var":   11.5,
+      "highlights": [
+        "Líder absoluto em crédito imobiliário no Brasil, com 68% de participação de mercado",
+        "Expansão do programa Minha Casa Minha Vida impulsionando crescimento da carteira habitacional",
+        "Transformação digital em curso: migração de sistemas legados e investimento em cloud híbrida"
+      ],
+      "oportunidade_titulo":  "Modernização de core bancário e cloud híbrida",
+      "oportunidade_corpo":   "Caixa possui grande volume de sistemas legados COBOL e IBM Mainframe. Oportunidade de modernização com watsonx Code Assistant e migração híbrida para IBM Cloud.",
+      "oportunidade_solucao": "IBM watsonx Code Assistant + IBM Cloud Hybrid"
+    },
+    {
+      "slug":               "bradesco",
+      "nome":               "Bradesco",
+      "pdf":                "bradesco-ri-2024.pdf",
+      "periodo":            "2024",
+      "lucro_liquido_bi":   19.5,
+      "lucro_liquido_var":  -3.2,
+      "ativos_totais_bi":   1650.0,
+      "ativos_totais_var":  4.8,
+      "roe":                13.1,
+      "roe_var":            -1.2,
+      "carteira_total_bi":  890.0,
+      "carteira_total_var": 7.4,
+      "credito_imob_bi":    180.0,
+      "credito_imob_var":   6.8,
+      "highlights": [
+        "Programa de reestruturação e eficiência operacional em andamento",
+        "Investimentos em IA generativa para atendimento ao cliente via BIA",
+        "Parceria com startups via inovabra para acelerar transformação digital"
+      ],
+      "oportunidade_titulo":  "IA generativa para atendimento e operações",
+      "oportunidade_corpo":   "Bradesco já usa IA no atendimento mas busca evolução para modelos generativos com governança. watsonx.ai pode acelerar e garantir compliance.",
+      "oportunidade_solucao": "IBM watsonx.ai + watsonx.governance"
+    },
+    {
+      "slug":               "itau",
+      "nome":               "Itaú Unibanco",
+      "pdf":                "itau-ri-2024.pdf",
+      "periodo":            "2024",
+      "lucro_liquido_bi":   38.6,
+      "lucro_liquido_var":  15.2,
+      "ativos_totais_bi":   2870.0,
+      "ativos_totais_var":  8.3,
+      "roe":                21.5,
+      "roe_var":            2.1,
+      "carteira_total_bi":  1180.0,
+      "carteira_total_var": 11.0,
+      "credito_imob_bi":    250.0,
+      "credito_imob_var":   14.2,
+      "highlights": [
+        "Melhor resultado da história em 2024, liderando o setor em rentabilidade",
+        "Forte investimento em plataformas digitais e open finance",
+        "Expansão internacional e foco em clientes de alta renda"
+      ],
+      "oportunidade_titulo":  "Plataforma de dados e analytics em escala",
+      "oportunidade_corpo":   "Volume massivo de dados transacionais. Oportunidade de unificação com IBM watsonx.data e análise preditiva para risco de crédito.",
+      "oportunidade_solucao": "IBM watsonx.data + IBM Consulting Analytics"
+    }
+  ]
+}

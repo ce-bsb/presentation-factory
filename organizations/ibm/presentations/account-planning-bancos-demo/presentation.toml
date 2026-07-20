@@ -1,0 +1,4 @@
+name = "Account Planning — Bancos (Demo)"
+template = "organizations/ibm/templates/ibm-account-planning"
+brief = "organizations/ibm/presentations/account-planning-bancos-demo/brief.md"
+default_model = "primary"

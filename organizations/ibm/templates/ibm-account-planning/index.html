@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>{{TITULO}} — IBM Account Planning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap" />
+  <style>
+    :root {
+      --white:#fff; --gray-10:#f4f4f4; --gray-20:#e0e0e0; --gray-30:#c6c6c6;
+      --gray-50:#8d8d8d; --gray-70:#525252; --gray-80:#393939; --gray-100:#161616;
+      --ibm-blue:#0f62fe; --ibm-blue-h:#0043ce; --ibm-cyan:#1192e8; --ibm-cyan-l:#33b1ff;
+      --ibm-teal:#009d9a; --ibm-purple:#8a3ffc; --ibm-green:#198038; --ibm-red:#da1e28;
+      --ibm-yellow:#f1c21b;
+      --bg:var(--white); --bg-2:var(--gray-10); --ink:var(--gray-100);
+      --ink-muted:var(--gray-70); --ink-faint:var(--gray-50);
+      --line:var(--gray-20); --line-strong:var(--gray-30);
+      --font-sans:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+      --font-mono:'IBM Plex Mono',monospace;
+      --text-11:.6875rem; --text-12:.75rem; --text-14:.875rem; --text-16:1rem;
+      --text-18:1.125rem; --text-20:1.25rem; --text-24:1.5rem; --text-32:2rem;
+      --text-42:2.625rem; --text-54:3.375rem;
+      --u1:4px;--u2:8px;--u3:12px;--u4:16px;--u5:24px;--u6:32px;--u7:40px;--u8:48px;--u9:64px;
+      --topbar-h:52px; --navbar-h:52px;
+      --ease:cubic-bezier(.2,0,.38,.9); --ease-out:cubic-bezier(0,0,.38,.9);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    @media(max-width:600px){html{font-size:14px;}}
+    body{font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow:hidden;overflow-wrap:break-word;}
+    img,svg{display:block;max-width:100%;height:auto;}
+    button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+    :focus-visible{outline:2px solid var(--ibm-blue);outline-offset:2px;}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+    /* ── Progress ── */
+    .progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--gray-20);z-index:50;}
+    .progress__bar{height:100%;width:0;background:linear-gradient(90deg,var(--ibm-blue),var(--ibm-cyan-l));transition:width 300ms var(--ease);}
+
+    /* ── Topbar ── */
+    .topbar{position:fixed;top:3px;left:0;right:0;height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;padding:0 var(--u6);background:var(--bg);border-bottom:1px solid var(--line);z-index:40;}
+    .topbar__left,.topbar__right{display:flex;align-items:center;gap:var(--u4);}
+    .brand__ibm img{height:13px;width:auto;}
+    .t-sep{width:1px;height:18px;background:var(--line-strong);}
+    .t-label{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);}
+    .t-dot{display:inline-block;width:6px;height:6px;background:var(--ibm-blue);}
+    .t-counter{font-family:var(--font-mono);font-size:var(--text-12);color:var(--ink-faint);}
+    @media(max-width:500px){.t-label{display:none;}.t-sep{display:none;}}
+
+    /* ── Deck ── */
+    .deck{position:fixed;top:calc(3px + var(--topbar-h));bottom:var(--navbar-h);left:0;right:0;overflow:hidden;}
+    .slide{position:absolute;inset:0;opacity:0;visibility:hidden;clip-path:inset(0 100% 0 0);transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms;overflow:auto;background:var(--white);}
+    .slide.is-active{opacity:1;visibility:visible;clip-path:inset(0 0% 0 0);transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s;}
+    .slide__inner{max-width:1360px;margin:0 auto;padding:var(--u7) var(--u8) var(--u8);min-height:100%;display:flex;flex-direction:column;gap:var(--u5);}
+    @media(max-width:820px){.slide__inner{padding:var(--u5) var(--u5) var(--u6);gap:var(--u4);}}
+
+    /* ── Typography ── */
+    .eyebrow{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.08em;text-transform:uppercase;color:var(--ibm-blue);padding-bottom:var(--u2);border-bottom:1px solid var(--ibm-blue);display:inline-block;}
+    .eyebrow--light{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.35);}
+    .slide-title{font-weight:300;font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:var(--u3) 0 0;}
+    .slide-title--light{color:var(--white);}
+    .slide-sub{font-size:var(--text-16);color:var(--ink-muted);font-weight:300;margin:var(--u2) 0 0;}
+    .slide-head{display:flex;flex-direction:column;gap:0;flex-shrink:0;}
+    .mono{font-family:var(--font-mono);}
+    .tag{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--line-strong);color:var(--ink-faint);width:fit-content;}
+
+    /* ══════════════════════════════════
+       SLIDE 01 — COVER
+    ══════════════════════════════════ */
+    .slide--cover{background:var(--ibm-blue);}
+    .slide--cover .slide__inner{flex-direction:row;padding:0;max-width:none;gap:0;}
+    .cover-bar{width:clamp(140px,16vw,220px);background:rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:space-between;padding:var(--u8) var(--u5);flex-shrink:0;position:relative;overflow:hidden;}
+    .cover-bar::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.15) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;}
+    .cover-bar__label{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);writing-mode:vertical-rl;transform:rotate(180deg);align-self:flex-start;position:relative;z-index:1;}
+    .cover-bar__period{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);width:fit-content;position:relative;z-index:1;}
+    .cover-main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:var(--u8) var(--u8) var(--u7);gap:var(--u6);}
+    .cover-kicker{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:var(--u3);}
+    .cover-kicker::before{content:"";display:block;width:32px;height:1px;background:rgba(255,255,255,.4);}
+    .cover-display{font-weight:200;font-size:clamp(2rem,5vw,4rem);line-height:1.0;letter-spacing:-.03em;color:var(--white);}
+    .cover-display em{font-style:normal;color:var(--ibm-cyan-l);font-weight:600;}
+    .cover-banks{display:flex;flex-wrap:wrap;gap:var(--u2);margin-top:var(--u2);}
+    .cover-bank-tag{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);}
+    .cover-foot{border-top:1px solid rgba(255,255,255,.12);padding-top:var(--u5);display:flex;align-items:center;gap:var(--u4);}
+    .cover-foot img{height:13px;filter:brightness(0) invert(1);opacity:.6;}
+    .cover-foot__text{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+    @media(max-width:768px){
+      .slide--cover .slide__inner{flex-direction:column;}
+      .cover-bar{width:100%;height:52px;flex-direction:row;align-items:center;padding:0 var(--u5);}
+      .cover-bar__label{writing-mode:horizontal-tb;transform:none;}
+      .cover-main{padding:var(--u6) var(--u5);}
+      .cover-display{font-size:clamp(1.8rem,7vw,3rem);}
+    }
+
+    /* ══════════════════════════════════
+       SLIDE 02 — CONTEXTO DO SETOR
+    ══════════════════════════════════ */
+    .context-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);flex:1;}
+    .context-panel{background:var(--bg);padding:var(--u6);display:flex;flex-direction:column;gap:var(--u4);}
+    .context-panel--accent{background:var(--bg-2);border-left:3px solid var(--ibm-blue);padding-left:calc(var(--u6) - 3px);}
+    .context-panel__label{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);}
+    .context-panel--accent .context-panel__label{color:var(--ibm-blue);}
+    .context-panel__body{font-size:var(--text-16);line-height:1.65;color:var(--ink-muted);}
+    .context-bullets{list-style:none;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+    .context-bullet{background:var(--bg);display:grid;grid-template-columns:32px 1fr;gap:var(--u3);padding:var(--u3) var(--u4);font-size:var(--text-14);line-height:1.5;color:var(--ink);}
+    .context-bullet__dot{width:6px;height:6px;background:var(--ibm-blue);border-radius:50%;margin-top:5px;}
+    @media(max-width:720px){.context-grid{grid-template-columns:1fr;}}
+
+    /* ══════════════════════════════════
+       SLIDE 03 — COMPARATIVO FINANCEIRO (tabela)
+    ══════════════════════════════════ */
+    .fin-table-wrap{overflow-x:auto;flex:1;display:flex;flex-direction:column;}
+    .fin-table{width:100%;border-collapse:collapse;font-size:var(--text-14);}
+    .fin-table th{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding:var(--u3) var(--u4);border-bottom:2px solid var(--ibm-blue);text-align:right;white-space:nowrap;}
+    .fin-table th:first-child{text-align:left;}
+    .fin-table td{padding:var(--u3) var(--u4);border-bottom:1px solid var(--line);text-align:right;color:var(--ink);white-space:nowrap;}
+    .fin-table td:first-child{text-align:left;font-weight:600;color:var(--ink);font-size:var(--text-14);}
+    .fin-table tr:hover td{background:var(--bg-2);}
+    .fin-table .metric-row td:first-child{font-weight:400;font-size:var(--text-13,var(--text-12));color:var(--ink-muted);padding-left:var(--u6);}
+    .fin-table .bank-row{background:var(--bg-2);}
+    .fin-table .bank-row td:first-child{font-size:var(--text-16);font-weight:700;}
+    .val-up{color:var(--ibm-green);}
+    .val-down{color:var(--ibm-red);}
+    .val-neutral{color:var(--ink-muted);}
+    .fin-note{font-family:var(--font-mono);font-size:var(--text-11);color:var(--ink-faint);margin-top:var(--u4);}
+
+    /* ══════════════════════════════════
+       SLIDE 04 — CARTEIRA DE CRÉDITO (barras SVG)
+    ══════════════════════════════════ */
+    .chart-section{display:flex;flex-direction:column;gap:var(--u3);flex:1;}
+    .chart-label-row{display:flex;align-items:center;justify-content:space-between;}
+    .chart-section-title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ibm-blue);}
+    .bar-list{display:flex;flex-direction:column;gap:var(--u3);}
+    .bar-item{display:grid;grid-template-columns:140px 1fr 80px;align-items:center;gap:var(--u4);}
+    .bar-item__name{font-size:var(--text-14);font-weight:600;color:var(--ink);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .bar-track{background:var(--gray-20);height:28px;position:relative;overflow:hidden;}
+    .bar-fill{height:100%;transition:width 600ms var(--ease-out);}
+    .bar-fill--blue{background:var(--ibm-blue);}
+    .bar-fill--cyan{background:var(--ibm-cyan);}
+    .bar-fill--teal{background:var(--ibm-teal);}
+    .bar-fill--purple{background:var(--ibm-purple);}
+    .bar-fill--green{background:var(--ibm-green);}
+    .bar-fill--yellow{background:var(--ibm-yellow);}
+    .bar-item__val{font-family:var(--font-mono);font-size:var(--text-12);color:var(--ink-muted);white-space:nowrap;}
+    .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--u6);flex:1;}
+    @media(max-width:820px){
+      .charts-grid{grid-template-columns:1fr;}
+      .bar-item{grid-template-columns:100px 1fr 70px;}
+    }
+    @media(max-width:500px){.bar-item{grid-template-columns:80px 1fr 60px;}.bar-item__name{font-size:var(--text-12);}}
+
+    /* ══════════════════════════════════
+       SLIDE 05..N — PERFIL DO BANCO
+    ══════════════════════════════════ */
+    .bank-profile{display:grid;grid-template-columns:1fr 1fr;gap:var(--u5);flex:1;}
+    .bank-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);align-self:start;}
+    .bank-kpi{background:var(--bg);padding:var(--u5) var(--u4);display:flex;flex-direction:column;gap:var(--u1);position:relative;}
+    .bank-kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;}
+    .bank-kpi:nth-child(1)::before{background:var(--ibm-blue);}
+    .bank-kpi:nth-child(2)::before{background:var(--ibm-cyan);}
+    .bank-kpi:nth-child(3)::before{background:var(--ibm-teal);}
+    .bank-kpi:nth-child(4)::before{background:var(--ibm-purple);}
+    .bank-kpi:nth-child(5)::before{background:var(--ibm-green);}
+    .bank-kpi:nth-child(6)::before{background:var(--ibm-yellow);}
+    .bank-kpi__value{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;letter-spacing:-.02em;color:var(--ink);line-height:1;}
+    .bank-kpi__label{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);}
+    .bank-kpi__delta{font-family:var(--font-mono);font-size:var(--text-11);margin-top:var(--u1);}
+    .bank-highlights{display:flex;flex-direction:column;gap:var(--u4);}
+    .bank-highlights__title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ibm-blue);}
+    .highlight-list{list-style:none;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+    .highlight-item{background:var(--bg);padding:var(--u4) var(--u5);display:grid;grid-template-columns:28px 1fr;gap:var(--u3);align-items:start;}
+    .highlight-item__icon{width:20px;height:20px;background:var(--ibm-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .highlight-item__icon svg{width:12px;height:12px;fill:white;}
+    .highlight-item__text{font-size:var(--text-14);line-height:1.55;color:var(--ink);}
+    .highlight-item__text strong{color:var(--ink);font-weight:600;}
+    @media(max-width:820px){
+      .bank-profile{grid-template-columns:1fr;}
+      .bank-kpis{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:500px){.bank-kpis{grid-template-columns:repeat(2,1fr);}}
+
+    /* ══════════════════════════════════
+       SLIDE OPORTUNIDADES IBM (azul)
+    ══════════════════════════════════ */
+    .slide--opps{background:var(--ibm-blue);}
+    .slide--opps .slide__inner{padding:var(--u7) var(--u8);gap:var(--u5);}
+    .opps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);flex:1;}
+    .opp-card{background:rgba(0,0,0,.15);padding:var(--u5);display:flex;flex-direction:column;gap:var(--u3);}
+    .opp-card__bank{font-family:var(--font-mono);font-size:var(--text-11);letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);width:fit-content;}
+    .opp-card__title{font-size:var(--text-16);font-weight:600;color:var(--white);line-height:1.25;}
+    .opp-card__body{font-size:var(--text-13,var(--text-14));line-height:1.55;color:rgba(255,255,255,.7);}
+    .opp-card__solution{font-family:var(--font-mono);font-size:var(--text-11);color:var(--ibm-cyan-l);letter-spacing:.04em;margin-top:auto;padding-top:var(--u3);border-top:1px solid rgba(255,255,255,.1);}
+    @media(max-width:800px){.slide--opps .slide__inner{padding:var(--u6) var(--u5);}}
+
+    /* ══════════════════════════════════
+       SLIDE PRÓXIMOS PASSOS (closing)
+    ══════════════════════════════════ */
+    .slide--closing{background:var(--bg-2);}
+    .closing-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--u6);flex:1;}
+    .next-steps{display:flex;flex-direction:column;gap:var(--u3);}
+    .next-steps__title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ibm-blue);}
+    .steps-list{list-style:none;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+    .step-item{background:var(--bg);display:grid;grid-template-columns:48px 1fr;align-items:start;gap:var(--u4);padding:var(--u4) var(--u5);}
+    .step-item__num{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;color:var(--ibm-blue);padding-top:2px;}
+    .step-item__text{font-size:var(--text-14);line-height:1.5;color:var(--ink);}
+    .step-item__text strong{font-weight:600;}
+    .closing-meta{display:flex;flex-direction:column;gap:var(--u5);}
+    .meta-block{display:flex;flex-direction:column;gap:var(--u3);}
+    .meta-block__title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);}
+    .meta-block__content{font-size:var(--text-16);color:var(--ink);line-height:1.55;}
+    .closing-brand{display:flex;align-items:center;gap:var(--u3);margin-top:auto;padding-top:var(--u5);border-top:1px solid var(--line);}
+    .closing-brand img{height:13px;}
+    .closing-brand__text{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);}
+    @media(max-width:820px){.closing-layout{grid-template-columns:1fr;}}
+
+    /* ══════════════════════════════════
+       Navbar
+    ══════════════════════════════════ */
+    .navbar{position:fixed;bottom:0;left:0;right:0;height:var(--navbar-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--u6);background:var(--bg);border-top:1px solid var(--line);z-index:40;}
+    .navbar__left,.navbar__right{display:flex;align-items:center;}
+    .navbar__right{justify-content:flex-end;}
+    .navbar__center{display:flex;align-items:center;justify-content:center;gap:var(--u3);}
+    .navbar__hint{font-family:var(--font-mono);font-size:var(--text-12);color:var(--ink-faint);}
+    .btn{display:inline-flex;align-items:center;gap:var(--u2);height:36px;padding:0 var(--u4);border:1px solid var(--gray-100);background:var(--gray-100);color:var(--white);font-size:var(--text-14);cursor:pointer;transition:background 120ms var(--ease);}
+    .btn:hover{background:var(--gray-80);border-color:var(--gray-80);}
+    .btn--primary{background:var(--ibm-blue);border-color:var(--ibm-blue);}
+    .btn--primary:hover{background:var(--ibm-blue-h);border-color:var(--ibm-blue-h);}
+    .btn--ghost{background:transparent;border-color:var(--line-strong);color:var(--ink-muted);}
+    .btn--ghost:hover{background:var(--bg-2);color:var(--ink);}
+    @media(max-width:560px){.navbar{padding:0 var(--u3);}.navbar__hint{display:none;}}
+
+    /* ── Index panel ── */
+    .index-panel{position:fixed;inset:0;background:rgba(22,22,22,.55);z-index:60;display:flex;align-items:stretch;justify-content:flex-end;backdrop-filter:blur(4px);}
+    .index-panel[hidden]{display:none;}
+    .index-panel__inner{width:min(380px,100%);background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;padding:var(--u6);overflow-y:auto;}
+    .index-panel__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--u4);border-bottom:1px solid var(--line);margin-bottom:var(--u4);}
+    .index-panel__title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ibm-blue);margin:0;font-weight:500;}
+    .index-list{list-style:none;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+    .index-item{background:var(--bg);width:100%;border:0;text-align:left;display:grid;grid-template-columns:44px 1fr;align-items:center;gap:var(--u3);padding:var(--u3) var(--u4);cursor:pointer;font-size:var(--text-14);color:var(--ink);transition:background 100ms;}
+    .index-item:hover{background:var(--bg-2);}
+    .index-item.is-current{background:var(--bg-2);box-shadow:inset 3px 0 0 var(--ibm-blue);}
+    .index-item__num{font-family:var(--font-mono);font-size:var(--text-12);color:var(--ink-faint);}
+    .index-item.is-current .index-item__num{color:var(--ibm-blue);}
+
+    /* ── Animações ── */
+    @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .slide.is-active .cover-kicker{animation:slideUp 400ms 60ms var(--ease-out) both;}
+    .slide.is-active .cover-display{animation:slideUp 500ms 160ms var(--ease-out) both;}
+    .slide.is-active .cover-banks{animation:slideUp 400ms 280ms var(--ease-out) both;}
+    .slide.is-active .slide-head{animation:slideUp 360ms 60ms var(--ease-out) both;}
+    .slide.is-active .bank-kpis{animation:slideUp 360ms 80ms var(--ease-out) both;}
+    .slide.is-active .bank-highlights{animation:slideUp 360ms 200ms var(--ease-out) both;}
+    .slide.is-active .fin-table-wrap{animation:slideUp 400ms 80ms var(--ease-out) both;}
+    .slide.is-active .charts-grid{animation:slideUp 400ms 80ms var(--ease-out) both;}
+    .slide.is-active .opp-card:nth-child(1){animation:slideUp 340ms 60ms var(--ease-out) both;}
+    .slide.is-active .opp-card:nth-child(2){animation:slideUp 340ms 130ms var(--ease-out) both;}
+    .slide.is-active .opp-card:nth-child(3){animation:slideUp 340ms 200ms var(--ease-out) both;}
+    .slide.is-active .opp-card:nth-child(4){animation:slideUp 340ms 270ms var(--ease-out) both;}
+    .slide.is-active .opp-card:nth-child(5){animation:slideUp 340ms 340ms var(--ease-out) both;}
+    .slide.is-active .closing-layout{animation:slideUp 460ms 80ms var(--ease-out) both;}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.slide{clip-path:none!important;}}
+    @media print{
+      @page{size:A4 landscape;margin:12mm;}
+      html,body{overflow:visible;height:auto;}
+      .progress,.topbar,.navbar,.index-panel{display:none!important;}
+      .deck{position:static;}
+      .slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}
+      .slide:last-child{page-break-after:auto;}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#slide-1">Pular para o conteúdo</a>
+  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <header class="topbar" aria-label="Cabeçalho">
+    <div class="topbar__left">
+      <span class="brand__ibm"><img src="assets/ibm-logo.svg" alt="IBM"></span>
+      <span class="t-sep" aria-hidden="true"></span>
+      <span class="t-label">Account Planning</span>
+      <span class="t-sep" aria-hidden="true"></span>
+      <span class="t-label">{{PERIODO}}</span>
+    </div>
+    <div class="topbar__right">
+      <span class="t-dot" aria-hidden="true"></span>
+      <span class="t-counter" id="slide-counter" aria-live="polite">01 / {{TOTAL_SLIDES}}</span>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- ══════════════════════════════════
+         SLIDE 01 — COVER
+    ══════════════════════════════════ -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
+      <div class="slide__inner">
+        <div class="cover-bar" aria-hidden="true">
+          <span class="cover-bar__label">IBM · Account Planning</span>
+          <span class="cover-bar__period">{{PERIODO}}</span>
+        </div>
+        <div class="cover-main">
+          <span class="cover-kicker">Análise comparativa · {{SEGMENTO}}</span>
+          <div>
+            <h1 id="s1-title" class="cover-display">{{TITULO_LINHA_1}}<br/><em>{{TITULO_LINHA_2}}</em></h1>
+            <div class="cover-banks" aria-label="Bancos analisados">
+              {{COVER_BANK_TAGS}}
+            </div>
+          </div>
+          <div class="cover-foot">
+            <img src="assets/ibm-logo.svg" alt="IBM">
+            <span class="cover-foot__text">IBM · Uso interno — confidencial</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SLIDE 02 — CONTEXTO DO SETOR
+    ══════════════════════════════════ -->
+    <section class="slide" id="slide-2" data-slide="2" aria-labelledby="s2-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Contexto</span>
+          <h2 id="s2-title" class="slide-title">{{CONTEXTO_TITULO}}</h2>
+        </header>
+        <div class="context-grid">
+          <div class="context-panel" aria-labelledby="ctx-a">
+            <span class="context-panel__label" id="ctx-a">Panorama</span>
+            <p class="context-panel__body">{{CONTEXTO_PANORAMA}}</p>
+          </div>
+          <div class="context-panel context-panel--accent" aria-labelledby="ctx-b">
+            <span class="context-panel__label" id="ctx-b">Tendências &amp; pressões</span>
+            <ul class="context-bullets" aria-label="Tendências">
+              {{CONTEXTO_BULLETS}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SLIDE 03 — COMPARATIVO FINANCEIRO
+    ══════════════════════════════════ -->
+    <section class="slide" id="slide-3" data-slide="3" aria-labelledby="s3-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">03 — Financeiro</span>
+          <h2 id="s3-title" class="slide-title">Comparativo financeiro — {{PERIODO}}</h2>
+          <p class="slide-sub">Valores em R$ bilhões salvo indicado · Fonte: RI / Demonstrações financeiras</p>
+        </header>
+        <div class="fin-table-wrap">
+          <table class="fin-table" aria-label="Comparativo financeiro dos bancos">
+            <thead>
+              <tr>
+                <th scope="col">Banco / Métrica</th>
+                {{FIN_TABLE_HEADERS}}
+              </tr>
+            </thead>
+            <tbody>
+              {{FIN_TABLE_ROWS}}
+            </tbody>
+          </table>
+          <p class="fin-note">* Variação YoY. [A confirmar] = dado não disponível no RI analisado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SLIDE 04 — CARTEIRA DE CRÉDITO
+    ══════════════════════════════════ -->
+    <section class="slide" id="slide-4" data-slide="4" aria-labelledby="s4-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">04 — Crédito</span>
+          <h2 id="s4-title" class="slide-title">Carteira de crédito — {{PERIODO}}</h2>
+          <p class="slide-sub">Valores em R$ bilhões · Fonte: RI</p>
+        </header>
+        <div class="charts-grid">
+          <div class="chart-section">
+            <div class="chart-label-row">
+              <span class="chart-section-title">Carteira total</span>
+            </div>
+            <div class="bar-list" aria-label="Carteira total por banco">
+              {{BARS_CREDITO_TOTAL}}
+            </div>
+          </div>
+          <div class="chart-section">
+            <div class="chart-label-row">
+              <span class="chart-section-title">Crédito imobiliário</span>
+            </div>
+            <div class="bar-list" aria-label="Crédito imobiliário por banco">
+              {{BARS_CREDITO_IMOB}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SLIDES 05..N — PERFIL POR BANCO
+         (gerado pelo script para cada banco)
+    ══════════════════════════════════ -->
+    {{BANK_PROFILE_SLIDES}}
+
+    <!-- ══════════════════════════════════
+         SLIDE OPORTUNIDADES IBM
+    ══════════════════════════════════ -->
+    <section class="slide slide--opps" id="slide-opps" data-slide="{{SLIDE_NUM_OPPS}}" aria-labelledby="sopps-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow eyebrow--light">{{SLIDE_NUM_OPPS}} — IBM</span>
+          <h2 id="sopps-title" class="slide-title slide-title--light">Oportunidades IBM por banco</h2>
+        </header>
+        <div class="opps-grid">
+          {{OPP_CARDS}}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SLIDE PRÓXIMOS PASSOS
+    ══════════════════════════════════ -->
+    <section class="slide slide--closing" id="slide-closing" data-slide="{{SLIDE_NUM_CLOSING}}" aria-labelledby="sclosing-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">{{SLIDE_NUM_CLOSING}} — Próximos passos</span>
+          <h2 id="sclosing-title" class="slide-title">{{CLOSING_TITULO}}</h2>
+        </header>
+        <div class="closing-layout">
+          <div class="next-steps">
+            <span class="next-steps__title">Ações prioritárias</span>
+            <ol class="steps-list" aria-label="Próximos passos">
+              {{NEXT_STEPS}}
+            </ol>
+          </div>
+          <div class="closing-meta">
+            <div class="meta-block">
+              <span class="meta-block__title">Time IBM responsável</span>
+              <span class="meta-block__content">{{TIME_IBM}}</span>
+            </div>
+            <div class="meta-block">
+              <span class="meta-block__title">Período de execução</span>
+              <span class="meta-block__content">{{PERIODO_EXECUCAO}}</span>
+            </div>
+            <div class="meta-block">
+              <span class="meta-block__title">Fontes analisadas</span>
+              <span class="meta-block__content">{{FONTES}}</span>
+            </div>
+            <div class="closing-brand">
+              <img src="assets/ibm-logo.svg" alt="IBM">
+              <span class="closing-brand__text">IBM · Uso interno — confidencial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navbar -->
+  <nav class="navbar" aria-label="Controles">
+    <div class="navbar__left">
+      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Índice (Esc)">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M4 6h24v2H4zm0 8h24v2H4zm0 8h24v2H4z"/></svg>
+        <span>Índice</span>
+      </button>
+    </div>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Anterior">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M20 6l-10 10 10 10-1.4 1.4L7.2 16 18.6 4.6z"/></svg>
+        <span>Anterior</span>
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo">
+        <span>Próximo</span>
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M12 6l10 10-10 10 1.4 1.4L24.8 16 13.4 4.6z"/></svg>
+      </button>
+    </div>
+    <div class="navbar__right">
+      <span class="navbar__hint" aria-hidden="true">← → navegar · Esc índice · F tela cheia</span>
+    </div>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true">
+    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="idx-title">
+      <header class="index-panel__head">
+        <h2 id="idx-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar">Fechar</button>
+      </header>
+      <ol class="index-list" id="index-list">
+        <!-- gerado pelo script -->
+      </ol>
+    </div>
+  </aside>
+
+  <script>
+  (function(){
+    'use strict';
+    var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total   = slides.length;
+    var bar     = document.getElementById('progress-bar');
+    var counter = document.getElementById('slide-counter');
+    var btnPrev = document.getElementById('btn-prev');
+    var btnNext = document.getElementById('btn-next');
+    var btnIdx  = document.getElementById('btn-index');
+    var btnClose= document.getElementById('btn-index-close');
+    var idxPanel= document.getElementById('index-panel');
+    var idxList = document.getElementById('index-list');
+    var current = 1;
+
+    // Gera índice dinamicamente
+    slides.forEach(function(s,i){
+      var n=i+1;
+      var title=(s.querySelector('h1,h2')||{}).textContent||('Slide '+n);
+      var li=document.createElement('li');
+      var btn=document.createElement('button');
+      btn.className='index-item'; btn.setAttribute('data-go',n);
+      btn.innerHTML='<span class="index-item__num">'+pad(n)+'</span><span>'+title.trim().slice(0,60)+'</span>';
+      btn.addEventListener('click',function(){closeIdx();go(n);});
+      li.appendChild(btn); idxList.appendChild(li);
+    });
+    var idxItems=Array.prototype.slice.call(document.querySelectorAll('.index-item'));
+
+    function pad(n){return n<10?'0'+n:''+n;}
+    function go(n,opts){
+      opts=opts||{};
+      if(n<1)n=1; if(n>total)n=total;
+      if(n===current&&!opts.force)return;
+      slides.forEach(function(s){
+        var sn=parseInt(s.getAttribute('data-slide'),10);
+        if(sn===n){s.classList.add('is-active');s.removeAttribute('aria-hidden');s.scrollTop=0;}
+        else{s.classList.remove('is-active');s.setAttribute('aria-hidden','true');}
+      });
+      current=n;
+      var pct=(n/total)*100;
+      if(bar)bar.style.width=pct+'%';
+      if(bar)bar.parentElement.setAttribute('aria-valuenow',Math.round(pct));
+      if(counter)counter.textContent=pad(n)+' / '+pad(total);
+      idxItems.forEach(function(b){parseInt(b.getAttribute('data-go'),10)===n?b.classList.add('is-current'):b.classList.remove('is-current');});
+      if(btnPrev)btnPrev.disabled=(n===1);
+      if(btnNext)btnNext.disabled=(n===total);
+      history.replaceState(null,'','#slide-'+n);
+    }
+    function next(){go(current+1);}
+    function prev(){go(current-1);}
+    function openIdx(){if(!idxPanel)return;idxPanel.hidden=false;idxPanel.setAttribute('aria-hidden','false');if(btnClose)btnClose.focus();}
+    function closeIdx(){if(!idxPanel)return;idxPanel.hidden=true;idxPanel.setAttribute('aria-hidden','true');if(btnIdx)btnIdx.focus();}
+    function toggleIdx(){idxPanel&&(idxPanel.hidden?openIdx():closeIdx());}
+    if(btnPrev)btnPrev.addEventListener('click',prev);
+    if(btnNext)btnNext.addEventListener('click',next);
+    if(btnIdx)btnIdx.addEventListener('click',toggleIdx);
+    if(btnClose)btnClose.addEventListener('click',closeIdx);
+    if(idxPanel)idxPanel.addEventListener('click',function(e){if(e.target===idxPanel)closeIdx();});
+    document.addEventListener('keydown',function(e){
+      var tag=e.target&&e.target.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA'||(e.target&&e.target.isContentEditable))return;
+      var k=e.key;
+      if(k==='Escape'){e.preventDefault();toggleIdx();}
+      else if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();next();}
+      else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev();}
+      else if(k==='Home'){e.preventDefault();go(1);}
+      else if(k==='End'){e.preventDefault();go(total);}
+      else if(k==='f'||k==='F'){e.preventDefault();document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+    });
+    var tx=null,ty=null;
+    document.addEventListener('touchstart',function(e){if(e.touches[0]){tx=e.touches[0].clientX;ty=e.touches[0].clientY;}},{passive:true});
+    document.addEventListener('touchend',function(e){
+      if(tx===null)return;
+      var t=e.changedTouches[0];if(!t)return;
+      var dx=t.clientX-tx,dy=t.clientY-ty;
+      if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){dx<0?next():prev();}
+      tx=ty=null;
+    },{passive:true});
+    var m=/^slide-(\d+)$/.exec((window.location.hash||'').replace('#',''));
+    go(m?Math.max(1,Math.min(parseInt(m[1],10),total)):1,{force:true});
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+[meta]
+name        = "IBM Account Planning"
+slug        = "ibm-account-planning"
+version     = "1.0.0"
+description = "Template de deck comparativo para account planning interno IBM. Suporta até 6 bancos, com slides de contexto setorial, comparativo financeiro (tabela), carteira de crédito (barras SVG), perfil individual por banco, oportunidades IBM e próximos passos."
+author      = "IBM Presentation Factory"
+
+[design]
+system      = "IBM Carbon Design System v11"
+fonts       = ["IBM Plex Sans", "IBM Plex Mono"]
+base_size   = "16px"
+theme       = "light"
+contrast    = "WCAG 2.1 AA"
+
+[slides]
+# Número de slides varia conforme quantidade de bancos (4 fixos + 1 por banco)
+labels = [
+  "cover",
+  "contexto-setor",
+  "comparativo-financeiro",
+  "carteira-credito",
+  "perfil-banco-n",        # repetido por banco
+  "oportunidades-ibm",
+  "proximos-passos"
+]
+
+[assets]
+# Logo IBM copiada em assets/ibm-logo.svg.
+# Sem outros assets externos — barras e gráficos são SVG/CSS puro.
