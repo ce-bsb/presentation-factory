@@ -16,13 +16,14 @@ Qualquer pergunta ou tema recebido → gere o deck imediatamente + resposta curt
 |---|---|
 | `organizations/ibm/templates/ibm-febraban-template/` | **Único template ativo** — 4 slides, modo feira |
 
-## Fluxo de criação (sempre este)
+## Fluxo de criação (via script — obrigatório)
 
 1. Derive slug do tema.
-2. Crie `<workspace>/<slug>/index.html` — copie o template e substitua todos os `{{PLACEHOLDER}}`.
-3. Copie `organizations/ibm/templates/ibm-febraban-template/assets/` → `<workspace>/<slug>/assets/`.
-4. Copie `organizations/ibm/assets/img/logo-dark.svg` → `<workspace>/<slug>/assets/ibm-logo.svg`.
-5. `assets/qr.png` é opcional — fallback SVG automático já está no template.
+2. Escreva `tools/<slug>-valores.json` (base: `tools/valores-modelo.json`).
+3. Execute: `node tools/gerar-deck.mjs <slug> tools/<slug>-valores.json`
+4. Apague o JSON temporário.
+
+**Nunca reescreva o `index.html` inteiro manualmente.**
 
 ## Referências (leitura, nunca destino de escrita)
 

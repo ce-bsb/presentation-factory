@@ -5,28 +5,28 @@
 **Toda mensagem com pergunta ou tema → gere o deck imediatamente.**
 Não espere pedido explícito de "criar apresentação".
 
-## Fluxo único
+## Fluxo único — via script (mais rápido)
 
-1. Derive slug kebab-case do tema recebido.
-2. Crie `<workspace>/<slug>/` fora da factory.
-3. Copie `organizations/ibm/templates/ibm-febraban-template/index.html` → `<workspace>/<slug>/index.html`.
-4. Copie `organizations/ibm/templates/ibm-febraban-template/assets/` → `<workspace>/<slug>/assets/`.
-5. Copie `organizations/ibm/assets/img/logo-dark.svg` → `<workspace>/<slug>/assets/ibm-logo.svg`.
-6. Substitua todos os `{{PLACEHOLDER}}` com conteúdo real do tema.
-7. Não rode `make build/validate/test` — não é necessário para este fluxo.
+1. Derive slug kebab-case do tema.
+2. Escreva `tools/<slug>-valores.json` com os 46 valores (use `tools/valores-modelo.json` como base).
+3. Execute: `node tools/gerar-deck.mjs <slug> tools/<slug>-valores.json`
+4. O script gera `<workspace>/<slug>/index.html` + copia assets automaticamente.
+5. Apague `tools/<slug>-valores.json` após geração (arquivo temporário).
 
-## Conteúdo dos 4 slides
+**Nunca reescreva o `index.html` inteiro manualmente** — use sempre o script.
 
-| Slide | O que preencher |
+## Conteúdo dos 4 slides (o que preencher no JSON)
+
+| Slide | Campos principais |
 |---|---|
-| 01 Cover | Tema/pergunta como headline — `{{PERGUNTA_LINHA_1}}` e `{{PERGUNTA_LINHA_2}}` |
-| 02 Visão geral | Contexto do tema + 3 pontos-chave do IBM watsonx ou solução relevante |
-| 03 Cases IBM | 3 cases reais verificáveis; use `[A confirmar]` se sem fonte |
-| 04 Closing | "Quer saber mais?" + `{{ESPECIALISTA_NOME}}` + `{{ESPECIALISTA_WHATSAPP}}` |
+| 01 Cover | `PERGUNTA_LINHA_1`, `PERGUNTA_LINHA_2`, `CONTEXTO_COVER` |
+| 02 Visão geral | `TITULO_S2`, `PANEL_A_TEXTO`, `PONTO_1..3_TITULO/DESC` |
+| 03 Cases IBM | `CASE_1..3_TAG/TITULO/CORPO/RESULTADO` — use `[A confirmar]` se sem fonte |
+| 04 Closing | `ESPECIALISTA_NOME`, `ESPECIALISTA_WHATSAPP` |
 
-`assets/qr.png` é opcional — o template exibe fallback SVG se ausente.
+`assets/qr.png` é opcional — fallback SVG automático já está no template.
 
 ## Critério de conclusão
 
-- Todos os `{{PLACEHOLDER}}` substituídos; sem paths absolutos; sem dados inventados sem marcação.
-- Responsividade e navegação funcionando (já garantidas pelo template).
+- Script rodou sem erros; nenhum placeholder `{{...}}` restante no HTML gerado.
+- Responsividade e navegação garantidas pelo template.

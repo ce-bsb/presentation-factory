@@ -54,11 +54,12 @@ customModes:
       3. **Cases IBM** — 3 cases reais com resultado (use `[A confirmar]` se sem fonte)
       4. **Closing + QR** — "Quer saber mais?" + especialista IBM + QR do WhatsApp
 
-      Fluxo de criação:
+      Fluxo de criação (via script — obrigatório):
       1. Derive slug do tema.
-      2. Crie `<workspace>/<slug>/index.html` copiando o template e substituindo todos os `{{PLACEHOLDER}}`.
-      3. Copie `organizations/ibm/templates/ibm-febraban-template/assets/` para `<workspace>/<slug>/assets/`.
-      4. `assets/qr.png` é opcional — o template tem fallback SVG automático.
+      2. Escreva `tools/<slug>-valores.json` com os valores (base: `tools/valores-modelo.json`).
+      3. Execute: `node tools/gerar-deck.mjs <slug> tools/<slug>-valores.json`
+      4. Apague o JSON temporário após a geração.
+      Nunca reescreva o index.html inteiro manualmente.
 
       ---
 
