@@ -91,16 +91,61 @@ const tableRows = METRICS.map(m => {
 }).join('\n');
 
 // ── Slides de perfil por banco ───────────────────────────────────────────
+
+// Gráfico de barras divergentes para variações YoY
+// Escala: o maior valor absoluto de variação entre todos os bancos = 50% da largura
+const allVars = bancos.flatMap(b => [
+  b.lucro_liquido_var, b.ativos_totais_var, b.roe_var,
+  b.carteira_total_var, b.credito_imob_var
+]).filter(v => v != null);
+const maxAbsVar = Math.max(...allVars.map(Math.abs), 1);
+
+function buildGrowthChart(b) {
+  const rows = [
+    { label: 'Lucro líquido', val: b.lucro_liquido_var },
+    { label: 'Ativos totais', val: b.ativos_totais_var },
+    { label: 'ROE',           val: b.roe_var },
+    { label: 'Cart. crédito', val: b.carteira_total_var },
+    { label: 'Créd. imob.',   val: b.credito_imob_var },
+  ];
+  const rowsHtml = rows.map(r => {
+    if (r.val == null) {
+      return `<div class="growth-row">
+        <span class="growth-row__label">${esc(r.label)}</span>
+        <div class="growth-track"></div>
+        <span class="growth-row__val val-neutral">—</span>
+      </div>`;
+    }
+    const pct = Math.min(Math.round((Math.abs(r.val) / maxAbsVar) * 50), 50);
+    const isPos = r.val >= 0;
+    return `<div class="growth-row">
+        <span class="growth-row__label">${esc(r.label)}</span>
+        <div class="growth-track" aria-label="${esc(r.label)}: ${fmtPct(r.val)} YoY">
+          <div class="growth-bar growth-bar--${isPos ? 'pos' : 'neg'}${pct === 0 ? ' growth-bar--zero' : ''}" style="width:${pct}%" role="presentation"></div>
+        </div>
+        <span class="growth-row__val ${varClass(r.val)}">${fmtPct(r.val)}</span>
+      </div>`;
+  }).join('\n');
+  return `<div class="growth-chart" role="img" aria-label="Variação YoY das métricas">
+    ${rowsHtml}
+    <div class="growth-legend" aria-hidden="true">
+      <span class="growth-legend__item"><span class="growth-legend__dot growth-legend__dot--pos"></span>Crescimento</span>
+      <span class="growth-legend__item"><span class="growth-legend__dot growth-legend__dot--neg"></span>Queda</span>
+    </div>
+  </div>`;
+}
+
 let profileSlides = '';
 bancos.forEach((b, i) => {
   const slideNum = 5 + i;
   const kpiValues = [
-    { label: 'Lucro líquido', value: b.lucro_liquido_bi != null ? `R$ ${b.lucro_liquido_bi}bi` : '[A confirmar]', delta: b.lucro_liquido_var },
-    { label: 'Ativos totais', value: b.ativos_totais_bi != null ? `R$ ${b.ativos_totais_bi}bi` : '[A confirmar]', delta: b.ativos_totais_var },
-    { label: 'ROE',           value: b.roe != null ? `${b.roe}%` : '[A confirmar]',             delta: b.roe_var },
-    { label: 'Cart. crédito', value: b.carteira_total_bi != null ? `R$ ${b.carteira_total_bi}bi` : '[A confirmar]', delta: b.carteira_total_var },
-    { label: 'Créd. imob.',   value: b.credito_imob_bi != null ? `R$ ${b.credito_imob_bi}bi` : '[A confirmar]',    delta: b.credito_imob_var },
+    { label: 'Lucro líquido', value: b.lucro_liquido_bi != null ? `R$ ${b.lucro_liquido_bi}bi` : '[A conf.]', delta: b.lucro_liquido_var },
+    { label: 'Ativos totais', value: b.ativos_totais_bi != null ? `R$ ${b.ativos_totais_bi}bi` : '[A conf.]', delta: b.ativos_totais_var },
+    { label: 'ROE',           value: b.roe != null ? `${b.roe}%` : '[A conf.]',                               delta: b.roe_var },
+    { label: 'Cart. crédito', value: b.carteira_total_bi != null ? `R$ ${b.carteira_total_bi}bi` : '[A conf.]', delta: b.carteira_total_var },
+    { label: 'Créd. imob.',   value: b.credito_imob_bi != null ? `R$ ${b.credito_imob_bi}bi` : '[A conf.]',    delta: b.credito_imob_var },
   ];
+
   const kpiHtml = kpiValues.map(k => `
     <div class="bank-kpi">
       <span class="bank-kpi__value">${esc(k.value)}</span>
@@ -126,9 +171,15 @@ bancos.forEach((b, i) => {
         </header>
         <div class="bank-profile">
           <div class="bank-kpis">${kpiHtml}</div>
-          <div class="bank-highlights">
-            <span class="bank-highlights__title">Destaques do período</span>
-            <ul class="highlight-list">${highlightHtml}</ul>
+          <div class="bank-body">
+            <div class="bank-chart">
+              <span class="bank-chart__title">Crescimento YoY (%)</span>
+              ${buildGrowthChart(b)}
+            </div>
+            <div class="bank-highlights">
+              <span class="bank-highlights__title">Destaques do período</span>
+              <ul class="highlight-list">${highlightHtml}</ul>
+            </div>
           </div>
         </div>
       </div>
