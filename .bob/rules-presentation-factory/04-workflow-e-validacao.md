@@ -29,3 +29,12 @@ Não rode `make build/validate/test` para decks simples.
 - Alteração na camada correta; sem dados inventados; sem paths absolutos.
 - Navegação, acessibilidade e responsividade funcionando.
 - `make validate` e `make test` passando quando aplicável.
+- Todos os logos usam arquivos clonados da factory — nenhum logo foi criado ou aproximado.
+- Todos os `font-size` de conteúdo respeitam os mínimos (18px para descrições/importantes, 16px para secundários).
+
+## ⚠️ Mensagem de entrega obrigatória
+
+Ao concluir e entregar **qualquer apresentação**, a última mensagem deve sempre incluir:
+
+> "⚠️ **Verifique todos os dados antes de usar esta apresentação.**
+> Métricas, nomes, datas, porcentagens e quaisquer informações factuais podem conter erros ou dados sintéticos gerados incorretamente. Por favor, valide cada número e afirmação com suas fontes reais antes de apresentar."

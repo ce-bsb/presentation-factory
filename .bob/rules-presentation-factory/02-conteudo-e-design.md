@@ -7,11 +7,31 @@
 - Não invente dados, métricas, datas ou nomes. Use `[A confirmar]`.
 - Não copie conteúdo dos exemplos; reuse só estrutura e CSS.
 
+## ⚠️ Aviso obrigatório ao entregar a apresentação
+
+**Toda vez que uma apresentação for entregue ao usuário, inclua obrigatoriamente na mensagem final:**
+
+> "⚠️ **Por favor, revise todos os dados da apresentação antes de usá-la.**
+> Métricas, nomes, datas, porcentagens e quaisquer informações factuais podem conter erros ou dados sintéticos gerados incorretamente. Valide cada número e afirmação com suas fontes reais."
+
+Isso se aplica a qualquer deck gerado ou modificado, sem exceção.
+
 ## Design
 
 - Tema claro fixo; IBM Plex Sans; base 18 px; WCAG 2.1 AA.
 - Logos e assets IBM vêm de `organizations/ibm/assets/`.
   Copie os arquivos para a pasta da apresentação e use path relativo no deck.
+
+## ⚠️ Tipografia — tamanhos mínimos obrigatórios
+
+| Elemento | Tamanho mínimo | Observação |
+|----------|---------------|------------|
+| Descrições e corpo de texto | **18 px** | Nunca abaixo de 18 px |
+| Informações importantes (KPIs, destaques, alertas) | **18 px** | Nunca abaixo de 18 px |
+| Itens secundários / menos importantes | **16 px** | Mínimo absoluto para conteúdo de suporte |
+| Rodapé (`footer`, notas de rodapé, legendas) | Pode ser abaixo de 16 px | Único contexto onde tamanhos menores são permitidos |
+
+**Regra prática:** ao definir `font-size` em qualquer elemento de conteúdo que não seja rodapé, o valor mínimo é `16px`; para descrições e informações relevantes, o mínimo é `18px`. Proibido usar valores menores para texto de conteúdo fora do rodapé.
 
 ## ⚠️ Logo IBM — procedimento canônico (fonte de verdade)
 
@@ -85,11 +105,26 @@ ou qualquer deck comparativo de bancos, **você DEVE perguntar antes de gerar**:
 | **BTG Pactual** | `#002C71` (azul marinho) | `#005FAD` (azul) | sem asset pré-existente |
 | **Nubank** | `#820AD1` (roxo) | `#44003F` (roxo escuro) | sem asset pré-existente |
 
-### Procedimento de cópia de logos
+### Procedimento de cópia de logos — regra universal
 
-1. Para CAIXA: copie `presentation-factory/clients/caixa/caixa-logo.png` para `<slug>/assets/caixa-logo.png`
-2. Para BB: copie `presentation-factory/clients/banco-do-brasil/logo_azul_bb.svg` para `<slug>/assets/bb-logo.svg`
-3. Use sempre path relativo no HTML: `<img src="assets/caixa-logo.png" alt="CAIXA">`
+> **Nunca crie, desenhe, aproxime ou gere um logo de banco ou empresa com IA, SVG manual, CSS, canvas, texto estilizado ou qualquer outro meio.**
+> O único procedimento permitido é **clonar** o arquivo de logo já existente na factory para a pasta `assets/` da apresentação.
+> Se o arquivo de origem não existir na factory, informe o usuário e peça que ele forneça o logo — não improvise.
+
+Passos obrigatórios para cada logo utilizado:
+
+1. Localize o arquivo de origem na factory (veja tabela acima; coluna "Logo disponível").
+2. Copie-o para `<slug>/assets/<nome-normalizado>` usando path relativo.
+3. Referencie no HTML exclusivamente via esse path relativo: `<img src="assets/<arquivo>" alt="<Nome do banco>">`.
+4. Antes de concluir, confirme que o arquivo copiado existe no disco e que o `src` resolve para ele.
+
+Exemplos de cópia correta:
+
+- CAIXA: `presentation-factory/clients/caixa/caixa-logo.png` → `<slug>/assets/caixa-logo.png`
+- BB: `presentation-factory/clients/banco-do-brasil/logo_azul_bb.svg` → `<slug>/assets/bb-logo.svg`
+- IBM (fundo claro): `presentation-factory/organizations/ibm/assets/img/logo-dark.svg` → `<slug>/assets/ibm-logo.svg`
+
+Para bancos sem asset pré-existente (Santander, BTG, Nubank etc.): **não crie um logo substituto**. Informe ao usuário qual logo está faltando e deixe um placeholder textual `[Logo <Banco> — a confirmar]` até que o arquivo seja fornecido.
 
 ## Referências sob demanda
 

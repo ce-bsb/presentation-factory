@@ -28,6 +28,14 @@ Os templates IBM são autocontidos: preserve CSS e JavaScript dentro de `index.h
 - **CSS de referência:** `organizations/ibm/assets/css/styles.css`.
   Para templates autocontidos, preserve o bloco `<style>` dentro de `index.html`.
 
+### Tamanhos de fonte mínimos (reforço de regra)
+
+- Corpo de texto e descrições: `font-size` ≥ **18px**.
+- Informações importantes (KPIs, alertas, destaques): `font-size` ≥ **18px**.
+- Conteúdo secundário / menos importante: `font-size` ≥ **16px**.
+- Rodapé e notas de rodapé: único contexto onde valores abaixo de 16px são aceitos.
+- **Nunca use `font-size` < 16px** fora do rodapé em nenhum elemento de conteúdo.
+
 ## JavaScript
 
 - Vanilla, sem build. Estado centralizado.
