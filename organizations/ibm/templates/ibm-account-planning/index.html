@@ -7,7 +7,8 @@
 <title>{{CLIENTE}} — IBM Account Planning {{PERIODO}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Serif:ital,wght@1,200;1,300&display=swap" rel="stylesheet"/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Serif:ital,wght@1,200;1,300&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Serif:ital,wght@1,200;1,300&display=swap" rel="stylesheet"/></noscript>
 <style>
 :root {
   --ibm-blue:    #0f62fe;
@@ -26,6 +27,7 @@
        Banco do Brasil: --focal-color:#003882; --focal-accent:#F8E400;
        Itaú Unibanco:   --focal-color:#EC7000; --focal-accent:#003D70;
        Bradesco:        --focal-color:#CC092F; --focal-accent:#F05A24;
+     Por padrão usa IBM Blue (perspectiva IBM).
   ─────────────────────────────────────────────────────────────────── */
   --focal-color:  #0f62fe;
   --focal-accent: #0043ce;
@@ -102,6 +104,9 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   transition:opacity 280ms var(--ease),visibility 280ms,transform 280ms var(--ease);
 }
 .slide.active{opacity:1;visibility:visible;pointer-events:auto;transform:none;}
+/* slides com muito conteúdo ganham scroll vertical */
+.slide--scrollable{overflow-y:auto;}
+.slide--scrollable.active{overflow-y:auto;}
 
 /* slide footer */
 .slide{--slide-footer-color:var(--ink-faint);}
@@ -115,6 +120,8 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   position:absolute;right:clamp(2rem,4vw,4.5rem);bottom:1.2rem;z-index:2;
   color:var(--slide-footer-color);font-family:var(--font-mono);font-size:.6875rem;
 }
+/* slides scrolláveis: footer fixo não faz sentido */
+.slide--scrollable::before,.slide--scrollable::after{content:none;}
 
 /* ── COVER ── */
 .cover{background:var(--bg);}
@@ -125,7 +132,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .cover-left{
   position:relative;overflow:hidden;
   padding:clamp(3.5rem,5vw,5.5rem) clamp(2.5rem,4vw,5rem) clamp(3rem,4vw,4.5rem);
-  display:flex;flex-direction:column;justify-content:space-between;
+  display:grid;grid-template-rows:auto 1fr auto;gap:0;
 }
 .cover-dots{
   position:absolute;inset:0;pointer-events:none;
@@ -141,15 +148,21 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   background:radial-gradient(640px circle at var(--mx) var(--my),rgba(15,98,254,.1),transparent 60%);
   transition:background .06s linear;
 }
-.cover-left-content{position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(1.2rem,2vw,2rem);}
+/* eyebrow fica na linha 1 (topo); conteúdo centraliza na linha 2; rodapé na linha 3 */
 .cover-kicker{
+  position:relative;z-index:1;
   display:flex;align-items:center;gap:.6rem;
   font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
 }
 .cover-kicker::before{content:"";width:28px;height:2px;background:var(--focal-color);}
+.cover-left-content{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:clamp(1.2rem,2vw,2rem);
+  align-self:center;
+}
 .cover-h1{font-size:clamp(2.8rem,5vw,5.5rem);font-weight:100;line-height:1.02;letter-spacing:-.02em;}
 .cover-h1 em{font-style:italic;font-family:var(--font-serif);font-weight:300;color:var(--focal-color);}
-.cover-desc{font-size:clamp(.95rem,1.2vw,1.2rem);line-height:1.55;color:var(--ink-muted);max-width:50ch;}
+.cover-desc{font-size:clamp(1.125rem,1.4vw,1.4rem);line-height:1.55;color:var(--ink-muted);max-width:50ch;}
 .cover-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem;}
 .cover-tag{
   display:inline-flex;align-items:center;padding:.25rem .65rem;
@@ -197,17 +210,17 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .col-12{
   display:flex;flex-direction:column;
-  gap:clamp(.5rem,.8vw,.8rem);
+  gap:.5rem;
 }
 .s-kicker{
   display:flex;align-items:center;gap:.55em;
   font-family:var(--font-mono);font-size:.72rem;font-weight:600;
   color:var(--focal-color);text-transform:uppercase;letter-spacing:.1em;
-  margin-bottom:.75rem;
+  margin-bottom:.5rem;
 }
 .s-kicker::before{content:"";width:18px;height:2px;background:var(--focal-color);}
 .s-title{font-size:clamp(1.8rem,3.2vw,3.8rem);font-weight:200;line-height:1;letter-spacing:-.02em;color:var(--ink);}
-.s-sub{font-size:clamp(.9rem,1.1vw,1.1rem);color:var(--ink-muted);font-weight:300;margin-top:.6rem;line-height:1.55;max-width:58ch;}
+.s-sub{font-size:clamp(1.125rem,1.3vw,1.3rem);color:var(--ink-muted);font-weight:300;margin-top:.6rem;line-height:1.55;max-width:58ch;}
 .intro-cards{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:1px;background:var(--line-s);
@@ -221,8 +234,8 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .intro-card:hover{background:rgba(15,98,254,.05);}
 .intro-card__kicker{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--focal-color);font-weight:600;}
-.intro-card__title{font-size:clamp(.95rem,1.2vw,1.2rem);font-weight:500;color:var(--ink);line-height:1.2;}
-.intro-card__body{font-size:clamp(.78rem,.9vw,.9rem);color:var(--ink-muted);line-height:1.55;font-weight:300;}
+.intro-card__title{font-size:clamp(1.125rem,1.4vw,1.4rem);font-weight:500;color:var(--ink);line-height:1.2;}
+.intro-card__body{font-size:clamp(1.125rem,1.2vw,1.2rem);color:var(--ink-muted);line-height:1.55;font-weight:300;}
 
 /* ── METRIC SLIDES ── */
 .metric-slide{background:var(--bg);}
@@ -236,11 +249,24 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   position:relative;z-index:1;
   width:100%;height:100%;
   padding:clamp(3rem,5vh,5rem) clamp(2rem,4vw,4.5rem) clamp(2rem,3vw,3rem);
-  display:grid;grid-template-rows:auto 1fr auto;
-  gap:clamp(.8rem,1.2vw,1.5rem);
+  display:grid;
+  grid-template-columns:1fr 260px;
+  grid-template-rows:auto 1fr;
+  gap:clamp(.6rem,1vh,.9rem) clamp(1.5rem,3vw,3.5rem);
+  align-items:start;
 }
-.metric-grid .bar-table{justify-content:center;}
-.metric-header{display:flex;flex-direction:column;gap:.3rem;}
+/* header full-width na linha 1 */
+.metric-header{
+  grid-column:1 / -1;
+  display:flex;flex-direction:column;gap:.5rem;
+}
+/* gráfico de barras na linha 2, coluna 1 (larga) */
+.metric-grid .bar-table{align-self:center;flex:0 0 auto;grid-column:1;grid-row:2;}
+/* insight na linha 2, coluna 2 (estreita) */
+.metric-left{
+  display:flex;flex-direction:column;gap:clamp(1.2rem,2vw,2rem);
+  align-self:center;grid-column:2;grid-row:2;
+}
 .metric-num-label{
   display:flex;align-items:center;gap:.55em;
   font-family:var(--font-mono);font-size:.72rem;font-weight:600;
@@ -254,7 +280,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 /* bars */
 .bar-table{display:flex;flex-direction:column;gap:.45rem;flex:1;}
 .bar-row{
-  display:grid;grid-template-columns:28px 150px 1fr 90px;
+  display:grid;grid-template-columns:28px 180px 1fr 110px;
   align-items:center;gap:.9rem;padding:.6rem 0;
   border-bottom:1px solid var(--line);
 }
@@ -276,13 +302,15 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   font-family:var(--font-mono);font-size:.62rem;font-weight:700;
   flex-shrink:0;
 }
-/* rank-focal = banco cliente; rank-n1/n2/n3 = concorrentes */
-.rank-focal{background:var(--focal-color);color:#fff;}
-.rank-n1{background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
-.rank-n2{background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
-.rank-n3{background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
+/* rank-focal = banco cliente; rank-n1/n2/n3 = concorrentes
+   Defina as cores específicas de cada banco no :root ou inline:
+   ex: .rank-n1{background:#ec7000;color:#fff;} */
+.rank-focal  {background:var(--focal-color);color:#fff;}
+.rank-n1     {background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
+.rank-n2     {background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
+.rank-n3     {background:var(--bg-3);border:1px solid var(--line-s);color:var(--ink-muted);}
 .bname{display:flex;flex-direction:column;gap:.12rem;min-width:0;}
-.bname strong{font-size:clamp(.75rem,.9vw,.95rem);font-weight:600;color:var(--ink);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.35rem;}
+.bname strong{font-size:clamp(1.125rem,1.1vw,1.2rem);font-weight:600;color:var(--ink);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:.35rem;}
 .bname strong img{flex-shrink:0;height:14px;width:auto;display:block;}
 .bname small{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);}
 .focal-badge{
@@ -291,26 +319,21 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   background:var(--focal-color);color:#fff;padding:.12rem .4rem;margin-left:.4rem;
   vertical-align:middle;
 }
-.bar-track{
-  height:20px;background:var(--bg-2);border-radius:1px;overflow:hidden;flex:1;
-}
-.bar-fill{
-  height:100%;width:0;
-  transition:width 700ms var(--ease-out);
-}
+.bar-track{height:20px;background:var(--bg-2);border-radius:1px;overflow:hidden;flex:1;}
+.bar-fill{height:100%;width:0;transition:width 700ms var(--ease-out);}
 .active .bar-fill{width:var(--bw);}
 .bar-row:nth-child(1) .bar-fill{transition-delay:0ms;}
 .bar-row:nth-child(2) .bar-fill{transition-delay:110ms;}
 .bar-row:nth-child(3) .bar-fill{transition-delay:220ms;}
 .bar-row:nth-child(4) .bar-fill{transition-delay:330ms;}
-/* f-focal = banco cliente; f-n1/n2/n3 = concorrentes (tons neutros) */
+/* f-focal = banco cliente; f-n1/n2/n3 = concorrentes */
 .bar-fill.f-focal{background:var(--focal-color);}
-.bar-fill.f-n1{background:#64748b;}
-.bar-fill.f-n2{background:#78716c;}
-.bar-fill.f-n3{background:#a8a29e;}
+.bar-fill.f-n1   {background:#64748b;}
+.bar-fill.f-n2   {background:#78716c;}
+.bar-fill.f-n3   {background:#a8a29e;}
 .bval{
   display:block;
-  font-family:var(--font-mono);font-size:clamp(.7rem,.85vw,.88rem);font-weight:600;
+  font-family:var(--font-mono);font-size:clamp(1.125rem,1.1vw,1.2rem);font-weight:600;
   color:var(--ink);text-align:right;white-space:nowrap;
 }
 .bval small{font-size:.52em;color:var(--ink-faint);font-weight:400;margin-left:.2em;}
@@ -321,7 +344,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   display:flex;align-items:flex-start;gap:.75rem;
   padding:.75rem 1rem;background:var(--bg-1);
   border-left:3px solid var(--ibm-cyan);
-  font-size:clamp(.78rem,.9vw,.9rem);line-height:1.55;color:var(--ink-muted);
+  font-size:clamp(1.125rem,1.1vw,1.2rem);line-height:1.55;color:var(--ink-muted);
 }
 .insight.leader{border-left-color:var(--focal-accent);}
 .insight-icon{
@@ -332,34 +355,35 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .insight.leader .insight-icon{background:rgba(15,98,254,.1);}
 .insight strong{color:var(--ink);font-weight:600;}
 
-/* ── BANK SLIDE ── */
+/* ── BANK SLIDE (perfil / KPIs) ── */
 .bank-slide{background:var(--bg);--bank-color:var(--focal-color);--bank-accent:var(--focal-accent);}
 .bank-inner{
-  width:100%;height:100%;
-  padding:clamp(3rem,5vh,5rem) clamp(2rem,4vw,4.5rem) clamp(2rem,3vw,3rem);
-  display:grid;grid-template-rows:auto 1fr;
-  gap:0;overflow:hidden;
+  width:100%;min-height:100%;
+  padding:clamp(3rem,5vh,5rem) clamp(2rem,4vw,4.5rem) clamp(3rem,4vw,4rem);
+  display:grid;grid-template-rows:auto auto;
+  gap:0;
 }
 .bank-content{
   display:flex;flex-direction:column;gap:clamp(.8rem,1.2vw,1.5rem);
-  min-height:0;padding-top:clamp(.8rem,1.5vh,1.5rem);
+  padding-top:clamp(.8rem,1.5vh,1.5rem);
 }
-.bank-content .bank-body{flex:1;min-height:0;}
+.bank-content .bank-body{flex:1;}
 .bank-side-accent{
   position:absolute;left:0;top:0;bottom:0;width:4px;
   background:var(--bank-color);
 }
-.bank-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-shrink:0;}
+/* align-items:flex-start garante que o eyebrow começa sempre no topo */
+.bank-head{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-shrink:0;}
 .bank-kicker{
   display:flex;align-items:center;gap:.55em;
   font-family:var(--font-mono);font-size:.7rem;font-weight:600;
-  color:var(--bank-color);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.35rem;
+  color:var(--bank-color);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;
 }
 .bank-kicker::before{content:"";width:18px;height:2px;background:var(--bank-color);}
 .bank-title{font-size:clamp(1.6rem,2.6vw,2.8rem);font-weight:300;line-height:1.05;letter-spacing:-.015em;}
 .bank-period{
   font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-faint);margin-top:.8rem;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:.5rem;
   display:flex;align-items:center;gap:.5em;
 }
 .bank-kpis{
@@ -373,10 +397,10 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .kpi-cell:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.07);}
 .kpi-cell::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bank-color);}
-.kpi-label{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-bottom:.3rem;}
+.kpi-label{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-bottom:.3rem;}
 .kpi-value{font-size:clamp(1.4rem,2.5vw,2.6rem);font-weight:200;color:var(--ink);line-height:1;letter-spacing:-.02em;}
 .kpi-value sup{font-size:.4em;color:var(--ink-faint);vertical-align:super;}
-.kpi-delta{font-family:var(--font-mono);font-size:.6rem;margin-top:.2rem;}
+.kpi-delta{font-family:var(--font-mono);font-size:.62rem;margin-top:.2rem;}
 .kpi-up{color:var(--ibm-green);}
 .kpi-down{color:var(--ibm-red);}
 .kpi-neutral{color:var(--ink-faint);}
@@ -386,20 +410,20 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .bank-body-col{
   background:var(--bg);padding:clamp(.9rem,1.5vw,1.6rem);
-  display:flex;flex-direction:column;gap:.7rem;overflow:hidden;
+  display:flex;flex-direction:column;gap:.7rem;
 }
 .bank-body-col__title{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bank-color);font-weight:600;}
 
 /* growth bars */
 .growth-list{display:flex;flex-direction:column;gap:.5rem;flex:1;}
-.growth-row{display:grid;grid-template-columns:90px 1fr 44px;align-items:center;gap:.7rem;}
-.growth-row__label{font-size:.75rem;color:var(--ink-muted);text-align:right;white-space:nowrap;}
+.growth-row{display:grid;grid-template-columns:120px 1fr 56px;align-items:center;gap:.7rem;}
+.growth-row__label{font-size:1.125rem;color:var(--ink-muted);text-align:right;white-space:nowrap;}
 .growth-track{position:relative;height:16px;background:var(--bg-1);border:1px solid var(--line);overflow:hidden;}
 .growth-track::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--bg-3);pointer-events:none;}
 .growth-bar{position:absolute;top:2px;bottom:2px;width:0;max-width:50%;transition:width 750ms var(--ease-out);}
 .growth-bar--pos{background:var(--bank-color);left:50%;}
 .growth-bar--neg{background:var(--ibm-red);right:50%;}
-.growth-val{font-family:var(--font-mono);font-size:.58rem;text-align:right;white-space:nowrap;}
+.growth-val{font-family:var(--font-mono);font-size:1rem;text-align:right;white-space:nowrap;}
 
 /* highlight list */
 .highlight-list{list-style:none;display:flex;flex-direction:column;gap:1px;background:var(--line-s);}
@@ -413,22 +437,60 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   background:var(--bank-color);border-radius:50%;margin-top:.12rem;
 }
 .highlight-item__icon img{width:8px;height:8px;filter:brightness(0) invert(1);}
-.highlight-item__text{font-size:.82rem;line-height:1.5;color:var(--ink);}
+.highlight-item__text{font-size:1.125rem;line-height:1.5;color:var(--ink);}
+
+/* ── DESTAQUES SLIDE (slide IBM Blue texturizado) ── */
+.destaques-slide{
+  background:var(--ibm-blue);
+  background-image:
+    radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:20px 20px, 60px 60px, 60px 60px;
+}
+.destaques-slide .bank-side-accent{background:var(--ibm-cyan);}
+.destaques-slide .bank-kicker{color:rgba(255,255,255,.65);}
+.destaques-slide .bank-kicker::before{background:var(--ibm-cyan);}
+.destaques-slide .bank-title{color:#fff;}
+.destaques-slide .bank-period{color:rgba(255,255,255,.5);}
+.destaques-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:rgba(255,255,255,.12);
+  align-self:stretch;
+}
+.destaque-card{
+  background:rgba(255,255,255,.85);
+  padding:clamp(1.2rem,2vw,2rem);
+  display:flex;flex-direction:column;gap:.75rem;
+  transition:background 160ms var(--ease);
+}
+.destaque-card:hover{background:rgba(255,255,255,.95);}
+.destaque-card__num{
+  font-family:var(--font-mono);font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ibm-cyan);
+}
+.destaque-card__title{
+  font-size:clamp(1.125rem,1.4vw,1.4rem);font-weight:600;
+  color:var(--ink);line-height:1.2;
+}
+.destaque-card__body{
+  font-size:clamp(1.125rem,1.2vw,1.2rem);font-weight:300;
+  color:var(--ink-muted);line-height:1.55;flex:1;
+}
 
 /* ── OPPS SLIDE ── */
 .opps-slide{background:var(--bg);}
 .opps-inner{
   width:100%;height:100%;
-  padding:clamp(3rem,5vh,5rem) clamp(2rem,4vw,4.5rem) clamp(2rem,3vw,3rem);
+  padding:clamp(3rem,5vh,5rem) clamp(2rem,4vw,4.5rem) clamp(3rem,4vw,4rem);
   display:flex;flex-direction:column;gap:clamp(1rem,1.5vw,1.5rem);
-  overflow:hidden;
 }
 .opps-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:clamp(.5rem,.9vw,1rem);
-  flex:1;overflow-y:auto;min-height:0;
-  align-content:center;
   padding-bottom:.5rem;
+  margin:auto 0; /* centraliza verticalmente o grid sem mover o header */
 }
 .opp-card{
   padding:clamp(.9rem,1.4vw,1.4rem);background:var(--bg-1);
@@ -438,8 +500,8 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .opp-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,98,254,.09);}
 .opp-card__bank{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .5rem;border:1px solid var(--line-s);color:var(--ink-faint);width:fit-content;}
-.opp-card__title{font-size:clamp(.9rem,1.2vw,1.2rem);font-weight:500;color:var(--ink);line-height:1.2;}
-.opp-card__body{font-size:clamp(.75rem,.88vw,.9rem);color:var(--ink-muted);line-height:1.55;font-weight:300;flex:1;}
+.opp-card__title{font-size:clamp(1.125rem,1.4vw,1.4rem);font-weight:500;color:var(--ink);line-height:1.2;}
+.opp-card__body{font-size:clamp(1.125rem,1.2vw,1.2rem);color:var(--ink-muted);line-height:1.55;font-weight:300;flex:1;}
 .opp-card__solution{
   font-family:var(--font-mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;
   color:var(--focal-color);margin-top:.2rem;
@@ -468,8 +530,8 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 }
 .closing-card:hover{background:rgba(15,98,254,.04);box-shadow:inset 0 -3px 0 var(--focal-color);}
 .closing-card__kicker{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--focal-color);font-weight:600;}
-.closing-card__title{font-size:clamp(1rem,1.6vw,1.8rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;color:var(--ink);}
-.closing-card__body{font-size:clamp(.75rem,.88vw,.9rem);color:var(--ink-muted);line-height:1.55;font-weight:300;}
+.closing-card__title{font-size:clamp(1.125rem,1.6vw,1.8rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;color:var(--ink);}
+.closing-card__body{font-size:clamp(1.125rem,1.2vw,1.2rem);color:var(--ink-muted);line-height:1.55;font-weight:300;}
 .closing-kpis{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:1px;background:var(--line-s);flex-shrink:0;
@@ -547,6 +609,10 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 .active .highlight-item:nth-child(2){animation:slideRight 280ms 550ms var(--ease-out) both;}
 .active .highlight-item:nth-child(3){animation:slideRight 280ms 620ms var(--ease-out) both;}
 .active .highlight-item:nth-child(4){animation:slideRight 280ms 690ms var(--ease-out) both;}
+.active .destaque-card:nth-child(1){animation:popIn 340ms  80ms var(--ease-spring) both;}
+.active .destaque-card:nth-child(2){animation:popIn 340ms 155ms var(--ease-spring) both;}
+.active .destaque-card:nth-child(3){animation:popIn 340ms 230ms var(--ease-spring) both;}
+.active .destaque-card:nth-child(4){animation:popIn 340ms 305ms var(--ease-spring) both;}
 
 .active .opp-card:nth-child(1){animation:popIn 340ms  80ms var(--ease-spring) both;}
 .active .opp-card:nth-child(2){animation:popIn 340ms 155ms var(--ease-spring) both;}
@@ -569,7 +635,12 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   .cover-inner{grid-template-columns:1fr;}
   .cover-right{display:none;}
   .intro-cards{grid-template-columns:1fr 1fr;}
+  .metric-grid{grid-template-columns:1fr;grid-template-rows:auto auto auto;}
+  .metric-header{grid-column:1;}
+  .metric-grid .bar-table{grid-column:1;grid-row:2;}
+  .metric-left{grid-column:1;grid-row:3;}
   .bar-row{grid-template-columns:28px 100px 1fr 90px;}
+  .destaques-grid{grid-template-columns:1fr;}
   .closing-cards{grid-template-columns:1fr;}
   .closing-kpis{grid-template-columns:1fr;}
   .bank-kpis{grid-template-columns:repeat(3,1fr);}
@@ -591,7 +662,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   </div>
   <div class="topbar-right">
     <div class="slide-counter" aria-live="polite">
-      <span id="sNum">01</span>&thinsp;/&thinsp;<span id="sTot">09</span>
+      <span id="sNum">01</span>&thinsp;/&thinsp;<span id="sTot">10</span>
     </div>
     <button class="fs-btn" id="fsBtn" aria-label="Tela cheia">
       <img src="assets/icon-maximize.svg" width="15" height="15" aria-hidden="true" style="filter:var(--icon-filter,none)">
@@ -607,8 +678,10 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   <div class="cover-inner">
     <div class="cover-left">
       <div class="cover-dots" aria-hidden="true"></div>
+      <!-- eyebrow: linha 1 do grid (topo fixo) -->
+      <span class="cover-kicker">{{PERIODO}} · {{SETOR}}</span>
+      <!-- conteúdo: linha 2 (centralizado verticalmente) -->
       <div class="cover-left-content">
-        <span class="cover-kicker">{{PERIODO}} · {{SETOR}}</span>
         <h1 class="cover-h1">{{CLIENTE}}<br><em>Account Planning</em></h1>
         <p class="cover-desc">{{DESCRICAO_CAPA}}</p>
         <div class="cover-tags">
@@ -618,6 +691,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
           <span class="cover-tag">{{N_METRICAS}} Métricas</span>
         </div>
       </div>
+      <!-- rodapé: linha 3 -->
       <p class="cover-foot">IBM · Uso interno — confidencial · {{PERIODO}} · Dados: Relatórios RI oficiais</p>
     </div>
     <div class="cover-right" aria-label="Destaques {{CLIENTE}} {{PERIODO}}">
@@ -691,16 +765,16 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 </section>
 
 <!-- ══ 03 — MÉTRICA 1 ══ -->
-<!-- Duplique este slide para cada métrica adicional.
-     rank-focal = banco cliente  |  rank-n1/n2/n3 = concorrentes
-     f-focal = barra cliente     |  f-n1/f-n2/f-n3 = barras concorrentes
-     Para logos: <img src="assets/logo-BANCO.png" alt="BANCO"> dentro do <strong>
--->
+<!-- Duplique este bloco para cada métrica adicional (slides 04, 05, 06…).
+     rank-focal / f-focal = banco cliente
+     rank-n1/n2/n3 / f-n1/f-n2/f-n3 = concorrentes em ordem decrescente
+     Para logos: <img src="assets/logo-BANCO.ext" alt="BANCO"> dentro do <strong>
+     Para bancos com cores específicas, adicione classes rank-BANCO e f-BANCO no :root -->
 <section class="slide metric-slide" data-slide="03">
   <div class="metric-bg-num" aria-hidden="true">{{SIGLA_METRICA1}}</div>
   <div class="metric-grid">
     <div class="metric-header">
-      <p class="metric-num-label">03 — {{CATEGORIA_METRICA1}}</p>
+      <p class="metric-num-label">03 — Comparativo</p>
       <h2 class="metric-title">{{TITULO_METRICA1}} <span>{{SUBTITULO_METRICA1}}</span></h2>
       <p class="metric-unit">{{UNIDADE_METRICA1}}</p>
     </div>
@@ -708,37 +782,44 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
       <div class="bar-row">
         <div class="rank rank-n1">1</div>
         <div class="bname"><strong>{{BANCO_1}}</strong><small>{{NOTA_BANCO_1}}</small></div>
-        <div class="bar-track"><div class="bar-fill f-n1" style="--bw:100%"></div></div><span class="bval">{{VAL_1}}</span>
+        <div class="bar-track"><div class="bar-fill f-n1" style="--bw:100%"></div></div>
+        <span class="bval">{{VAL_1}}</span>
       </div>
       <div class="bar-row hl">
         <div class="rank rank-focal">2</div>
         <div class="bname"><strong>{{CLIENTE}}<span class="focal-badge">Focal</span></strong><small>{{NOTA_FOCAL}}</small></div>
-        <div class="bar-track"><div class="bar-fill f-focal" style="--bw:{{PCT_FOCAL}}%"></div></div><span class="bval">{{VAL_FOCAL}}</span>
+        <div class="bar-track"><div class="bar-fill f-focal" style="--bw:{{PCT_FOCAL}}%"></div></div>
+        <span class="bval">{{VAL_FOCAL}}</span>
       </div>
       <div class="bar-row">
         <div class="rank rank-n2">3</div>
         <div class="bname"><strong>{{BANCO_3}}</strong><small>{{NOTA_BANCO_3}}</small></div>
-        <div class="bar-track"><div class="bar-fill f-n2" style="--bw:{{PCT_3}}%"></div></div><span class="bval">{{VAL_3}}</span>
+        <div class="bar-track"><div class="bar-fill f-n2" style="--bw:{{PCT_3}}%"></div></div>
+        <span class="bval">{{VAL_3}}</span>
       </div>
       <div class="bar-row">
         <div class="rank rank-n3">4</div>
         <div class="bname"><strong>{{BANCO_4}}</strong><small>{{NOTA_BANCO_4}}</small></div>
-        <div class="bar-track"><div class="bar-fill f-n3" style="--bw:{{PCT_4}}%"></div></div><span class="bval">{{VAL_4}}</span>
+        <div class="bar-track"><div class="bar-fill f-n3" style="--bw:{{PCT_4}}%"></div></div>
+        <span class="bval">{{VAL_4}}</span>
       </div>
     </div>
-    <div class="insight">
-      <div class="insight-icon"><img src="assets/icon-information.svg" width="16" height="16" aria-hidden="true"></div>
-      <p>{{INSIGHT_METRICA1}}</p>
+    <div class="metric-left">
+      <div class="insight">
+        <div class="insight-icon"><img src="assets/icon-information.svg" width="16" height="16" aria-hidden="true"></div>
+        <p>{{INSIGHT_METRICA1}}</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ 04–06 — MÉTRICAS ADICIONAIS ══ -->
-<!-- Copie o bloco acima e ajuste data-slide, sigla, título e valores. -->
+<!-- Copie o bloco acima, ajuste data-slide (04, 05, 06…), sigla, eyebrow, título e valores.
+     Use class="insight leader" quando o banco focal liderar a métrica. -->
 
 <!-- ══ 07 — PERFIL DO BANCO FOCAL ══ -->
-<!-- --bank-color e --bank-accent devem ser as cores oficiais do cliente -->
-<section class="slide bank-slide" data-slide="07" style="--bank-color:var(--focal-color);--bank-accent:var(--focal-accent);">
+<!-- --bank-color deve ser a cor primária oficial do cliente -->
+<section class="slide bank-slide slide--scrollable" data-slide="07" style="--bank-color:var(--focal-color);--bank-accent:var(--focal-accent);">
   <div class="bank-side-accent"></div>
   <div class="bank-inner">
     <div class="bank-head">
@@ -752,96 +833,118 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
       </div>
     </div>
     <div class="bank-content">
-    <div class="bank-kpis">
-      <div class="kpi-cell">
-        <span class="kpi-label">{{KPI1_LABEL}}</span>
-        <span class="kpi-value">{{KPI1_VAL}}</span>
-        <span class="kpi-delta kpi-up">{{KPI1_DELTA1}}</span>
-        <span class="kpi-delta kpi-neutral">{{KPI1_DELTA2}}</span>
+      <div class="bank-kpis">
+        <div class="kpi-cell">
+          <span class="kpi-label">{{KPI1_LABEL}}</span>
+          <span class="kpi-value">{{KPI1_VAL}}</span>
+          <span class="kpi-delta kpi-up">{{KPI1_DELTA1}}</span>
+          <span class="kpi-delta kpi-neutral">{{KPI1_DELTA2}}</span>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label">{{KPI2_LABEL}}</span>
+          <span class="kpi-value">{{KPI2_VAL}}</span>
+          <span class="kpi-delta kpi-up">{{KPI2_DELTA1}}</span>
+          <span class="kpi-delta kpi-up">{{KPI2_DELTA2}}</span>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label">{{KPI3_LABEL}}</span>
+          <span class="kpi-value">{{KPI3_VAL}}</span>
+          <span class="kpi-delta kpi-up">{{KPI3_DELTA1}}</span>
+          <span class="kpi-delta kpi-neutral">{{KPI3_DELTA2}}</span>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label">{{KPI4_LABEL}}</span>
+          <span class="kpi-value">{{KPI4_VAL}}</span>
+          <span class="kpi-delta kpi-up">{{KPI4_DELTA1}}</span>
+          <span class="kpi-delta kpi-up">{{KPI4_DELTA2}}</span>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label">{{KPI5_LABEL}}</span>
+          <span class="kpi-value">{{KPI5_VAL}}</span>
+          <span class="kpi-delta kpi-up">{{KPI5_DELTA1}}</span>
+          <span class="kpi-delta kpi-neutral">{{KPI5_DELTA2}}</span>
+        </div>
       </div>
-      <div class="kpi-cell">
-        <span class="kpi-label">{{KPI2_LABEL}}</span>
-        <span class="kpi-value">{{KPI2_VAL}}</span>
-        <span class="kpi-delta kpi-up">{{KPI2_DELTA1}}</span>
-        <span class="kpi-delta kpi-up">{{KPI2_DELTA2}}</span>
-      </div>
-      <div class="kpi-cell">
-        <span class="kpi-label">{{KPI3_LABEL}}</span>
-        <span class="kpi-value">{{KPI3_VAL}}</span>
-        <span class="kpi-delta kpi-up">{{KPI3_DELTA1}}</span>
-        <span class="kpi-delta kpi-neutral">{{KPI3_DELTA2}}</span>
-      </div>
-      <div class="kpi-cell">
-        <span class="kpi-label">{{KPI4_LABEL}}</span>
-        <span class="kpi-value">{{KPI4_VAL}}</span>
-        <span class="kpi-delta kpi-up">{{KPI4_DELTA1}}</span>
-        <span class="kpi-delta kpi-up">{{KPI4_DELTA2}}</span>
-      </div>
-      <div class="kpi-cell">
-        <span class="kpi-label">{{KPI5_LABEL}}</span>
-        <span class="kpi-value">{{KPI5_VAL}}</span>
-        <span class="kpi-delta kpi-up">{{KPI5_DELTA1}}</span>
-        <span class="kpi-delta kpi-neutral">{{KPI5_DELTA2}}</span>
-      </div>
-    </div>
-    <div class="bank-body">
-      <div class="bank-body-col">
-        <p class="bank-body-col__title">{{TITULO_GRAFICO_CRESCIMENTO}}</p>
-        <div class="growth-list">
-          <!-- data-w = % relativa ao maior valor (max = 50%) -->
-          <div class="growth-row">
-            <span class="growth-row__label">{{LINHA1_LABEL}}</span>
-            <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="50%"></div></div>
-            <span class="growth-val kpi-up">{{LINHA1_VAL}}</span>
-          </div>
-          <div class="growth-row">
-            <span class="growth-row__label">{{LINHA2_LABEL}}</span>
-            <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="{{LINHA2_PCT}}%"></div></div>
-            <span class="growth-val kpi-up">{{LINHA2_VAL}}</span>
-          </div>
-          <div class="growth-row">
-            <span class="growth-row__label">{{LINHA3_LABEL}}</span>
-            <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="{{LINHA3_PCT}}%"></div></div>
-            <span class="growth-val kpi-up">{{LINHA3_VAL}}</span>
-          </div>
-          <div class="growth-row">
-            <span class="growth-row__label">{{LINHA4_LABEL}}</span>
-            <div class="growth-track"><div class="growth-bar growth-bar--neg" data-w="{{LINHA4_PCT}}%"></div></div>
-            <span class="growth-val kpi-down">{{LINHA4_VAL}}</span>
+      <div class="bank-body" style="grid-template-columns:1fr;">
+        <div class="bank-body-col">
+          <p class="bank-body-col__title">{{TITULO_GRAFICO_CRESCIMENTO}}</p>
+          <div class="growth-list">
+            <!-- data-w = % relativa ao maior valor positivo (max=50%); use growth-bar--neg para negativos -->
+            <div class="growth-row">
+              <span class="growth-row__label">{{LINHA1_LABEL}}</span>
+              <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="50%"></div></div>
+              <span class="growth-val kpi-up">{{LINHA1_VAL}}</span>
+            </div>
+            <div class="growth-row">
+              <span class="growth-row__label">{{LINHA2_LABEL}}</span>
+              <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="{{LINHA2_PCT}}%"></div></div>
+              <span class="growth-val kpi-up">{{LINHA2_VAL}}</span>
+            </div>
+            <div class="growth-row">
+              <span class="growth-row__label">{{LINHA3_LABEL}}</span>
+              <div class="growth-track"><div class="growth-bar growth-bar--pos" data-w="{{LINHA3_PCT}}%"></div></div>
+              <span class="growth-val kpi-up">{{LINHA3_VAL}}</span>
+            </div>
+            <div class="growth-row">
+              <span class="growth-row__label">{{LINHA4_LABEL}}</span>
+              <div class="growth-track"><div class="growth-bar growth-bar--neg" data-w="{{LINHA4_PCT}}%"></div></div>
+              <span class="growth-val kpi-down">{{LINHA4_VAL}}</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="bank-body-col">
-        <p class="bank-body-col__title">{{TITULO_DESTAQUES}}</p>
-        <ul class="highlight-list">
-          <li class="highlight-item">
-            <span class="highlight-item__icon"><img src="assets/icon-checkmark.svg" alt=""></span>
-            <span class="highlight-item__text"><strong>{{DESTAQUE1_TITULO}}:</strong> {{DESTAQUE1_CORPO}}</span>
-          </li>
-          <li class="highlight-item">
-            <span class="highlight-item__icon"><img src="assets/icon-checkmark.svg" alt=""></span>
-            <span class="highlight-item__text"><strong>{{DESTAQUE2_TITULO}}:</strong> {{DESTAQUE2_CORPO}}</span>
-          </li>
-          <li class="highlight-item">
-            <span class="highlight-item__icon"><img src="assets/icon-checkmark.svg" alt=""></span>
-            <span class="highlight-item__text"><strong>{{DESTAQUE3_TITULO}}:</strong> {{DESTAQUE3_CORPO}}</span>
-          </li>
-          <li class="highlight-item">
-            <span class="highlight-item__icon"><img src="assets/icon-checkmark.svg" alt=""></span>
-            <span class="highlight-item__text"><strong>{{DESTAQUE4_TITULO}}:</strong> {{DESTAQUE4_CORPO}}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
     </div><!-- /.bank-content -->
   </div>
 </section>
 
-<!-- ══ 08 — OPORTUNIDADES IBM ══ -->
-<section class="slide opps-slide" data-slide="08">
+<!-- ══ 08 — DESTAQUES ESTRATÉGICOS ══ -->
+<!-- Slide com fundo IBM Blue texturizado. Adicione destaques-slide à class.
+     --bank-color pode ser mantido como focal-color ou a cor do cliente. -->
+<section class="slide bank-slide destaques-slide" data-slide="08" style="--bank-color:var(--focal-color);">
+  <div class="bank-side-accent"></div>
+  <div class="bank-inner">
+    <div class="bank-head">
+      <div class="bank-head-left">
+        <p class="bank-kicker">08 — Banco Focal</p>
+        <h2 class="bank-title">{{TITULO_DESTAQUES}}</h2>
+        <p class="bank-period">
+          <img src="assets/client-logo.png" alt="{{CLIENTE}}" style="height:18px;display:inline-block;vertical-align:middle;margin-right:.4rem;filter:brightness(0) invert(1);opacity:.7;">
+          {{CLIENTE_NOME_COMPLETO}} · Fonte: {{FONTE_DADOS}}
+        </p>
+      </div>
+    </div>
+    <div class="bank-content">
+      <div class="destaques-grid">
+        <div class="destaque-card">
+          <span class="destaque-card__num">01 — {{DESTAQUE1_CATEGORIA}}</span>
+          <p class="destaque-card__title">{{DESTAQUE1_TITULO}}</p>
+          <p class="destaque-card__body">{{DESTAQUE1_CORPO}}</p>
+        </div>
+        <div class="destaque-card">
+          <span class="destaque-card__num">02 — {{DESTAQUE2_CATEGORIA}}</span>
+          <p class="destaque-card__title">{{DESTAQUE2_TITULO}}</p>
+          <p class="destaque-card__body">{{DESTAQUE2_CORPO}}</p>
+        </div>
+        <div class="destaque-card">
+          <span class="destaque-card__num">03 — {{DESTAQUE3_CATEGORIA}}</span>
+          <p class="destaque-card__title">{{DESTAQUE3_TITULO}}</p>
+          <p class="destaque-card__body">{{DESTAQUE3_CORPO}}</p>
+        </div>
+        <div class="destaque-card">
+          <span class="destaque-card__num">04 — {{DESTAQUE4_CATEGORIA}}</span>
+          <p class="destaque-card__title">{{DESTAQUE4_TITULO}}</p>
+          <p class="destaque-card__body">{{DESTAQUE4_CORPO}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 09 — OPORTUNIDADES IBM ══ -->
+<section class="slide opps-slide slide--scrollable" data-slide="09">
   <div class="opps-inner">
     <div>
-      <p class="s-kicker">08 — IBM</p>
+      <p class="s-kicker">09 — Oportunidades</p>
       <h2 class="s-title">Oportunidades IBM para {{CLIENTE}}</h2>
     </div>
     <div class="opps-grid">
@@ -885,48 +988,48 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
   </div>
 </section>
 
-<!-- ══ 09 — PRÓXIMOS PASSOS ══ -->
-<section class="slide closing-slide" data-slide="09">
+<!-- ══ 10 — PRÓXIMOS PASSOS ══ -->
+<section class="slide closing-slide" data-slide="10">
   <div class="closing-inner">
     <div>
-      <p class="s-kicker">09 — Próximos Passos</p>
+      <p class="s-kicker">10 — Próximos Passos</p>
       <h2 class="s-title">Agenda e prioridades IBM × {{CLIENTE}}</h2>
     </div>
     <div class="closing-body">
-    <div class="closing-cards">
-      <div class="closing-card">
-        <span class="closing-card__kicker">Curto Prazo · {{PRAZO1}}</span>
-        <p class="closing-card__title">{{PASSO1_TITULO}}</p>
-        <p class="closing-card__body">{{PASSO1_CORPO}}</p>
+      <div class="closing-cards">
+        <div class="closing-card">
+          <span class="closing-card__kicker">Curto Prazo · {{PRAZO1}}</span>
+          <p class="closing-card__title">{{PASSO1_TITULO}}</p>
+          <p class="closing-card__body">{{PASSO1_CORPO}}</p>
+        </div>
+        <div class="closing-card">
+          <span class="closing-card__kicker">Médio Prazo · {{PRAZO2}}</span>
+          <p class="closing-card__title">{{PASSO2_TITULO}}</p>
+          <p class="closing-card__body">{{PASSO2_CORPO}}</p>
+        </div>
+        <div class="closing-card">
+          <span class="closing-card__kicker">Longo Prazo · {{PRAZO3}}</span>
+          <p class="closing-card__title">{{PASSO3_TITULO}}</p>
+          <p class="closing-card__body">{{PASSO3_CORPO}}</p>
+        </div>
       </div>
-      <div class="closing-card">
-        <span class="closing-card__kicker">Médio Prazo · {{PRAZO2}}</span>
-        <p class="closing-card__title">{{PASSO2_TITULO}}</p>
-        <p class="closing-card__body">{{PASSO2_CORPO}}</p>
+      <div class="closing-kpis">
+        <div class="closing-kpi">
+          <p class="closing-kpi__label">{{KPI_CLOSING1_LABEL}}</p>
+          <p class="closing-kpi__value">{{KPI_CLOSING1_VAL}}</p>
+          <p class="closing-kpi__desc">{{KPI_CLOSING1_DESC}}</p>
+        </div>
+        <div class="closing-kpi">
+          <p class="closing-kpi__label">{{KPI_CLOSING2_LABEL}}</p>
+          <p class="closing-kpi__value">{{KPI_CLOSING2_VAL}}</p>
+          <p class="closing-kpi__desc">{{KPI_CLOSING2_DESC}}</p>
+        </div>
+        <div class="closing-kpi">
+          <p class="closing-kpi__label">{{KPI_CLOSING3_LABEL}}</p>
+          <p class="closing-kpi__value">{{KPI_CLOSING3_VAL}}</p>
+          <p class="closing-kpi__desc">{{KPI_CLOSING3_DESC}}</p>
+        </div>
       </div>
-      <div class="closing-card">
-        <span class="closing-card__kicker">Longo Prazo · {{PRAZO3}}</span>
-        <p class="closing-card__title">{{PASSO3_TITULO}}</p>
-        <p class="closing-card__body">{{PASSO3_CORPO}}</p>
-      </div>
-    </div>
-    <div class="closing-kpis">
-      <div class="closing-kpi">
-        <p class="closing-kpi__label">{{KPI_CLOSING1_LABEL}}</p>
-        <p class="closing-kpi__value">{{KPI_CLOSING1_VAL}}</p>
-        <p class="closing-kpi__desc">{{KPI_CLOSING1_DESC}}</p>
-      </div>
-      <div class="closing-kpi">
-        <p class="closing-kpi__label">{{KPI_CLOSING2_LABEL}}</p>
-        <p class="closing-kpi__value">{{KPI_CLOSING2_VAL}}</p>
-        <p class="closing-kpi__desc">{{KPI_CLOSING2_DESC}}</p>
-      </div>
-      <div class="closing-kpi">
-        <p class="closing-kpi__label">{{KPI_CLOSING3_LABEL}}</p>
-        <p class="closing-kpi__value">{{KPI_CLOSING3_VAL}}</p>
-        <p class="closing-kpi__desc">{{KPI_CLOSING3_DESC}}</p>
-      </div>
-    </div>
     </div><!-- /.closing-body -->
   </div>
 </section>
