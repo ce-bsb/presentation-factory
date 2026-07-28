@@ -236,6 +236,7 @@ button {
   right: 0;
   overflow: hidden;
 }
+/* overflow:hidden impede scroll interno que fazia o conteúdo passar por cima do topbar */
 .slide {
   position: absolute;
   inset: 0;
@@ -243,7 +244,7 @@ button {
   visibility: hidden;
   transform: translateY(8px);
   transition: opacity 240ms var(--ease), transform 320ms var(--ease), visibility 0s 320ms;
-  overflow: auto;
+  overflow: hidden;
   will-change: opacity, transform;
 }
 .slide.is-active {
@@ -252,14 +253,23 @@ button {
   transform: translateY(0);
   transition: opacity 280ms var(--ease-out), transform 360ms var(--ease-out), visibility 0s;
 }
+/* max-height garante que o conteúdo nunca ultrapasse a área do deck */
 .slide__inner {
   max-width: 1280px;
   margin: 0 auto;
   padding: var(--u-8) var(--u-8) var(--u-9);
-  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--u-6);
+  overflow: hidden;
+}
+/* Imagens dentro dos slides respeitam o espaço disponível verticalmente */
+.slide__inner img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
 }
 
 @media (max-width: 820px) {

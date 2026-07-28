@@ -77,9 +77,13 @@
 
     /* ── Deck / slides ── */
     .deck { position:fixed; top:calc(3px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
-    .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:auto; background:var(--white); }
+    /* overflow:hidden impede scroll interno que fazia o conteúdo passar por cima do topbar */
+    .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:hidden; background:var(--white); }
     .slide.is-active { opacity:1; visibility:visible; clip-path:inset(0 0% 0 0); transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
-    .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
+    /* max-height garante que o conteúdo nunca ultrapasse a área do deck; imagens respeitam o teto via max-height:100% */
+    .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); height:100%; max-height:100%; display:flex; flex-direction:column; gap:var(--u-6); overflow:hidden; }
+    /* Imagens dentro dos slides respeitam o espaço disponível verticalmente */
+    .slide__inner img { max-height:100%; width:auto; object-fit:contain; }
     @media(max-width:820px){ .slide__inner { padding:var(--u-6) var(--u-5) var(--u-7); } }
 
     /* ── Typography ── */
