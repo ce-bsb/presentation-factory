@@ -1,5 +1,10 @@
 # Arquitetura
 
+## ⚠️ Esta branch é exclusivamente Account Planning
+
+Todo pedido de apresentação nesta branch resulta em um deck de account planning
+usando o template `ibm-account-planning`. Não crie outros tipos de deck aqui.
+
 ## Estrutura do repositório
 
 - `clients/` — entidades cliente; `organizations/` — entidades corporativas.

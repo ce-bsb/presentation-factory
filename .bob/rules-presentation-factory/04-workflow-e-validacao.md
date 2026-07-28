@@ -1,13 +1,23 @@
 # Workflow e validação
 
-## Criar nova apresentação (caso padrão)
+## ⚠️ Esta branch é exclusivamente Account Planning
 
-1. Derive o slug kebab-case do nome pedido pelo usuário.
-2. Crie a pasta **fora** da factory: `<workspace>/<slug>/` (irmã de `presentation-factory/`).
-3. Leia o template real mais próximo na factory **apenas como referência**.
-4. Copie `index.html` e `assets/` do template; nos templates IBM ativos, mantenha
-   CSS e JavaScript dentro do `index.html`.
-5. Verifique sintaxe JS e que não há paths absolutos proibidos.
+**Toda apresentação pedida nesta branch é um deck de account planning.**
+Use sempre o template `ibm-account-planning`. Não use outros templates.
+
+## Criar apresentação de account planning
+
+1. Pergunte o banco focal (se não informado).
+2. Derive o slug kebab-case: ex. `account-planning-caixa-2025`.
+3. Crie a pasta **fora** da factory: `<workspace>/<slug>/` (irmã de `presentation-factory/`).
+4. **Copie byte a byte** `presentation-factory/organizations/ibm/templates/ibm-account-planning/index.html` → `<slug>/index.html`.
+   Não reescreva nem refatore — copie o arquivo exatamente como está.
+5. Copie os assets necessários para `<slug>/assets/` (logos, ícones Carbon).
+6. **Leia os RIs** do banco focal para extrair os dados dos placeholders.
+   - Leia apenas as seções relevantes: resultados financeiros, KPIs, destaques estratégicos.
+   - Não varra todo o RI — localize as tabelas de resultado e extraia o necessário.
+7. Substitua todos os `{{PLACEHOLDERS}}` pelos dados extraídos dos RIs. Nenhum placeholder pode ser visível no deck final.
+8. Verifique que não há paths absolutos proibidos.
 
 Não rode `make build/validate/test` para decks simples.
 

@@ -78,7 +78,24 @@ Use exclusivamente ícones oficiais do Carbon Design System (`@carbon/icons`).
 **Proibido:** criar, desenhar, aproximar ou gerar ícones com IA, SVG manual,
 formas CSS, caracteres Unicode ou emojis.
 
-## ⚠️ Account Planning — banco focal obrigatório
+## ⚠️ Account Planning — template e banco focal obrigatórios
+
+### Template obrigatório
+
+Toda vez que o usuário pedir uma apresentação de account planning **ou qualquer deck comparativo
+de bancos**, use **obrigatoriamente** o template `ibm-account-planning` como base estrutural:
+
+1. Copie **byte a byte** o arquivo `presentation-factory/organizations/ibm/templates/ibm-account-planning/index.html` para `<slug>/index.html`.
+   - **Não reescreva, não resuma, não refatore o CSS/JS.** Copie o arquivo completo.
+   - O template já tem CSS e JavaScript inline e autocontido — não altere nenhuma linha de estilo ou script.
+2. Substitua todos os `{{PLACEHOLDERS}}` pelos dados reais extraídos dos RIs — **nunca entregue placeholders visíveis**.
+3. Não remova nem simplifique componentes do template; adicione slides extras se necessário,
+   mas mantenha os slides canônicos do template.
+
+> **Proibido:** criar um deck de account planning do zero com CSS próprio ignorando este template.
+> **Proibido:** reescrever, reformatar ou "limpar" o CSS/JS do template — copie-o exatamente como está.
+
+### Banco focal obrigatório — perguntar antes de gerar
 
 Toda vez que o usuário pedir uma apresentação de account planning (template `ibm-account-planning`)
 ou qualquer deck comparativo de bancos, **você DEVE perguntar antes de gerar**:
