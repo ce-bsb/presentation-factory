@@ -203,7 +203,7 @@
     }
 
     /* ── Navbar ── */
-    .navbar{position:fixed;bottom:0;left:0;right:0;height:var(--navbar-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--u-6);background:var(--bg);border-top:1px solid var(--line);z-index:40;}
+    .navbar{position:fixed;bottom:0;left:0;right:0;height:var(--navbar-h);display:grid;grid-template-columns:1fr;align-items:center;padding:0 var(--u-6);background:var(--bg);border-top:1px solid var(--line);z-index:40;}
     .navbar__left{display:flex;align-items:center;}
     .navbar__center{display:flex;align-items:center;justify-content:center;gap:var(--u-3);}
     .navbar__right{display:flex;align-items:center;justify-content:flex-end;}
@@ -216,20 +216,7 @@
     .btn--ghost:hover{background:var(--bg-2);color:var(--ink);}
     @media(max-width:560px){.navbar{padding:0 var(--u-3);}.navbar__hint{display:none;}}
 
-    /* ── Index panel ── */
-    .index-panel{position:fixed;inset:0;background:rgba(22,22,22,.55);z-index:60;display:flex;align-items:stretch;justify-content:flex-end;backdrop-filter:blur(4px);}
-    .index-panel[hidden]{display:none;}
-    .index-panel__inner{width:min(360px,100%);background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;padding:var(--u-6);}
-    .index-panel__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--u-4);border-bottom:1px solid var(--line);margin-bottom:var(--u-4);}
-    .index-panel__title{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;text-transform:uppercase;color:var(--ibm-blue);margin:0;font-weight:500;}
-    .index-list{list-style:none;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
-    .index-item{background:var(--bg);width:100%;border:0;text-align:left;display:grid;grid-template-columns:48px 1fr;align-items:center;gap:var(--u-3);padding:var(--u-3) var(--u-4);cursor:pointer;font-size:var(--text-14);color:var(--ink);transition:background 100ms var(--ease);}
-    .index-item:hover{background:var(--bg-2);}
-    .index-item.is-current{background:var(--bg-2);box-shadow:inset 3px 0 0 var(--ibm-blue);}
-    .index-item__num{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.06em;color:var(--ink-faint);}
-    .index-item.is-current .index-item__num{color:var(--ibm-blue);}
-    .index-item__label{font-weight:500;}
-
+    
     /* ── Animations ── */
     @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -246,7 +233,7 @@
     .slide.is-active .closing-left{animation:fadeIn 500ms 80ms var(--ease-out) both;}
     .slide.is-active .closing-right{animation:slideUp 480ms 160ms var(--ease-out) both;}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.slide{clip-path:none!important;}}
-    @media print{@page{size:A4 landscape;margin:12mm;}html,body{overflow:visible;height:auto;}.progress,.topbar,.navbar,.index-panel{display:none!important;}.deck{position:static;}.slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}.slide:last-child{page-break-after:auto;}}
+    @media print{@page{size:A4 landscape;margin:12mm;}html,body{overflow:visible;height:auto;}.progress,.topbar,.navbar{display:none!important;}.deck{position:static;}.slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}.slide:last-child{page-break-after:auto;}}
   
     /* ── Portrait / vertical-screen universal fixes ───────────────────────────
        Targets: monitors rotated 90° (e.g. 40" portrait), tall tablets, phones.
@@ -297,10 +284,7 @@
     @media(orientation:portrait) and (min-height:1000px){
       .closing-display { font-size: clamp(2rem, 5vh, 4rem); }
     }
-
-    /* Index panel: full-screen on portrait narrow */
     @media(orientation:portrait) and (max-width:768px){
-      .index-panel__inner { width: 100%; border-left: none; }
     }
   </style>
 </head>
@@ -458,12 +442,6 @@
   </main>
 
   <nav class="navbar" aria-label="Controles de navegação">
-    <div class="navbar__left">
-      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
-        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M4 6h24v2H4zm0 8h24v2H4zm0 8h24v2H4z"/></svg>
-        <span>Índice</span>
-      </button>
-    </div>
     <div class="navbar__center">
       <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
         <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M20 6l-10 10 10 10-1.4 1.4L7.2 16 18.6 4.6z"/></svg>
@@ -474,25 +452,7 @@
         <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M12 6l10 10-10 10 1.4 1.4L24.8 16 13.4 4.6z"/></svg>
       </button>
     </div>
-    <div class="navbar__right">
-      <span class="navbar__hint" aria-hidden="true">Use 1–4 para ir direto ao slide</span>
-    </div>
   </nav>
-
-  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice">
-    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="idx-title">
-      <header class="index-panel__head">
-        <h2 id="idx-title" class="index-panel__title">Índice</h2>
-        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
-      </header>
-      <ol class="index-list">
-        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">{{IDX_1}}</span></button></li>
-        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">{{IDX_2}}</span></button></li>
-        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">{{IDX_3}}</span></button></li>
-        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">{{IDX_4}}</span></button></li>
-      </ol>
-    </div>
-  </aside>
 
   <script>
   (function(){
@@ -503,10 +463,6 @@
     var counter=document.getElementById('slide-counter');
     var btnPrev=document.getElementById('btn-prev');
     var btnNext=document.getElementById('btn-next');
-    var btnIdx=document.getElementById('btn-index');
-    var btnClose=document.getElementById('btn-index-close');
-    var idxPanel=document.getElementById('index-panel');
-    var idxItems=Array.prototype.slice.call(document.querySelectorAll('.index-item'));
     var current=1;
     function pad(n){return n<10?'0'+n:''+n;}
     function go(n,opts){
@@ -524,27 +480,18 @@
       var prog=document.querySelector('.progress');
       if(prog)prog.setAttribute('aria-valuenow',Math.round(pct));
       if(counter)counter.textContent=pad(n)+' / '+pad(total);
-      idxItems.forEach(function(b){parseInt(b.getAttribute('data-go'),10)===n?b.classList.add('is-current'):b.classList.remove('is-current');});
       if(btnPrev)btnPrev.disabled=(n===1);
       if(btnNext)btnNext.disabled=(n===total);
       var h='#slide-'+n;if(window.location.hash!==h)history.replaceState(null,'',h);
     }
     function next(){go(current+1);}
     function prev(){go(current-1);}
-    function openIdx(){if(!idxPanel)return;idxPanel.hidden=false;idxPanel.setAttribute('aria-hidden','false');if(btnClose)btnClose.focus();}
-    function closeIdx(){if(!idxPanel)return;idxPanel.hidden=true;idxPanel.setAttribute('aria-hidden','true');if(btnIdx)btnIdx.focus();}
-    function toggleIdx(){idxPanel&&(idxPanel.hidden?openIdx():closeIdx());}
     if(btnPrev)btnPrev.addEventListener('click',prev);
     if(btnNext)btnNext.addEventListener('click',next);
-    if(btnIdx)btnIdx.addEventListener('click',toggleIdx);
-    if(btnClose)btnClose.addEventListener('click',closeIdx);
-    if(idxPanel)idxPanel.addEventListener('click',function(e){if(e.target===idxPanel)closeIdx();});
-    idxItems.forEach(function(b){b.addEventListener('click',function(){var n=parseInt(b.getAttribute('data-go'),10);if(!isNaN(n)){closeIdx();go(n);}});});
     document.addEventListener('keydown',function(e){
       var tag=e.target&&e.target.tagName;
       if(tag==='INPUT'||tag==='TEXTAREA'||(e.target&&e.target.isContentEditable))return;
       var k=e.key;
-      if(k==='Escape'){e.preventDefault();toggleIdx();}
       else if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();next();}
       else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev();}
       else if(k==='Home'){e.preventDefault();go(1);}
