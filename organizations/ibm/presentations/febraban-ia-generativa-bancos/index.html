@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>IA Generativa para Bancos — IBM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --white:      #ffffff;
+      --gray-10:    #f4f4f4;
+      --gray-20:    #e0e0e0;
+      --gray-30:    #c6c6c6;
+      --gray-50:    #8d8d8d;
+      --gray-60:    #6f6f6f;
+      --gray-70:    #525252;
+      --gray-80:    #393939;
+      --gray-90:    #262626;
+      --gray-100:   #161616;
+      --blue:       #0f62fe;
+      --blue-h:     #0043ce;
+      --blue-d:     #002d9c;
+      --blue-l:     #4589ff;
+      --cyan:       #1192e8;
+      --cyan-l:     #33b1ff;
+      --purple:     #8a3ffc;
+      --teal:       #009d9a;
+      --bg:         #ffffff;
+      --bg-2:       #f4f4f4;
+      --ink:        #161616;
+      --ink-m:      #525252;
+      --ink-f:      #8d8d8d;
+      --line:       #e0e0e0;
+      --sans:       'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+      --mono:       'IBM Plex Mono',monospace;
+      --topbar-h:   52px;
+      --navbar-h:   52px;
+      --ease:       cubic-bezier(.2,0,.38,.9);
+      --ease-out:   cubic-bezier(0,0,.38,.9);
+      --spring:     cubic-bezier(.34,1.56,.64,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; }
+    @media(max-width:600px){ html { font-size:15px; } }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      min-height: 100dvh;
+    }
+    img, svg { display:block; max-width:100%; height:auto; }
+    button { font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+    :focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+    .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+
+    /* ══════════════════════════════════════
+       PROGRESS BAR
+       ══════════════════════════════════════ */
+    .progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gray-20); z-index: 60;
+    }
+    .progress__bar {
+      height: 100%; width: 25%;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--cyan-l) 100%);
+      transition: width 500ms var(--ease);
+      position: relative;
+    }
+    .progress__bar::after {
+      content: '';
+      position: absolute; right: -1px; top: -2px;
+      width: 7px; height: 7px;
+      background: var(--cyan-l);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan-l), 0 0 16px var(--blue);
+      transition: opacity 300ms;
+    }
+
+    /* ══════════════════════════════════════
+       TOPBAR
+       ══════════════════════════════════════ */
+    .topbar {
+      position: fixed; top: 3px; left: 0; right: 0;
+      height: var(--topbar-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      z-index: 50;
+    }
+    .brand { display:inline-flex; align-items:center; gap:.75rem; }
+    .brand__ibm img { height:13px; }
+    .brand__sep { width:1px; height:18px; background:var(--gray-30); }
+    .brand__febraban {
+      font-family: var(--mono); font-size:.7rem; letter-spacing:.08em;
+      text-transform: uppercase; color: var(--ink-m);
+    }
+    .topbar__right { display:flex; align-items:center; gap:.75rem; }
+    .meta-label { font-family:var(--mono); font-size:.7rem; letter-spacing:.05em; color:var(--ink-f); text-transform:uppercase; }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow:0 0 0 0 rgba(15,98,254,.5); }
+      50%      { box-shadow:0 0 0 6px rgba(15,98,254,0); }
+    }
+    @media(max-width:480px){ .meta-label { display:none; } }
+
+    /* ══════════════════════════════════════
+       DECK / SLIDES
+       ══════════════════════════════════════ */
+    .deck {
+      position: fixed;
+      top: calc(3px + var(--topbar-h));
+      bottom: var(--navbar-h);
+      left: 0; right: 0;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; visibility: hidden;
+      transform: translateX(40px);
+      transition:
+        opacity 60ms var(--ease),
+        transform 420ms var(--ease),
+        visibility 0s 420ms;
+      overflow-y: auto; overflow-x: hidden;
+      background: var(--bg);
+    }
+    .slide.is-active {
+      opacity: 1; visibility: visible;
+      transform: translateX(0);
+      transition:
+        opacity 80ms var(--ease-out),
+        transform 380ms var(--ease-out),
+        visibility 0s;
+    }
+    .slide.slide-out {
+      transform: translateX(-40px);
+      opacity: 0;
+    }
+    .slide__inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 3rem 4rem 4rem;
+      min-height: 100%;
+      display: flex; flex-direction: column; gap: 2rem;
+    }
+    @media(max-width:820px){ .slide__inner { padding:2rem 1.5rem 3rem; } }
+
+    /* ══════════════════════════════════════
+       SLIDE 01 — COVER  (pergunta do visitante)
+       Fundo com dot-grid animado + barra azul lateral
+       ══════════════════════════════════════ */
+    .slide--cover {
+      background: var(--white);
+      overflow: hidden;
+    }
+    .slide--cover .slide__inner {
+      padding: 0; max-width: none;
+      flex-direction: row; gap: 0; min-height: 100%;
+    }
+
+    /* dot-grid canvas background */
+    #canvas-cover {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+      opacity: .45;
+    }
+
+    .cover-bar {
+      width: clamp(140px,16vw,240px);
+      background: var(--blue);
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 1.5rem;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+      overflow: hidden;
+    }
+    /* geometric lines inside the bar */
+    .cover-bar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255,255,255,.05) 0px,
+          rgba(255,255,255,.05) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      pointer-events: none;
+    }
+    .cover-bar::after {
+      content: '';
+      position: absolute; bottom: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      border: 40px solid rgba(255,255,255,.07);
+      pointer-events: none;
+    }
+    .cover-bar__label {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      align-self: flex-start; position: relative; z-index: 1;
+    }
+    .cover-bar__badge {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.25);
+      color: rgba(255,255,255,.8);
+      background: rgba(255,255,255,.08);
+      width: fit-content;
+      position: relative; z-index: 1;
+    }
+
+    .cover-main {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 4rem 5rem;
+      gap: 2rem;
+      position: relative; z-index: 1;
+    }
+    .cover-question-label {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue);
+      display: flex; align-items: center; gap: .75rem;
+      opacity: 0;
+      animation: none;
+    }
+    .cover-question-label::before {
+      content: ''; display: block;
+      width: 0; height: 1px; background: var(--blue);
+      transition: width 600ms var(--ease-out);
+    }
+    .cover-question {
+      font-weight: 200;
+      font-size: clamp(2rem,5vw,4rem);
+      line-height: 1.05; letter-spacing: -.03em;
+      color: var(--ink); max-width: 18ch;
+      opacity: 0;
+    }
+    .cover-question em {
+      font-style: normal; font-weight: 600; color: var(--blue);
+    }
+    .cover-context {
+      font-size: 1rem; line-height: 1.65;
+      color: var(--ink-m); max-width: 52ch;
+      border-left: 3px solid var(--blue);
+      padding-left: 1.25rem;
+      opacity: 0;
+    }
+    /* animations triggered when is-active */
+    .slide--cover.is-active .cover-question-label {
+      animation: fadeSlideUp 500ms 100ms var(--ease-out) both;
+    }
+    .slide--cover.is-active .cover-question-label::before {
+      width: 32px;
+    }
+    .slide--cover.is-active .cover-question {
+      animation: fadeSlideUp 600ms 200ms var(--ease-out) both;
+    }
+    .slide--cover.is-active .cover-context {
+      animation: fadeSlideUp 500ms 380ms var(--ease-out) both;
+    }
+
+    @media(max-width:768px){
+      .slide--cover .slide__inner { flex-direction:column; }
+      .cover-bar { width:100%; height:52px; flex-direction:row; align-items:center; padding:0 1.25rem; gap:1rem; }
+      .cover-bar__label { writing-mode:horizontal-tb; transform:none; }
+      .cover-main { padding:2rem 1.5rem; }
+      .cover-question { font-size:clamp(1.8rem,7vw,2.8rem); }
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 02 — TEMA / VISÃO GERAL
+       Fundo grid quadrado + 2 paineis + 3 pontos
+       ══════════════════════════════════════ */
+    .slide--tema {
+      background: var(--bg);
+    }
+    .slide--tema::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--gray-20) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gray-20) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: .35;
+      pointer-events: none;
+    }
+    .slide--tema .slide__inner { position: relative; z-index: 1; }
+
+    .slide-head { display:flex; flex-direction:column; gap:.25rem; }
+    .eyebrow {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--blue);
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--blue);
+      display: inline-block;
+      opacity: 0;
+    }
+    .title {
+      font-weight: 300;
+      font-size: clamp(1.5rem,3.5vw,2.5rem);
+      line-height: 1.1; letter-spacing: -.02em;
+      color: var(--ink);
+      margin-top: .75rem;
+      opacity: 0;
+    }
+
+    .slide--tema.is-active .eyebrow  { animation: fadeSlideUp 400ms 60ms  var(--ease-out) both; }
+    .slide--tema.is-active .title    { animation: fadeSlideUp 500ms 140ms var(--ease-out) both; }
+
+    .tema-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line);
+      flex: 1;
+    }
+    .tema-panel {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      opacity: 0;
+    }
+    .slide--tema.is-active .tema-panel:nth-child(1) { animation: fadeSlideUp 440ms 200ms var(--ease-out) both; }
+    .slide--tema.is-active .tema-panel:nth-child(2) { animation: fadeSlideUp 440ms 320ms var(--ease-out) both; }
+
+    .tema-panel--accent {
+      background: var(--gray-10);
+      border-left: 3px solid var(--blue);
+      padding-left: calc(2rem - 3px);
+    }
+    .tema-panel__label {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--ink-f); font-weight: 500;
+    }
+    .tema-panel--accent .tema-panel__label { color: var(--blue); }
+    .tema-panel__body {
+      font-size: 1rem; line-height: 1.7; color: var(--ink-m);
+    }
+
+    .tema-points { list-style:none; display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
+    .tema-point {
+      background: var(--white);
+      display: grid; grid-template-columns: 40px 1fr;
+      align-items: start; gap: 1rem;
+      padding: 1rem 1.25rem;
+      transition: background 150ms var(--ease);
+    }
+    .tema-point:hover { background: var(--gray-10); }
+    .tema-point__num {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .06em; color: var(--blue); padding-top: 3px;
+    }
+    .tema-point__text { font-size: .9rem; line-height: 1.55; color: var(--ink); }
+    .tema-point__text strong { color: var(--ink); font-weight: 600; }
+    @media(max-width:820px){ .tema-layout { grid-template-columns:1fr; flex:none; } }
+
+    /* ══════════════════════════════════════
+       SLIDE 03 — CASES IBM
+       Fundo azul escuro com partículas flutuantes
+       ══════════════════════════════════════ */
+    .slide--cases {
+      background: var(--blue-d);
+      overflow: hidden;
+    }
+    #canvas-cases {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .slide--cases .slide__inner {
+      position: relative; z-index: 1;
+      padding: 3rem 4rem;
+      display: flex; flex-direction: column; gap: 1.75rem;
+    }
+
+    .cases-header { display:flex; flex-direction:column; gap:.75rem; }
+    .eyebrow--inv {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      display: inline-block;
+      opacity: 0;
+    }
+    .cases-title {
+      font-weight: 200;
+      font-size: clamp(1.4rem,3.2vw,2.4rem);
+      line-height: 1.1; letter-spacing: -.02em;
+      color: var(--white);
+      opacity: 0;
+    }
+    .cases-sub {
+      font-size: .875rem; color: rgba(255,255,255,.5);
+      font-weight: 300; opacity: 0;
+    }
+    .slide--cases.is-active .eyebrow--inv { animation: fadeSlideUp 400ms 60ms  var(--ease-out) both; }
+    .slide--cases.is-active .cases-title  { animation: fadeSlideUp 500ms 140ms var(--ease-out) both; }
+    .slide--cases.is-active .cases-sub    { animation: fadeSlideUp 400ms 220ms var(--ease-out) both; }
+
+    .cases-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.08);
+      flex: 1;
+    }
+    .case-card {
+      background: rgba(255,255,255,.04);
+      padding: 1.75rem 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      position: relative; overflow: hidden;
+      cursor: default;
+      transition: background 200ms var(--ease);
+      opacity: 0;
+    }
+    .case-card:hover { background: rgba(255,255,255,.09); }
+    /* top accent line per card */
+    .case-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 600ms var(--ease-out);
+    }
+    .case-card:nth-child(1)::before { background: var(--cyan-l); }
+    .case-card:nth-child(2)::before { background: rgba(255,255,255,.5); }
+    .case-card:nth-child(3)::before { background: var(--blue-l); }
+
+    .slide--cases.is-active .case-card:nth-child(1) { animation: fadeSlideUp 440ms 280ms var(--ease-out) both; }
+    .slide--cases.is-active .case-card:nth-child(2) { animation: fadeSlideUp 440ms 380ms var(--ease-out) both; }
+    .slide--cases.is-active .case-card:nth-child(3) { animation: fadeSlideUp 440ms 480ms var(--ease-out) both; }
+    .slide--cases.is-active .case-card::before       { transform: scaleX(1); transition-delay: 600ms; }
+
+    .case-card__tag {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .07em; text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.5);
+      width: fit-content;
+    }
+    .case-card__title {
+      font-size: .95rem; font-weight: 600;
+      color: var(--white); line-height: 1.3;
+    }
+    .case-card__body {
+      font-size: .85rem; line-height: 1.6;
+      color: rgba(255,255,255,.65);
+      flex: 1;
+    }
+    .case-card__result {
+      font-family: var(--mono); font-size: .7rem;
+      color: var(--cyan-l); letter-spacing: .04em;
+      padding-top: .75rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    @media(max-width:900px){ .cases-grid { grid-template-columns:1fr 1fr; flex:none; } }
+    @media(max-width:600px){ .cases-grid { grid-template-columns:1fr; } }
+    @media(max-width:800px){ .slide--cases .slide__inner { padding:2rem 1.5rem; } }
+
+    /* ══════════════════════════════════════
+       SLIDE 04 — CLOSING + QR WhatsApp
+       Fundo branco com ruído sutil + painel azul QR
+       ══════════════════════════════════════ */
+    .slide--closing {
+      background: var(--bg);
+      overflow: hidden;
+    }
+    /* noise texture overlay */
+    .slide--closing::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      pointer-events: none;
+      opacity: .6;
+    }
+    .slide--closing .slide__inner {
+      flex-direction: row; gap: 0;
+      padding: 0; max-width: none;
+      min-height: 100%; position: relative; z-index: 1;
+    }
+
+    .closing-left {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 4rem 4.5rem;
+      gap: 2rem; min-width: 0;
+      opacity: 0;
+    }
+    .slide--closing.is-active .closing-left {
+      animation: fadeSlideUp 600ms 100ms var(--ease-out) both;
+    }
+
+    .closing-display {
+      font-weight: 200;
+      font-size: clamp(2rem,5vw,4rem);
+      line-height: .95; letter-spacing: -.04em;
+      color: var(--ink);
+    }
+    .closing-display em {
+      font-style: normal; color: var(--blue); font-weight: 400;
+    }
+    .closing-sub {
+      font-size: 1rem; color: var(--ink-m);
+      font-weight: 300; max-width: 38ch; line-height: 1.6;
+    }
+    .closing-specialist {
+      display: flex; flex-direction: column; gap: 4px;
+      border-left: 3px solid var(--blue);
+      padding-left: 1.25rem;
+    }
+    .closing-specialist__label {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--ink-f);
+    }
+    .closing-specialist__name {
+      font-size: 1.1rem; font-weight: 600; color: var(--ink);
+    }
+    .closing-specialist__role {
+      font-size: .85rem; color: var(--ink-m);
+    }
+    .closing-brand-row {
+      display: flex; align-items: center; gap: .75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .closing-brand-row img { height: 13px; }
+    .closing-brand-row span {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--ink-f);
+    }
+
+    /* QR panel */
+    .closing-right {
+      width: clamp(220px,28vw,340px);
+      background: var(--blue);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.25rem;
+      padding: 2.5rem 2rem;
+      flex-shrink: 0;
+      position: relative; overflow: hidden;
+      opacity: 0;
+    }
+    /* animated rings */
+    .closing-right::before, .closing-right::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.1);
+      animation: ring-expand 4s ease-in-out infinite;
+    }
+    .closing-right::before { width:200px; height:200px; bottom:-60px; right:-60px; }
+    .closing-right::after  { width:340px; height:340px; bottom:-140px; right:-140px; animation-delay:1s; }
+    @keyframes ring-expand {
+      0%,100% { transform:scale(1); opacity:.6; }
+      50%      { transform:scale(1.08); opacity:.2; }
+    }
+
+    .slide--closing.is-active .closing-right {
+      animation: fadeSlideRight 600ms 300ms var(--ease-out) both;
+    }
+
+    .closing-right__label {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); text-align: center;
+      position: relative; z-index: 1;
+    }
+    .qr-frame {
+      background: var(--white); padding: .75rem;
+      display: inline-flex;
+      position: relative; z-index: 1;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.2);
+    }
+    .qr-frame img { width: clamp(110px,14vw,160px); height: auto; display:block; }
+    .closing-right__name {
+      font-size: 1rem; font-weight: 600; color: var(--white);
+      text-align: center; position: relative; z-index: 1;
+    }
+    .closing-right__phone {
+      font-family: var(--mono); font-size: .85rem;
+      color: rgba(255,255,255,.6); text-align: center;
+      letter-spacing: .04em; position: relative; z-index: 1;
+    }
+
+    @media(max-width:820px){
+      .slide--closing .slide__inner { flex-direction:column; overflow:auto; }
+      .closing-right { width:100%; flex-direction:row; flex-wrap:wrap; gap:1rem; justify-content:center; padding:2rem 1.5rem; }
+      .closing-left  { padding:2rem 1.5rem; }
+      .closing-display { font-size:clamp(1.8rem,6vw,3rem); }
+    }
+    @media(max-width:480px){
+      .closing-right { flex-direction:column; }
+      .qr-frame img  { width:clamp(120px,40vw,160px); }
+    }
+
+    /* ══════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════ */
+    .navbar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: var(--navbar-h);
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 2rem;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+      z-index: 50;
+    }
+    .navbar__left { display:flex; align-items:center; }
+    .navbar__center { display:flex; align-items:center; justify-content:center; gap:.75rem; }
+    .navbar__right { display:flex; align-items:center; justify-content:flex-end; }
+    .navbar__hint { font-family:var(--mono); font-size:.65rem; color:var(--ink-f); letter-spacing:.02em; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      height: 36px; padding: 0 1rem;
+      border: 1px solid var(--gray-100);
+      background: var(--gray-100); color: var(--white);
+      font-size: .875rem; cursor: pointer;
+      transition: background 120ms, border-color 120ms, transform 80ms;
+    }
+    .btn:hover  { background: var(--gray-80); border-color: var(--gray-80); }
+    .btn:active { transform: scale(.97); }
+    .btn--primary { background: var(--blue); border-color: var(--blue); }
+    .btn--primary:hover { background: var(--blue-h); border-color: var(--blue-h); }
+    .btn--ghost {
+      background: transparent; border-color: var(--line);
+      color: var(--ink-m);
+    }
+    .btn--ghost:hover { background: var(--gray-10); color: var(--ink); }
+    @media(max-width:560px){ .navbar { padding:0 .75rem; } .navbar__hint { display:none; } }
+
+    /* ══════════════════════════════════════
+       INDEX PANEL
+       ══════════════════════════════════════ */
+    .index-panel {
+      position: fixed; inset: 0;
+      background: rgba(22,22,22,.4);
+      z-index: 70;
+      display: flex; align-items: stretch; justify-content: flex-end;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .index-panel[hidden] { display:none; }
+    .index-panel__inner {
+      width: min(360px,100%);
+      background: var(--bg);
+      border-left: 1px solid var(--line);
+      display: flex; flex-direction: column;
+      padding: 2rem;
+      animation: slideInRight 280ms var(--ease-out) both;
+    }
+    @keyframes slideInRight {
+      from { transform:translateX(40px); opacity:0; }
+      to   { transform:translateX(0);    opacity:1; }
+    }
+    .index-panel__head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--line);
+      margin-bottom: 1rem;
+    }
+    .index-panel__title {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--blue); margin: 0; font-weight: 500;
+    }
+    .index-list {
+      list-style: none; display: grid;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .index-item {
+      background: var(--bg); width: 100%; border: 0;
+      text-align: left;
+      display: grid; grid-template-columns: 48px 1fr;
+      align-items: center; gap: .75rem;
+      padding: .875rem 1rem;
+      cursor: pointer; font-size: .875rem; color: var(--ink);
+      transition: background 100ms var(--ease);
+    }
+    .index-item:hover { background: var(--gray-10); }
+    .index-item.is-current {
+      background: var(--gray-10);
+      box-shadow: inset 3px 0 0 var(--blue);
+    }
+    .index-item__num {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .06em; color: var(--ink-f);
+    }
+    .index-item.is-current .index-item__num { color: var(--blue); }
+    .index-item__label { font-weight: 500; }
+
+    /* ══════════════════════════════════════
+       KEYFRAMES
+       ══════════════════════════════════════ */
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeSlideRight {
+      from { opacity:0; transform:translateX(30px); }
+      to   { opacity:1; transform:translateX(0); }
+    }
+    @keyframes floatUp {
+      0%   { transform:translateY(0)   scale(1);   opacity:.6; }
+      50%  { transform:translateY(-40px) scale(1.1); opacity:.3; }
+      100% { transform:translateY(-80px) scale(.9); opacity:0; }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *, *::before, *::after {
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+      }
+    }
+    @media print{
+      @page{size:A4 landscape;margin:12mm;}
+      html,body{overflow:visible;height:auto;}
+      .progress,.topbar,.navbar,.index-panel,#canvas-cover,#canvas-cases{display:none!important;}
+      .deck{position:static;}
+      .slide{position:static!important;opacity:1!important;visibility:visible!important;transform:none!important;page-break-after:always;}
+      .slide:last-child{page-break-after:auto;}
+      .cover-question-label,.cover-question,.cover-context,
+      .eyebrow,.title,.tema-panel,.eyebrow--inv,.cases-title,.cases-sub,
+      .case-card,.closing-left,.closing-right{opacity:1!important;animation:none!important;}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#slide-1">Pular para o conteúdo</a>
+
+  <div class="progress" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <header class="topbar" aria-label="Cabeçalho">
+    <div class="brand">
+      <span class="brand__ibm"><img src="assets/ibm-logo.svg" alt="IBM" /></span>
+      <span class="brand__sep" aria-hidden="true"></span>
+      <span class="brand__febraban">Febraban Tech</span>
+    </div>
+    <div class="topbar__right">
+      <span class="meta-label" id="slide-counter">01 / 04</span>
+      <span class="live-dot" aria-hidden="true"></span>
+    </div>
+  </header>
+
+  <main class="deck" id="deck">
+
+    <!-- ═══════════════════════════
+         SLIDE 01 — CAPA / PERGUNTA
+         ═══════════════════════════ -->
+    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
+      <canvas id="canvas-cover" aria-hidden="true"></canvas>
+      <div class="slide__inner">
+        <div class="cover-bar" aria-hidden="true">
+          <span class="cover-bar__label">Febraban Tech 2025</span>
+          <span class="cover-bar__badge">IA Generativa</span>
+        </div>
+        <div class="cover-main">
+          <span class="cover-question-label">Pergunta do visitante</span>
+          <h1 id="s1-title" class="cover-question">
+            Como a IA Generativa<br/><em>está mudando os bancos?</em>
+          </h1>
+          <p class="cover-context">Do atendimento ao cliente à detecção de fraudes — a IA Generativa está redefinindo como os bancos operam, com velocidade e precisão sem precedentes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════
+         SLIDE 02 — VISÃO DO TEMA
+         ═══════════════════════════ -->
+    <section class="slide slide--tema" id="slide-2" data-slide="2" aria-labelledby="s2-title">
+      <div class="slide__inner">
+        <header class="slide-head">
+          <span class="eyebrow">02 — Visão geral do tema</span>
+          <h2 id="s2-title" class="title">IA Generativa no setor financeiro</h2>
+        </header>
+        <div class="tema-layout">
+          <article class="tema-panel" aria-labelledby="t2-a">
+            <span class="tema-panel__label" id="t2-a">O que está acontecendo</span>
+            <p class="tema-panel__body">A IA Generativa permite que bancos automatizem tarefas complexas, gerem insights em tempo real e personalizem a experiência do cliente em escala. No Brasil, instituições financeiras já estão usando modelos de linguagem para análise de contratos, geração de relatórios e suporte inteligente.</p>
+          </article>
+          <article class="tema-panel tema-panel--accent" aria-labelledby="t2-b">
+            <span class="tema-panel__label" id="t2-b">3 pontos-chave</span>
+            <ol class="tema-points">
+              <li class="tema-point">
+                <span class="tema-point__num">01</span>
+                <span class="tema-point__text"><strong>Hyper-personalização</strong> — Ofertas de crédito e investimentos adaptadas ao perfil de cada cliente com base em dados comportamentais.</span>
+              </li>
+              <li class="tema-point">
+                <span class="tema-point__num">02</span>
+                <span class="tema-point__text"><strong>Automação de processos</strong> — Contratos, KYC e relatórios gerados automaticamente, reduzindo tempo e custo operacional em até 60%.</span>
+              </li>
+              <li class="tema-point">
+                <span class="tema-point__num">03</span>
+                <span class="tema-point__text"><strong>Detecção de fraudes</strong> — Modelos treinados em tempo real identificam padrões suspeitos antes de qualquer transação ser concluída.</span>
+              </li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════
+         SLIDE 03 — CASES IBM
+         ═══════════════════════════ -->
+    <section class="slide slide--cases" id="slide-3" data-slide="3" aria-labelledby="s3-title">
+      <canvas id="canvas-cases" aria-hidden="true"></canvas>
+      <div class="slide__inner">
+        <header class="cases-header">
+          <span class="eyebrow--inv">03 — Cases reais IBM</span>
+          <h2 id="s3-title" class="cases-title">IBM em ação nos maiores bancos do mundo</h2>
+          <p class="cases-sub">Soluções implementadas com IBM watsonx e IBM Cloud</p>
+        </header>
+        <div class="cases-grid">
+          <article class="case-card" aria-labelledby="c3-a">
+            <span class="case-card__tag">Banco de Varejo · EUA</span>
+            <h3 class="case-card__title" id="c3-a">Assistente virtual com watsonx Assistant</h3>
+            <p class="case-card__body">Banco americano com 50 milhões de clientes implementou assistente de IA generativa para resolução de dúvidas e abertura de contas, sem intervenção humana em 78% dos atendimentos.</p>
+            <span class="case-card__result">→ -40% custo de atendimento · +32% NPS</span>
+          </article>
+          <article class="case-card" aria-labelledby="c3-b">
+            <span class="case-card__tag">Banco Central · Europa</span>
+            <h3 class="case-card__title" id="c3-b">Análise de risco com IBM Granite</h3>
+            <p class="case-card__body">Instituição europeia usa modelos IBM Granite para analisar contratos de crédito corporativo em segundos, tarefa que levava horas para equipes jurídicas.</p>
+            <span class="case-card__result">→ 95% redução no tempo de análise</span>
+          </article>
+          <article class="case-card" aria-labelledby="c3-c">
+            <span class="case-card__tag">Fintech · Brasil</span>
+            <h3 class="case-card__title" id="c3-c">Prevenção de fraudes em tempo real</h3>
+            <p class="case-card__body">Fintech brasileira integrou IBM Financial Crimes Insight para monitoramento de transações Pix com modelos de IA atualizados continuamente.</p>
+            <span class="case-card__result">→ +67% detecção · -28% falsos positivos</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════
+         SLIDE 04 — CLOSING + QR
+         ═══════════════════════════ -->
+    <section class="slide slide--closing" id="slide-4" data-slide="4" aria-labelledby="s4-title">
+      <div class="slide__inner">
+        <div class="closing-left">
+          <div>
+            <span class="eyebrow">04 — Próximos passos</span>
+            <h2 id="s4-title" class="closing-display" style="margin-top:.75rem">
+              Quer saber<br/><em>mais?</em>
+            </h2>
+            <p class="closing-sub" style="margin-top:1.5rem">Converse com nosso especialista IBM e descubra como a IA Generativa pode transformar a sua instituição financeira — com resultados mensuráveis em menos de 90 dias.</p>
+          </div>
+          <div class="closing-specialist" aria-label="Especialista IBM">
+            <span class="closing-specialist__label">Especialista IBM</span>
+            <span class="closing-specialist__name">João Silva</span>
+            <span class="closing-specialist__role">Client Executive · IBM Financial Services</span>
+          </div>
+          <div class="closing-brand-row">
+            <img src="assets/ibm-logo.svg" alt="IBM" />
+            <span>Febraban Tech 2025</span>
+          </div>
+        </div>
+        <div class="closing-right" aria-label="QR Code WhatsApp">
+          <span class="closing-right__label">Escaneie para falar no WhatsApp</span>
+          <div class="qr-frame">
+            <img src="assets/qr.png" alt="QR Code WhatsApp" width="160" height="160"
+                 onerror="this.parentNode.innerHTML=document.getElementById('qr-fallback').innerHTML" />
+          </div>
+          <span class="closing-right__name">João Silva</span>
+          <span class="closing-right__phone">+55 (11) 9 9999-9999</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QR fallback SVG -->
+    <template id="qr-fallback">
+      <svg width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#ffffff"/>
+        <rect x="10" y="10" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="22" y="22" width="36" height="36" fill="#161616"/>
+        <rect x="130" y="10" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="142" y="22" width="36" height="36" fill="#161616"/>
+        <rect x="10" y="130" width="60" height="60" fill="none" stroke="#161616" stroke-width="4"/>
+        <rect x="22" y="142" width="36" height="36" fill="#161616"/>
+        <rect x="90" y="10" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="10" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="26" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="122" y="90" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="106" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="106" width="8" height="8" fill="#161616"/>
+        <rect x="90" y="130" width="8" height="8" fill="#161616"/>
+        <rect x="106" y="146" width="8" height="8" fill="#161616"/>
+        <text x="100" y="192" font-family="monospace" font-size="9" fill="#8d8d8d" text-anchor="middle">Substitua por qr.png</text>
+      </svg>
+    </template>
+  </main>
+
+  <!-- Navbar -->
+  <nav class="navbar" aria-label="Navegação">
+    <div class="navbar__left">
+      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M4 6h24v2H4zm0 8h24v2H4zm0 8h24v2H4z"/></svg>
+        <span>Índice</span>
+      </button>
+    </div>
+    <div class="navbar__center">
+      <button class="btn" id="btn-prev" aria-label="Anterior">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M20 6l-10 10 10 10-1.4 1.4L7.2 16 18.6 4.6z"/></svg>
+        Anterior
+      </button>
+      <button class="btn btn--primary" id="btn-next" aria-label="Próximo">
+        Próximo
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M12 6l10 10-10 10 1.4 1.4L24.8 16 13.4 4.6z"/></svg>
+      </button>
+    </div>
+    <div class="navbar__right">
+      <span class="navbar__hint" aria-hidden="true">Use as teclas ← → para navegar</span>
+    </div>
+  </nav>
+
+  <!-- Index panel -->
+  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="idx-title">
+    <div class="index-panel__inner">
+      <header class="index-panel__head">
+        <h2 id="idx-title" class="index-panel__title">Índice</h2>
+        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
+      </header>
+      <ol class="index-list">
+        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">Pergunta do visitante</span></button></li>
+        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">Visão geral do tema</span></button></li>
+        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">Cases IBM</span></button></li>
+        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">Fale com especialista</span></button></li>
+      </ol>
+    </div>
+  </aside>
+
+  <script>
+  (function(){
+    'use strict';
+
+    /* ── Canvas: dot-grid flutuante (slide 1) ── */
+    (function(){
+      var cv = document.getElementById('canvas-cover');
+      if(!cv) return;
+      var ctx = cv.getContext('2d');
+      var dots = [];
+      var W, H;
+      function resize(){
+        W = cv.width  = cv.offsetWidth;
+        H = cv.height = cv.offsetHeight;
+      }
+      function mkDot(){
+        return {
+          x: Math.random()*W, y: Math.random()*H,
+          r: Math.random()*1.5+.5,
+          vx: (Math.random()-.5)*.3,
+          vy: (Math.random()-.5)*.3,
+          a: Math.random()*.5+.15
+        };
+      }
+      function init(){
+        resize();
+        dots = [];
+        var n = Math.floor((W*H)/3800);
+        for(var i=0;i<n;i++) dots.push(mkDot());
+      }
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        dots.forEach(function(d){
+          d.x += d.vx; d.y += d.vy;
+          if(d.x<0) d.x=W; if(d.x>W) d.x=0;
+          if(d.y<0) d.y=H; if(d.y>H) d.y=0;
+          ctx.beginPath();
+          ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+          ctx.fillStyle = 'rgba(15,98,254,'+d.a+')';
+          ctx.fill();
+        });
+        /* draw connecting lines between close dots */
+        for(var i=0;i<dots.length;i++){
+          for(var j=i+1;j<dots.length;j++){
+            var dx=dots[i].x-dots[j].x, dy=dots[i].y-dots[j].y;
+            var dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<90){
+              ctx.beginPath();
+              ctx.moveTo(dots[i].x,dots[i].y);
+              ctx.lineTo(dots[j].x,dots[j].y);
+              ctx.strokeStyle='rgba(15,98,254,'+((.18*(1-dist/90)))+')';
+              ctx.lineWidth=.6;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      init();
+      draw();
+      window.addEventListener('resize', init);
+    })();
+
+    /* ── Canvas: partículas flutuantes (slide 3) ── */
+    (function(){
+      var cv = document.getElementById('canvas-cases');
+      if(!cv) return;
+      var ctx = cv.getContext('2d');
+      var particles = [];
+      var W, H;
+      function resize(){
+        W = cv.width  = cv.offsetWidth;
+        H = cv.height = cv.offsetHeight;
+      }
+      function mkP(){
+        return {
+          x: Math.random()*W,
+          y: H + Math.random()*80,
+          r: Math.random()*2.5+.5,
+          vy: -(Math.random()*.4+.15),
+          vx: (Math.random()-.5)*.2,
+          life: 1, decay: Math.random()*.003+.001,
+          color: Math.random()>.5
+            ? 'rgba(51,177,255,'
+            : 'rgba(255,255,255,'
+        };
+      }
+      function init(){
+        resize();
+        particles = [];
+        for(var i=0;i<30;i++){
+          var p = mkP();
+          p.y = Math.random()*H;
+          p.life = Math.random();
+          particles.push(p);
+        }
+      }
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        if(particles.length<40) particles.push(mkP());
+        particles.forEach(function(p,i){
+          p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle = p.color + (p.life*.45)+')';
+          ctx.fill();
+          if(p.life<=0) particles.splice(i,1);
+        });
+        requestAnimationFrame(draw);
+      }
+      init(); draw();
+      window.addEventListener('resize', init);
+    })();
+
+    /* ── Slide engine ── */
+    var slides   = [].slice.call(document.querySelectorAll('.slide'));
+    var total    = slides.length;
+    var bar      = document.getElementById('progress-bar');
+    var counter  = document.getElementById('slide-counter');
+    var btnPrev  = document.getElementById('btn-prev');
+    var btnNext  = document.getElementById('btn-next');
+    var btnIdx   = document.getElementById('btn-index');
+    var btnClose = document.getElementById('btn-index-close');
+    var idxPanel = document.getElementById('index-panel');
+    var idxItems = [].slice.call(document.querySelectorAll('.index-item'));
+    var current  = 1;
+
+    function pad(n){ return n<10?'0'+n:''+n; }
+
+    function go(n, opts){
+      opts = opts||{};
+      if(n<1) n=1; if(n>total) n=total;
+      if(n===current&&!opts.force) return;
+      slides.forEach(function(s){
+        var sn = parseInt(s.getAttribute('data-slide'),10);
+        if(sn===n){
+          s.classList.add('is-active');
+          s.removeAttribute('aria-hidden');
+          s.scrollTop = 0;
+        } else {
+          s.classList.remove('is-active');
+          s.setAttribute('aria-hidden','true');
+        }
+      });
+      current = n;
+      if(bar){ bar.style.width = (n/total*100)+'%'; }
+      var prog = document.querySelector('.progress');
+      if(prog) prog.setAttribute('aria-valuenow', Math.round(n/total*100));
+      if(counter) counter.textContent = pad(n)+' / '+pad(total);
+      idxItems.forEach(function(b){
+        parseInt(b.getAttribute('data-go'),10)===n
+          ? b.classList.add('is-current')
+          : b.classList.remove('is-current');
+      });
+      if(btnPrev) btnPrev.disabled = (n===1);
+      if(btnNext) btnNext.disabled = (n===total);
+      var h = '#slide-'+n;
+      if(window.location.hash!==h) history.replaceState(null,'',h);
+    }
+
+    function next(){ go(current+1); }
+    function prev(){ go(current-1); }
+    function openIdx(){  if(!idxPanel)return; idxPanel.hidden=false; idxPanel.setAttribute('aria-hidden','false'); if(btnClose)btnClose.focus(); }
+    function closeIdx(){ if(!idxPanel)return; idxPanel.hidden=true;  idxPanel.setAttribute('aria-hidden','true');  if(btnIdx)btnIdx.focus(); }
+    function toggleIdx(){ idxPanel&&(idxPanel.hidden?openIdx():closeIdx()); }
+
+    if(btnPrev)  btnPrev.addEventListener('click',prev);
+    if(btnNext)  btnNext.addEventListener('click',next);
+    if(btnIdx)   btnIdx.addEventListener('click',toggleIdx);
+    if(btnClose) btnClose.addEventListener('click',closeIdx);
+    if(idxPanel) idxPanel.addEventListener('click',function(e){ if(e.target===idxPanel)closeIdx(); });
+    idxItems.forEach(function(b){
+      b.addEventListener('click',function(){
+        var n=parseInt(b.getAttribute('data-go'),10);
+        if(!isNaN(n)){ closeIdx(); go(n); }
+      });
+    });
+
+    document.addEventListener('keydown',function(e){
+      var tag = e.target&&e.target.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA') return;
+      var k = e.key;
+      if(k==='Escape')           { e.preventDefault(); toggleIdx(); }
+      else if(k==='ArrowRight'||k==='PageDown'||k===' ')  { e.preventDefault(); next(); }
+      else if(k==='ArrowLeft' ||k==='PageUp')              { e.preventDefault(); prev(); }
+      else if(k==='Home')        { e.preventDefault(); go(1); }
+      else if(k==='End')         { e.preventDefault(); go(total); }
+      else if(k==='f'||k==='F') {
+        e.preventDefault();
+        document.fullscreenElement
+          ? document.exitFullscreen()
+          : document.documentElement.requestFullscreen();
+      }
+      else if(/^[1-4]$/.test(k)){ e.preventDefault(); go(parseInt(k,10)); }
+    });
+
+    /* swipe */
+    var tx=null,ty=null;
+    document.addEventListener('touchstart',function(e){ if(e.touches[0]){tx=e.touches[0].clientX;ty=e.touches[0].clientY;} },{passive:true});
+    document.addEventListener('touchend',function(e){
+      if(tx===null)return;
+      var t=e.changedTouches[0]; if(!t)return;
+      var dx=t.clientX-tx, dy=t.clientY-ty;
+      if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ dx<0?next():prev(); }
+      tx=ty=null;
+    },{passive:true});
+
+    /* init */
+    var hash=(window.location.hash||'').replace('#','');
+    var m=/^slide-(\d+)$/.exec(hash);
+    var init=m?parseInt(m[1],10):1;
+    if(init<1||init>total)init=1;
+    go(init,{force:true});
+  })();
+  </script>
+</body>
+</html>
