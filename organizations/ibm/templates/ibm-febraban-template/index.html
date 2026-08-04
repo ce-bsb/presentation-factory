@@ -53,6 +53,10 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 18px; scroll-behavior: smooth; }
+    /* Portrait vertical monitors (e.g. 40" rotated) */
+    @media(orientation:portrait) and (min-height:1000px){ html { font-size: 22px; } }
+    @media(orientation:portrait) and (min-height:1600px){ html { font-size: 28px; } }
+
     @media(max-width:600px){ html { font-size: 15px; } }
     body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; overflow: hidden; min-height: 100dvh; overflow-wrap: break-word; word-break: break-word; }
     img, svg { display: block; max-width: 100%; height: auto; }
@@ -84,6 +88,7 @@
     .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
     @media(max-width:820px){ .slide__inner { padding:var(--u-6) var(--u-5) var(--u-7); } }
     @media(max-width:480px){ .slide__inner { padding:var(--u-5) var(--u-4) var(--u-6); gap:var(--u-4); } }
+    @media(orientation:portrait) and (min-height:1000px){ .slide__inner { padding:var(--u-8) var(--u-7); gap:var(--u-7); } }
 
     /* ── Typography ── */
     .eyebrow { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.08em; text-transform:uppercase; color:var(--ibm-blue); padding-bottom:var(--u-2); border-bottom:1px solid var(--ibm-blue); display:inline-block; }
@@ -126,6 +131,14 @@
       .cover-bar__badge { display:none; }
       .cover-main { padding:var(--u-5) var(--u-4); }
     }
+    @media(orientation:portrait) and (min-height:1000px){
+      .slide--cover .slide__inner { flex-direction:column; }
+      .cover-bar { width:100%; height:auto; flex-direction:row; align-items:center; padding:var(--u-5) var(--u-7); gap:var(--u-4); }
+      .cover-bar__label { writing-mode:horizontal-tb; transform:none; }
+      .cover-main { padding:var(--u-9) var(--u-8); gap:var(--u-6); }
+      .cover-question { font-size:clamp(3rem,6vh,5rem); max-width:22ch; }
+      .cover-context { font-size:var(--text-20); }
+    }
 
     /* ══════════════════════════════════════════
        SLIDE 02 — TEMA / VISÃO GERAL (two-col ou painel largo)
@@ -144,6 +157,7 @@
     .tema-point__text strong { color:var(--ink); font-weight:600; }
     @media(max-width:820px){ .tema-layout { grid-template-columns:1fr; flex:none; } }
     @media(max-width:820px){ .tema-panel { padding:var(--u-5) var(--u-5); } }
+    @media(orientation:portrait) and (min-height:1000px){ .tema-layout { grid-template-columns:1fr; } .tema-panel { padding:var(--u-6) var(--u-7); } .tema-panel__body { font-size:var(--text-20); } .tema-point__text { font-size:var(--text-18); } }
 
     /* ══════════════════════════════════════════
        SLIDE 03 — CASES IBM (fundo azul com cards)
@@ -167,6 +181,7 @@
     @media(max-width:900px){ .cases-grid { grid-template-columns:1fr 1fr; flex:none; } }
     @media(max-width:600px){ .cases-grid { grid-template-columns:1fr; } }
     @media(max-width:800px){ .slide--cases .slide__inner { padding:var(--u-6) var(--u-5); } }
+    @media(orientation:portrait) and (min-height:1000px){ .cases-grid { grid-template-columns:1fr; } .case-card { padding:var(--u-6) var(--u-7); } .case-card__title { font-size:var(--text-20); } .case-card__body { font-size:var(--text-16); } .slide--cases .slide__inner { padding:var(--u-7) var(--u-8); } }
 
     /* ══════════════════════════════════════════
        SLIDE 04 — CLOSING + QR CODE WhatsApp
@@ -201,6 +216,13 @@
     @media(max-width:480px){
       .closing-right { flex-direction:column; }
       .qr-frame img { width:clamp(120px,40vw,160px); }
+    }
+    @media(orientation:portrait) and (min-height:1000px){
+      .slide--closing .slide__inner { flex-direction:column; }
+      .closing-right { width:100%; flex-direction:row; flex-wrap:wrap; justify-content:center; padding:var(--u-8) var(--u-7); }
+      .closing-left { padding:var(--u-8) var(--u-7); }
+      .closing-display { font-size:clamp(2.5rem,6vh,5rem); }
+      .qr-frame img { width:clamp(140px,20vw,220px); }
     }
 
     /* ══════════════════════════════════════════
