@@ -158,7 +158,7 @@
     .case-card:nth-child(1){border-bottom-color:var(--ibm-blue);}
     .case-card:nth-child(2){border-bottom-color:var(--ibm-cyan);}
     .case-card:nth-child(3){border-bottom-color:var(--ibm-blue-l);}
-    .case-card__tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);width:fit-content;}
+    .case-card__tag{font-family:var(--font-mono);font-size:var(--text-12);letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);width:fit-content;}
     .case-card__title{font-size:var(--text-16);font-weight:600;color:var(--white);letter-spacing:-.01em;line-height:1.25;}
     .case-card__body{font-size:var(--text-14);line-height:1.55;color:rgba(255,255,255,.65);}
     .case-card__result{font-family:var(--font-mono);font-size:var(--text-12);color:var(--ibm-cyan-l);letter-spacing:.04em;margin-top:auto;padding-top:var(--u-3);border-top:1px solid rgba(255,255,255,.08);}
@@ -247,6 +247,61 @@
     .slide.is-active .closing-right{animation:slideUp 480ms 160ms var(--ease-out) both;}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}.slide{clip-path:none!important;}}
     @media print{@page{size:A4 landscape;margin:12mm;}html,body{overflow:visible;height:auto;}.progress,.topbar,.navbar,.index-panel{display:none!important;}.deck{position:static;}.slide{position:static!important;opacity:1!important;visibility:visible!important;clip-path:none!important;page-break-after:always;break-after:page;}.slide:last-child{page-break-after:auto;}}
+  
+    /* ── Portrait / vertical-screen universal fixes ───────────────────────────
+       Targets: monitors rotated 90° (e.g. 40" portrait), tall tablets, phones.
+       Strategy: stack everything, scale with vh, prevent horizontal overflow.
+       ──────────────────────────────────────────────────────────────────────── */
+
+    /* Slide 2: heading uses vw; in portrait override to vh-relative */
+    @media(orientation:portrait) and (min-height:1000px){
+      .title { font-size: clamp(1.8rem, 3.5vh, 3rem); }
+      .slide-head { padding-bottom: var(--u-4); border-bottom: 1px solid var(--line); }
+    }
+
+    /* Cases slide: title and slide inner allow scroll when stacked */
+    @media(orientation:portrait) and (min-height:1000px){
+      .slide--cases { overflow: visible; }
+      .cases-title { font-size: clamp(1.4rem, 3vh, 2.2rem); }
+      .slide--cases .slide__inner { overflow: visible; min-height: auto; }
+    }
+
+    /* Cover heading fallback — each template overrides individually,
+       this catches any that do not have a portrait block */
+    @media(orientation:portrait) and (min-height:1000px){
+      .cover-question, .cover-q, .cover-h1 {
+        font-size: clamp(2.2rem, 5.5vh, 4.5rem);
+        max-width: 26ch;
+      }
+    }
+
+    /* QR image: use height-relative sizing in portrait so it does not get huge */
+    @media(orientation:portrait) and (min-height:1000px){
+      .qr-frame img { width: clamp(120px, 18vh, 220px); height: auto; }
+    }
+
+    /* Navbar: bigger tap target in portrait */
+    @media(orientation:portrait) and (min-height:1000px){
+      .navbar { height: 64px; }
+      .deck { bottom: 64px; }
+      .btn { height: 44px; padding: 0 var(--u-5); }
+    }
+
+    /* Prevent any horizontal overflow in portrait */
+    @media(orientation:portrait){
+      body { overflow-x: hidden; }
+      .slide__inner { max-width: 100%; }
+    }
+
+    /* In portrait, closing display uses vh so it fits above the fold */
+    @media(orientation:portrait) and (min-height:1000px){
+      .closing-display { font-size: clamp(2rem, 5vh, 4rem); }
+    }
+
+    /* Index panel: full-screen on portrait narrow */
+    @media(orientation:portrait) and (max-width:768px){
+      .index-panel__inner { width: 100%; border-left: none; }
+    }
   </style>
 </head>
 <body>
