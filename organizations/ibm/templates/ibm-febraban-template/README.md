@@ -1,6 +1,6 @@
-# Template: IBM Febraban
+# Template: IBM Febraban Tech 2026
 
-Template de deck rápido para **feiras e eventos presenciais** (Febraban, CIAB, e similares).
+Template de deck rápido para **feiras e eventos presenciais** (Febraban Tech 2026, CIAB, e similares).
 Projetado para entregar uma resposta visual completa em **menos de 1 minuto**: 4 slides,
 navegação por toque, fullscreen nativo.
 
@@ -19,7 +19,7 @@ navegação por toque, fullscreen nativo.
 | Placeholder | Uso |
 |---|---|
 | `{{TITULO}}` | Título do `<title>` |
-| `{{EVENTO}}` | Nome do evento (ex.: `Febraban Tech 2025`) |
+| `{{EVENTO}}` | Nome do evento (ex.: `Febraban Tech 2026`) |
 
 ### Slide 01 — Cover Pergunta
 | Placeholder | Uso |

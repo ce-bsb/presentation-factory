@@ -2,7 +2,7 @@
 name        = "IBM Febraban Template"
 slug        = "ibm-febraban-template"
 version     = "1.0.0"
-description = "Template de deck rápido para feiras e eventos presenciais (Febraban e similares). 4 slides: capa com a pergunta do visitante, visão geral do tema, cases IBM e encerramento com QR code de WhatsApp."
+description = "Template de deck rápido para feiras e eventos presenciais (Febraban Tech 2026 e similares). 4 slides: capa com a pergunta do visitante, visão geral do tema, cases IBM e encerramento com QR code de WhatsApp."
 author      = "IBM Presentation Factory"
 
 [design]
