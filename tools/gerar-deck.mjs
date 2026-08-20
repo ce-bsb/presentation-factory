@@ -26,7 +26,6 @@ const TEMPLATES_DIR = path.join(FACTORY, 'organizations/ibm/templates');
 /** Templates disponíveis (sorteio aleatório) */
 const TEMPLATES = [
   'ibm-febraban-template', // Original: barra azul lateral, cards IBM
-  'ibm-febraban-dark',     // Dark Edition: fundo preto, neon azul
   'ibm-febraban-split',    // Split: metade cinza/branco, QR invertido
   'ibm-febraban-pulse',    // Pulse: cover full-azul, stripes diagonais
   'ibm-febraban-minimal',  // Minimal: tipografia-first, grid limpo
