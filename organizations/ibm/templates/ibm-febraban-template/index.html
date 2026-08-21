@@ -85,6 +85,8 @@
     .deck { position:fixed; top:calc(3px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
     .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:auto; background:var(--white); }
     .slide.is-active { opacity:1; visibility:visible; clip-path:inset(0 0% 0 0); transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
+    .deck--ready .slide.is-active { transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
+    .deck:not(.deck--ready) .slide.is-active { transition:none; }
     .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
     @media(max-width:820px){ .slide__inner { padding:var(--u-6) var(--u-5) var(--u-7); } }
     @media(max-width:480px){ .slide__inner { padding:var(--u-5) var(--u-4) var(--u-6); gap:var(--u-4); } }
@@ -184,8 +186,8 @@
     @media(orientation:portrait) and (min-height:1000px){ .cases-grid { grid-template-columns:1fr; } .case-card { padding:var(--u-6) var(--u-7); } .case-card__title { font-size:var(--text-20); } .case-card__body { font-size:var(--text-16); } .slide--cases .slide__inner { padding:var(--u-7) var(--u-8); } }
 
     /* ══════════════════════════════════════════
-       SLIDE 04 — CLOSING + QR CODE WhatsApp
-       CTA final: "Quer saber mais?" + QR code.
+       SLIDE 04 — CLOSING + QR CODE Innovation Studio
+       CTA final: "Quer saber mais?" + QR code IBM Innovation Studio SP.
        ══════════════════════════════════════════ */
     .slide--closing { background:var(--bg-2); }
     .slide--closing .slide__inner { flex-direction:row; gap:0; padding:0; max-width:none; }
@@ -193,20 +195,16 @@
     .closing-display { font-weight:200; font-size:clamp(2rem,5.5vw,4.5rem); line-height:.95; letter-spacing:-.04em; color:var(--ink); }
     .closing-display em { font-style:normal; color:var(--ibm-blue); font-weight:400; }
     .closing-sub { font-size:var(--text-16); color:var(--ink-muted); font-weight:300; max-width:40ch; line-height:1.55; }
-    .closing-specialist { display:flex; flex-direction:column; gap:4px; border-left:3px solid var(--ibm-blue); padding-left:var(--u-5); }
-    .closing-specialist__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
-    .closing-specialist__name { font-size:var(--text-18); font-weight:600; color:var(--ink); }
-    .closing-specialist__role { font-size:var(--text-14); color:var(--ink-muted); }
     .closing-brand-row { display:flex; align-items:center; gap:var(--u-3); padding-top:var(--u-5); border-top:1px solid var(--line); flex-wrap:wrap; }
     .closing-brand-row img { height:13px; }
     .closing-brand-row span { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
     /* Painel direito com QR */
     .closing-right { width:clamp(240px,30vw,360px); background:var(--ibm-blue); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--u-4); padding:var(--u-7) var(--u-6); flex-shrink:0; }
-    .closing-right__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); text-align:center; }
+    .closing-right__label { font-family:var(--font-mono); font-size:var(--text-12); letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); text-align:center; }
+    .closing-right__studio { font-size:var(--text-16); font-weight:600; color:var(--white); text-align:center; line-height:1.3; }
+    .closing-right__studio span { display:block; font-size:var(--text-12); font-weight:300; color:rgba(255,255,255,.6); font-family:var(--font-mono); letter-spacing:.04em; margin-top:4px; }
     .qr-frame { background:var(--white); padding:var(--u-3); display:inline-flex; }
     .qr-frame img { width:clamp(120px,16vw,180px); height:auto; display:block; }
-    .closing-right__name { font-size:var(--text-16); font-weight:600; color:var(--white); text-align:center; }
-    .closing-right__phone { font-family:var(--font-mono); font-size:var(--text-14); color:rgba(255,255,255,.65); text-align:center; letter-spacing:.04em; }
     @media(max-width:820px){
       .slide--closing .slide__inner { flex-direction:column; overflow:auto; }
       .closing-right { width:100%; padding:var(--u-6) var(--u-5); flex-direction:row; flex-wrap:wrap; gap:var(--u-4); justify-content:center; }
@@ -439,9 +437,9 @@
     </section>
 
     <!-- ═══════════════════════════════════════
-         SLIDE 04 — CLOSING + QR CODE WhatsApp
-         "Quer saber mais? Fale com nosso especialista."
-         Coloque qr.png em assets/ (QR code do WhatsApp).
+         SLIDE 04 — CLOSING + QR CODE Innovation Studio
+         "Quer saber mais? Visite o IBM Innovation Studio São Paulo."
+         QR code fixo: assets/qrcodeinnovation.png
          ═══════════════════════════════════════ -->
     <section class="slide slide--closing" id="slide-4" data-slide="4" aria-labelledby="s4-title">
       <div class="slide__inner">
@@ -451,25 +449,17 @@
             <h2 id="s4-title" class="closing-display" style="margin-top:var(--u-4)">{{CLOSING_LINHA_1}}<br/><em>{{CLOSING_LINHA_2}}</em></h2>
             <p class="closing-sub" style="margin-top:var(--u-5)">{{CLOSING_SUB}}</p>
           </div>
-          <div class="closing-specialist" aria-label="Especialista IBM">
-            <span class="closing-specialist__label">{{ESPECIALISTA_LABEL}}</span>
-            <span class="closing-specialist__name">{{ESPECIALISTA_NOME}}</span>
-            <span class="closing-specialist__role">{{ESPECIALISTA_CARGO}}</span>
-          </div>
           <div class="closing-brand-row">
             <img src="assets/ibm-logo.svg" alt="IBM" />
             <span>{{EVENTO}}</span>
           </div>
         </div>
-        <div class="closing-right" aria-label="QR Code WhatsApp">
-          <span class="closing-right__label">{{QR_LABEL}}</span>
-          <!-- Coloque assets/qr.png com o QR do WhatsApp do especialista -->
+        <div class="closing-right" aria-label="QR Code IBM Innovation Studio São Paulo">
+          <span class="closing-right__label">Saiba mais</span>
           <div class="qr-frame">
-            <img src="assets/qr.png" alt="QR Code WhatsApp" width="200" height="200"
-                 onerror="this.parentNode.innerHTML=document.getElementById('qr-fallback').innerHTML" />
+            <img src="assets/qrcodeinnovation.png" alt="QR Code IBM Innovation Studio São Paulo" width="200" height="200" />
           </div>
-          <span class="closing-right__name">{{ESPECIALISTA_NOME}}</span>
-          <span class="closing-right__phone">{{ESPECIALISTA_WHATSAPP}}</span>
+          <p class="closing-right__studio">IBM Innovation Studio<span>São Paulo</span></p>
         </div>
       </div>
     </section>
@@ -536,9 +526,11 @@
     var counter = document.getElementById('slide-counter');
     var btnPrev = document.getElementById('btn-prev');
     var btnNext = document.getElementById('btn-next');
-    var btnIdx  = document.getElementById('btn-index');
+    var idxPanel = document.getElementById('idx-panel');
+    var idxItems = Array.prototype.slice.call(document.querySelectorAll('[data-go]'));
     var current = 1;
     function pad(n){ return n<10?'0'+n:''+n; }
+    function closeIdx(){ if(idxPanel) idxPanel.hidden=true; }
     function go(n,opts){
       opts=opts||{};
       if(n<1)n=1; if(n>total)n=total;
@@ -589,7 +581,13 @@
     var m=/^slide-(\d+)$/.exec(hash);
     var init=m?parseInt(m[1],10):1;
     if(init<1||init>total)init=1;
+    var deck=document.querySelector('.deck');
     go(init,{force:true});
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        if(deck) deck.classList.add('deck--ready');
+      });
+    });
   })();
   </script>
 </body>
