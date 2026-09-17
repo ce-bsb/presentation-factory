@@ -13,34 +13,28 @@
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <a class="sr-only" href="#slide-1">Pular para o conteúdo</a>
 
-  <div class="progress" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="12">
-    <div class="progress__bar" id="progress-bar"></div>
-  </div>
-
-  <!-- Topbar
-       Regra de logo:
-       - Cliente IBM → exiba só brand__ibm (sem ×)
-       - Cliente externo → exiba brand__ibm + brand__sep + brand__client
-  -->
-  <header class="topbar" aria-label="Cabeçalho da apresentação">
-    <div class="topbar__left">
-      <span class="brand">
-        <!-- Logo IBM oficial copiado em assets/ -->
-        <span class="brand__ibm">
-          <img src="assets/ibm-logo.svg" alt="IBM">
-        </span>
-        <!-- Remova as duas linhas abaixo quando cliente for IBM -->
-        <span class="brand__sep" aria-hidden="true">×</span>
-        <span class="brand__client">{{CLIENTE}}</span>
-      </span>
-      <span class="meta-divider" aria-hidden="true"></span>
-      <span class="meta-label">{{AREA_OU_SERVICO}}</span>
+  <!-- ── Topbar ── -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
+      </div>
+      <div class="brand-mark brand-mark-client">
+        <img src="assets/image-placeholder.svg" alt="{{CLIENTE}}">
+      </div>
+      <span class="brand-context">{{AREA_OU_SERVICO}} — {{DOC_REF}}</span>
     </div>
-    <div class="topbar__right">
-      <span class="topbar__dot" aria-hidden="true"></span>
-      <span class="meta-label" id="slide-counter" aria-live="polite">01 / 08</span>
+    <div class="topbar-meta">
+      <div class="slide-counter" aria-live="polite">
+        <span id="slideNum">01</span>&thinsp;/&thinsp;<span id="slideTot">08</span>
+      </div>
+      <button class="utility-btn" id="fullscreenBtn" aria-label="Tela cheia" title="Alternar tela cheia">
+        <svg class="carbon-icon" width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
+      </button>
+    </div>
+    <div class="progress-track" aria-hidden="true">
+      <span id="progressFill"></span>
     </div>
   </header>
 
@@ -344,54 +338,10 @@
 
   </main>
 
-  <!-- Navbar com grid 3 colunas -->
-  <nav class="navbar" aria-label="Controles de navegação">
-    <div class="navbar__left">
-      <button class="btn btn--ghost" id="btn-index" aria-haspopup="dialog" aria-controls="index-panel" aria-label="Abrir índice (Esc)">
-        <span class="carbon-icon carbon-icon--list" aria-hidden="true"></span>
-        <span>Índice</span>
-      </button>
-    </div>
-    <div class="navbar__center">
-      <button class="btn" id="btn-prev" aria-label="Slide anterior (seta esquerda)">
-        <span class="carbon-icon carbon-icon--left" aria-hidden="true"></span>
-        <span>Anterior</span>
-      </button>
-      <button class="btn btn--primary" id="btn-next" aria-label="Próximo slide (seta direita)">
-        <span>Próximo</span>
-        <span class="carbon-icon carbon-icon--right" aria-hidden="true"></span>
-      </button>
-    </div>
-    <div class="navbar__right">
-      <span class="navbar__hint" aria-hidden="true">Use 1–8 para ir direto ao slide</span>
-    </div>
+  <!-- ── Navigation dots ── -->
+  <nav class="nav-controls" aria-label="Controle de Navegação">
+    <div class="slide-dots" id="navDots" role="tablist"></div>
   </nav>
-
-  <!-- Index panel -->
-  <aside class="index-panel" id="index-panel" hidden aria-hidden="true" aria-label="Índice">
-    <div class="index-panel__inner" role="dialog" aria-modal="true" aria-labelledby="idx-title">
-      <header class="index-panel__head">
-        <h2 id="idx-title" class="index-panel__title">Índice</h2>
-        <button class="btn btn--ghost" id="btn-index-close" aria-label="Fechar índice">Fechar</button>
-      </header>
-      <ol class="index-list">
-        <li><button class="index-item" data-go="1"><span class="index-item__num">01</span><span class="index-item__label">{{IDX_1}}</span></button></li>
-        <li><button class="index-item" data-go="2"><span class="index-item__num">02</span><span class="index-item__label">{{IDX_2}}</span></button></li>
-        <li><button class="index-item" data-go="3"><span class="index-item__num">03</span><span class="index-item__label">{{IDX_3}}</span></button></li>
-        <li><button class="index-item" data-go="4"><span class="index-item__num">04</span><span class="index-item__label">{{IDX_4}}</span></button></li>
-        <li><button class="index-item" data-go="5"><span class="index-item__num">05</span><span class="index-item__label">{{IDX_5}}</span></button></li>
-        <li><button class="index-item" data-go="6"><span class="index-item__num">06</span><span class="index-item__label">{{IDX_6}}</span></button></li>
-        <li><button class="index-item" data-go="7"><span class="index-item__num">07</span><span class="index-item__label">{{IDX_7}}</span></button></li>
-        <li><button class="index-item" data-go="8"><span class="index-item__num">08</span><span class="index-item__label">{{IDX_8}}</span></button></li>
-      </ol>
-      <footer class="index-panel__foot">
-        <span class="kbd">←</span><span class="kbd">→</span> navegar &nbsp;·&nbsp;
-        <span class="kbd">1</span>–<span class="kbd">8</span> ir para slide &nbsp;·&nbsp;
-        <span class="kbd">Esc</span> índice &nbsp;·&nbsp;
-        <span class="kbd">F</span> tela cheia
-      </footer>
-    </div>
-  </aside>
 
   <script src="assets/deck.js"></script>
 </body>
