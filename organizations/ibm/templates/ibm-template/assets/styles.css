@@ -350,42 +350,20 @@ button {
 
 .theme-hero,
 .theme-close {
-  background-color: #001d6c; /* IBM Blue 90 */
+  background-color: #f5f8ff;
   background-image:
-    radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px),
-    linear-gradient(135deg, #001d6c 0%, #002d9c 50%, #0043ce 100%),
-    radial-gradient(ellipse at 85% 40%, rgba(15, 98, 254, 0.35), transparent 55%),
-    radial-gradient(ellipse at 15% 80%, rgba(17, 146, 232, 0.25), transparent 45%);
-  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
-  color: #ffffff !important;
-}
-
-.theme-dark {
-  background-color: #001140; /* Ultra-deep IBM Blue */
-  background-image:
-    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
-    linear-gradient(135deg, #001140 0%, #001d6c 100%);
-  background-size: 24px 24px, 100% 100%;
-  color: #ffffff !important;
+    radial-gradient(rgba(15, 98, 254, 0.07) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, rgba(15, 98, 254, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 88% 8%, rgba(15, 98, 254, 0.12), transparent 48%),
+    radial-gradient(ellipse at 6% 92%, rgba(17, 146, 232, 0.10), transparent 42%);
+  background-size: 26px 26px, 100% 100%, 100% 100%, 100% 100%;
 }
 
 /* Premium Heading Gradients */
-.theme-light h2 {
-  background: linear-gradient(135deg, #161616 20%, #0043ce 85%, #0f62fe 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  display: inline-block;
-}
-
-.theme-hero h1 {
-  background: linear-gradient(135deg, #ffffff 30%, #d0e2ff 75%, #82cfff 100%);
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  display: inline-block;
-}
-
+.theme-light h2,
+.theme-hero h1,
 .theme-close h2 {
-  background: linear-gradient(135deg, #ffffff 30%, #d0e2ff 75%, #82cfff 100%);
+  background: linear-gradient(135deg, #161616 20%, #0043ce 85%, #0f62fe 100%);
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   display: inline-block;
@@ -424,18 +402,6 @@ button {
     0 12px 32px rgba(15, 98, 254, 0.08),
     0 2px 6px rgba(15, 98, 254, 0.03) !important;
   background: #ffffff !important;
-}
-
-/* Dark slide card overrides for contrast in Theme-Hero & Theme-Close */
-.theme-hero .executive-panel,
-.theme-close .closing-box {
-  background: rgba(0, 29, 108, 0.55) !important; /* Translucent IBM Blue 90 */
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  border-radius: 12px !important;
-  box-shadow:
-    0 24px 64px rgba(0, 29, 108, 0.4),
-    0 1px 2px rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(24px) !important;
 }
 
 .slide-grid {
@@ -571,12 +537,6 @@ h3 {
   font-size: clamp(1.125rem, 1.8vw, 1.65rem);
   line-height: 1.45;
   font-weight: 300;
-}
-
-.theme-hero .hero-copy p,
-.theme-dark .lead,
-.theme-close .lead {
-  color: var(--gray-70);
 }
 
 .hero-copy {
@@ -1608,7 +1568,7 @@ h3 {
   height: 100%;
   display: block;
   object-fit: contain;
-  background: #0f172a;
+  background: var(--gray-100);
 }
 
 .video-frame.is-missing .video-placeholder {
