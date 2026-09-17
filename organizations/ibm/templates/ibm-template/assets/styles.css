@@ -350,21 +350,23 @@ button {
 
 .theme-hero,
 .theme-close {
-  background-color: #060913;
+  background-color: #001d6c; /* IBM Blue 90 */
   background-image:
-    radial-gradient(rgba(15, 98, 254, 0.12) 1.2px, transparent 1.2px),
-    radial-gradient(ellipse at 85% 40%, rgba(15, 98, 254, 0.18), transparent 50%),
-    radial-gradient(ellipse at 15% 80%, rgba(17, 146, 232, 0.08), transparent 45%);
-  background-size: 24px 24px, 100% 100%, 100% 100%;
-  color: #f4f4f4 !important;
+    radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, #001d6c 0%, #002d9c 50%, #0043ce 100%),
+    radial-gradient(ellipse at 85% 40%, rgba(15, 98, 254, 0.35), transparent 55%),
+    radial-gradient(ellipse at 15% 80%, rgba(17, 146, 232, 0.25), transparent 45%);
+  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+  color: #ffffff !important;
 }
 
 .theme-dark {
-  background-color: #0a0e1a;
+  background-color: #001140; /* Ultra-deep IBM Blue */
   background-image:
-    radial-gradient(rgba(15, 98, 254, 0.1) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-  color: #f4f4f4 !important;
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, #001140 0%, #001d6c 100%);
+  background-size: 24px 24px, 100% 100%;
+  color: #ffffff !important;
 }
 
 /* Premium Heading Gradients */
@@ -376,14 +378,14 @@ button {
 }
 
 .theme-hero h1 {
-  background: linear-gradient(135deg, #ffffff 10%, #d0e2ff 65%, #78a9ff 100%);
+  background: linear-gradient(135deg, #ffffff 30%, #d0e2ff 75%, #82cfff 100%);
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   display: inline-block;
 }
 
 .theme-close h2 {
-  background: linear-gradient(135deg, #ffffff 15%, #d0e2ff 70%, #78a9ff 100%);
+  background: linear-gradient(135deg, #ffffff 30%, #d0e2ff 75%, #82cfff 100%);
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   display: inline-block;
@@ -427,12 +429,12 @@ button {
 /* Dark slide card overrides for contrast in Theme-Hero & Theme-Close */
 .theme-hero .executive-panel,
 .theme-close .closing-box {
-  background: rgba(10, 14, 26, 0.72) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 29, 108, 0.55) !important; /* Translucent IBM Blue 90 */
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 12px !important;
   box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.35),
-    0 1px 2px rgba(255, 255, 255, 0.05) !important;
+    0 24px 64px rgba(0, 29, 108, 0.4),
+    0 1px 2px rgba(255, 255, 255, 0.15) !important;
   backdrop-filter: blur(24px) !important;
 }
 
