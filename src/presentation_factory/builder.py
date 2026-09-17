@@ -139,6 +139,47 @@ def build_package(
         target_path = workspace_target(workspace, target)
         target_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target_path)
+
+    # Inline styles and scripts into index.html for portability in the compiled package
+    import re
+    index_path = workspace / "index.html"
+    if index_path.is_file():
+        index_content = index_path.read_text(encoding="utf-8")
+        
+        # Match '<link rel="stylesheet" href="assets/styles.css">' or variation
+        # and inline assets/styles.css if it exists
+        link_pattern = re.compile(r'<link\s+[^>]*href=["\']assets/styles\.css["\'][^>]*>')
+        if link_pattern.search(index_content):
+            styles_path = workspace / "assets/styles.css"
+            if styles_path.is_file():
+                styles_content = styles_path.read_text(encoding="utf-8")
+                index_content = link_pattern.sub(
+                    f"<style>\n{styles_content}\n</style>", index_content
+                )
+                try:
+                    styles_path.unlink()
+                except OSError:
+                    pass
+                    
+        # Match '<script src="assets/deck.js"></script>' or variation
+        # and inline assets/deck.js if it exists
+        script_pattern = re.compile(
+            r'<script\s+[^>]*src=["\']assets/deck\.js["\'][^>]*>\s*</script>'
+        )
+        if script_pattern.search(index_content):
+            deck_path = workspace / "assets/deck.js"
+            if deck_path.is_file():
+                deck_content = deck_path.read_text(encoding="utf-8")
+                index_content = script_pattern.sub(
+                    f"<script>\n{deck_content}\n</script>", index_content
+                )
+                try:
+                    deck_path.unlink()
+                except OSError:
+                    pass
+                    
+        index_path.write_text(index_content, encoding="utf-8")
+
     shutil.copy2(brief_path, destination / "brief.md")
 
     prompt = "\n\n".join(
