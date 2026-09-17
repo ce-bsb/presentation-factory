@@ -62,7 +62,7 @@
     @media(max-width:700px){ .topbar .meta-label:not(#slide-counter), .topbar .meta-divider { display:none; } }
 
     /* ── Deck / slides ── */
-    .deck { position:fixed; top:calc(2px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
+    .deck { position:fixed; top:var(--topbar-h); bottom:0; left:0; right:0; overflow:hidden; }
     .slide {
       position:absolute; inset:0; opacity:0; visibility:hidden; transform:translateY(14px);
       transition:opacity 260ms var(--ease),transform 260ms var(--ease),visibility 0s 260ms; overflow:auto;

@@ -51,7 +51,7 @@
     /* ── Topbar ── */
 
     /* ── Deck / slides ── */
-    .deck { position:fixed; top:calc(3px + var(--topbar-h)); bottom:var(--navbar-h); left:0; right:0; overflow:hidden; }
+    .deck { position:fixed; top:var(--topbar-h); bottom:0; left:0; right:0; overflow:hidden; }
     .slide { position:absolute; inset:0; opacity:0; visibility:hidden; clip-path:inset(0 100% 0 0); transition:opacity 80ms var(--ease),clip-path 400ms var(--ease),visibility 0s 400ms; overflow:auto; background:var(--white); }
     .slide.active { opacity:1; visibility:visible; clip-path:inset(0 0% 0 0); transition:opacity 80ms var(--ease-out),clip-path 380ms var(--ease-out),visibility 0s; }
     .slide__inner { max-width:1280px; margin:0 auto; padding:var(--u-8) var(--u-8) var(--u-9); min-height:100%; display:flex; flex-direction:column; gap:var(--u-6); }
