@@ -341,27 +341,99 @@ button {
 }
 
 .theme-light {
-  background:
-    linear-gradient(135deg, rgba(15, 98, 254, 0.05) 0%, transparent 55%),
-    linear-gradient(315deg, rgba(120, 169, 255, 0.03) 0%, transparent 45%),
-    var(--gray-05);
+  background-color: #f7fafc;
+  background-image:
+    radial-gradient(rgba(15, 98, 254, 0.04) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, rgba(15, 98, 254, 0.03) 0%, transparent 60%);
+  background-size: 32px 32px, 100% 100%;
 }
 
 .theme-hero,
 .theme-close {
-  background:
-    linear-gradient(130deg, rgba(15,98,254,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse at 88% 48%, rgba(120, 169, 255, 0.10), transparent 45%),
-    radial-gradient(ellipse at 12% 82%, rgba(15, 98, 254, 0.04), transparent 35%),
-    var(--gray-05);
-  color: var(--gray-100);
+  background-color: #060913;
+  background-image:
+    radial-gradient(rgba(15, 98, 254, 0.12) 1.2px, transparent 1.2px),
+    radial-gradient(ellipse at 85% 40%, rgba(15, 98, 254, 0.18), transparent 50%),
+    radial-gradient(ellipse at 15% 80%, rgba(17, 146, 232, 0.08), transparent 45%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
+  color: #f4f4f4 !important;
 }
 
 .theme-dark {
-  background:
-    linear-gradient(135deg, rgba(15, 98, 254, 0.04) 0%, transparent 50%),
-    var(--gray-10);
-  color: var(--gray-100);
+  background-color: #0a0e1a;
+  background-image:
+    radial-gradient(rgba(15, 98, 254, 0.1) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  color: #f4f4f4 !important;
+}
+
+/* Premium Heading Gradients */
+.theme-light h2 {
+  background: linear-gradient(135deg, #161616 20%, #0043ce 85%, #0f62fe 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+.theme-hero h1 {
+  background: linear-gradient(135deg, #ffffff 10%, #d0e2ff 65%, #78a9ff 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+.theme-close h2 {
+  background: linear-gradient(135deg, #ffffff 15%, #d0e2ff 70%, #78a9ff 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+/* Card Redesign — Sophisticated Glassmorphism and Micro Shadowing */
+.metric-stack article,
+.value-list article,
+.compare-card,
+.script-image-card,
+.deployment-option,
+.dashboard,
+.journey article,
+.roadmap article,
+.deployment-note {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(15, 98, 254, 0.08) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 4px 18px rgba(15, 98, 254, 0.02),
+    0 1px 2px rgba(15, 98, 254, 0.01) !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.metric-stack article:hover,
+.value-list article:hover,
+.compare-card:hover,
+.script-image-card:hover,
+.deployment-option:hover,
+.journey article:hover,
+.roadmap article:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(15, 98, 254, 0.28) !important;
+  box-shadow:
+    0 12px 32px rgba(15, 98, 254, 0.08),
+    0 2px 6px rgba(15, 98, 254, 0.03) !important;
+  background: #ffffff !important;
+}
+
+/* Dark slide card overrides for contrast in Theme-Hero & Theme-Close */
+.theme-hero .executive-panel,
+.theme-close .closing-box {
+  background: rgba(10, 14, 26, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(24px) !important;
 }
 
 .slide-grid {
