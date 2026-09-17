@@ -48,6 +48,7 @@ class Deck {
   _bind() {
     document.addEventListener('keydown', e => this._key(e));
     this._initTouch();
+    this._initWheel();
     if (this.$fs) this.$fs.addEventListener('click', () => this._toggleFullscreen());
   }
 
@@ -78,6 +79,23 @@ class Deck {
       const dy = e.changedTouches[0].screenY - startY;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
         dx < 0 ? this.next() : this.prev();
+      }
+    }, { passive: true });
+  }
+
+  _initWheel() {
+    let lastWheelTime = 0;
+    document.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) < 15) return;
+      
+      const now = Date.now();
+      if (now - lastWheelTime < 800) return;
+      
+      lastWheelTime = now;
+      if (e.deltaY > 0) {
+        this.next();
+      } else {
+        this.prev();
       }
     }, { passive: true });
   }
