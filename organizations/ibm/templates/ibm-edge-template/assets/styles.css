@@ -111,7 +111,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   display: grid;
   place-items: center;
   border-right: 1px solid var(--gray-20);
-  background: #ffffff;
+  background: var(--white);
 }
 .brand-mark-client { width: 118px; }
 .brand-logo { width: 58px; height: auto; display: block; }
@@ -633,9 +633,10 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 /* ── Print ── */
 @media print {
+  @page { size: A4 landscape; margin: 12mm; }
   html, body { overflow: visible; height: auto; }
   .deck { position: static; }
   .topbar, .nav-controls { display: none; }
-  .slide { position: static !important; opacity: 1 !important; visibility: visible !important; clip-path: none !important; page-break-after: always; break-after: page; }
+  .slide { position: static !important; opacity: 1 !important; visibility: visible !important; clip-path: none !important; background-image: none !important; page-break-after: always; break-after: page; }
   .slide:last-child { page-break-after: auto; }
 }

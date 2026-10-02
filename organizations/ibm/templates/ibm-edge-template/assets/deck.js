@@ -1,5 +1,6 @@
 /**
- * Deck controller — Template IBM executivo
+ * Deck controller — IBM Presentation Factory
+ * Handles slide navigation, progress, dots, fullscreen, touch and wheel.
  */
 class Deck {
   constructor() {
@@ -10,38 +11,22 @@ class Deck {
     this.$dots = document.getElementById('navDots');
     this.$fill = document.getElementById('progressFill');
     this.$num  = document.getElementById('slideNum');
-    this.$tot  = document.getElementById('slideTot');
-    this.$side = document.getElementById('sideNav');
     this.$fs   = document.getElementById('fullscreenBtn');
 
     this._buildDots();
-    this._buildSideNav();
     this._bind();
     this._render();
   }
 
   _buildDots() {
-    this.slides.forEach((_, i) => {
+    this.slides.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'dot';
       btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-label', `Slide ${i + 1}`);
+      const label = s.dataset.presentationName || `Slide ${i + 1}`;
+      btn.setAttribute('aria-label', label);
       btn.addEventListener('click', () => this.goto(i));
       this.$dots.appendChild(btn);
-    });
-  }
-
-  _buildSideNav() {
-    if (!this.$side) return;
-
-    this.slides.forEach((s, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'side-nav-item';
-      btn.setAttribute('role', 'listitem');
-      const label = s.dataset.title || `Slide ${i + 1}`;
-      btn.innerHTML = `<span>${String(i + 1).padStart(2, '0')}</span>${label}`;
-      btn.addEventListener('click', () => this.goto(i));
-      this.$side.appendChild(btn);
     });
   }
 
@@ -49,7 +34,13 @@ class Deck {
     document.addEventListener('keydown', e => this._key(e));
     this._initTouch();
     this._initWheel();
-    if (this.$fs) this.$fs.addEventListener('click', () => this._toggleFullscreen());
+    if (this.$fs) {
+      this.$fs.addEventListener('click', () => this._toggleFullscreen());
+    }
+    document.addEventListener('fullscreenchange', () => {
+      const on = !!document.fullscreenElement;
+      if (this.$fs) this.$fs.setAttribute('aria-pressed', String(on));
+    });
   }
 
   _key(e) {
@@ -63,7 +54,9 @@ class Deck {
       PageUp     : () => this.prev(),
       Home       : () => this.goto(0),
       End        : () => this.goto(this.total - 1),
-      Escape     : () => this._toggleFullscreen(),
+      f          : () => this._toggleFullscreen(),
+      F          : () => this._toggleFullscreen(),
+      Escape     : () => document.fullscreenElement && document.exitFullscreen?.(),
     };
     if (actions[e.key]) { e.preventDefault(); actions[e.key](); }
   }
@@ -87,16 +80,10 @@ class Deck {
     let lastWheelTime = 0;
     document.addEventListener('wheel', e => {
       if (Math.abs(e.deltaY) < 15) return;
-      
       const now = Date.now();
       if (now - lastWheelTime < 800) return;
-      
       lastWheelTime = now;
-      if (e.deltaY > 0) {
-        this.next();
-      } else {
-        this.prev();
-      }
+      e.deltaY > 0 ? this.next() : this.prev();
     }, { passive: true });
   }
 
@@ -126,12 +113,8 @@ class Deck {
       d.setAttribute('aria-selected', String(i === n));
     });
 
-    if (this.$side) {
-      [...this.$side.children].forEach((b, i) => b.classList.toggle('active', i === n));
-    }
-
-    this.$fill.style.width = `${((n + 1) / this.total) * 100}%`;
-    this.$num.textContent  = String(n + 1).padStart(2, '0');
+    if (this.$fill) this.$fill.style.width = `${((n + 1) / this.total) * 100}%`;
+    if (this.$num)  this.$num.textContent  = String(n + 1).padStart(2, '0');
   }
 }
 
@@ -142,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.opacity    = '1';
   });
 
-  document.getElementById('slideTot').textContent =
-    String(document.querySelectorAll('.slide').length).padStart(2, '0');
+  const tot = document.getElementById('slideTot');
+  if (tot) tot.textContent = String(document.querySelectorAll('.slide').length).padStart(2, '0');
 
   window._deck = new Deck();
 
-  console.info('%cTemplate de apresentação', 'font:700 18px/1 IBM Plex Sans,sans-serif;color:#0f62fe');
-  console.info('→ / ← : navegar | Esc : fullscreen | Home / End : primeiro / último');
+  console.info('%cIBM Presentation Factory', 'font:700 16px/1 IBM Plex Sans,sans-serif;color:#0f62fe');
+  console.info('→ / ← : navegar  |  F : tela cheia  |  Home / End : primeiro / último');
 });
