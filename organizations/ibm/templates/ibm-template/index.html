@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Template de apresentação</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="design-system" content="IBM Carbon Design System v11" />
+  <title>{{TITULO}} — IBM · {{CLIENTE}}</title>
+  <meta name="description" content="{{DESCRICAO}}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
 <div class="presentation">
 
   <!-- ── Topbar ── -->
@@ -19,9 +24,9 @@
         <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
       </div>
       <div class="brand-mark brand-mark-client">
-        <img src="assets/image-placeholder.svg" alt="Descrição 3">
+        <img src="assets/image-placeholder.svg" alt="{{CLIENTE}}">
       </div>
-      <span class="brand-context">Texto 71</span>
+      <span class="brand-context">{{AREA_OU_SERVICO}} — {{DOC_REF}}</span>
     </div>
     <div class="topbar-meta">
       <div class="slide-counter" aria-live="polite" aria-atomic="true">
@@ -40,28 +45,29 @@
   <main class="deck" aria-label="Apresentação de slides">
 
     <!-- 01 · Capa -->
-    <section class="slide active theme-hero" data-slide="01" data-title="Capa" data-presentation-name="Template de apresentação" aria-label="Capa">
+    <section class="slide active theme-hero" data-slide="01" data-presentation-name="Capa" aria-label="Capa">
       <div class="slide-blob blob-1" aria-hidden="true"></div>
       <div class="slide-blob blob-2" aria-hidden="true"></div>
+      <div class="slide-blob blob-3" aria-hidden="true"></div>
       <div class="slide-grid hero-grid">
-        <p class="section-label">Texto 1</p>
+        <p class="section-label">{{EYEBROW_COVER}}</p>
         <div class="hero-copy">
-          <h1>Título 1</h1>
-          <p>Texto 2</p>
+          <h1>{{TITULO_LINHA_1}}<br><em>{{TITULO_LINHA_2}}</em></h1>
+          <p>{{LEDE_COVER}}</p>
           <div class="cover-presenter">
-            <span class="presenter-kicker">Texto 74</span>
+            <span class="presenter-kicker">{{APRESENTADORES_KICKER}}</span>
             <div class="presenter-list">
               <div>
-                <strong>Texto 53</strong>
-                <span>Texto 75</span>
+                <strong>{{APRESENTADOR_1_NOME}}</strong>
+                <span>{{APRESENTADOR_1_CARGO}}</span>
               </div>
               <div>
-                <strong>Texto 54</strong>
-                <span>Texto 76</span>
+                <strong>{{APRESENTADOR_2_NOME}}</strong>
+                <span>{{APRESENTADOR_2_CARGO}}</span>
               </div>
               <div>
-                <strong>Texto 55</strong>
-                <span>Texto 77</span>
+                <strong>{{APRESENTADOR_3_NOME}}</strong>
+                <span>{{APRESENTADOR_3_CARGO}}</span>
               </div>
             </div>
           </div>
@@ -70,7 +76,7 @@
           <div class="cover-panel-header">
             <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
           </div>
-          <div class="motion-grid cover-panel-grid" aria-hidden="true">
+          <div class="motion-grid" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span>
@@ -81,177 +87,177 @@
     </section>
 
     <!-- 02 · Contexto -->
-    <section class="slide theme-light" data-slide="02" data-title="Contexto" data-presentation-name="Template de apresentação" aria-label="Contexto">
+    <section class="slide theme-light" data-slide="02" data-presentation-name="Contexto" aria-label="Contexto">
       <div class="slide-grid">
-        <p class="section-label">Texto 3</p>
+        <p class="section-label">{{EYEBROW_S2}}</p>
         <div class="span-9">
-          <h2>Título 2</h2>
-          <p class="lead">Texto 4</p>
+          <h2>{{TITULO_S2}}</h2>
+          <p class="lead">{{LEAD_S2}}</p>
         </div>
         <div class="metric-stack span-7">
           <article>
-            <span>Texto 78</span>
-            <strong>Texto 56</strong>
-            <p>Texto 5</p>
+            <span>{{METRIC_1_LABEL}}</span>
+            <strong>{{METRIC_1_VALOR}}</strong>
+            <p>{{METRIC_1_DESC}}</p>
           </article>
           <article>
-            <span>Texto 79</span>
-            <strong>Texto 57</strong>
-            <p>Texto 6</p>
+            <span>{{METRIC_2_LABEL}}</span>
+            <strong>{{METRIC_2_VALOR}}</strong>
+            <p>{{METRIC_2_DESC}}</p>
           </article>
           <article>
-            <span>Texto 80</span>
-            <strong>Texto 58</strong>
-            <p>Texto 7</p>
+            <span>{{METRIC_3_LABEL}}</span>
+            <strong>{{METRIC_3_VALOR}}</strong>
+            <p>{{METRIC_3_DESC}}</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- 03 · Jornada -->
-    <section class="slide theme-light" data-slide="03" data-title="Jornada" data-presentation-name="Template de apresentação" aria-label="Jornada">
+    <section class="slide theme-light" data-slide="03" data-presentation-name="Jornada" aria-label="Jornada">
       <div class="slide-grid">
-        <p class="section-label">Texto 8</p>
+        <p class="section-label">{{EYEBROW_S3}}</p>
         <div class="span-16">
-          <h2>Título 3</h2>
+          <h2>{{TITULO_S3}}</h2>
         </div>
         <div class="journey span-16" role="list">
           <article role="listitem">
-            <span>Texto 81</span>
-            <h3>Título 4</h3>
-            <p>Texto 9</p>
+            <span>{{JORNADA_1_FASE}}</span>
+            <h3>{{JORNADA_1_TITULO}}</h3>
+            <p>{{JORNADA_1_DESC}}</p>
           </article>
           <article role="listitem">
-            <span>Texto 82</span>
-            <h3>Título 5</h3>
-            <p>Texto 10</p>
+            <span>{{JORNADA_2_FASE}}</span>
+            <h3>{{JORNADA_2_TITULO}}</h3>
+            <p>{{JORNADA_2_DESC}}</p>
           </article>
           <article role="listitem">
-            <span>Texto 83</span>
-            <h3>Título 6</h3>
-            <p>Texto 11</p>
+            <span>{{JORNADA_3_FASE}}</span>
+            <h3>{{JORNADA_3_TITULO}}</h3>
+            <p>{{JORNADA_3_DESC}}</p>
           </article>
           <article role="listitem">
-            <span>Texto 84</span>
-            <h3>Título 7</h3>
-            <p>Texto 12</p>
+            <span>{{JORNADA_4_FASE}}</span>
+            <h3>{{JORNADA_4_TITULO}}</h3>
+            <p>{{JORNADA_4_DESC}}</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- 04 · Devolutiva -->
-    <section class="slide theme-light" data-slide="04" data-title="Devolutiva" data-presentation-name="Template de apresentação" aria-label="Devolutiva">
-      <div class="slide-grid media-layout">
-        <p class="section-label">Texto 13</p>
+    <section class="slide theme-light" data-slide="04" data-presentation-name="Devolutiva" aria-label="Devolutiva">
+      <div class="slide-grid">
+        <p class="section-label">{{EYEBROW_S4}}</p>
         <div class="span-9">
-          <h2>Título 8</h2>
-          <p class="lead">Texto 14</p>
+          <h2>{{TITULO_S4}}</h2>
+          <p class="lead">{{LEAD_S4}}</p>
         </div>
         <div class="value-list span-7">
           <article>
             <div class="icon-slot icon-slot--success">✓</div>
             <div>
-              <span>Texto 85</span>
-              <h3>Título 9</h3>
-              <p>Texto 15</p>
+              <span>{{ACHADO_1_LABEL}}</span>
+              <h3>{{ACHADO_1_TITULO}}</h3>
+              <p>{{ACHADO_1_DESC}}</p>
             </div>
           </article>
           <article>
             <div class="icon-slot icon-slot--warn">!</div>
             <div>
-              <span>Texto 86</span>
-              <h3>Título 10</h3>
-              <p>Texto 16</p>
+              <span>{{ACHADO_2_LABEL}}</span>
+              <h3>{{ACHADO_2_TITULO}}</h3>
+              <p>{{ACHADO_2_DESC}}</p>
             </div>
           </article>
           <article>
             <div class="icon-slot icon-slot--ref">REF</div>
             <div>
-              <span>Texto 87</span>
-              <h3>Título 11</h3>
-              <p class="text-mono-sm">Texto 17</p>
+              <span>{{ACHADO_3_LABEL}}</span>
+              <h3>{{ACHADO_3_TITULO}}</h3>
+              <p class="text-mono-sm">{{ACHADO_3_REF}}</p>
             </div>
           </article>
         </div>
         <div class="media-row span-16">
           <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="Descrição 4">
+            <img src="assets/image-placeholder.svg" alt="{{MEDIA_1_ALT}}">
           </figure>
           <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="Descrição 5">
+            <img src="assets/image-placeholder.svg" alt="{{MEDIA_2_ALT}}">
           </figure>
         </div>
       </div>
     </section>
 
     <!-- 05 · Solução -->
-    <section class="slide theme-light" data-slide="05" data-title="Solução" data-presentation-name="Template de apresentação" aria-label="Solução">
-      <div class="slide-grid media-layout">
-        <p class="section-label">Texto 18</p>
+    <section class="slide theme-light" data-slide="05" data-presentation-name="Solução" aria-label="Solução">
+      <div class="slide-grid">
+        <p class="section-label">{{EYEBROW_S5}}</p>
         <div class="span-9">
-          <h2>Título 12</h2>
-          <p class="lead">Texto 19</p>
+          <h2>{{TITULO_S5}}</h2>
+          <p class="lead">{{LEAD_S5}}</p>
         </div>
         <div class="metric-stack span-7">
           <article>
-            <span>Texto 88</span>
-            <strong>Texto 59</strong>
-            <p>Texto 20</p>
+            <span>{{BENEFICIO_1_LABEL}}</span>
+            <strong>{{BENEFICIO_1_VALOR}}</strong>
+            <p>{{BENEFICIO_1_DESC}}</p>
           </article>
           <article>
-            <span>Texto 89</span>
-            <strong>Texto 60</strong>
-            <p>Texto 21</p>
+            <span>{{BENEFICIO_2_LABEL}}</span>
+            <strong>{{BENEFICIO_2_VALOR}}</strong>
+            <p>{{BENEFICIO_2_DESC}}</p>
           </article>
           <article>
-            <span>Texto 90</span>
-            <strong>Texto 61</strong>
-            <p>Texto 22</p>
+            <span>{{BENEFICIO_3_LABEL}}</span>
+            <strong>{{BENEFICIO_3_VALOR}}</strong>
+            <p>{{BENEFICIO_3_DESC}}</p>
           </article>
         </div>
         <div class="media-row span-16">
           <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="Descrição 6">
+            <img src="assets/image-placeholder.svg" alt="{{MEDIA_3_ALT}}">
           </figure>
           <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="Descrição 7">
+            <img src="assets/image-placeholder.svg" alt="{{MEDIA_4_ALT}}">
           </figure>
         </div>
       </div>
     </section>
 
     <!-- 06 · Estrutura do Script -->
-    <section class="slide theme-light" data-slide="06" data-title="Estrutura do Script" data-presentation-name="Template de apresentação" aria-label="Estrutura do Script">
+    <section class="slide theme-light" data-slide="06" data-presentation-name="Estrutura do Script" aria-label="Estrutura do Script">
       <div class="slide-grid">
-        <p class="section-label">Texto 23</p>
+        <p class="section-label">{{EYEBROW_S6}}</p>
         <div class="span-16">
-          <h2>Título 13</h2>
+          <h2>{{TITULO_S6}}</h2>
         </div>
 
         <!-- Antes -->
         <div class="span-7">
-          <p class="compare-heading muted-heading">Texto 24</p>
+          <p class="compare-heading muted-heading">{{ANTES_LABEL}}</p>
           <div class="value-list">
             <article class="compare-card before-card">
               <div class="compare-symbol muted-symbol">-</div>
               <div>
-                <span>Texto 91</span>
-                <p>Texto 25</p>
+                <span>{{ANTES_1_LABEL}}</span>
+                <p>{{ANTES_1_DESC}}</p>
               </div>
             </article>
             <article class="compare-card before-card">
               <div class="compare-symbol muted-symbol">-</div>
               <div>
-                <span>Texto 92</span>
-                <p>Texto 26</p>
+                <span>{{ANTES_2_LABEL}}</span>
+                <p>{{ANTES_2_DESC}}</p>
               </div>
             </article>
             <article class="compare-card before-card">
               <div class="compare-symbol muted-symbol">-</div>
               <div>
-                <span>Texto 93</span>
-                <p>Texto 27</p>
+                <span>{{ANTES_3_LABEL}}</span>
+                <p>{{ANTES_3_DESC}}</p>
               </div>
             </article>
           </div>
@@ -261,33 +267,33 @@
         <div class="span-2 center-arrow">
           <div>
             <svg class="carbon-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="m18 6-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg>
-            <span>Texto 94</span>
+            <span>{{TRANSICAO_LABEL}}</span>
           </div>
         </div>
 
         <!-- Depois -->
         <div class="span-7">
-          <p class="compare-heading">Texto 28</p>
+          <p class="compare-heading">{{DEPOIS_LABEL}}</p>
           <div class="value-list">
             <article>
               <div class="compare-symbol">+</div>
               <div>
-                <span>Texto 95</span>
-                <p>Texto 29</p>
+                <span>{{DEPOIS_1_LABEL}}</span>
+                <p>{{DEPOIS_1_DESC}}</p>
               </div>
             </article>
             <article>
               <div class="compare-symbol">+</div>
               <div>
-                <span>Texto 96</span>
-                <p>Texto 30</p>
+                <span>{{DEPOIS_2_LABEL}}</span>
+                <p>{{DEPOIS_2_DESC}}</p>
               </div>
             </article>
             <article>
               <div class="compare-symbol">+</div>
               <div>
-                <span>Texto 97</span>
-                <p>Texto 31</p>
+                <span>{{DEPOIS_3_LABEL}}</span>
+                <p>{{DEPOIS_3_DESC}}</p>
               </div>
             </article>
           </div>
@@ -296,36 +302,36 @@
     </section>
 
     <!-- 07 · Evidências Visuais -->
-    <section class="slide theme-light" data-slide="07" data-title="Evidências Visuais" data-presentation-name="Template de apresentação" aria-label="Evidências Visuais">
-      <div class="slide-grid script-images-layout">
-        <p class="section-label">Texto 32</p>
+    <section class="slide theme-light" data-slide="07" data-presentation-name="Evidências Visuais" aria-label="Evidências Visuais">
+      <div class="slide-grid">
+        <p class="section-label">{{EYEBROW_S7}}</p>
         <div class="span-16">
-          <h2>Título 14</h2>
+          <h2>{{TITULO_S7}}</h2>
         </div>
         <div class="script-image-grid span-16">
           <figure class="script-image-card muted-shot">
-            <figcaption>Descrição 1</figcaption>
-            <img src="assets/image-placeholder.svg" alt="Descrição 8">
+            <figcaption>{{EVIDENCIA_1_LEGENDA}}</figcaption>
+            <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_1_ALT}}">
           </figure>
           <figure class="script-image-card">
-            <figcaption>Descrição 2</figcaption>
-            <img src="assets/image-placeholder.svg" alt="Descrição 9">
+            <figcaption>{{EVIDENCIA_2_LEGENDA}}</figcaption>
+            <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_2_ALT}}">
           </figure>
         </div>
       </div>
     </section>
 
     <!-- 08 · Resultados -->
-    <section class="slide theme-light" data-slide="08" data-title="Resultados" data-presentation-name="Template de apresentação" aria-label="Resultados">
-      <div class="slide-grid dashboard-grid">
-        <p class="section-label">Texto 33</p>
+    <section class="slide theme-light" data-slide="08" data-presentation-name="Resultados" aria-label="Resultados">
+      <div class="slide-grid">
+        <p class="section-label">{{EYEBROW_S8}}</p>
         <div class="span-16">
-          <h2>Título 15</h2>
+          <h2>{{TITULO_S8}}</h2>
         </div>
         <div class="dashboard span-10">
           <div class="dashboard-header">
-            <strong>Texto 62</strong>
-            <span>Texto 98</span>
+            <strong>{{DASHBOARD_TITULO}}</strong>
+            <span>{{DASHBOARD_PERIODO}}</span>
           </div>
           <div class="chart-row" role="img" aria-label="Gráfico de barras com evolução de resultados">
             <span style="--value: 48%"></span>
@@ -337,75 +343,75 @@
           </div>
           <div class="status-grid">
             <article>
-              <span>Texto 99</span>
-              <strong>Texto 63</strong>
+              <span>{{STATUS_1_LABEL}}</span>
+              <strong>{{STATUS_1_VALOR}}</strong>
             </article>
             <article>
-              <span>Texto 100</span>
-              <strong>Texto 64</strong>
+              <span>{{STATUS_2_LABEL}}</span>
+              <strong>{{STATUS_2_VALOR}}</strong>
             </article>
             <article>
-              <span>Texto 101</span>
-              <strong>Texto 65</strong>
+              <span>{{STATUS_3_LABEL}}</span>
+              <strong>{{STATUS_3_VALOR}}</strong>
             </article>
           </div>
         </div>
         <div class="metric-stack span-6">
           <article>
-            <span>Texto 102</span>
-            <strong>Texto 66</strong>
-            <p>Texto 34</p>
+            <span>{{RESULTADO_1_LABEL}}</span>
+            <strong>{{RESULTADO_1_VALOR}}</strong>
+            <p>{{RESULTADO_1_DESC}}</p>
           </article>
           <article>
-            <span>Texto 103</span>
-            <strong>Texto 67</strong>
-            <p>Texto 35</p>
+            <span>{{RESULTADO_2_LABEL}}</span>
+            <strong>{{RESULTADO_2_VALOR}}</strong>
+            <p>{{RESULTADO_2_DESC}}</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- 09 · Autonomia -->
-    <section class="slide theme-light" data-slide="09" data-title="Autonomia" data-presentation-name="Template de apresentação" aria-label="Autonomia">
+    <section class="slide theme-light" data-slide="09" data-presentation-name="Autonomia" aria-label="Autonomia">
       <div class="slide-grid">
-        <p class="section-label">Texto 36</p>
+        <p class="section-label">{{EYEBROW_S9}}</p>
         <div class="span-16">
-          <h2>Título 16</h2>
+          <h2>{{TITULO_S9}}</h2>
         </div>
         <div class="capability-grid span-16">
           <article>
-            <span>Texto 104</span>
-            <h3>Título 17</h3>
-            <p>Texto 37</p>
+            <span>{{CAPACIDADE_1_LABEL}}</span>
+            <h3>{{CAPACIDADE_1_TITULO}}</h3>
+            <p>{{CAPACIDADE_1_DESC}}</p>
           </article>
           <article>
-            <span>Texto 105</span>
-            <h3>Título 18</h3>
-            <p>Texto 38</p>
+            <span>{{CAPACIDADE_2_LABEL}}</span>
+            <h3>{{CAPACIDADE_2_TITULO}}</h3>
+            <p>{{CAPACIDADE_2_DESC}}</p>
           </article>
           <article>
-            <span>Texto 106</span>
-            <h3>Título 19</h3>
-            <p>Texto 39</p>
+            <span>{{CAPACIDADE_3_LABEL}}</span>
+            <h3>{{CAPACIDADE_3_TITULO}}</h3>
+            <p>{{CAPACIDADE_3_DESC}}</p>
           </article>
           <article class="demo-video-panel">
-            <span>Texto 107</span>
-            <h3>Título 20</h3>
+            <span>{{DEMO_LABEL}}</span>
+            <h3>{{DEMO_TITULO}}</h3>
             <div class="demo-video-list">
               <div class="video-frame">
-                <p>Texto 40</p>
-                <img src="assets/image-placeholder.svg" alt="Descrição 10">
+                <p>{{DEMO_1_CAPTION}}</p>
+                <img src="assets/image-placeholder.svg" alt="{{DEMO_1_ALT}}">
                 <div class="video-placeholder" aria-hidden="true">
-                  <span>Texto 108</span>
-                  <strong>Texto 68</strong>
+                  <span>{{DEMO_1_BADGE_LABEL}}</span>
+                  <strong>{{DEMO_1_BADGE_VALOR}}</strong>
                 </div>
               </div>
               <div class="video-frame">
-                <p>Texto 41</p>
-                <img src="assets/image-placeholder.svg" alt="Descrição 11">
+                <p>{{DEMO_2_CAPTION}}</p>
+                <img src="assets/image-placeholder.svg" alt="{{DEMO_2_ALT}}">
                 <div class="video-placeholder" aria-hidden="true">
-                  <span>Texto 109</span>
-                  <strong>Texto 69</strong>
+                  <span>{{DEMO_2_BADGE_LABEL}}</span>
+                  <strong>{{DEMO_2_BADGE_VALOR}}</strong>
                 </div>
               </div>
             </div>
@@ -415,27 +421,28 @@
     </section>
 
     <!-- 10 · Flexibilidade de Deployment -->
-    <section class="slide theme-light" data-slide="10" data-title="Flexibilidade de Deployment" data-presentation-name="Template de apresentação" aria-label="Flexibilidade de Deployment">
-      <div class="slide-grid deployment-layout">
-        <p class="section-label">Texto 42</p>
-        <div class="span-16">
-          <h2>Título 21</h2>
-          <p class="lead">Texto 43</p>
+    <section class="slide theme-light" data-slide="10" data-presentation-name="Flexibilidade de Deployment" aria-label="Flexibilidade de Deployment">
+      <div class="slide-grid">
+        <p class="section-label">{{EYEBROW_S10}}</p>
+        <div class="span-10">
+          <h2>{{TITULO_S10}}</h2>
+          <p class="lead">{{LEAD_S10}}</p>
         </div>
+        <div class="slide-pictogram slide-pictogram--cloud span-6" aria-hidden="true"></div>
 
         <div class="deployment-map span-16" aria-label="Mapa de opções de deployment">
           <article class="deployment-option">
-            <span>Texto 110</span>
-            <h3>Título 22</h3>
-            <div class="deployment-stack single-stack">
+            <span>{{DEPLOY_1_LABEL}}</span>
+            <h3>{{DEPLOY_1_TITULO}}</h3>
+            <div class="deployment-stack">
               <div>IBM SaaS</div>
               <div>AWS · Azure <small>em breve</small></div>
             </div>
           </article>
 
           <article class="deployment-option featured">
-            <span>Texto 111</span>
-            <h3>Título 23</h3>
+            <span>{{DEPLOY_2_LABEL}}</span>
+            <h3>{{DEPLOY_2_TITULO}}</h3>
             <div class="deployment-stack">
               <div>IBM Watsonx Orchestrate</div>
               <div>Red Hat OpenShift</div>
@@ -444,8 +451,8 @@
           </article>
 
           <article class="deployment-option">
-            <span>Texto 112</span>
-            <h3>Título 24</h3>
+            <span>{{DEPLOY_3_LABEL}}</span>
+            <h3>{{DEPLOY_3_TITULO}}</h3>
             <div class="deployment-stack">
               <div>IBM Watsonx Orchestrate</div>
               <div>Red Hat OpenShift</div>
@@ -455,66 +462,75 @@
         </div>
 
         <div class="deployment-note span-16">
-          <span>Texto 113</span>
-          <p>Texto 44</p>
+          <span>{{DEPLOY_NOTA_LABEL}}</span>
+          <p>{{DEPLOY_NOTA_TEXTO}}</p>
         </div>
       </div>
     </section>
 
     <!-- 11 · Conclusões -->
-    <section class="slide theme-close" data-slide="11" data-title="Conclusões" data-presentation-name="Template de apresentação" aria-label="Conclusões">
+    <section class="slide theme-close" data-slide="11" data-presentation-name="Conclusões" aria-label="Conclusões">
       <div class="slide-grid close-grid">
-        <p class="section-label">Texto 45</p>
-        <div class="span-16">
-          <p class="compare-heading">Texto 46</p>
-          <h2>Título 25</h2>
+        <p class="section-label">{{EYEBROW_S11}}</p>
+        <div class="span-10">
+          <p class="compare-heading">{{CONCLUSAO_KICKER}}</p>
+          <h2>{{TITULO_S11}}</h2>
         </div>
+        <div class="slide-pictogram slide-pictogram--strategy span-6" aria-hidden="true"></div>
         <div class="roadmap span-16">
           <article>
-            <span>Texto 114</span>
-            <h3>Título 26</h3>
-            <p>Texto 47</p>
+            <span>{{ROADMAP_1_LABEL}}</span>
+            <h3>{{ROADMAP_1_TITULO}}</h3>
+            <p>{{ROADMAP_1_DESC}}</p>
           </article>
           <article>
-            <span>Texto 115</span>
-            <h3>Título 27</h3>
-            <p>Texto 48</p>
+            <span>{{ROADMAP_2_LABEL}}</span>
+            <h3>{{ROADMAP_2_TITULO}}</h3>
+            <p>{{ROADMAP_2_DESC}}</p>
           </article>
           <article>
-            <span>Texto 116</span>
-            <h3>Título 28</h3>
-            <p>Texto 49</p>
+            <span>{{ROADMAP_3_LABEL}}</span>
+            <h3>{{ROADMAP_3_TITULO}}</h3>
+            <p>{{ROADMAP_3_DESC}}</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- 12 · Encerramento -->
-    <section class="slide theme-close" data-slide="12" data-title="Encerramento" data-presentation-name="Template de apresentação" aria-label="Encerramento">
+    <section class="slide theme-close" data-slide="12" data-presentation-name="Encerramento" aria-label="Encerramento">
       <div class="slide-grid close-grid">
-        <p class="section-label">Texto 50</p>
+        <p class="section-label">{{EYEBROW_S12}}</p>
         <div class="span-10">
-          <h2>Título 29</h2>
-          <p class="lead">Texto 51</p>
+          <h2>{{TITULO_S12}}</h2>
+          <p class="lead">{{LEAD_S12}}</p>
           <div class="cover-tags">
-            <span>Texto 117</span>
-            <span>Texto 118</span>
-            <span>Texto 119</span>
+            <span>{{TAG_1}}</span>
+            <span>{{TAG_2}}</span>
+            <span>{{TAG_3}}</span>
           </div>
         </div>
         <aside class="closing-box">
           <div class="panel-lockup">
             <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
-            <img src="assets/image-placeholder.svg" alt="Descrição 12">
+            <img src="assets/image-placeholder.svg" alt="{{CLOSING_IMAGEM_ALT}}">
           </div>
-          <span>Texto 120</span>
-          <strong>Texto 70</strong>
-          <p>Texto 52</p>
+          <span>{{CLOSING_LABEL}}</span>
+          <strong>{{CLOSING_VALOR}}</strong>
+          <p>{{CLOSING_TEXTO}}</p>
         </aside>
       </div>
     </section>
 
   </main>
+
+  <!-- ── Prev / next arrows ── -->
+  <button class="nav-arrow nav-arrow--prev" id="prevBtn" aria-label="Slide anterior" title="Slide anterior (←)">
+    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="10,16 20,6 21.4,7.4 12.8,16 21.4,24.6 20,26 "/></svg>
+  </button>
+  <button class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo slide" title="Próximo slide (→)">
+    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="22,16 12,26 10.6,24.6 19.2,16 10.6,7.4 12,6 "/></svg>
+  </button>
 
   <!-- ── Navigation dots ── -->
   <nav class="nav-controls" aria-label="Navegação entre slides">
