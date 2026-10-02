@@ -1,6 +1,8 @@
 /**
- * Deck controller — Template IBM executivo
+ * Deck controller — IBM Presentation Factory
+ * Vanilla JS · no dependencies · keyboard + touch + wheel navigation
  */
+
 class Deck {
   constructor() {
     this.slides  = [...document.querySelectorAll('.slide')];
@@ -11,49 +13,44 @@ class Deck {
     this.$fill = document.getElementById('progressFill');
     this.$num  = document.getElementById('slideNum');
     this.$tot  = document.getElementById('slideTot');
-    this.$side = document.getElementById('sideNav');
     this.$fs   = document.getElementById('fullscreenBtn');
 
     this._buildDots();
-    this._buildSideNav();
     this._bind();
     this._render();
   }
 
+  /** Build navigation dots from the live slide list */
   _buildDots() {
-    this.slides.forEach((_, i) => {
+    this.slides.forEach((s, i) => {
       const btn = document.createElement('button');
       btn.className = 'dot';
       btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-label', `Slide ${i + 1}`);
+      btn.setAttribute('aria-label', `Slide ${i + 1}${s.dataset.title ? ': ' + s.dataset.title : ''}`);
       btn.addEventListener('click', () => this.goto(i));
       this.$dots.appendChild(btn);
     });
   }
 
-  _buildSideNav() {
-    if (!this.$side) return;
-
-    this.slides.forEach((s, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'side-nav-item';
-      btn.setAttribute('role', 'listitem');
-      const label = s.dataset.title || `Slide ${i + 1}`;
-      btn.innerHTML = `<span>${String(i + 1).padStart(2, '0')}</span>${label}`;
-      btn.addEventListener('click', () => this.goto(i));
-      this.$side.appendChild(btn);
-    });
-  }
-
+  /** Bind keyboard, touch, wheel and fullscreen events */
   _bind() {
     document.addEventListener('keydown', e => this._key(e));
     this._initTouch();
     this._initWheel();
-    if (this.$fs) this.$fs.addEventListener('click', () => this._toggleFullscreen());
+
+    if (this.$fs) {
+      this.$fs.addEventListener('click', () => this._toggleFullscreen());
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const icon = this.$fs?.querySelector('svg');
+      if (!icon) return;
+      this.$fs.setAttribute('aria-pressed', String(!!document.fullscreenElement));
+    });
   }
 
   _key(e) {
-    const actions = {
+    const map = {
       ArrowRight : () => this.next(),
       ArrowDown  : () => this.next(),
       PageDown   : () => this.next(),
@@ -63,9 +60,14 @@ class Deck {
       PageUp     : () => this.prev(),
       Home       : () => this.goto(0),
       End        : () => this.goto(this.total - 1),
-      Escape     : () => this._toggleFullscreen(),
+      f          : () => this._toggleFullscreen(),
+      F          : () => this._toggleFullscreen(),
+      Escape     : () => { if (document.fullscreenElement) this._toggleFullscreen(); },
     };
-    if (actions[e.key]) { e.preventDefault(); actions[e.key](); }
+    if (map[e.key]) {
+      e.preventDefault();
+      map[e.key]();
+    }
   }
 
   _initTouch() {
@@ -87,16 +89,10 @@ class Deck {
     let lastWheelTime = 0;
     document.addEventListener('wheel', e => {
       if (Math.abs(e.deltaY) < 15) return;
-      
       const now = Date.now();
       if (now - lastWheelTime < 800) return;
-      
       lastWheelTime = now;
-      if (e.deltaY > 0) {
-        this.next();
-      } else {
-        this.prev();
-      }
+      e.deltaY > 0 ? this.next() : this.prev();
     }, { passive: true });
   }
 
@@ -113,40 +109,50 @@ class Deck {
     this.current = index;
     this._render();
   }
+
   next() { this.goto(this.current + 1); }
   prev() { this.goto(this.current - 1); }
 
   _render() {
     const n = this.current;
 
-    this.slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    this.slides.forEach((s, i) => {
+      s.classList.toggle('active', i === n);
+    });
 
     [...this.$dots.children].forEach((d, i) => {
       d.classList.toggle('active', i === n);
       d.setAttribute('aria-selected', String(i === n));
     });
 
-    if (this.$side) {
-      [...this.$side.children].forEach((b, i) => b.classList.toggle('active', i === n));
+    if (this.$fill) {
+      this.$fill.style.width = `${((n + 1) / this.total) * 100}%`;
     }
-
-    this.$fill.style.width = `${((n + 1) / this.total) * 100}%`;
-    this.$num.textContent  = String(n + 1).padStart(2, '0');
+    if (this.$num) {
+      this.$num.textContent = String(n + 1).padStart(2, '0');
+    }
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Graceful entry fade
   document.body.style.opacity = '0';
   requestAnimationFrame(() => {
-    document.body.style.transition = 'opacity .4s ease';
+    document.body.style.transition = 'opacity .35s ease';
     document.body.style.opacity    = '1';
   });
 
-  document.getElementById('slideTot').textContent =
-    String(document.querySelectorAll('.slide').length).padStart(2, '0');
+  // Populate total slide count
+  const tot = document.getElementById('slideTot');
+  if (tot) {
+    tot.textContent = String(document.querySelectorAll('.slide').length).padStart(2, '0');
+  }
 
   window._deck = new Deck();
 
-  console.info('%cTemplate de apresentação', 'font:700 18px/1 IBM Plex Sans,sans-serif;color:#0f62fe');
-  console.info('→ / ← : navegar | Esc : fullscreen | Home / End : primeiro / último');
+  console.info(
+    '%c IBM Presentation Factory ',
+    'font: 700 14px/1 "IBM Plex Mono", monospace; color: #fff; background: #0f62fe; padding: 2px 6px;'
+  );
+  console.info('← → Arrow keys · Space · PageUp/Down · Home · End · F = fullscreen');
 });

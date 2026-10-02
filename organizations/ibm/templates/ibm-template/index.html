@@ -6,8 +6,8 @@
   <title>Template de apresentação</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Serif:ital,wght@1,300&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <div class="presentation">
@@ -24,11 +24,11 @@
       <span class="brand-context">Texto 71</span>
     </div>
     <div class="topbar-meta">
-      <div class="slide-counter" aria-live="polite">
-        <span id="slideNum">Texto 72</span>&thinsp;/&thinsp;<span id="slideTot">Texto 73</span>
+      <div class="slide-counter" aria-live="polite" aria-atomic="true">
+        <span id="slideNum">01</span>&thinsp;/&thinsp;<span id="slideTot">12</span>
       </div>
-      <button class="utility-btn" id="fullscreenBtn" aria-label="Descrição 13" title="Descrição 19">
-        <svg class="carbon-icon" width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
+      <button class="utility-btn" id="fullscreenBtn" aria-label="Alternar tela cheia" title="Tela cheia (F)" aria-pressed="false">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
       </button>
     </div>
     <div class="progress-track" aria-hidden="true">
@@ -37,10 +37,10 @@
   </header>
 
   <!-- ── Slides ── -->
-  <main class="deck" aria-label="Descrição 14">
+  <main class="deck" aria-label="Apresentação de slides" role="region">
 
     <!-- 01 · Capa -->
-    <section class="slide active theme-hero" data-slide="01" data-title="Descrição 20">
+    <section class="slide active theme-hero" data-slide="01" data-title="Capa" data-presentation-name="Template de apresentação" aria-label="Capa">
       <div class="slide-blob blob-1" aria-hidden="true"></div>
       <div class="slide-blob blob-2" aria-hidden="true"></div>
       <div class="slide-grid hero-grid">
@@ -81,7 +81,7 @@
     </section>
 
     <!-- 02 · Contexto -->
-    <section class="slide theme-light" data-slide="02" data-title="Descrição 21">
+    <section class="slide theme-light" data-slide="02" data-title="Contexto" data-presentation-name="Template de apresentação" aria-label="Contexto">
       <div class="slide-grid">
         <p class="section-label">Texto 3</p>
         <div class="span-9">
@@ -109,7 +109,7 @@
     </section>
 
     <!-- 03 · Jornada -->
-    <section class="slide theme-light" data-slide="03" data-title="Descrição 22">
+    <section class="slide theme-light" data-slide="03" data-title="Jornada" data-presentation-name="Template de apresentação" aria-label="Jornada">
       <div class="slide-grid">
         <p class="section-label">Texto 8</p>
         <div class="span-16">
@@ -141,7 +141,7 @@
     </section>
 
     <!-- 04 · Devolutiva -->
-    <section class="slide theme-light" data-slide="04" data-title="Descrição 23">
+    <section class="slide theme-light" data-slide="04" data-title="Devolutiva" data-presentation-name="Template de apresentação" aria-label="Devolutiva">
       <div class="slide-grid media-layout">
         <p class="section-label">Texto 13</p>
         <div class="span-9">
@@ -186,7 +186,7 @@
     </section>
 
     <!-- 05 · Solução -->
-    <section class="slide theme-light" data-slide="05" data-title="Descrição 24">
+    <section class="slide theme-light" data-slide="05" data-title="Solução" data-presentation-name="Template de apresentação" aria-label="Solução">
       <div class="slide-grid media-layout">
         <p class="section-label">Texto 18</p>
         <div class="span-9">
@@ -222,7 +222,7 @@
     </section>
 
     <!-- 06 · Estrutura do Script -->
-    <section class="slide theme-light" data-slide="06" data-title="Descrição 25">
+    <section class="slide theme-light" data-slide="06" data-title="Estrutura do Script" data-presentation-name="Template de apresentação" aria-label="Estrutura do Script">
       <div class="slide-grid">
         <p class="section-label">Texto 23</p>
         <div class="span-16">
@@ -296,7 +296,7 @@
     </section>
 
     <!-- 07 · Evidências Visuais -->
-    <section class="slide theme-light" data-slide="07" data-title="Descrição 26">
+    <section class="slide theme-light" data-slide="07" data-title="Evidências Visuais" data-presentation-name="Template de apresentação" aria-label="Evidências Visuais">
       <div class="slide-grid script-images-layout">
         <p class="section-label">Texto 32</p>
         <div class="span-16">
@@ -316,7 +316,7 @@
     </section>
 
     <!-- 08 · Resultados -->
-    <section class="slide theme-light" data-slide="08" data-title="Descrição 27">
+    <section class="slide theme-light" data-slide="08" data-title="Resultados" data-presentation-name="Template de apresentação" aria-label="Resultados">
       <div class="slide-grid dashboard-grid">
         <p class="section-label">Texto 33</p>
         <div class="span-16">
@@ -366,7 +366,7 @@
     </section>
 
     <!-- 09 · Autonomia -->
-    <section class="slide theme-light" data-slide="09" data-title="Descrição 28">
+    <section class="slide theme-light" data-slide="09" data-title="Autonomia" data-presentation-name="Template de apresentação" aria-label="Autonomia">
       <div class="slide-grid">
         <p class="section-label">Texto 36</p>
         <div class="span-16">
@@ -415,7 +415,7 @@
     </section>
 
     <!-- 10 · Flexibilidade de Deployment -->
-    <section class="slide theme-light" data-slide="10" data-title="Descrição 29">
+    <section class="slide theme-light" data-slide="10" data-title="Flexibilidade de Deployment" data-presentation-name="Template de apresentação" aria-label="Flexibilidade de Deployment">
       <div class="slide-grid deployment-layout">
         <p class="section-label">Texto 42</p>
         <div class="span-16">
@@ -462,7 +462,7 @@
     </section>
 
     <!-- 11 · Conclusões -->
-    <section class="slide theme-close" data-slide="11" data-title="Descrição 30">
+    <section class="slide theme-close" data-slide="11" data-title="Conclusões" data-presentation-name="Template de apresentação" aria-label="Conclusões">
       <div class="slide-grid close-grid">
         <p class="section-label">Texto 45</p>
         <div class="span-16">
@@ -490,7 +490,7 @@
     </section>
 
     <!-- 12 · Encerramento -->
-    <section class="slide theme-close" data-slide="12" data-title="Descrição 31">
+    <section class="slide theme-close" data-slide="12" data-title="Encerramento" data-presentation-name="Template de apresentação" aria-label="Encerramento">
       <div class="slide-grid close-grid">
         <p class="section-label">Texto 50</p>
         <div class="span-10">
@@ -517,8 +517,8 @@
   </main>
 
   <!-- ── Navigation dots ── -->
-  <nav class="nav-controls" aria-label="Descrição 18">
-    <div class="slide-dots" id="navDots" role="tablist"></div>
+  <nav class="nav-controls" aria-label="Navegação entre slides">
+    <div class="slide-dots" id="navDots" role="tablist" aria-label="Slides"></div>
   </nav>
 
 </div>
