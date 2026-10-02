@@ -45,7 +45,7 @@
   <main class="deck" aria-label="Apresentação de slides">
 
     <!-- 01 · Capa -->
-    <section class="slide active theme-hero" data-slide="01" data-presentation-name="Capa" aria-label="Capa">
+    <section style="--i: 0" class="slide active theme-hero" data-slide="01" data-presentation-name="Capa" aria-label="Capa">
       <div class="slide-blob blob-1" aria-hidden="true"></div>
       <div class="slide-blob blob-2" aria-hidden="true"></div>
       <div class="slide-blob blob-3" aria-hidden="true"></div>
@@ -74,7 +74,7 @@
         </div>
         <aside class="executive-panel" aria-label="Painel de destaque da capa">
           <div class="cover-panel-header">
-            <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
+            <img src="assets/logo-light.svg" alt="IBM" class="brand-logo">
           </div>
           <div class="motion-grid" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
@@ -87,418 +87,442 @@
     </section>
 
     <!-- 02 · Contexto -->
-    <section class="slide theme-light" data-slide="02" data-presentation-name="Contexto" aria-label="Contexto">
+    <section style="--i: 1" class="slide theme-light" data-slide="02" data-presentation-name="Contexto" aria-label="Contexto">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S2}}</p>
-        <div class="span-9">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S2}}</p>
           <h2>{{TITULO_S2}}</h2>
           <p class="lead">{{LEAD_S2}}</p>
-        </div>
-        <div class="metric-stack span-7">
-          <article>
-            <span>{{METRIC_1_LABEL}}</span>
-            <strong>{{METRIC_1_VALOR}}</strong>
-            <p>{{METRIC_1_DESC}}</p>
-          </article>
-          <article>
-            <span>{{METRIC_2_LABEL}}</span>
-            <strong>{{METRIC_2_VALOR}}</strong>
-            <p>{{METRIC_2_DESC}}</p>
-          </article>
-          <article>
-            <span>{{METRIC_3_LABEL}}</span>
-            <strong>{{METRIC_3_VALOR}}</strong>
-            <p>{{METRIC_3_DESC}}</p>
-          </article>
+        </header>
+        <div class="slide-body">
+          <div class="span-9" aria-hidden="true"></div>
+          <div class="metric-stack span-7">
+            <article>
+              <span>{{METRIC_1_LABEL}}</span>
+              <strong>{{METRIC_1_VALOR}}</strong>
+              <p>{{METRIC_1_DESC}}</p>
+            </article>
+            <article>
+              <span>{{METRIC_2_LABEL}}</span>
+              <strong>{{METRIC_2_VALOR}}</strong>
+              <p>{{METRIC_2_DESC}}</p>
+            </article>
+            <article>
+              <span>{{METRIC_3_LABEL}}</span>
+              <strong>{{METRIC_3_VALOR}}</strong>
+              <p>{{METRIC_3_DESC}}</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 03 · Jornada -->
-    <section class="slide theme-light" data-slide="03" data-presentation-name="Jornada" aria-label="Jornada">
+    <section style="--i: 2" class="slide theme-light" data-slide="03" data-presentation-name="Jornada" aria-label="Jornada">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S3}}</p>
-        <div class="span-16">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S3}}</p>
           <h2>{{TITULO_S3}}</h2>
-        </div>
-        <div class="journey span-16" role="list">
-          <article role="listitem">
-            <span>{{JORNADA_1_FASE}}</span>
-            <h3>{{JORNADA_1_TITULO}}</h3>
-            <p>{{JORNADA_1_DESC}}</p>
-          </article>
-          <article role="listitem">
-            <span>{{JORNADA_2_FASE}}</span>
-            <h3>{{JORNADA_2_TITULO}}</h3>
-            <p>{{JORNADA_2_DESC}}</p>
-          </article>
-          <article role="listitem">
-            <span>{{JORNADA_3_FASE}}</span>
-            <h3>{{JORNADA_3_TITULO}}</h3>
-            <p>{{JORNADA_3_DESC}}</p>
-          </article>
-          <article role="listitem">
-            <span>{{JORNADA_4_FASE}}</span>
-            <h3>{{JORNADA_4_TITULO}}</h3>
-            <p>{{JORNADA_4_DESC}}</p>
-          </article>
+        </header>
+        <div class="slide-body">
+          <div class="journey span-16" role="list">
+            <article role="listitem">
+              <span>{{JORNADA_1_FASE}}</span>
+              <h3>{{JORNADA_1_TITULO}}</h3>
+              <p>{{JORNADA_1_DESC}}</p>
+            </article>
+            <article role="listitem">
+              <span>{{JORNADA_2_FASE}}</span>
+              <h3>{{JORNADA_2_TITULO}}</h3>
+              <p>{{JORNADA_2_DESC}}</p>
+            </article>
+            <article role="listitem">
+              <span>{{JORNADA_3_FASE}}</span>
+              <h3>{{JORNADA_3_TITULO}}</h3>
+              <p>{{JORNADA_3_DESC}}</p>
+            </article>
+            <article role="listitem">
+              <span>{{JORNADA_4_FASE}}</span>
+              <h3>{{JORNADA_4_TITULO}}</h3>
+              <p>{{JORNADA_4_DESC}}</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 04 · Devolutiva -->
-    <section class="slide theme-light" data-slide="04" data-presentation-name="Devolutiva" aria-label="Devolutiva">
+    <section style="--i: 3" class="slide theme-light" data-slide="04" data-presentation-name="Devolutiva" aria-label="Devolutiva">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S4}}</p>
-        <div class="span-9">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S4}}</p>
           <h2>{{TITULO_S4}}</h2>
           <p class="lead">{{LEAD_S4}}</p>
-        </div>
-        <div class="value-list span-7">
-          <article>
-            <div class="icon-slot icon-slot--success">✓</div>
-            <div>
-              <span>{{ACHADO_1_LABEL}}</span>
-              <h3>{{ACHADO_1_TITULO}}</h3>
-              <p>{{ACHADO_1_DESC}}</p>
-            </div>
-          </article>
-          <article>
-            <div class="icon-slot icon-slot--warn">!</div>
-            <div>
-              <span>{{ACHADO_2_LABEL}}</span>
-              <h3>{{ACHADO_2_TITULO}}</h3>
-              <p>{{ACHADO_2_DESC}}</p>
-            </div>
-          </article>
-          <article>
-            <div class="icon-slot icon-slot--ref">REF</div>
-            <div>
-              <span>{{ACHADO_3_LABEL}}</span>
-              <h3>{{ACHADO_3_TITULO}}</h3>
-              <p class="text-mono-sm">{{ACHADO_3_REF}}</p>
-            </div>
-          </article>
-        </div>
-        <div class="media-row span-16">
-          <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="{{MEDIA_1_ALT}}">
-          </figure>
-          <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="{{MEDIA_2_ALT}}">
-          </figure>
+        </header>
+        <div class="slide-body">
+          <div class="span-9" aria-hidden="true"></div>
+          <div class="value-list span-7">
+            <article>
+              <div class="icon-slot icon-slot--success">✓</div>
+              <div>
+                <span>{{ACHADO_1_LABEL}}</span>
+                <h3>{{ACHADO_1_TITULO}}</h3>
+                <p>{{ACHADO_1_DESC}}</p>
+              </div>
+            </article>
+            <article>
+              <div class="icon-slot icon-slot--warn">!</div>
+              <div>
+                <span>{{ACHADO_2_LABEL}}</span>
+                <h3>{{ACHADO_2_TITULO}}</h3>
+                <p>{{ACHADO_2_DESC}}</p>
+              </div>
+            </article>
+            <article>
+              <div class="icon-slot icon-slot--ref">REF</div>
+              <div>
+                <span>{{ACHADO_3_LABEL}}</span>
+                <h3>{{ACHADO_3_TITULO}}</h3>
+                <p class="text-mono-sm">{{ACHADO_3_REF}}</p>
+              </div>
+            </article>
+          </div>
+          <div class="media-row span-16">
+            <figure class="media-card">
+              <img src="assets/image-placeholder.svg" alt="{{MEDIA_1_ALT}}">
+            </figure>
+            <figure class="media-card">
+              <img src="assets/image-placeholder.svg" alt="{{MEDIA_2_ALT}}">
+            </figure>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 05 · Solução -->
-    <section class="slide theme-light" data-slide="05" data-presentation-name="Solução" aria-label="Solução">
+    <section style="--i: 4" class="slide theme-light" data-slide="05" data-presentation-name="Solução" aria-label="Solução">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S5}}</p>
-        <div class="span-9">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S5}}</p>
           <h2>{{TITULO_S5}}</h2>
           <p class="lead">{{LEAD_S5}}</p>
-        </div>
-        <div class="metric-stack span-7">
-          <article>
-            <span>{{BENEFICIO_1_LABEL}}</span>
-            <strong>{{BENEFICIO_1_VALOR}}</strong>
-            <p>{{BENEFICIO_1_DESC}}</p>
-          </article>
-          <article>
-            <span>{{BENEFICIO_2_LABEL}}</span>
-            <strong>{{BENEFICIO_2_VALOR}}</strong>
-            <p>{{BENEFICIO_2_DESC}}</p>
-          </article>
-          <article>
-            <span>{{BENEFICIO_3_LABEL}}</span>
-            <strong>{{BENEFICIO_3_VALOR}}</strong>
-            <p>{{BENEFICIO_3_DESC}}</p>
-          </article>
-        </div>
-        <div class="media-row span-16">
-          <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="{{MEDIA_3_ALT}}">
-          </figure>
-          <figure class="media-card">
-            <img src="assets/image-placeholder.svg" alt="{{MEDIA_4_ALT}}">
-          </figure>
+        </header>
+        <div class="slide-body">
+          <div class="span-9" aria-hidden="true"></div>
+          <div class="metric-stack span-7">
+            <article>
+              <span>{{BENEFICIO_1_LABEL}}</span>
+              <strong>{{BENEFICIO_1_VALOR}}</strong>
+              <p>{{BENEFICIO_1_DESC}}</p>
+            </article>
+            <article>
+              <span>{{BENEFICIO_2_LABEL}}</span>
+              <strong>{{BENEFICIO_2_VALOR}}</strong>
+              <p>{{BENEFICIO_2_DESC}}</p>
+            </article>
+            <article>
+              <span>{{BENEFICIO_3_LABEL}}</span>
+              <strong>{{BENEFICIO_3_VALOR}}</strong>
+              <p>{{BENEFICIO_3_DESC}}</p>
+            </article>
+          </div>
+          <div class="media-row span-16">
+            <figure class="media-card">
+              <img src="assets/image-placeholder.svg" alt="{{MEDIA_3_ALT}}">
+            </figure>
+            <figure class="media-card">
+              <img src="assets/image-placeholder.svg" alt="{{MEDIA_4_ALT}}">
+            </figure>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 06 · Estrutura do Script -->
-    <section class="slide theme-light" data-slide="06" data-presentation-name="Estrutura do Script" aria-label="Estrutura do Script">
+    <section style="--i: 5" class="slide theme-light" data-slide="06" data-presentation-name="Estrutura do Script" aria-label="Estrutura do Script">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S6}}</p>
-        <div class="span-16">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S6}}</p>
           <h2>{{TITULO_S6}}</h2>
-        </div>
-
-        <!-- Antes -->
-        <div class="span-7">
-          <p class="compare-heading muted-heading">{{ANTES_LABEL}}</p>
-          <div class="value-list">
-            <article class="compare-card before-card">
-              <div class="compare-symbol muted-symbol">-</div>
-              <div>
-                <span>{{ANTES_1_LABEL}}</span>
-                <p>{{ANTES_1_DESC}}</p>
-              </div>
-            </article>
-            <article class="compare-card before-card">
-              <div class="compare-symbol muted-symbol">-</div>
-              <div>
-                <span>{{ANTES_2_LABEL}}</span>
-                <p>{{ANTES_2_DESC}}</p>
-              </div>
-            </article>
-            <article class="compare-card before-card">
-              <div class="compare-symbol muted-symbol">-</div>
-              <div>
-                <span>{{ANTES_3_LABEL}}</span>
-                <p>{{ANTES_3_DESC}}</p>
-              </div>
-            </article>
+        </header>
+        <div class="slide-body">
+          <!-- Antes -->
+          <div class="span-7">
+            <p class="compare-heading muted-heading">{{ANTES_LABEL}}</p>
+            <div class="value-list">
+              <article class="compare-card before-card">
+                <div class="compare-symbol muted-symbol">-</div>
+                <div>
+                  <span>{{ANTES_1_LABEL}}</span>
+                  <p>{{ANTES_1_DESC}}</p>
+                </div>
+              </article>
+              <article class="compare-card before-card">
+                <div class="compare-symbol muted-symbol">-</div>
+                <div>
+                  <span>{{ANTES_2_LABEL}}</span>
+                  <p>{{ANTES_2_DESC}}</p>
+                </div>
+              </article>
+              <article class="compare-card before-card">
+                <div class="compare-symbol muted-symbol">-</div>
+                <div>
+                  <span>{{ANTES_3_LABEL}}</span>
+                  <p>{{ANTES_3_DESC}}</p>
+                </div>
+              </article>
+            </div>
           </div>
-        </div>
 
-        <!-- Seta -->
-        <div class="span-2 center-arrow">
-          <div>
-            <svg class="carbon-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="m18 6-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg>
-            <span>{{TRANSICAO_LABEL}}</span>
+          <!-- Seta -->
+          <div class="span-2 center-arrow">
+            <div>
+              <svg class="carbon-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="m18 6-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg>
+              <span>{{TRANSICAO_LABEL}}</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Depois -->
-        <div class="span-7">
-          <p class="compare-heading">{{DEPOIS_LABEL}}</p>
-          <div class="value-list">
-            <article>
-              <div class="compare-symbol">+</div>
-              <div>
-                <span>{{DEPOIS_1_LABEL}}</span>
-                <p>{{DEPOIS_1_DESC}}</p>
-              </div>
-            </article>
-            <article>
-              <div class="compare-symbol">+</div>
-              <div>
-                <span>{{DEPOIS_2_LABEL}}</span>
-                <p>{{DEPOIS_2_DESC}}</p>
-              </div>
-            </article>
-            <article>
-              <div class="compare-symbol">+</div>
-              <div>
-                <span>{{DEPOIS_3_LABEL}}</span>
-                <p>{{DEPOIS_3_DESC}}</p>
-              </div>
-            </article>
+          <!-- Depois -->
+          <div class="span-7">
+            <p class="compare-heading">{{DEPOIS_LABEL}}</p>
+            <div class="value-list">
+              <article>
+                <div class="compare-symbol">+</div>
+                <div>
+                  <span>{{DEPOIS_1_LABEL}}</span>
+                  <p>{{DEPOIS_1_DESC}}</p>
+                </div>
+              </article>
+              <article>
+                <div class="compare-symbol">+</div>
+                <div>
+                  <span>{{DEPOIS_2_LABEL}}</span>
+                  <p>{{DEPOIS_2_DESC}}</p>
+                </div>
+              </article>
+              <article>
+                <div class="compare-symbol">+</div>
+                <div>
+                  <span>{{DEPOIS_3_LABEL}}</span>
+                  <p>{{DEPOIS_3_DESC}}</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 07 · Evidências Visuais -->
-    <section class="slide theme-light" data-slide="07" data-presentation-name="Evidências Visuais" aria-label="Evidências Visuais">
+    <section style="--i: 6" class="slide theme-light" data-slide="07" data-presentation-name="Evidências Visuais" aria-label="Evidências Visuais">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S7}}</p>
-        <div class="span-16">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S7}}</p>
           <h2>{{TITULO_S7}}</h2>
-        </div>
-        <div class="script-image-grid span-16">
-          <figure class="script-image-card muted-shot">
-            <figcaption>{{EVIDENCIA_1_LEGENDA}}</figcaption>
-            <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_1_ALT}}">
-          </figure>
-          <figure class="script-image-card">
-            <figcaption>{{EVIDENCIA_2_LEGENDA}}</figcaption>
-            <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_2_ALT}}">
-          </figure>
+        </header>
+        <div class="slide-body">
+          <div class="script-image-grid span-16">
+            <figure class="script-image-card muted-shot">
+              <figcaption>{{EVIDENCIA_1_LEGENDA}}</figcaption>
+              <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_1_ALT}}">
+            </figure>
+            <figure class="script-image-card">
+              <figcaption>{{EVIDENCIA_2_LEGENDA}}</figcaption>
+              <img src="assets/image-placeholder.svg" alt="{{EVIDENCIA_2_ALT}}">
+            </figure>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 08 · Resultados -->
-    <section class="slide theme-light" data-slide="08" data-presentation-name="Resultados" aria-label="Resultados">
+    <section style="--i: 7" class="slide theme-light" data-slide="08" data-presentation-name="Resultados" aria-label="Resultados">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S8}}</p>
-        <div class="span-16">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S8}}</p>
           <h2>{{TITULO_S8}}</h2>
-        </div>
-        <div class="dashboard span-10">
-          <div class="dashboard-header">
-            <strong>{{DASHBOARD_TITULO}}</strong>
-            <span>{{DASHBOARD_PERIODO}}</span>
+        </header>
+        <div class="slide-body">
+          <div class="dashboard span-10">
+            <div class="dashboard-header">
+              <strong>{{DASHBOARD_TITULO}}</strong>
+              <span>{{DASHBOARD_PERIODO}}</span>
+            </div>
+            <div class="chart-row" role="img" aria-label="Gráfico de barras com evolução de resultados">
+              <span style="--value: 48%"></span>
+              <span style="--value: 55%"></span>
+              <span style="--value: 62%"></span>
+              <span style="--value: 65%"></span>
+              <span style="--value: 74%"></span>
+              <span style="--value: 82%"></span>
+            </div>
+            <div class="status-grid">
+              <article>
+                <span>{{STATUS_1_LABEL}}</span>
+                <strong>{{STATUS_1_VALOR}}</strong>
+              </article>
+              <article>
+                <span>{{STATUS_2_LABEL}}</span>
+                <strong>{{STATUS_2_VALOR}}</strong>
+              </article>
+              <article>
+                <span>{{STATUS_3_LABEL}}</span>
+                <strong>{{STATUS_3_VALOR}}</strong>
+              </article>
+            </div>
           </div>
-          <div class="chart-row" role="img" aria-label="Gráfico de barras com evolução de resultados">
-            <span style="--value: 48%"></span>
-            <span style="--value: 55%"></span>
-            <span style="--value: 62%"></span>
-            <span style="--value: 65%"></span>
-            <span style="--value: 74%"></span>
-            <span style="--value: 82%"></span>
-          </div>
-          <div class="status-grid">
+          <div class="metric-stack span-6">
             <article>
-              <span>{{STATUS_1_LABEL}}</span>
-              <strong>{{STATUS_1_VALOR}}</strong>
+              <span>{{RESULTADO_1_LABEL}}</span>
+              <strong>{{RESULTADO_1_VALOR}}</strong>
+              <p>{{RESULTADO_1_DESC}}</p>
             </article>
             <article>
-              <span>{{STATUS_2_LABEL}}</span>
-              <strong>{{STATUS_2_VALOR}}</strong>
-            </article>
-            <article>
-              <span>{{STATUS_3_LABEL}}</span>
-              <strong>{{STATUS_3_VALOR}}</strong>
+              <span>{{RESULTADO_2_LABEL}}</span>
+              <strong>{{RESULTADO_2_VALOR}}</strong>
+              <p>{{RESULTADO_2_DESC}}</p>
             </article>
           </div>
-        </div>
-        <div class="metric-stack span-6">
-          <article>
-            <span>{{RESULTADO_1_LABEL}}</span>
-            <strong>{{RESULTADO_1_VALOR}}</strong>
-            <p>{{RESULTADO_1_DESC}}</p>
-          </article>
-          <article>
-            <span>{{RESULTADO_2_LABEL}}</span>
-            <strong>{{RESULTADO_2_VALOR}}</strong>
-            <p>{{RESULTADO_2_DESC}}</p>
-          </article>
         </div>
       </div>
     </section>
 
     <!-- 09 · Autonomia -->
-    <section class="slide theme-light" data-slide="09" data-presentation-name="Autonomia" aria-label="Autonomia">
+    <section style="--i: 8" class="slide theme-light" data-slide="09" data-presentation-name="Autonomia" aria-label="Autonomia">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S9}}</p>
-        <div class="span-16">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S9}}</p>
           <h2>{{TITULO_S9}}</h2>
-        </div>
-        <div class="capability-grid span-16">
-          <article>
-            <span>{{CAPACIDADE_1_LABEL}}</span>
-            <h3>{{CAPACIDADE_1_TITULO}}</h3>
-            <p>{{CAPACIDADE_1_DESC}}</p>
-          </article>
-          <article>
-            <span>{{CAPACIDADE_2_LABEL}}</span>
-            <h3>{{CAPACIDADE_2_TITULO}}</h3>
-            <p>{{CAPACIDADE_2_DESC}}</p>
-          </article>
-          <article>
-            <span>{{CAPACIDADE_3_LABEL}}</span>
-            <h3>{{CAPACIDADE_3_TITULO}}</h3>
-            <p>{{CAPACIDADE_3_DESC}}</p>
-          </article>
-          <article class="demo-video-panel">
-            <span>{{DEMO_LABEL}}</span>
-            <h3>{{DEMO_TITULO}}</h3>
-            <div class="demo-video-list">
-              <div class="video-frame">
-                <p>{{DEMO_1_CAPTION}}</p>
-                <img src="assets/image-placeholder.svg" alt="{{DEMO_1_ALT}}">
-                <div class="video-placeholder" aria-hidden="true">
-                  <span>{{DEMO_1_BADGE_LABEL}}</span>
-                  <strong>{{DEMO_1_BADGE_VALOR}}</strong>
+        </header>
+        <div class="slide-body">
+          <div class="capability-grid span-16">
+            <article>
+              <span>{{CAPACIDADE_1_LABEL}}</span>
+              <h3>{{CAPACIDADE_1_TITULO}}</h3>
+              <p>{{CAPACIDADE_1_DESC}}</p>
+            </article>
+            <article>
+              <span>{{CAPACIDADE_2_LABEL}}</span>
+              <h3>{{CAPACIDADE_2_TITULO}}</h3>
+              <p>{{CAPACIDADE_2_DESC}}</p>
+            </article>
+            <article>
+              <span>{{CAPACIDADE_3_LABEL}}</span>
+              <h3>{{CAPACIDADE_3_TITULO}}</h3>
+              <p>{{CAPACIDADE_3_DESC}}</p>
+            </article>
+            <article class="demo-video-panel">
+              <span>{{DEMO_LABEL}}</span>
+              <h3>{{DEMO_TITULO}}</h3>
+              <div class="demo-video-list">
+                <div class="video-frame">
+                  <p>{{DEMO_1_CAPTION}}</p>
+                  <img src="assets/image-placeholder.svg" alt="{{DEMO_1_ALT}}">
+                  <div class="video-placeholder" aria-hidden="true">
+                    <span>{{DEMO_1_BADGE_LABEL}}</span>
+                    <strong>{{DEMO_1_BADGE_VALOR}}</strong>
+                  </div>
+                </div>
+                <div class="video-frame">
+                  <p>{{DEMO_2_CAPTION}}</p>
+                  <img src="assets/image-placeholder.svg" alt="{{DEMO_2_ALT}}">
+                  <div class="video-placeholder" aria-hidden="true">
+                    <span>{{DEMO_2_BADGE_LABEL}}</span>
+                    <strong>{{DEMO_2_BADGE_VALOR}}</strong>
+                  </div>
                 </div>
               </div>
-              <div class="video-frame">
-                <p>{{DEMO_2_CAPTION}}</p>
-                <img src="assets/image-placeholder.svg" alt="{{DEMO_2_ALT}}">
-                <div class="video-placeholder" aria-hidden="true">
-                  <span>{{DEMO_2_BADGE_LABEL}}</span>
-                  <strong>{{DEMO_2_BADGE_VALOR}}</strong>
-                </div>
-              </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 10 · Flexibilidade de Deployment -->
-    <section class="slide theme-light" data-slide="10" data-presentation-name="Flexibilidade de Deployment" aria-label="Flexibilidade de Deployment">
+    <section style="--i: 9" class="slide theme-light" data-slide="10" data-presentation-name="Flexibilidade de Deployment" aria-label="Flexibilidade de Deployment">
       <div class="slide-grid">
-        <p class="section-label">{{EYEBROW_S10}}</p>
-        <div class="span-10">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S10}}</p>
           <h2>{{TITULO_S10}}</h2>
           <p class="lead">{{LEAD_S10}}</p>
-        </div>
-        <div class="slide-pictogram slide-pictogram--cloud span-6" aria-hidden="true"></div>
+        </header>
+        <div class="slide-body">
+          <div class="span-10" aria-hidden="true"></div>
+          <div class="slide-pictogram slide-pictogram--cloud span-6" aria-hidden="true"></div>
 
-        <div class="deployment-map span-16" aria-label="Mapa de opções de deployment">
-          <article class="deployment-option">
-            <span>{{DEPLOY_1_LABEL}}</span>
-            <h3>{{DEPLOY_1_TITULO}}</h3>
-            <div class="deployment-stack">
-              <div>IBM SaaS</div>
-              <div>AWS · Azure <small>em breve</small></div>
-            </div>
-          </article>
+          <div class="deployment-map span-16" aria-label="Mapa de opções de deployment">
+            <article class="deployment-option">
+              <span>{{DEPLOY_1_LABEL}}</span>
+              <h3>{{DEPLOY_1_TITULO}}</h3>
+              <div class="deployment-stack">
+                <div>IBM SaaS</div>
+                <div>AWS · Azure <small>em breve</small></div>
+              </div>
+            </article>
 
-          <article class="deployment-option featured">
-            <span>{{DEPLOY_2_LABEL}}</span>
-            <h3>{{DEPLOY_2_TITULO}}</h3>
-            <div class="deployment-stack">
-              <div>IBM Watsonx Orchestrate</div>
-              <div>Red Hat OpenShift</div>
-              <div>IBM Cloud · AWS · Azure · GCP</div>
-            </div>
-          </article>
+            <article class="deployment-option featured">
+              <span>{{DEPLOY_2_LABEL}}</span>
+              <h3>{{DEPLOY_2_TITULO}}</h3>
+              <div class="deployment-stack">
+                <div>IBM Watsonx Orchestrate</div>
+                <div>Red Hat OpenShift</div>
+                <div>IBM Cloud · AWS · Azure · GCP</div>
+              </div>
+            </article>
 
-          <article class="deployment-option">
-            <span>{{DEPLOY_3_LABEL}}</span>
-            <h3>{{DEPLOY_3_TITULO}}</h3>
-            <div class="deployment-stack">
-              <div>IBM Watsonx Orchestrate</div>
-              <div>Red Hat OpenShift</div>
-              <div>Infraestrutura local</div>
-            </div>
-          </article>
-        </div>
+            <article class="deployment-option">
+              <span>{{DEPLOY_3_LABEL}}</span>
+              <h3>{{DEPLOY_3_TITULO}}</h3>
+              <div class="deployment-stack">
+                <div>IBM Watsonx Orchestrate</div>
+                <div>Red Hat OpenShift</div>
+                <div>Infraestrutura local</div>
+              </div>
+            </article>
+          </div>
 
-        <div class="deployment-note span-16">
-          <span>{{DEPLOY_NOTA_LABEL}}</span>
-          <p>{{DEPLOY_NOTA_TEXTO}}</p>
+          <div class="deployment-note span-16">
+            <span>{{DEPLOY_NOTA_LABEL}}</span>
+            <p>{{DEPLOY_NOTA_TEXTO}}</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 11 · Conclusões -->
-    <section class="slide theme-close" data-slide="11" data-presentation-name="Conclusões" aria-label="Conclusões">
-      <div class="slide-grid close-grid">
-        <p class="section-label">{{EYEBROW_S11}}</p>
-        <div class="span-10">
+    <section style="--i: 10" class="slide theme-close" data-slide="11" data-presentation-name="Conclusões" aria-label="Conclusões">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <p class="section-label">{{EYEBROW_S11}}</p>
           <p class="compare-heading">{{CONCLUSAO_KICKER}}</p>
           <h2>{{TITULO_S11}}</h2>
-        </div>
-        <div class="slide-pictogram slide-pictogram--strategy span-6" aria-hidden="true"></div>
-        <div class="roadmap span-16">
-          <article>
-            <span>{{ROADMAP_1_LABEL}}</span>
-            <h3>{{ROADMAP_1_TITULO}}</h3>
-            <p>{{ROADMAP_1_DESC}}</p>
-          </article>
-          <article>
-            <span>{{ROADMAP_2_LABEL}}</span>
-            <h3>{{ROADMAP_2_TITULO}}</h3>
-            <p>{{ROADMAP_2_DESC}}</p>
-          </article>
-          <article>
-            <span>{{ROADMAP_3_LABEL}}</span>
-            <h3>{{ROADMAP_3_TITULO}}</h3>
-            <p>{{ROADMAP_3_DESC}}</p>
-          </article>
+        </header>
+        <div class="slide-body">
+          <div class="span-10" aria-hidden="true"></div>
+          <div class="slide-pictogram slide-pictogram--strategy span-6" aria-hidden="true"></div>
+          <div class="roadmap span-16">
+            <article>
+              <span>{{ROADMAP_1_LABEL}}</span>
+              <h3>{{ROADMAP_1_TITULO}}</h3>
+              <p>{{ROADMAP_1_DESC}}</p>
+            </article>
+            <article>
+              <span>{{ROADMAP_2_LABEL}}</span>
+              <h3>{{ROADMAP_2_TITULO}}</h3>
+              <p>{{ROADMAP_2_DESC}}</p>
+            </article>
+            <article>
+              <span>{{ROADMAP_3_LABEL}}</span>
+              <h3>{{ROADMAP_3_TITULO}}</h3>
+              <p>{{ROADMAP_3_DESC}}</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 12 · Encerramento -->
-    <section class="slide theme-close" data-slide="12" data-presentation-name="Encerramento" aria-label="Encerramento">
+    <section style="--i: 11" class="slide theme-close" data-slide="12" data-presentation-name="Encerramento" aria-label="Encerramento">
       <div class="slide-grid close-grid">
         <p class="section-label">{{EYEBROW_S12}}</p>
         <div class="span-10">
@@ -512,7 +536,7 @@
         </div>
         <aside class="closing-box">
           <div class="panel-lockup">
-            <img src="assets/ibm-logo.svg" alt="IBM" class="brand-logo">
+            <img src="assets/logo-light.svg" alt="IBM" class="brand-logo">
             <img src="assets/image-placeholder.svg" alt="{{CLOSING_IMAGEM_ALT}}">
           </div>
           <span>{{CLOSING_LABEL}}</span>

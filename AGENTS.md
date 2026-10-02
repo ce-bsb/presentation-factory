@@ -6,6 +6,23 @@ Use este repositório com Bob (modo **Presentation Factory**), agente de IA, Cla
 
 Tarefa clara → leia o mínimo → implemente. Pergunte só se uma decisão ausente bloquear a execução.
 
+## ⚠️ Caminho rápido — obrigatório para pedidos simples
+
+Uma apresentação simples deve ser entregue em poucos minutos de trabalho, não em
+iterações longas. Para isso:
+
+1. **Nunca escreva CSS ou JavaScript do zero.** Copie o template inteiro
+   (`index.html` + `assets/`) e só substitua os tokens `{{PLACEHOLDER}}` e o conteúdo.
+   Os 3 templates IBM ativos já são Carbon v11 completos — reescrever estilos do zero é
+   sempre mais lento e sai pior do que copiar.
+2. **Não rode `make build`, `make validate` ou `make test`** a menos que o usuário peça
+   explicitamente para "registrar na factory" (uso avançado). Decks simples não passam
+   pelo builder Python.
+3. **Gere a apresentação completa em uma única passada.** Na falta de um dado real, use
+   `[A confirmar]` e siga — não trave em idas e voltas sobre conteúdo.
+4. **Decida o template pela tabela em `.bob/presentation-factory/README.md`, sem abrir e
+   comparar os 3 HTMLs.** Só leia o HTML/CSS do template já escolhido.
+
 ## ⚠️ Onde criar apresentações novas
 
 **Apresentações novas vão FORA desta pasta, como irmãs de `presentation-factory/`.**

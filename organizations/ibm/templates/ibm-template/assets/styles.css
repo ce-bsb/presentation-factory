@@ -369,48 +369,65 @@ button {
 
 /* ─── Deck / slides ──────────────────────────────────────────────── */
 
-.deck { position: fixed; top: var(--topbar-h); bottom: 0; left: 0; right: 0; overflow: hidden; }
+.deck { position: fixed; top: var(--topbar-h); bottom: 0; left: 0; right: 0; overflow: hidden; --n: 0; }
 
+/* Every slide sits on a horizontal track at (--i - --n) * 100% — moving between
+   slides is a literal side-to-side slide, not a fade. --i is set per slide by deck.js. */
 .slide {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(18px) scale(.97);
-  transition: opacity 320ms var(--ease), transform 320ms var(--ease), visibility 0s 320ms;
-  overflow: auto;
+  transform: translateX(calc((var(--i, 0) - var(--n, 0)) * 100%));
+  transition: transform 900ms var(--ease-spring);
+  overflow: hidden;
   background: var(--white);
 }
 
-.slide.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out), visibility 0s;
-}
+.slide.active { z-index: 2; }
 
 /* Soft dot-grid backdrop on content slides */
 .theme-light {
   background-color: var(--white);
-  background-image: radial-gradient(rgba(15, 98, 254, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(15, 98, 254, 0.16) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
 }
 
+/* Outer wrapper: a fixed-height header (eyebrow + title) on top, then a body
+   that takes all remaining space and centers its content vertically within it. */
 .slide-grid {
   max-width: 1440px;
   margin: 0 auto;
   min-height: 100%;
   padding: var(--u-8) var(--u-8) var(--u-9);
-  display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  gap: var(--row-gap) var(--col-gap);
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-6);
   position: relative;
   z-index: 1;
 }
 
+.slide-head { flex-shrink: 0; }
+
+.slide-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: var(--row-gap) var(--col-gap);
+  align-content: center;
+}
+
+/* Slide 12 (Encerramento) keeps the original flat 16-col grid — no fixed
+   header, title and closing panel are one centered two-column composition. */
+.close-grid {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: var(--row-gap) var(--col-gap);
+  align-content: center;
+}
+
 @media (max-width: 1024px) {
   .slide-grid { padding: var(--u-6) var(--u-5) var(--u-7); gap: var(--u-5); }
+  .slide-body, .close-grid { gap: var(--u-5); }
 }
 
 .span-2  { grid-column: span 2; }
@@ -626,9 +643,8 @@ h2 em, .hero-copy h1 em {
 
 /* Glassmorphism panel — sits over the gradient mesh */
 .executive-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(24px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(155deg, var(--ibm-blue-d), var(--ibm-blue));
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-lg);
   padding: var(--u-6);
   display: flex;
@@ -644,7 +660,8 @@ h2 em, .hero-copy h1 em {
   position: absolute;
   inset: 0;
   border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, rgba(15, 98, 254, 0.1), transparent 55%);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 18px 18px;
   pointer-events: none;
 }
 
@@ -661,13 +678,13 @@ h2 em, .hero-copy h1 em {
 
 .motion-grid span {
   aspect-ratio: 1;
-  background: rgba(15, 98, 254, 0.08);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
   animation: gridPulse 3.2s ease-in-out infinite;
 }
 
-.motion-grid span:nth-child(3n+1) { background: var(--ibm-blue); }
-.motion-grid span:nth-child(5n+2) { background: var(--ibm-cyan); }
+.motion-grid span:nth-child(3n+1) { background: var(--white); }
+.motion-grid span:nth-child(5n+2) { background: var(--ibm-cyan-t); }
 
 @keyframes gridPulse {
   0%, 100% { opacity: 1; }
@@ -1237,9 +1254,9 @@ h2 em, .hero-copy h1 em {
 .theme-close {
   background-color: var(--gray-10);
   background-image:
-    radial-gradient(rgba(15, 98, 254, 0.08) 1px, transparent 1px),
-    radial-gradient(ellipse at 88% 85%, rgba(138, 63, 252, 0.10), transparent 45%),
-    radial-gradient(ellipse at 10% 10%, rgba(15, 98, 254, 0.08), transparent 40%);
+    radial-gradient(rgba(15, 98, 254, 0.16) 1.4px, transparent 1.4px),
+    radial-gradient(ellipse at 88% 85%, rgba(138, 63, 252, 0.14), transparent 45%),
+    radial-gradient(ellipse at 10% 10%, rgba(15, 98, 254, 0.12), transparent 40%);
   background-size: 26px 26px, 100% 100%, 100% 100%;
 }
 
@@ -1286,9 +1303,10 @@ h2 em, .hero-copy h1 em {
 
 .closing-box {
   grid-column: span 6;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(1.5);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(155deg, var(--ibm-blue-d), var(--ibm-blue));
+  background-image: linear-gradient(155deg, var(--ibm-blue-d), var(--ibm-blue)), radial-gradient(circle, rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size: auto, 18px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-lg);
   padding: var(--u-6);
   display: flex;
@@ -1297,27 +1315,24 @@ h2 em, .hero-copy h1 em {
   box-shadow: var(--shadow-glow);
 }
 
-.panel-lockup { display: flex; align-items: center; gap: var(--u-4); padding-bottom: var(--u-4); border-bottom: 1px solid var(--line); }
+.panel-lockup { display: flex; align-items: center; gap: var(--u-4); padding-bottom: var(--u-4); border-bottom: 1px solid rgba(255,255,255,.18); }
 .panel-lockup .brand-logo { width: 54px; }
-.panel-lockup img:last-child { width: 72px; opacity: .5; }
+.panel-lockup img:last-child { width: 72px; opacity: .6; filter: brightness(0) invert(1); }
 
 .closing-box > span {
   font-family: var(--font-mono);
   font-size: var(--text-11);
   text-transform: uppercase;
   letter-spacing: .05em;
-  color: var(--ibm-blue);
+  color: rgba(255, 255, 255, .6);
 }
 
 .closing-box > strong {
   font-size: var(--text-24);
   font-weight: 600;
-  background: linear-gradient(120deg, var(--ink) 20%, var(--ibm-blue-h) 80%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--white);
 }
-.closing-box > p { font-size: var(--text-14); color: var(--ink-muted); line-height: 1.55; }
+.closing-box > p { font-size: var(--text-14); color: rgba(255, 255, 255, .75); line-height: 1.55; }
 
 @media (max-width: 900px) { .closing-box { grid-column: span 16; } }
 
@@ -1356,7 +1371,6 @@ h2 em, .hero-copy h1 em {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
-  .slide { transform: none !important; }
 }
 
 /* ─── Print ──────────────────────────────────────────────────────── */

@@ -1,0 +1,7 @@
+slug = "serpro"
+name = "Serpro"
+kind = "client"
+
+[design]
+font = "IBM Plex"
+language = "pt-BR"

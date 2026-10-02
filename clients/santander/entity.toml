@@ -1,0 +1,7 @@
+slug = "santander"
+name = "Santander Brasil"
+kind = "client"
+
+[design]
+font = "IBM Plex"
+language = "pt-BR"

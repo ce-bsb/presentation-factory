@@ -2,7 +2,7 @@
 name        = "IBM Executive"
 slug        = "ibm-template"
 version     = "1.0.0"
-description = "Template IBM executivo autocontido de 12 slides, com conteúdo numerado e mídias neutralizadas."
+description = "Template IBM executivo autocontido de 12 slides, com tokens {{NOMEADOS}} e mídias neutralizadas."
 author      = "IBM Presentation Factory"
 
 [design]

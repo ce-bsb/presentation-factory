@@ -30,6 +30,28 @@ assets:
   - path: assets/js/deck.js
     type: runtime
     owner: IBM
-    purpose: shared active-slide deck navigation runtime
+    purpose: shared active-slide deck navigation runtime — keep every template's local assets/deck.js byte-identical to this file
     use_when:
       - templates that use slide sections with data-slide navigation
+  - path: assets/icons/
+    type: icon-library
+    owner: Carbon Design System (official @carbon/icons, 32px)
+    purpose: official Carbon icon set, grep this folder before approximating or drawing any icon — never invent one
+    use_when:
+      - navigation — arrow--right, arrow--up-right, arrow--down, chevron--left, chevron--right, fit-to-screen, close
+      - status — checkmark, checkmark--filled, warning, warning--filled, error--filled, flag, time
+      - communication — email, chat, chat-bot, quotes, partnership, group
+      - data / tech — chart--bar, analytics, growth, cloud, security, locked, chip, machine-learning-model, ai-generate, connect, network (pictograms dir), globe
+      - content — document, document--blank, document--pdf, calendar, list--boxes, idea, rocket, settings, download, upload, play--filled, user, user--multiple
+  - path: assets/img/pictograms/
+    type: pictogram-library
+    owner: Carbon Design System (official @carbon/pictograms)
+    purpose: larger illustrative pictograms for cover/section slides — real variety without inventing imagery
+    use_when:
+      - cloud, security, growth, idea, partnership, network, banking, analytics, ecosystem, launch, rocket, strategy, target, handshake
+  - path: assets/img/brand-bob/
+    type: pending
+    owner: Bob (IBM internal IDE)
+    purpose: reserved for the official Bob logo once the user provides the file — do not populate or reference until then
+    use_when:
+      - not yet usable

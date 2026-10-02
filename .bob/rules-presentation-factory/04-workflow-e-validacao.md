@@ -1,5 +1,16 @@
 # Workflow e validação
 
+## ⚠️ Caminho rápido — não escreva CSS/JS do zero, não rode o builder
+
+Um deck simples deve ficar pronto em poucos minutos:
+
+- Copie o template inteiro (`index.html` + `assets/`); nunca reescreva CSS/JS do zero —
+  os 3 templates já são Carbon v11 completos.
+- Substitua os tokens `{{PLACEHOLDER}}` numa única passada; sem dado real, use
+  `[A confirmar]` e siga — não itere sobre conteúdo arbitrariamente.
+- `make build`, `make validate` e `make test` são exclusivos do fluxo avançado
+  ("registrar na factory"), nunca do caso padrão abaixo.
+
 ## Criar nova apresentação (caso padrão)
 
 1. Derive o slug kebab-case do nome pedido pelo usuário.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder de imagem</title>
+  <desc id="desc">Área reservada para uma imagem da apresentação</desc>
+  <rect width="800" height="450" fill="#e0e0e0"/>
+  <rect x="24" y="24" width="752" height="402" fill="none" stroke="#8d8d8d" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="400" y="225" fill="#525252" font-family="IBM Plex Sans, sans-serif" font-size="28" text-anchor="middle">[IMAGEM]</text>
+</svg>

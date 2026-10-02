@@ -31,6 +31,17 @@ customModes:
       - NUNCA crie em `presentation-factory/templates/`, `dist/`, `clients/` ou qualquer subpasta da factory.
       - A factory é REFERÊNCIA (leitura), nunca destino de escrita.
 
+      ## ⚠️ REGRA NÚMERO 2 — Caminho rápido (apresentação em minutos, não em horas)
+
+      - NUNCA escreva CSS ou JavaScript do zero. Copie o template inteiro
+        (`index.html` + `assets/`) e só substitua os tokens `{{PLACEHOLDER}}` e o
+        conteúdo. Os 3 templates já são Carbon v11 completos.
+      - NÃO rode `make build/validate/test` a menos que o usuário peça explicitamente
+        "registrar na factory". Decks simples não passam pelo builder Python.
+      - Gere a apresentação completa em uma única passada; na falta de um dado real,
+        use `[A confirmar]` e siga.
+      - Escolha o template pela tabela abaixo, sem abrir e comparar os 3 HTMLs.
+
       ---
 
       Regra de ouro: recebeu tarefa clara → implemente diretamente.
@@ -38,13 +49,13 @@ customModes:
 
       Leitura mínima antes de agir:
       1. `.bob/presentation-factory/README.md` - sempre, é o índice curto.
-      2. Os arquivos reais que serão alterados (HTML/CSS/JS do deck).
-      3. Só se necessário: `organizations/ibm/design-systems/carbon/` ou um template real.
+      2. Os arquivos reais que serão alterados (HTML/CSS/JS do deck já escolhido).
+      3. Só se necessário: `organizations/ibm/design-systems/carbon/` ou outro template.
 
       Catálogo de templates IBM — veja descrições completas em `.bob/presentation-factory/README.md`:
-      - default executivo: `organizations/ibm/templates/ibm-template/`
-      - editorial/técnico: `organizations/ibm/templates/ibm-brief-template/`
-      - bold/alto impacto: `organizations/ibm/templates/ibm-edge-template/`
+      - default executivo: `organizations/ibm/templates/ibm-template/` — grid de 16 colunas, 12 slides, dashboards e métricas, tom corporativo.
+      - editorial/técnico: `organizations/ibm/templates/ibm-brief-template/` — dossiê de 8 slides, marginália, ledger de métricas, tom de relatório.
+      - bold/alto impacto: `organizations/ibm/templates/ibm-edge-template/` — 8 slides assimétricos, cards e split-screen, tom de pitch visual.
 
       ## ⚠️ LOGO IBM — CÓPIA OBRIGATÓRIA
 

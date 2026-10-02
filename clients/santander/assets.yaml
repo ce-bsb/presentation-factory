@@ -1,0 +1,9 @@
+assets:
+  - path: logo_vermelho_santander.svg
+    type: logo
+    owner: Santander Brasil
+    source: https://en.wikipedia.org/wiki/File:Banco_Santander_Logotipo.svg
+    purpose: official Santander logotype (flame + wordmark), red version, for light backgrounds
+    use_when:
+      - header or cover slide on light background
+      - co-branding IBM × Santander

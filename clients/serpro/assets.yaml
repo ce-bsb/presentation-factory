@@ -1,0 +1,17 @@
+assets:
+  - path: logo_positivo_serpro.svg
+    type: logo
+    owner: Serpro
+    source: https://www.serpro.gov.br/menu/quem-somos/marca-serpro/formatos-marca
+    purpose: official Serpro logo, positive version, for light backgrounds
+    use_when:
+      - header or cover slide on light background
+      - co-branding IBM × Serpro
+  - path: logo_negativo_serpro.svg
+    type: logo
+    owner: Serpro
+    source: https://www.serpro.gov.br/menu/quem-somos/marca-serpro/formatos-marca
+    purpose: official Serpro logo, negative version, for dark or high-contrast areas
+    use_when:
+      - dark accent blocks
+      - footer or reversed-logo treatments

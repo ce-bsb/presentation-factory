@@ -1,0 +1,7 @@
+slug = "banco-do-brasil"
+name = "Banco do Brasil"
+kind = "client"
+
+[design]
+font = "IBM Plex"
+language = "pt-BR"

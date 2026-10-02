@@ -1,0 +1,22 @@
+assets:
+  - path: logo_azul_bb.svg
+    type: logo
+    owner: Banco do Brasil
+    purpose: official Banco do Brasil logo, blue version, for light backgrounds
+    use_when:
+      - header or cover slide on light background
+      - co-branding IBM × Banco do Brasil
+  - path: logo_amarela_bb.svg
+    type: logo
+    owner: Banco do Brasil
+    purpose: official Banco do Brasil logo, yellow version, for dark or high-contrast areas
+    use_when:
+      - dark accent blocks
+      - footer or reversed-logo treatments
+  - path: logo_icone_bb.svg
+    type: icon
+    owner: Banco do Brasil
+    purpose: Banco do Brasil icon mark (symbol only, no wordmark)
+    use_when:
+      - compact spaces where the full logo does not fit
+      - favicon-style usage

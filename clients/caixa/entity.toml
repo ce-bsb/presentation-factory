@@ -1,0 +1,7 @@
+slug = "caixa"
+name = "Caixa Econômica Federal"
+kind = "client"
+
+[design]
+font = "IBM Plex"
+language = "pt-BR"

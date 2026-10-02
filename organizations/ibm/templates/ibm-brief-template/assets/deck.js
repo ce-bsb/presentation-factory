@@ -1,6 +1,7 @@
 /**
  * Deck controller — IBM Presentation Factory
- * Handles slide navigation, progress, dots, fullscreen, touch and wheel.
+ * Vanilla JS, no dependencies. Keyboard + touch + wheel + fullscreen + TOC links.
+ * Canonical source — keep every template copy identical to this file.
  */
 class Deck {
   constructor() {
@@ -8,11 +9,16 @@ class Deck {
     this.total   = this.slides.length;
     this.current = 0;
 
+    this.$deck = document.querySelector('.deck');
     this.$dots = document.getElementById('navDots');
     this.$fill = document.getElementById('progressFill');
     this.$num  = document.getElementById('slideNum');
     this.$fs   = document.getElementById('fullscreenBtn');
+    this.$prev = document.getElementById('prevBtn');
+    this.$next = document.getElementById('nextBtn');
 
+    // Each slide carries its own --i (inline in the HTML) and sits on a horizontal
+    // track at (--i - --n) * 100% — moving between slides slides sideways, not a fade.
     this._buildDots();
     this._bind();
     this._render();
@@ -23,7 +29,7 @@ class Deck {
       const btn = document.createElement('button');
       btn.className = 'dot';
       btn.setAttribute('role', 'tab');
-      const label = s.dataset.presentationName || `Slide ${i + 1}`;
+      const label = s.dataset.presentationName || s.dataset.title || `Slide ${i + 1}`;
       btn.setAttribute('aria-label', label);
       btn.addEventListener('click', () => this.goto(i));
       this.$dots.appendChild(btn);
@@ -35,9 +41,12 @@ class Deck {
     this._initTouch();
     this._initWheel();
     this._initTocLinks();
+    this._initCursorGlow();
     if (this.$fs) {
       this.$fs.addEventListener('click', () => this._toggleFullscreen());
     }
+    if (this.$prev) this.$prev.addEventListener('click', () => this.prev());
+    if (this.$next) this.$next.addEventListener('click', () => this.next());
     document.addEventListener('fullscreenchange', () => {
       const on = !!document.fullscreenElement;
       if (this.$fs) this.$fs.setAttribute('aria-pressed', String(on));
@@ -45,6 +54,10 @@ class Deck {
   }
 
   _key(e) {
+    const target = e.target;
+    const tag = target && target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || target.isContentEditable) return;
+
     const actions = {
       ArrowRight : () => this.next(),
       ArrowDown  : () => this.next(),
@@ -105,6 +118,22 @@ class Deck {
     }
   }
 
+  _initCursorGlow() {
+    const glow = document.querySelector('.cursor-glow');
+    if (!glow) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    let raf = null;
+    document.addEventListener('pointermove', e => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        glow.style.setProperty('--mx', `${e.clientX}px`);
+        glow.style.setProperty('--my', `${e.clientY}px`);
+        raf = null;
+      });
+    }, { passive: true });
+  }
+
   goto(index) {
     if (index < 0 || index >= this.total || index === this.current) return;
     this.current = index;
@@ -116,7 +145,12 @@ class Deck {
   _render() {
     const n = this.current;
 
-    this.slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    if (this.$deck) this.$deck.style.setProperty('--n', n);
+
+    this.slides.forEach((s, i) => {
+      s.classList.toggle('active', i === n);
+      s.setAttribute('aria-hidden', String(i !== n));
+    });
 
     [...this.$dots.children].forEach((d, i) => {
       d.classList.toggle('active', i === n);
@@ -125,6 +159,8 @@ class Deck {
 
     if (this.$fill) this.$fill.style.width = `${((n + 1) / this.total) * 100}%`;
     if (this.$num)  this.$num.textContent  = String(n + 1).padStart(2, '0');
+    if (this.$prev) this.$prev.disabled = n === 0;
+    if (this.$next) this.$next.disabled = n === this.total - 1;
   }
 }
 

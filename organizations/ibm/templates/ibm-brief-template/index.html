@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
   <!-- ── Topbar ── -->
   <header class="topbar">
@@ -43,7 +45,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 01 — CAPA (dossiê)
          ═══════════════════════════════════════ -->
-    <section class="slide slide--cover active" id="slide-1" data-slide="1" data-presentation-name="Dossiê" aria-labelledby="s1-title">
+    <section style="--i: 0" class="slide slide--cover active" id="slide-1" data-slide="1" data-presentation-name="Dossiê" aria-labelledby="s1-title">
       <div class="slide__inner">
         <div class="cover-id" aria-hidden="true">
           <span class="cover-id__kicker">DOSSIÊ</span>
@@ -83,12 +85,13 @@
     <!-- ═══════════════════════════════════════
          SLIDE 02 — SUMÁRIO (agenda com líder pontilhado)
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-2" data-slide="2" data-presentation-name="Sumário" aria-labelledby="s2-title">
+    <section style="--i: 1" class="slide" id="slide-2" data-slide="2" data-presentation-name="Sumário" aria-labelledby="s2-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
           <h2 id="s2-title" class="title">{{TITULO_S2}}</h2>
         </header>
+        <div class="slide-body">
         <ol class="toc-list">
           <li>
             <button class="toc-item" data-go="3">
@@ -146,6 +149,7 @@
             </button>
           </li>
         </ol>
+        </div>
         <span class="page-num" aria-hidden="true">02</span>
       </div>
     </section>
@@ -153,13 +157,14 @@
     <!-- ═══════════════════════════════════════
          SLIDE 03 — LEDGER DE MÉTRICAS
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-3" data-slide="3" data-presentation-name="Métricas" aria-labelledby="s3-title">
+    <section style="--i: 2" class="slide" id="slide-3" data-slide="3" data-presentation-name="Métricas" aria-labelledby="s3-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">03 — {{EYEBROW_S3}}</span>
           <h2 id="s3-title" class="title">{{TITULO_S3}}</h2>
           <p class="subtitle">{{SUBTITULO_S3}}</p>
         </header>
+        <div class="slide-body">
         <div class="metric-row">
           <div class="metric">
             <span class="metric__value">{{METRICA_1_VALOR}}</span>
@@ -186,6 +191,7 @@
             <p class="metric__desc">{{METRICA_4_DESC}}</p>
           </div>
         </div>
+        </div>
         <span class="page-num" aria-hidden="true">03</span>
       </div>
     </section>
@@ -193,12 +199,13 @@
     <!-- ═══════════════════════════════════════
          SLIDE 04 — BRIEF DE DUAS COLUNAS + MARGINÁLIA
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-4" data-slide="4" data-presentation-name="Brief" aria-labelledby="s4-title">
+    <section style="--i: 3" class="slide" id="slide-4" data-slide="4" data-presentation-name="Brief" aria-labelledby="s4-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
           <h2 id="s4-title" class="title">{{TITULO_S4}}</h2>
         </header>
+        <div class="slide-body">
         <div class="brief-columns">
           <div class="brief-body">
             <p>{{CORPO_S4_P1}}</p>
@@ -219,6 +226,7 @@
             </div>
           </aside>
         </div>
+        </div>
         <span class="page-num" aria-hidden="true">04</span>
       </div>
     </section>
@@ -226,12 +234,13 @@
     <!-- ═══════════════════════════════════════
          SLIDE 05 — SIGNAL CHAIN (processo)
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-5" data-slide="5" data-presentation-name="Processo" aria-labelledby="s5-title">
+    <section style="--i: 4" class="slide" id="slide-5" data-slide="5" data-presentation-name="Processo" aria-labelledby="s5-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">05 — {{EYEBROW_S5}}</span>
           <h2 id="s5-title" class="title">{{TITULO_S5}}</h2>
         </header>
+        <div class="slide-body">
         <div class="chain">
           <ol class="chain-row">
             <li class="chain-step">
@@ -256,6 +265,7 @@
             </li>
           </ol>
         </div>
+        </div>
         <span class="page-num" aria-hidden="true">05</span>
       </div>
     </section>
@@ -263,12 +273,13 @@
     <!-- ═══════════════════════════════════════
          SLIDE 06 — TABELA COMPARATIVA
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-6" data-slide="6" data-presentation-name="Comparativo" aria-labelledby="s6-title">
+    <section style="--i: 5" class="slide" id="slide-6" data-slide="6" data-presentation-name="Comparativo" aria-labelledby="s6-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">06 — {{EYEBROW_S6}}</span>
           <h2 id="s6-title" class="title">{{TITULO_S6}}</h2>
         </header>
+        <div class="slide-body">
         <div class="compare-wrap">
           <table class="compare-table">
             <caption class="sr-only">{{TITULO_S6}}</caption>
@@ -303,6 +314,7 @@
             </tbody>
           </table>
         </div>
+        </div>
         <span class="page-num" aria-hidden="true">06</span>
       </div>
     </section>
@@ -310,7 +322,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 07 — STATEMENT / CITAÇÃO
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-7" data-slide="7" data-presentation-name="Statement" aria-labelledby="s7-title">
+    <section style="--i: 6" class="slide" id="slide-7" data-slide="7" data-presentation-name="Statement" aria-labelledby="s7-title">
       <div class="slide__inner" style="justify-content:center;">
         <div class="statement">
           <span class="statement__mark" aria-hidden="true"></span>
@@ -326,7 +338,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 08 — ENCERRAMENTO + COLOFÃO
          ═══════════════════════════════════════ -->
-    <section class="slide slide--closing" id="slide-8" data-slide="8" data-presentation-name="Encerramento" aria-labelledby="s8-title">
+    <section style="--i: 7" class="slide slide--closing" id="slide-8" data-slide="8" data-presentation-name="Encerramento" aria-labelledby="s8-title">
       <div class="slide__inner">
         <div class="closing-main">
           <span class="eyebrow">08 — {{EYEBROW_S8}}</span>
@@ -379,6 +391,14 @@
     </section>
 
   </main>
+
+  <!-- ── Prev / next arrows ── -->
+  <button class="nav-arrow nav-arrow--prev" id="prevBtn" aria-label="Slide anterior" title="Slide anterior (←)">
+    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="10,16 20,6 21.4,7.4 12.8,16 21.4,24.6 20,26 "/></svg>
+  </button>
+  <button class="nav-arrow nav-arrow--next" id="nextBtn" aria-label="Próximo slide" title="Próximo slide (→)">
+    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="22,16 12,26 10.6,24.6 19.2,16 10.6,7.4 12,6 "/></svg>
+  </button>
 
   <!-- ── Navigation dots ── -->
   <nav class="nav-controls" aria-label="Navegação de slides">

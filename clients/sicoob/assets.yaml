@@ -1,0 +1,9 @@
+assets:
+  - path: logo_sicoob.svg
+    type: logo
+    owner: Sicoob
+    source: https://commons.wikimedia.org/wiki/File:Logotipo_do_Sicoob.svg
+    purpose: official Sicoob logotype, green version, for light backgrounds
+    use_when:
+      - header or cover slide on light background
+      - co-branding IBM × Sicoob

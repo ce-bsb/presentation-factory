@@ -18,15 +18,26 @@ Aprofunde a leitura somente quando a tarefa pedir registro, build, redesign ampl
 2. Raiz atual (se contiver `catalog/models.toml` e `pyproject.toml`)
 3. Diretórios irmãos com esses arquivos
 
+## Caminho rápido — não pule isto
+
+Decks simples saem em poucos minutos quando o agente copia o template certo e só
+substitui tokens. Ficam lentos quando o agente reescreve CSS/JS do zero, roda o
+builder sem necessidade, ou itera demais sobre conteúdo. Por isso:
+
+- Escolha o template pela tabela abaixo — não abra os 3 HTMLs para comparar.
+- Copie o template inteiro (`index.html` + `assets/`); nunca recrie estilos do zero.
+- Substitua os tokens `{{PLACEHOLDER}}` numa só passada; falta de dado real = `[A confirmar]`.
+- `make build/validate/test` é só para quando o usuário pedir "registrar na factory".
+
 ## Catálogo de templates IBM
 
 Ao criar uma apresentação IBM nova, escolha somente entre estes templates:
 
-| Template | Quando usar |
-|---|---|
-| `organizations/ibm/templates/ibm-template/` | Padrão default: apresentação executiva, sóbria e orientada a negócio |
-| `organizations/ibm/templates/ibm-brief-template/` | Dossiê, relatório técnico, diagnóstico ou conteúdo editorial denso |
-| `organizations/ibm/templates/ibm-edge-template/` | Narrativa visual bold, assimétrica ou de alto impacto |
+| Template | Visual | Quando usar |
+|---|---|---|
+| `organizations/ibm/templates/ibm-template/` | Grid de 16 colunas, 12 slides, dashboards/métricas, tom corporativo | Padrão default: apresentação executiva, sóbria e orientada a negócio |
+| `organizations/ibm/templates/ibm-brief-template/` | Dossiê de 8 slides, marginália, ledger de métricas, tom de relatório | Dossiê, relatório técnico, diagnóstico ou conteúdo editorial denso |
+| `organizations/ibm/templates/ibm-edge-template/` | 8 slides assimétricos, cards e split-screen, tom de pitch visual | Narrativa visual bold, assimétrica ou de alto impacto |
 
 Qualquer outro template IBM foi descontinuado. Nunca tente localizar, recriar ou usá-los como fallback.
 

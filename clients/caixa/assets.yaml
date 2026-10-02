@@ -1,0 +1,9 @@
+assets:
+  - path: logo_azul_caixa.svg
+    type: logo
+    owner: Caixa Econômica Federal
+    source: https://commons.wikimedia.org/wiki/File:Caixa_Econômica_Federal_logo_1997.svg
+    purpose: official Caixa logo (mark in use since 1997), blue/orange version, for light backgrounds
+    use_when:
+      - header or cover slide on light background
+      - co-branding IBM × Caixa
