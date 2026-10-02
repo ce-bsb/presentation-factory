@@ -9,8 +9,8 @@
   <meta name="description" content="{{DESCRICAO}}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap" />
-    <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600&family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" />
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
@@ -26,10 +26,10 @@
       <span class="brand-context">{{AREA_OU_SERVICO}} — {{DOC_REF}}</span>
     </div>
     <div class="topbar-meta">
-      <div class="slide-counter" aria-live="polite">
+      <div class="slide-counter" aria-live="polite" aria-atomic="true">
         <span id="slideNum">01</span>&thinsp;/&thinsp;<span id="slideTot">08</span>
       </div>
-      <button class="utility-btn" id="fullscreenBtn" aria-label="Tela cheia" title="Alternar tela cheia">
+      <button class="utility-btn" id="fullscreenBtn" aria-label="Tela cheia" aria-pressed="false" title="Alternar tela cheia">
         <svg class="carbon-icon" width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
       </button>
     </div>
@@ -43,7 +43,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 01 — COVER assimétrico
          ═══════════════════════════════════════ -->
-    <section class="slide slide--cover" id="slide-1" data-slide="1" aria-labelledby="s1-title">
+    <section class="slide slide--cover active" id="slide-1" data-slide="1" data-presentation-name="Edge" aria-labelledby="s1-title">
       <div class="slide__inner">
         <div class="cover-bar" aria-hidden="true">
           <span class="cover-bar__label">{{LABEL_BARRA}}</span>
@@ -84,7 +84,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 02 — STAT GRID (4 métricas)
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-2" data-slide="2" aria-labelledby="s2-title">
+    <section class="slide" id="slide-2" data-slide="2" data-presentation-name="Métricas" aria-labelledby="s2-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
@@ -123,7 +123,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 03 — TWO-COL panels
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-3" data-slide="3" aria-labelledby="s3-title">
+    <section class="slide" id="slide-3" data-slide="3" data-presentation-name="Painéis" aria-labelledby="s3-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">03 — {{EYEBROW_S3}}</span>
@@ -145,7 +145,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 04 — TIMELINE (3 etapas)
          ═══════════════════════════════════════ -->
-    <section class="slide" id="slide-4" data-slide="4" aria-labelledby="s4-title">
+    <section class="slide" id="slide-4" data-slide="4" data-presentation-name="Timeline" aria-labelledby="s4-title">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
@@ -181,7 +181,7 @@
          SLIDE 05 — FUNDO AZUL IBM (impacto / quote)
          Sem scroll — tudo cabe na viewport.
          ═══════════════════════════════════════ -->
-    <section class="slide slide--blue" id="slide-5" data-slide="5" aria-labelledby="s5-title">
+    <section class="slide slide--blue" id="slide-5" data-slide="5" data-presentation-name="Impacto" aria-labelledby="s5-title">
       <div class="slide__inner">
         <div class="blue-eyebrow-row">
           <span class="eyebrow eyebrow--light">05 — {{EYEBROW_S5}}</span>
@@ -205,7 +205,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 06 — FUNDO TEXTURIZADO + cards
          ═══════════════════════════════════════ -->
-    <section class="slide slide--textured" id="slide-6" data-slide="6" aria-labelledby="s6-title">
+    <section class="slide slide--textured" id="slide-6" data-slide="6" data-presentation-name="Cards" aria-labelledby="s6-title">
       <div class="slide__inner">
         <div class="textured-bg" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -258,7 +258,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 07 — SPLIT azul / branco
          ═══════════════════════════════════════ -->
-    <section class="slide slide--split" id="slide-7" data-slide="7" aria-labelledby="s7-title">
+    <section class="slide slide--split" id="slide-7" data-slide="7" data-presentation-name="Split" aria-labelledby="s7-title">
       <div class="slide__inner">
         <div class="split-left">
           <div class="split-left__content">
@@ -305,7 +305,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 08 — ENCERRAMENTO claro
          ═══════════════════════════════════════ -->
-    <section class="slide slide--closing" id="slide-8" data-slide="8" aria-labelledby="s8-title">
+    <section class="slide slide--closing" id="slide-8" data-slide="8" data-presentation-name="Encerramento" aria-labelledby="s8-title">
       <div class="slide__inner">
         <div class="closing-main">
           <span class="eyebrow">08 — {{EYEBROW_S8}}</span>
@@ -339,8 +339,8 @@
   </main>
 
   <!-- ── Navigation dots ── -->
-  <nav class="nav-controls" aria-label="Controle de Navegação">
-    <div class="slide-dots" id="navDots" role="tablist"></div>
+  <nav class="nav-controls" aria-label="Navegação de slides">
+    <div class="slide-dots" id="navDots" role="tablist" aria-label="Slides"></div>
   </nav>
 
   <script src="assets/deck.js"></script>
