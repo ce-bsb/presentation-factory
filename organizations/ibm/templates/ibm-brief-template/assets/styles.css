@@ -8,12 +8,13 @@
   color-scheme: light;
 
   /* ── Carbon v11 Blue ── */
-  --ibm-blue:   #0f62fe;
-  --ibm-blue-h: #0043ce;
-  --ibm-blue-d: #002d9c;
-  --ibm-blue-t: #edf5ff;
-  --ibm-blue-40: #78a9ff;
-  --ibm-blue-20: #d0e2ff;
+  --ibm-blue:    #0f62fe;   /* blue-60 — primary interactive */
+  --ibm-blue-h:  #0043ce;   /* blue-70 — hover/active */
+  --ibm-blue-d:  #002d9c;   /* blue-80 — dark accent */
+  --ibm-blue-l:  #4589ff;   /* blue-50 — interactive on dark */
+  --ibm-blue-t:  #edf5ff;   /* blue-10 — subtle tint */
+  --ibm-blue-40: #78a9ff;   /* blue-40 — chart, decorative */
+  --ibm-blue-20: #d0e2ff;   /* blue-20 — border on blue */
 
   /* ── Carbon v11 Gray ── */
   --gray-100: #161616;
@@ -27,11 +28,13 @@
   --gray-10:  #f4f4f4;
   --white:    #ffffff;
 
-  /* ── Carbon v11 Support ── */
-  --ibm-cyan: #1192e8;
-  --ibm-purple: #8a3ffc;
-  --up:       #198038;
-  --down:     #da1e28;
+  /* ── Carbon v11 Accent ── */
+  --ibm-cyan:   #1192e8;   /* cyan-50 */
+  --ibm-teal:   #009d9a;   /* teal-60 */
+  --ibm-purple: #8a3ffc;   /* purple-60 */
+  --up:         #198038;   /* green-60 — success */
+  --down:       #da1e28;   /* red-60 — danger */
+  --warn:       #ff832b;   /* orange-40 — warning */
 
   /* ── Semantic aliases ── */
   --bg:          var(--white);
@@ -41,12 +44,14 @@
   --ink-faint:   var(--gray-50);
   --line:        var(--gray-20);
   --line-strong: var(--gray-30);
+  --line-soft:   rgba(22, 22, 22, 0.07);
 
   /* ── Fonts ── */
   --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
   /* ── Type scale ── */
+  --text-11: .6875rem;
   --text-12: .75rem;
   --text-14: .875rem;
   --text-16: 1rem;
@@ -58,7 +63,7 @@
   --text-54: 3.375rem;
   --text-76: 4.75rem;
 
-  /* ── Spacing (8px grid) ── */
+  /* ── Spacing — 8px grid ── */
   --u-1: 4px;
   --u-2: 8px;
   --u-3: 12px;
@@ -72,26 +77,21 @@
   /* ── Layout ── */
   --topbar-h: 48px;
 
-  /* ── Motion ── */
-  --ease:     cubic-bezier(0.2, 0, 0.38, 0.9);
-  --ease-out: cubic-bezier(0, 0, 0.38, 0.9);
+  /* ── Motion (Carbon v11 productive) ── */
+  --ease:        cubic-bezier(0.2, 0, 0.38, 0.9);
+  --ease-out:    cubic-bezier(0, 0, 0.38, 0.9);
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Focus ── */
   --focus-color: var(--ibm-blue);
   --focus-width: 2px;
 
-  /* ── Elevation (colored, layered shadows) ── */
-  --shadow-xs: 0 1px 2px rgba(22, 22, 22, 0.05);
+  /* ── Elevation — soft, IBM-blue-tinted ── */
   --shadow-sm: 0 1px 2px rgba(22, 22, 22, 0.04), 0 4px 12px rgba(15, 98, 254, 0.06);
   --shadow-md: 0 2px 6px rgba(22, 22, 22, 0.04), 0 16px 36px rgba(15, 98, 254, 0.12);
-  --shadow-lg: 0 8px 16px rgba(22, 22, 22, 0.05), 0 32px 72px rgba(15, 98, 254, 0.16);
-  --shadow-glow: 0 0 0 1px rgba(15, 98, 254, 0.08), 0 24px 64px rgba(15, 98, 254, 0.20);
 
-  /* ── Radius (Stripe/Linear signature: soft corners) ── */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* ── Radius ── */
+  --radius-sm:   10px;
   --radius-full: 999px;
 }
 
@@ -435,6 +435,30 @@ table { font-family: inherit; }
   position: relative;
 }
 
+/* Vertical margin label — dossiê signature, fills the left gutter left by the
+   old border-left spine. Ties back to the "DOSSIÊ" mark on the cover. */
+.slide__inner::before {
+  content: "DOSSIÊ";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  font-weight: 600;
+  letter-spacing: .22em;
+  color: var(--ibm-blue);
+  opacity: .35;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Cover already has its own full-height "DOSSIÊ" kicker inside .cover-id */
+.slide--cover .slide__inner::before {
+  content: none;
+}
+
 @media (max-width: 820px) {
   .slide__inner {
     padding: var(--u-6) var(--u-5) var(--u-7);
@@ -615,7 +639,7 @@ table { font-family: inherit; }
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-11);
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 4px 12px;
@@ -879,7 +903,7 @@ table { font-family: inherit; }
 
 .metric__label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-11);
   letter-spacing: .05em;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -887,9 +911,9 @@ table { font-family: inherit; }
 }
 
 .metric__desc {
-  font-size: 13px;
+  font-size: var(--text-12);
   color: var(--ink-muted);
-  line-height: 1.4;
+  line-height: 1.45;
   margin-top: var(--u-1);
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -902,7 +926,7 @@ table { font-family: inherit; }
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--text-12);
   font-weight: 500;
   margin-top: var(--u-2);
 }

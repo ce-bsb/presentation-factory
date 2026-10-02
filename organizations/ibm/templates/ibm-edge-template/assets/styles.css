@@ -8,12 +8,13 @@
   color-scheme: light;
 
   /* ── Carbon v11 Blue ── */
-  --ibm-blue:   #0f62fe;
-  --ibm-blue-h: #0043ce;
-  --ibm-blue-d: #002d9c;
-  --ibm-blue-l: #4589ff;
-  --ibm-blue-t: #edf5ff;
-  --ibm-blue-20: #d0e2ff;
+  --ibm-blue:    #0f62fe;
+  --ibm-blue-h:  #0043ce;
+  --ibm-blue-d:  #002d9c;
+  --ibm-blue-l:  #4589ff;   /* blue-50 — interactive on dark, fullscreen dots */
+  --ibm-blue-t:  #edf5ff;   /* blue-10 — subtle tint */
+  --ibm-blue-40: #78a9ff;   /* blue-40 — chart fills, decorative accents */
+  --ibm-blue-20: #d0e2ff;   /* blue-20 — border on blue surfaces */
 
   /* ── Carbon v11 Gray ── */
   --gray-100: #161616;
@@ -27,11 +28,13 @@
   --gray-10:  #f4f4f4;
   --white:    #ffffff;
 
-  /* ── Carbon v11 accent colors ── */
-  --ibm-cyan:   #1192e8;
-  --ibm-cyan-l: #33b1ff;
-  --ibm-purple: #8a3ffc;
-  --ibm-teal:   #009d9a;
+  /* ── Carbon v11 Accent ── */
+  --ibm-cyan:   #1192e8;   /* cyan-50 */
+  --ibm-teal:   #009d9a;   /* teal-60 */
+  --ibm-purple: #8a3ffc;   /* purple-60 */
+  --up:         #198038;   /* green-60 — success */
+  --down:       #da1e28;   /* red-60 — danger */
+  --warn:       #ff832b;   /* orange-40 — warning */
 
   /* ── Semantic aliases ── */
   --bg:          var(--white);
@@ -41,12 +44,14 @@
   --ink-faint:   var(--gray-50);
   --line:        var(--gray-20);
   --line-strong: var(--gray-30);
+  --line-soft:   rgba(22, 22, 22, 0.07);
 
   /* ── Fonts ── */
   --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
   /* ── Type scale ── */
+  --text-11: .6875rem;
   --text-12: .75rem;
   --text-14: .875rem;
   --text-16: 1rem;
@@ -72,7 +77,7 @@
   /* ── Layout ── */
   --topbar-h: 52px;
 
-  /* ── Motion (Carbon v11) ── */
+  /* ── Motion (Carbon v11 productive) ── */
   --ease:        cubic-bezier(0.2, 0, 0.38, 0.9);
   --ease-out:    cubic-bezier(0, 0, 0.38, 0.9);
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,15 +86,15 @@
   --focus-color: var(--ibm-blue);
   --focus-width: 2px;
 
-  /* ── Elevation (colored, layered shadows) ── */
+  /* ── Elevation — soft, IBM-blue-tinted ── */
   --shadow-sm: 0 1px 2px rgba(22, 22, 22, 0.04), 0 2px 8px rgba(15, 98, 254, 0.05);
   --shadow-md: 0 2px 6px rgba(22, 22, 22, 0.05), 0 14px 32px rgba(15, 98, 254, 0.10);
   --shadow-lg: 0 4px 12px rgba(22, 22, 22, 0.06), 0 28px 60px rgba(15, 98, 254, 0.15);
 
-  /* ── Radius (Stripe/Linear signature: soft corners) ── */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* ── Radius — soft, editorial corners ── */
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
   --radius-full: 999px;
 }
 
@@ -341,7 +346,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .cover-bar__tags { display: flex; flex-direction: column; gap: var(--u-2); position: relative; z-index: 1; }
 .cover-bar__tag {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-11);
   letter-spacing: .06em;
   text-transform: uppercase;
   padding: 3px 10px;
@@ -508,7 +513,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .blue-pills { display: flex; flex-wrap: wrap; gap: var(--u-2); }
 .blue-pill {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-11);
   letter-spacing: .07em;
   text-transform: uppercase;
   padding: 5px 14px;

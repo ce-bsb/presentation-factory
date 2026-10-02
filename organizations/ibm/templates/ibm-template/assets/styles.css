@@ -8,15 +8,16 @@
 :root {
   color-scheme: light;
 
-  /* ── IBM Blue ── */
-  --ibm-blue:    #0f62fe;
-  --ibm-blue-h:  #0043ce;
-  --ibm-blue-d:  #002d9c;
-  --ibm-blue-t:  #edf5ff;
-  --ibm-blue-40: #78a9ff;
-  --ibm-blue-20: #d0e2ff;
+  /* ── Carbon v11 Blue ── */
+  --ibm-blue:    #0f62fe;   /* blue-60 — primary interactive */
+  --ibm-blue-h:  #0043ce;   /* blue-70 — hover/active */
+  --ibm-blue-d:  #002d9c;   /* blue-80 — dark accent */
+  --ibm-blue-l:  #4589ff;   /* blue-50 — interactive on dark */
+  --ibm-blue-t:  #edf5ff;   /* blue-10 — subtle tint */
+  --ibm-blue-40: #78a9ff;   /* blue-40 — chart, decorative */
+  --ibm-blue-20: #d0e2ff;   /* blue-20 — border on blue */
 
-  /* ── Gray ── */
+  /* ── Carbon v11 Gray ── */
   --gray-100: #161616;
   --gray-90:  #262626;
   --gray-80:  #393939;
@@ -28,16 +29,17 @@
   --gray-10:  #f4f4f4;
   --white:    #ffffff;
 
-  /* ── Support / accent (official Carbon support colors) ── */
-  --ibm-cyan:   #1192e8;
-  --ibm-cyan-t: #d0e8fb;
-  --ibm-purple: #8a3ffc;
-  --ibm-purple-t: #f6f2ff;
-  --up:         #198038;
-  --down:       #da1e28;
-  --warn:       #ff832b;
-  --warn-t:     #fff1e7;
-  --up-t:       #defbe6;
+  /* ── Carbon v11 Accent ── */
+  --ibm-cyan:     #1192e8;   /* cyan-50 */
+  --ibm-cyan-t:   #d0e8fb;   /* cyan-10 — tint, grid accents */
+  --ibm-teal:     #009d9a;   /* teal-60 */
+  --ibm-purple:   #8a3ffc;   /* purple-60 */
+  --ibm-purple-t: #f6f2ff;   /* purple-10 — tint */
+  --up:           #198038;   /* green-60 — success */
+  --up-t:         #defbe6;   /* green-10 — success tint */
+  --down:         #da1e28;   /* red-60 — danger */
+  --warn:         #ff832b;   /* orange-40 — warning */
+  --warn-t:       #fff1e7;   /* orange-10 — warning tint */
 
   /* ── Semantic aliases ── */
   --bg:          var(--white);
@@ -50,9 +52,8 @@
   --line-soft:   rgba(22, 22, 22, 0.07);
 
   /* ── Fonts ── */
-  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-serif: 'IBM Plex Serif', Georgia, serif;
+  --font-sans:  'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:  'IBM Plex Mono', monospace;
 
   /* ── Type scale ── */
   --text-10: .625rem;
@@ -79,10 +80,10 @@
   --u-8: 48px;
   --u-9: 64px;
 
-  /* ── Radius (the Stripe/Linear signature: soft corners, not Carbon-square) ── */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* ── Radius — soft, editorial corners ── */
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
   --radius-full: 999px;
 
   /* ── Layout ── */
@@ -90,7 +91,7 @@
   --col-gap:  var(--u-6);
   --row-gap:  var(--u-5);
 
-  /* ── Motion ── */
+  /* ── Motion (Carbon v11 productive) ── */
   --ease:        cubic-bezier(0.2, 0, 0.38, 0.9);
   --ease-out:    cubic-bezier(0, 0, 0.38, 0.9);
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
@@ -99,11 +100,11 @@
   --focus-color: var(--ibm-blue);
   --focus-width: 2px;
 
-  /* ── Elevation: soft, colored, layered — the "floating card" feel ── */
-  --shadow-xs: 0 1px 2px rgba(22, 22, 22, 0.05);
-  --shadow-sm: 0 1px 2px rgba(22, 22, 22, 0.04), 0 4px 12px rgba(15, 98, 254, 0.06);
-  --shadow-md: 0 2px 6px rgba(22, 22, 22, 0.04), 0 16px 36px rgba(15, 98, 254, 0.12);
-  --shadow-lg: 0 8px 16px rgba(22, 22, 22, 0.05), 0 32px 72px rgba(15, 98, 254, 0.16);
+  /* ── Elevation — soft, IBM-blue-tinted, layered ── */
+  --shadow-xs:   0 1px 2px rgba(22, 22, 22, 0.05);
+  --shadow-sm:   0 1px 2px rgba(22, 22, 22, 0.04), 0 4px 12px rgba(15, 98, 254, 0.06);
+  --shadow-md:   0 2px 6px rgba(22, 22, 22, 0.04), 0 16px 36px rgba(15, 98, 254, 0.12);
+  --shadow-lg:   0 8px 16px rgba(22, 22, 22, 0.05), 0 32px 72px rgba(15, 98, 254, 0.16);
   --shadow-glow: 0 0 0 1px rgba(15, 98, 254, 0.08), 0 24px 64px rgba(15, 98, 254, 0.20);
 }
 
@@ -860,9 +861,9 @@ h2 em, .hero-copy h1 em {
   box-shadow: 0 6px 14px rgba(15, 98, 254, 0.3);
 }
 
-.icon-slot--success { background: linear-gradient(135deg, #42be65, var(--up)); box-shadow: 0 6px 14px rgba(25, 128, 56, 0.3); }
-.icon-slot--warn     { background: linear-gradient(135deg, #ff832b, #ba4e00); box-shadow: 0 6px 14px rgba(255, 131, 43, 0.3); }
-.icon-slot--ref      { background: linear-gradient(135deg, var(--gray-60), var(--gray-80)); font-size: 10px; box-shadow: 0 6px 14px rgba(22, 22, 22, 0.2); }
+.icon-slot--success { background: linear-gradient(135deg, var(--up-t), var(--up)); box-shadow: 0 6px 14px rgba(25, 128, 56, 0.3); }
+.icon-slot--warn     { background: linear-gradient(135deg, var(--warn), var(--warn-t)); box-shadow: 0 6px 14px rgba(255, 131, 43, 0.3); }
+.icon-slot--ref      { background: linear-gradient(135deg, var(--gray-60), var(--gray-80)); font-size: var(--text-10); box-shadow: 0 6px 14px rgba(22, 22, 22, 0.2); }
 
 .value-list span {
   display: block;
