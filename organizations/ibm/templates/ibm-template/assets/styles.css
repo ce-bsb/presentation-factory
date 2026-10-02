@@ -477,7 +477,6 @@ h3 {
 .deployment-note {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(15, 98, 254, 0.08);
-  border-radius: 2px;
   box-shadow: 0 1px 4px rgba(22, 22, 22, 0.06), 0 4px 16px rgba(15, 98, 254, 0.02);
   transition: transform 250ms var(--ease-spring), border-color 250ms var(--ease-spring), box-shadow 250ms var(--ease-spring);
 }
@@ -503,11 +502,6 @@ h3 {
   height: 3px;
   background: var(--blue-60);
   margin-bottom: 1.25rem;
-}
-
-.hero-copy {
-  grid-column: 1 / span 9;
-  align-self: center;
 }
 
 .theme-hero h1 {
@@ -584,8 +578,9 @@ h3 {
   column-gap: clamp(2rem, 4vw, 5rem);
 }
 
-.theme-hero .hero-copy {
+.hero-copy {
   grid-column: 1 / span 9;
+  align-self: center;
 }
 
 /* Cover tags */
@@ -689,26 +684,11 @@ h3 {
 
 /* Cover executive panel */
 
+/* Default executive-panel only used on closing slides (not slide 01).
+   The theme-hero and slide-01 variants below override all properties. */
 .executive-panel {
-  align-self: stretch;
-  grid-column: 12 / span 5;
-  min-height: min(420px, 54vh);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 1rem;
-  background: linear-gradient(155deg, var(--white) 55%, rgba(15, 98, 254, 0.025));
-  color: var(--gray-100);
-  border: 1px solid rgba(22, 22, 22, 0.1);
-  border-left: 3px solid var(--blue-60);
-  box-shadow: 0 2px 12px rgba(22, 22, 22, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   position: relative;
   overflow: hidden;
-}
-
-.executive-panel::after {
-  content: none;
 }
 
 .theme-hero .executive-panel {
@@ -805,40 +785,6 @@ h3 {
   width: min(100%, 390px);
   margin: 0 auto;
   background: transparent;
-}
-
-/* Cover panel stats */
-
-.cover-panel-stat {
-  padding: 0.8rem 1rem;
-  border-top: 1px solid var(--gray-20);
-  background: var(--white);
-  flex-shrink: 0;
-}
-
-.cover-panel-stat-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 500;
-  color: var(--blue-70);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  margin-bottom: 0.2rem;
-}
-
-.cover-panel-stat-value {
-  display: block;
-  font-size: clamp(1.75rem, 2.4vw, 2.6rem);
-  font-weight: 300;
-  color: var(--gray-100);
-  line-height: 1;
-}
-
-.cover-panel-stat-value small {
-  font-size: 0.55em;
-  font-weight: 400;
-  color: var(--gray-70);
 }
 
 /* Panel lockup (closing box) */
@@ -1807,10 +1753,6 @@ h3 {
   overflow: hidden;
 }
 
-.closing-box::after {
-  content: none;
-}
-
 /* ─── Navigation dots ────────────────────────────────────────────── */
 
 .nav-controls {
@@ -2049,7 +1991,7 @@ h3 {
 }
 
 .slide[data-slide="04"] .media-row {
-  min-height: 0;
+  min-height: 220px;
   height: auto;
   align-self: start;
   margin-top: clamp(0.25rem, 0.7vw, 0.75rem);
@@ -2064,11 +2006,6 @@ h3 {
 
 .slide[data-slide="04"] .media-card img {
   padding: 0.15rem;
-}
-
-.slide[data-slide="04"] .media-row,
-.slide[data-slide="05"] .media-row {
-  min-height: 220px;
 }
 
 .slide[data-slide="04"] .value-list,
@@ -2204,10 +2141,6 @@ h3 {
   height: 40px;
 }
 
-/* Slide 07 · Script images */
-
-/* Slide 08 · Results */
-
 /* Slide 09 · Autonomy */
 
 .slide[data-slide="09"] .slide-grid {
@@ -2272,12 +2205,6 @@ h3 {
   margin-top: 0.45rem;
   font-size: clamp(1.8rem, 2.4vw, 3rem);
 }
-
-/* Slide 10 · Deployment */
-
-/* Slide 11 · Conclusions */
-
-/* Slide 12 · Closing */
 
 /* ─── Animations ─────────────────────────────────────────────────── */
 
@@ -2374,14 +2301,6 @@ h3 {
 /* ─── Responsive — 980px ─────────────────────────────────────────── */
 
 @media (max-width: 980px) {
-  .deck {
-    left: 0;
-  }
-
-  .nav-controls {
-    left: 0;
-  }
-
   .slide-grid {
     grid-template-columns: 1fr;
     align-content: center;
