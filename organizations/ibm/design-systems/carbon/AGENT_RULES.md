@@ -52,9 +52,11 @@ Mandatory visual rules for Presentation Factory agents.
 - Every slide carries, at minimum, either a visible background pattern (dot-grid,
   already the default on `.slide`) or a full IBM-blue background — never a perfectly
   flat, pattern-less white slide.
-- A slide is a fixed page, not a scroll area (`.slide { overflow: hidden }`). If
-  content does not fit, split it into another slide — never let a slide scroll
-  internally to fit more content.
+- Desktop presentation mode uses fixed pages (`.slide { overflow: hidden }`).
+  On narrow/short viewports, zoom, or content overflow, the controller activates
+  `reading-mode`: the active slide grows with content and the document scrolls
+  naturally. Never create nested slide scrolling or shrink body text to fit.
+  Prefer splitting long content into more slides for projected presentations.
 - Soft rounded corners (`--radius-sm/md/lg/full`), layered colored shadows
   (`--shadow-*`) and the gradient/glass surfaces already in the templates are part of
   the visual language — keep them when copying a template, don't flatten them back to
@@ -64,7 +66,9 @@ Mandatory visual rules for Presentation Factory agents.
 
 ## Interaction
 
-- Preserve keyboard navigation: Arrow keys, Space, PageUp/Down, Home, End, F (fullscreen).
+- Preserve keyboard navigation: Left/Right, Home, End, F (fullscreen). In fixed
+  presentation mode also support Up/Down, Space and PageUp/Down. In reading mode,
+  vertical keys scroll naturally. Never intercept native controls or editable fields.
 - Preserve touch swipe navigation (horizontal).
 - Keep the visible prev/next arrow buttons (`.nav-arrow--prev` / `.nav-arrow--next`) on
   screen — they are the discoverable way to move between slides.
@@ -90,7 +94,8 @@ Mandatory visual rules for Presentation Factory agents.
 - Never use `!important` in CSS — fix specificity instead.
   Exception: `@media (prefers-reduced-motion: reduce)` overrides and `@media print` resets
   may use `!important` to guarantee override behavior for safety.
-- All CSS variables must be defined in `:root` before use.
+- Design tokens belong in `:root`; per-slide runtime values (`--i`, `--n`) and
+  per-chart data (`--value`) are defined on their owning elements.
 - Dead CSS (unused classes or vars) must not be added.
 - Never add a CSS variable to `:root` that is not used in that template's CSS.
 - HTML must be semantic with correct `lang`, unique IDs, and `aria-label` on slides.
