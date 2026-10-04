@@ -1,7 +1,7 @@
 [meta]
 name        = "IBM Executive"
 slug        = "ibm-template"
-version     = "1.0.0"
+version     = "2.0.0"
 description = "Template IBM executivo autocontido de 12 slides, com tokens {{NOMEADOS}} e mídias neutralizadas."
 author      = "IBM Presentation Factory"
 
@@ -17,5 +17,6 @@ contrast    = "WCAG 2.1 AA"
 count = 12
 
 [assets]
-# Os logos oficiais já estão duplicados fisicamente em assets/.
-# CSS, JavaScript e Carbon Icons ficam incorporados no index.html.
+# Template autônomo: copie index.html e toda a pasta assets/.
+# CSS gerado por tools/sync_template_assets.py; JavaScript compartilhado em
+# organizations/ibm/assets/js/deck.js. Fontes IBM Plex via Google Fonts.

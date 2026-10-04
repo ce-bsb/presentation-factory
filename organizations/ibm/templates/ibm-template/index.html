@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
-<div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#deck">Ir para a apresentação</a>
+
+
 <div class="presentation">
 
   <!-- ── Topbar ── -->
@@ -42,13 +43,13 @@
   </header>
 
   <!-- ── Slides ── -->
-  <main class="deck" aria-label="Apresentação de slides">
+  <main class="deck" id="deck" tabindex="-1" aria-label="Apresentação de slides">
 
     <!-- 01 · Capa -->
-    <section style="--i: 0" class="slide active theme-hero" data-slide="01" data-presentation-name="Capa" aria-label="Capa">
-      <div class="slide-blob blob-1" aria-hidden="true"></div>
-      <div class="slide-blob blob-2" aria-hidden="true"></div>
-      <div class="slide-blob blob-3" aria-hidden="true"></div>
+    <section style="--i: 0" class="slide active theme-hero" data-slide="01" data-presentation-name="Capa" aria-label="Capa" data-pattern="orbits">
+
+
+
       <div class="slide-grid hero-grid">
         <p class="section-label">{{EYEBROW_COVER}}</p>
         <div class="hero-copy">
@@ -87,7 +88,7 @@
     </section>
 
     <!-- 02 · Contexto -->
-    <section style="--i: 1" class="slide theme-light" data-slide="02" data-presentation-name="Contexto" aria-label="Contexto">
+    <section style="--i: 1" class="slide theme-light" data-slide="02" data-presentation-name="Contexto" aria-label="Contexto" data-pattern="matrix">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S2}}</p>
@@ -95,7 +96,7 @@
           <p class="lead">{{LEAD_S2}}</p>
         </header>
         <div class="slide-body">
-          <div class="span-9" aria-hidden="true"></div>
+          <div class="slide-pictogram slide-pictogram--strategy span-9" aria-hidden="true"></div>
           <div class="metric-stack span-7">
             <article>
               <span>{{METRIC_1_LABEL}}</span>
@@ -118,7 +119,7 @@
     </section>
 
     <!-- 03 · Jornada -->
-    <section style="--i: 2" class="slide theme-light" data-slide="03" data-presentation-name="Jornada" aria-label="Jornada">
+    <section style="--i: 2" class="slide theme-light" data-slide="03" data-presentation-name="Jornada" aria-label="Jornada" data-pattern="weave">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S3}}</p>
@@ -152,7 +153,7 @@
     </section>
 
     <!-- 04 · Devolutiva -->
-    <section style="--i: 3" class="slide theme-light" data-slide="04" data-presentation-name="Devolutiva" aria-label="Devolutiva">
+    <section style="--i: 3" class="slide theme-light" data-slide="04" data-presentation-name="Devolutiva" aria-label="Devolutiva" data-pattern="contour">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S4}}</p>
@@ -160,10 +161,10 @@
           <p class="lead">{{LEAD_S4}}</p>
         </header>
         <div class="slide-body">
-          <div class="span-9" aria-hidden="true"></div>
+          <div class="slide-pictogram slide-pictogram--strategy span-9" aria-hidden="true"></div>
           <div class="value-list span-7">
             <article>
-              <div class="icon-slot icon-slot--success">✓</div>
+              <div class="icon-slot"><img src="assets/icons/checkmark--filled.svg" alt="" aria-hidden="true"></div>
               <div>
                 <span>{{ACHADO_1_LABEL}}</span>
                 <h3>{{ACHADO_1_TITULO}}</h3>
@@ -171,7 +172,7 @@
               </div>
             </article>
             <article>
-              <div class="icon-slot icon-slot--warn">!</div>
+              <div class="icon-slot"><img src="assets/icons/warning--filled.svg" alt="" aria-hidden="true"></div>
               <div>
                 <span>{{ACHADO_2_LABEL}}</span>
                 <h3>{{ACHADO_2_TITULO}}</h3>
@@ -200,7 +201,7 @@
     </section>
 
     <!-- 05 · Solução -->
-    <section style="--i: 4" class="slide theme-light" data-slide="05" data-presentation-name="Solução" aria-label="Solução">
+    <section style="--i: 4" class="slide theme-light" data-slide="05" data-presentation-name="Solução" aria-label="Solução" data-pattern="orbits">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S5}}</p>
@@ -208,7 +209,7 @@
           <p class="lead">{{LEAD_S5}}</p>
         </header>
         <div class="slide-body">
-          <div class="span-9" aria-hidden="true"></div>
+          <div class="slide-pictogram slide-pictogram--strategy span-9" aria-hidden="true"></div>
           <div class="metric-stack span-7">
             <article>
               <span>{{BENEFICIO_1_LABEL}}</span>
@@ -239,7 +240,7 @@
     </section>
 
     <!-- 06 · Estrutura do Script -->
-    <section style="--i: 5" class="slide theme-light" data-slide="06" data-presentation-name="Estrutura do Script" aria-label="Estrutura do Script">
+    <section style="--i: 5" class="slide theme-light" data-slide="06" data-presentation-name="Estrutura do Script" aria-label="Estrutura do Script" data-pattern="matrix">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S6}}</p>
@@ -277,7 +278,7 @@
           <!-- Seta -->
           <div class="span-2 center-arrow">
             <div>
-              <svg class="carbon-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="m18 6-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg>
+              <svg class="carbon-icon" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="m18 6-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg>
               <span>{{TRANSICAO_LABEL}}</span>
             </div>
           </div>
@@ -314,7 +315,7 @@
     </section>
 
     <!-- 07 · Evidências Visuais -->
-    <section style="--i: 6" class="slide theme-light" data-slide="07" data-presentation-name="Evidências Visuais" aria-label="Evidências Visuais">
+    <section style="--i: 6" class="slide theme-light" data-slide="07" data-presentation-name="Evidências Visuais" aria-label="Evidências Visuais" data-pattern="weave">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S7}}</p>
@@ -336,7 +337,7 @@
     </section>
 
     <!-- 08 · Resultados -->
-    <section style="--i: 7" class="slide theme-light" data-slide="08" data-presentation-name="Resultados" aria-label="Resultados">
+    <section style="--i: 7" class="slide theme-light" data-slide="08" data-presentation-name="Resultados" aria-label="Resultados" data-pattern="contour">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S8}}</p>
@@ -388,7 +389,7 @@
     </section>
 
     <!-- 09 · Autonomia -->
-    <section style="--i: 8" class="slide theme-light" data-slide="09" data-presentation-name="Autonomia" aria-label="Autonomia">
+    <section style="--i: 8" class="slide theme-light" data-slide="09" data-presentation-name="Autonomia" aria-label="Autonomia" data-pattern="orbits">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S9}}</p>
@@ -439,7 +440,7 @@
     </section>
 
     <!-- 10 · Flexibilidade de Deployment -->
-    <section style="--i: 9" class="slide theme-light" data-slide="10" data-presentation-name="Flexibilidade de Deployment" aria-label="Flexibilidade de Deployment">
+    <section style="--i: 9" class="slide theme-light" data-slide="10" data-presentation-name="Flexibilidade de Deployment" aria-label="Flexibilidade de Deployment" data-pattern="matrix">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S10}}</p>
@@ -447,8 +448,8 @@
           <p class="lead">{{LEAD_S10}}</p>
         </header>
         <div class="slide-body">
-          <div class="span-10" aria-hidden="true"></div>
-          <div class="slide-pictogram slide-pictogram--cloud span-6" aria-hidden="true"></div>
+
+          <div class="slide-pictogram slide-pictogram--cloud span-16" aria-hidden="true"></div>
 
           <div class="deployment-map span-16" aria-label="Mapa de opções de deployment">
             <article class="deployment-option">
@@ -490,7 +491,7 @@
     </section>
 
     <!-- 11 · Conclusões -->
-    <section style="--i: 10" class="slide theme-close" data-slide="11" data-presentation-name="Conclusões" aria-label="Conclusões">
+    <section style="--i: 10" class="slide theme-close" data-slide="11" data-presentation-name="Conclusões" aria-label="Conclusões" data-pattern="weave">
       <div class="slide-grid">
         <header class="slide-head">
           <p class="section-label">{{EYEBROW_S11}}</p>
@@ -498,8 +499,8 @@
           <h2>{{TITULO_S11}}</h2>
         </header>
         <div class="slide-body">
-          <div class="span-10" aria-hidden="true"></div>
-          <div class="slide-pictogram slide-pictogram--strategy span-6" aria-hidden="true"></div>
+
+          <div class="slide-pictogram slide-pictogram--strategy span-16" aria-hidden="true"></div>
           <div class="roadmap span-16">
             <article>
               <span>{{ROADMAP_1_LABEL}}</span>
@@ -522,7 +523,7 @@
     </section>
 
     <!-- 12 · Encerramento -->
-    <section style="--i: 11" class="slide theme-close" data-slide="12" data-presentation-name="Encerramento" aria-label="Encerramento">
+    <section style="--i: 11" class="slide theme-close" data-slide="12" data-presentation-name="Encerramento" aria-label="Encerramento" data-pattern="contour">
       <div class="slide-grid close-grid">
         <p class="section-label">{{EYEBROW_S12}}</p>
         <div class="span-10">
@@ -558,7 +559,7 @@
 
   <!-- ── Navigation dots ── -->
   <nav class="nav-controls" aria-label="Navegação entre slides">
-    <div class="slide-dots" id="navDots" role="tablist" aria-label="Slides"></div>
+    <div class="slide-dots" id="navDots" role="group" aria-label="Slides"></div>
   </nav>
 
 </div>
