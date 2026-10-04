@@ -1,7 +1,7 @@
 [meta]
 name        = "IBM Edge Template"
 slug        = "ibm-edge-template"
-version     = "1.0.0"
+version     = "2.0.0"
 description = "Template de deck IBM com 8 layouts distintos: cover assimétrico, stat grid, two-col panels, timeline, fundo azul sólido, texturizado + cards, split azul/branco e encerramento claro."
 author      = "IBM Presentation Factory"
 
@@ -27,5 +27,6 @@ labels = [
 ]
 
 [assets]
-# Logos IBM oficiais e Carbon Icons estão copiados fisicamente em assets/.
-# CSS e JavaScript permanecem dentro do index.html.
+# Template autônomo: copie index.html e toda a pasta assets/.
+# CSS gerado por tools/sync_template_assets.py; JavaScript compartilhado em
+# organizations/ibm/assets/js/deck.js. Fontes IBM Plex via Google Fonts.
