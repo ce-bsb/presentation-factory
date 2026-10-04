@@ -1,0 +1,76 @@
+/* Expressive IBM geometry. Decorative CSS, never a replacement for brand marks.
+   Pattern fields stay inside their slide; text sits on a quiet light surface. */
+:root {
+  --pattern-line: color-mix(in srgb, var(--ibm-blue) 18%, transparent);
+  --pattern-soft: color-mix(in srgb, var(--ibm-blue) 8%, transparent);
+  --pattern-reverse: color-mix(in srgb, var(--ibm-blue-20) 32%, transparent);
+  --pattern-unit: 3rem;
+  --motion-enter: 640ms;
+  --motion-expressive: cubic-bezier(0, 0, .3, 1);
+  --reveal-delay: 0ms;
+}
+.slide { isolation: isolate; background-image: none; }
+.slide::before,.slide::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.slide::before {
+  background-image: linear-gradient(var(--pattern-soft) var(--hairline), transparent var(--hairline)), linear-gradient(90deg,var(--pattern-soft) var(--hairline),transparent var(--hairline));
+  background-size: var(--pattern-unit) var(--pattern-unit);
+  mask-image: linear-gradient(115deg,transparent 12%,var(--white) 90%);
+}
+.slide::after {
+  background: repeating-radial-gradient(circle at 100% 100%,transparent 0,transparent calc(var(--u-6) - var(--hairline)),var(--pattern-line) var(--u-6),transparent calc(var(--u-6) + var(--hairline)));
+  mask-image: linear-gradient(120deg,transparent 48%,var(--white));
+}
+.slide[data-pattern="matrix"]::before {
+  background-image: radial-gradient(var(--pattern-line) .075rem,transparent .075rem);
+  background-size: var(--u-4) var(--u-4);
+  mask-image: linear-gradient(110deg,transparent 20%,var(--white));
+}
+.slide[data-pattern="matrix"]::after {
+  background: linear-gradient(135deg,transparent 60%,var(--ibm-blue-t) 60%);
+  mask-image: linear-gradient(to bottom,transparent,var(--white));
+}
+.slide[data-pattern="weave"]::after {
+  background: repeating-linear-gradient(135deg,transparent 0,transparent calc(var(--u-4) - var(--hairline)),var(--pattern-line) var(--u-4),transparent calc(var(--u-4) + var(--hairline)));
+  mask-image: linear-gradient(105deg,transparent 55%,var(--white));
+}
+.slide[data-pattern="contour"]::after {
+  background: repeating-radial-gradient(ellipse at 110% 20%,transparent 0,transparent calc(var(--u-5) - var(--hairline)),var(--pattern-line) var(--u-5),transparent calc(var(--u-5) + var(--hairline)));
+  mask-image: linear-gradient(105deg,transparent 48%,var(--white));
+}
+.slide-head { position: relative; padding-left: var(--u-5); border-left: .1875rem solid var(--ibm-blue); }
+.eyebrow,.section-label,.cover-eyebrow { letter-spacing: .09em; }
+/* The decorative four-part composition shares the IBM 2x geometry. */
+.pattern-art { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); aspect-ratio: 1; width: 100%; gap: var(--u-2); pointer-events: none; }
+.pattern-art span { display: block; min-width: 0; aspect-ratio: 1; background-color: var(--ibm-blue); }
+.pattern-art span:nth-child(1) { border-radius: 100% 0 0 0; background-image: repeating-radial-gradient(circle at 100% 100%,transparent 0,transparent .55rem,var(--ibm-blue-20) .58rem,transparent .64rem); }
+.pattern-art span:nth-child(2) { border-radius: 50%; background: repeating-linear-gradient(0deg,var(--ibm-blue) 0,var(--ibm-blue) .125rem,transparent .125rem,transparent .5rem); }
+.pattern-art span:nth-child(3) { background: radial-gradient(var(--ibm-blue) .11rem,transparent .12rem) 0 0 / var(--u-3) var(--u-3); border-radius: 0 0 0 50%; }
+.pattern-art span:nth-child(4) { border-radius: 0 0 100% 0; background-color: var(--ibm-blue-d); background-image: repeating-radial-gradient(circle at 0 0,transparent 0,transparent .55rem,var(--ibm-blue-l) .58rem,transparent .64rem); }
+/* Reveal content once on slide entry. No ambient loops while people read. */
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active [data-reveal] { animation: content-enter var(--motion-enter) var(--motion-expressive) var(--reveal-delay) both; }
+  .slide.active .pattern-art span { animation: geometry-enter 1000ms var(--motion-expressive) both; }
+  .slide.active .pattern-art span:nth-child(2) { animation-delay: 80ms; }
+  .slide.active .pattern-art span:nth-child(3) { animation-delay: 160ms; }
+  .slide.active .pattern-art span:nth-child(4) { animation-delay: 240ms; }
+  .slide.active::after { animation: pattern-enter 1400ms var(--motion-expressive) both; }
+  .slide.active .chart-row span { transform-origin: bottom; animation: chart-enter 900ms var(--motion-expressive) both; }
+  .slide.active .motion-grid span { animation: geometry-enter 1000ms var(--motion-expressive) both; }
+  .slide.active .motion-grid span:nth-child(3n) { animation-delay: 160ms; }
+  .slide.active .motion-grid span:nth-child(4n) { animation-delay: 280ms; }
+  .nav-arrow svg { transition: transform 160ms var(--ease); }
+  .nav-arrow--next:hover:not(:disabled) svg { transform: translateX(.1875rem); }
+  .nav-arrow--prev:hover:not(:disabled) svg { transform: translateX(-.1875rem); }
+}
+@keyframes content-enter { from { opacity: 0; transform: translateY(var(--u-3)); } to { opacity: 1; transform: translateY(0); } }
+@keyframes geometry-enter { from { opacity: 0; transform: scale(.92) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes pattern-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes chart-enter { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@media (max-width: 41.99rem) {
+  .slide::after { mask-image: linear-gradient(110deg,transparent 40%,var(--white)); opacity: .6; }
+  .slide-head { padding-left: var(--u-4); }
+}
+@media print {
+  .slide::before,.slide::after { opacity: .3; animation: none !important; }
+  .slide [data-reveal],.slide .pattern-art span,.slide .motion-grid span,.slide .chart-row span { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

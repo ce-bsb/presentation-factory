@@ -1,0 +1,53 @@
+/* Standard · workshop preparation and actionable checklists. */
+.cover-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,3fr); gap: var(--u-6); }
+.cover-grid__meta { display: grid; align-content: start; gap: var(--u-5); }
+.kicker { font: var(--text-12)/1.5 var(--font-mono); color: var(--cds-text-secondary); }
+.display__alt { color: var(--ibm-blue); }
+.cover-grid__footer { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--u-6); padding-top: var(--u-5); border-top: var(--hairline) solid var(--gray-30); }
+.presenter { display: grid; gap: var(--u-2); }
+.presenter__label,.presenter__role { font-size: var(--text-14); color: var(--cds-text-secondary); }
+.presenter__name { font-weight: 500; }
+.cover-mark { width: 8rem; align-self: end; }
+.two-col { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--u-5); }
+.panel { padding: var(--u-6); border: var(--hairline) solid var(--gray-20); border-radius: var(--radius-md); background: var(--white); }
+.panel--accent { background: var(--ibm-blue-t); }
+.panel__title { margin-bottom: var(--u-5); }
+.note { border-left: .125rem solid var(--ibm-blue); padding-left: var(--u-4); margin-top: var(--u-5); }
+.method { display: grid; gap: var(--u-5); }
+.method-figure__image { width: 100%; max-height: 22rem; object-fit: contain; }
+.spec { width: 100%; table-layout: fixed; border-collapse: collapse; background: var(--white); }
+.spec th,.spec td { text-align: left; padding: var(--u-4); border-bottom: var(--hairline) solid var(--gray-20); vertical-align: top; }
+.spec thead { background: var(--gray-20); }
+.spec th { font-weight: 500; }
+.spec th:first-child { width: 25%; }
+.spec td > * + * { margin-left: var(--u-1); }
+.pill { background: var(--ibm-blue-t); color: var(--ibm-blue-d); padding: var(--u-1) var(--u-2); font-size: var(--text-14); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--u-5); }
+.timeline__step { border-top: .125rem solid var(--ibm-blue); padding-top: var(--u-4); }
+.timeline__index { color: var(--ibm-blue); font: var(--text-42)/1.2 var(--font-mono); display: block; margin-bottom: var(--u-6); }
+.timeline__title { margin-bottom: var(--u-4); }
+.checklist { list-style: none; padding: 0; margin: 0; }
+.check { display: flex; align-items: baseline; gap: var(--u-4); padding: var(--u-5); background: var(--white); border-bottom: var(--hairline) solid var(--gray-20); }
+.check input { width: var(--u-5); height: var(--u-5); accent-color: var(--ibm-blue); flex-shrink: 0; }
+.check label { cursor: pointer; }
+.check input:checked + label { color: var(--cds-text-secondary); text-decoration: line-through; }
+.closing { padding-top: var(--u-5); border-top: var(--hairline) solid var(--gray-30); }
+.closing__text { display: grid; gap: var(--u-2); }
+.bullets { padding-left: var(--u-5); }
+/* Workshop: technical grid and a modular cover illustration. */
+.slide--cover { background-color: var(--ibm-blue-t); }
+.slide--cover .slide__inner { display: grid; grid-template-columns: minmax(0,3fr) minmax(0,1fr); align-content: center; align-items: center; }
+.cover-grid { grid-template-columns: minmax(0,1fr); }
+.cover-grid__meta { gap: var(--u-3); }
+.cover-grid__title { min-width: 0; }
+.slide--cover .pattern-art { max-width: 18rem; justify-self: end; }
+.panel--accent { box-shadow: 0 var(--u-3) var(--u-6) var(--pattern-soft); }
+.slide--dense { background-color: var(--ibm-blue-t); }
+@media (max-width: 41.99rem) {
+  .slide--cover .slide__inner { grid-template-columns: minmax(0,1fr); }
+  .slide--cover .pattern-art { max-width: 10rem; }
+}
+@media (max-width: 41.99rem) {
+  .cover-grid,.cover-grid__footer,.two-col,.timeline { grid-template-columns: minmax(0,1fr); }
+  .spec th,.spec td { padding: var(--u-2); }
+}
