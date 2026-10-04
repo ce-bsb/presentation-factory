@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#deck">Ir para a apresentação</a>
+
+
 
   <!-- ── Topbar ── -->
   <header class="topbar">
@@ -32,7 +33,7 @@
         <span id="slideNum">01</span>&thinsp;/&thinsp;<span id="slideTot">08</span>
       </div>
       <button class="utility-btn" id="fullscreenBtn" aria-label="Tela cheia" aria-pressed="false" title="Alternar tela cheia">
-        <svg class="carbon-icon" width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
+        <svg class="carbon-icon" width="16" height="16" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" focusable="false"><path d="M27 11V5h-6V3h8v8h-2zM5 11H3V3h8v2H5v6zm22 10h2v8h-8v-2h6v-6zM11 29H3v-8h2v6h6v2z"/></svg>
       </button>
     </div>
     <div class="progress-track" aria-hidden="true">
@@ -40,16 +41,17 @@
     </div>
   </header>
 
-  <main class="deck" id="deck">
+  <main class="deck" id="deck" tabindex="-1" aria-label="Apresentação de slides">
 
     <!-- ═══════════════════════════════════════
          SLIDE 01 — CAPA (dossiê)
          ═══════════════════════════════════════ -->
-    <section style="--i: 0" class="slide slide--cover active" id="slide-1" data-slide="1" data-presentation-name="Dossiê" aria-labelledby="s1-title">
+    <section style="--i: 0" class="slide slide--cover active" id="slide-1" data-slide="1" data-presentation-name="Dossiê" aria-labelledby="s1-title" data-pattern="orbits">
       <div class="slide__inner">
-        <div class="cover-id" aria-hidden="true">
+        <div class="cover-id">
           <span class="cover-id__kicker">DOSSIÊ</span>
           <span class="cover-id__num">01</span>
+          <div class="pattern-art" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
           <div class="cover-id__foot">
             <span class="cover-id__status">{{CLASSIFICACAO}}</span>
             <span class="cover-id__date">{{DATA_COVER}}</span>
@@ -85,7 +87,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 02 — SUMÁRIO (agenda com líder pontilhado)
          ═══════════════════════════════════════ -->
-    <section style="--i: 1" class="slide" id="slide-2" data-slide="2" data-presentation-name="Sumário" aria-labelledby="s2-title">
+    <section style="--i: 1" class="slide" id="slide-2" data-slide="2" data-presentation-name="Sumário" aria-labelledby="s2-title" data-pattern="matrix">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">02 — {{EYEBROW_S2}}</span>
@@ -157,7 +159,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 03 — LEDGER DE MÉTRICAS
          ═══════════════════════════════════════ -->
-    <section style="--i: 2" class="slide" id="slide-3" data-slide="3" data-presentation-name="Métricas" aria-labelledby="s3-title">
+    <section style="--i: 2" class="slide" id="slide-3" data-slide="3" data-presentation-name="Métricas" aria-labelledby="s3-title" data-pattern="weave">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">03 — {{EYEBROW_S3}}</span>
@@ -199,7 +201,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 04 — BRIEF DE DUAS COLUNAS + MARGINÁLIA
          ═══════════════════════════════════════ -->
-    <section style="--i: 3" class="slide" id="slide-4" data-slide="4" data-presentation-name="Brief" aria-labelledby="s4-title">
+    <section style="--i: 3" class="slide" id="slide-4" data-slide="4" data-presentation-name="Brief" aria-labelledby="s4-title" data-pattern="contour">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">04 — {{EYEBROW_S4}}</span>
@@ -234,7 +236,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 05 — SIGNAL CHAIN (processo)
          ═══════════════════════════════════════ -->
-    <section style="--i: 4" class="slide" id="slide-5" data-slide="5" data-presentation-name="Processo" aria-labelledby="s5-title">
+    <section style="--i: 4" class="slide" id="slide-5" data-slide="5" data-presentation-name="Processo" aria-labelledby="s5-title" data-pattern="orbits">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">05 — {{EYEBROW_S5}}</span>
@@ -273,7 +275,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 06 — TABELA COMPARATIVA
          ═══════════════════════════════════════ -->
-    <section style="--i: 5" class="slide" id="slide-6" data-slide="6" data-presentation-name="Comparativo" aria-labelledby="s6-title">
+    <section style="--i: 5" class="slide" id="slide-6" data-slide="6" data-presentation-name="Comparativo" aria-labelledby="s6-title" data-pattern="matrix">
       <div class="slide__inner">
         <header class="slide-head">
           <span class="eyebrow">06 — {{EYEBROW_S6}}</span>
@@ -322,7 +324,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 07 — STATEMENT / CITAÇÃO
          ═══════════════════════════════════════ -->
-    <section style="--i: 6" class="slide" id="slide-7" data-slide="7" data-presentation-name="Statement" aria-labelledby="s7-title">
+    <section style="--i: 6" class="slide" id="slide-7" data-slide="7" data-presentation-name="Statement" aria-labelledby="s7-title" data-pattern="weave">
       <div class="slide__inner" style="justify-content:center;">
         <div class="statement">
           <span class="statement__mark" aria-hidden="true"></span>
@@ -338,7 +340,7 @@
     <!-- ═══════════════════════════════════════
          SLIDE 08 — ENCERRAMENTO + COLOFÃO
          ═══════════════════════════════════════ -->
-    <section style="--i: 7" class="slide slide--closing" id="slide-8" data-slide="8" data-presentation-name="Encerramento" aria-labelledby="s8-title">
+    <section style="--i: 7" class="slide slide--closing" id="slide-8" data-slide="8" data-presentation-name="Encerramento" aria-labelledby="s8-title" data-pattern="contour">
       <div class="slide__inner">
         <div class="closing-main">
           <span class="eyebrow">08 — {{EYEBROW_S8}}</span>
@@ -402,7 +404,7 @@
 
   <!-- ── Navigation dots ── -->
   <nav class="nav-controls" aria-label="Navegação de slides">
-    <div class="slide-dots" id="navDots" role="tablist" aria-label="Slides"></div>
+    <div class="slide-dots" id="navDots" role="group" aria-label="Slides"></div>
   </nav>
 
   <script src="assets/deck.js"></script>
