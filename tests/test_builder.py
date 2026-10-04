@@ -156,11 +156,14 @@ class BuilderTest(unittest.TestCase):
         ]
         for path in stylesheets:
             content = path.read_text(encoding="utf-8")
-            self.assertIn(
-                "font-size: 18px;",
-                content,
-                msg=str(path.relative_to(ROOT)),
-            )
+            if "font-size: 100%;" in content:
+                # 1.125rem at the browser's default 16px root is 18px, while
+                # respecting larger user font preferences and browser zoom.
+                self.assertIn("--text-18: 1.125rem;", content)
+                self.assertIn("font: var(--text-18)/1.5 var(--font-sans)", content)
+            else:
+                self.assertIn("font-size: 18px;", content,
+                              msg=str(path.relative_to(ROOT)))
 
 
 if __name__ == "__main__":
