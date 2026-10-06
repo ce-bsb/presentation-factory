@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -141,7 +142,6 @@ def build_package(
         shutil.copy2(source, target_path)
 
     # Inline styles and scripts into index.html for portability in the compiled package
-    import re
     index_path = workspace / "index.html"
     if index_path.is_file():
         index_content = index_path.read_text(encoding="utf-8")
