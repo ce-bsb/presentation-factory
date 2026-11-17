@@ -2,8 +2,11 @@
 
 Each template receives base.css + expressive.css + its own composition CSS. Custom
 properties declared in `:root` that the template never references (in its CSS or HTML)
-are pruned, so no template ships unused design tokens.
+are pruned, so no template ships unused design tokens. Local SVGs referenced through
+`url()` (mask images) are inlined as data URIs: Chromium blocks file:// mask requests
+(CORS), which would make icons and pictograms vanish when index.html is opened from disk.
 """
+import base64
 from pathlib import Path
 import re
 import sys
@@ -18,6 +21,7 @@ stale = []
 # @media queries must be left untouched.
 ROOT_BLOCK = re.compile(r'^:root \{\n(.*?)\n\}', re.S | re.M)
 DECLARATION = re.compile(r'--[\w-]+\s*:[^;]+;')
+LOCAL_SVG_URL = re.compile(r"url\(\s*(['\"]?)((?!data:|https?:|/|#)[^'\")\s]+\.svg)\1\s*\)")
 
 
 def read(path: Path) -> str:
@@ -52,8 +56,17 @@ def prune_unused_tokens(css: str, html: str) -> str:
             return css
 
 
+def inline_svg_urls(css: str, assets_dir: Path) -> str:
+    def inline(match):
+        data = base64.b64encode((assets_dir / match.group(2)).read_bytes()).decode('ascii')
+        return f"url('data:image/svg+xml;base64,{data}')"
+
+    return LOCAL_SVG_URL.sub(inline, css)
+
+
 def assemble(composition: str, html_path: Path) -> str:
     css = '\n'.join(read(source / name) for name in ('base.css', 'expressive.css', composition))
+    css = inline_svg_urls(css, html_path.parent / 'assets')
     return prune_unused_tokens(css, read(html_path))
 
 

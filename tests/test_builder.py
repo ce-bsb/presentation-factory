@@ -250,6 +250,13 @@ class BuilderTest(unittest.TestCase):
             self.assertGreaterEqual(float(width) * 16, 44, msg=".dot touch target")
         self.assertIn(".dot { flex-shrink: 0; width: 2.75rem; height: 2.75rem;", css)
 
+    def test_template_mask_images_are_inlined_for_file_protocol(self) -> None:
+        for slug in ("ibm-template", "ibm-brief-template", "ibm-edge-template"):
+            css = (
+                ROOT / f"organizations/ibm/templates/{slug}/assets/styles.css"
+            ).read_text(encoding="utf-8")
+            self.assertNotRegex(css, r"url\(\s*['\"]?(?:icons|pictograms)/", msg=slug)
+
     def test_status_deltas_do_not_rely_on_color_alone(self) -> None:
         html = (
             ROOT / "organizations/ibm/templates/ibm-brief-template/index.html"
