@@ -6,12 +6,14 @@ on:
       presentation:
         description: Presentation slug
         required: true
-        default: bb-dirco-workshop
+        default: ibm-discovery-workshop
         type: choice
         options:
-          - bb-dirco-workshop
-          - bb-dijur-sentencas
           - ia-parceria-produtividade
+          - ia-setor-bancario-brasil
+          - ibm-ai-document-review
+          - ibm-discovery-workshop
+          - lorem-ipsum-demo
       model:
         description: Model alias
         required: true
@@ -38,6 +40,8 @@ jobs:
           python-version: "3.12"
       - name: Validate associations
         run: PYTHONPATH=src python -m presentation_factory validate
+      - name: Check template assets are synchronized
+        run: python tools/sync_template_assets.py --check
       - name: Run tests
         run: PYTHONPATH=src python -m unittest discover -s tests -v
 
