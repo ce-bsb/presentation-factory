@@ -60,7 +60,7 @@ class Repository:
     def resolve(self, relative_path: str) -> Path:
         path = (self.root / relative_path).resolve()
         try:
-            path.relative_to(self.root)
+            path.relative_to(self.root.resolve())
         except ValueError as exc:
             raise ConfigurationError(
                 f"Caminho fora do repositório: {relative_path}"
@@ -81,5 +81,8 @@ def discover_repository(start: Path | None = None) -> Repository:
 def load_toml(path: Path) -> dict:
     if not path.is_file():
         raise ConfigurationError(f"Arquivo não encontrado: {path}")
-    with path.open("rb") as handle:
-        return tomllib.load(handle)
+    try:
+        with path.open("rb") as handle:
+            return tomllib.load(handle)
+    except tomllib.TOMLDecodeError as exc:
+        raise ConfigurationError(f"TOML inválido em {path}: {exc}") from exc

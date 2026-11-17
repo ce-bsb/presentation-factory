@@ -25,14 +25,30 @@ def sha256(path: Path) -> str:
 
 
 def git_revision(repository: Repository) -> str | None:
-    result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=repository.root,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repository.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:  # git is not installed
+        return None
     return result.stdout.strip() if result.returncode == 0 else None
+
+
+# Relative url(...) references in assets/styles.css are resolved against assets/;
+# once the stylesheet is inlined into index.html they must resolve against the root.
+CSS_RELATIVE_URL = re.compile(
+    r"url\(\s*(['\"]?)(?!data:|https?:|/|#|assets/)([^'\")\s]+)\1\s*\)"
+)
+
+
+def rebase_css_urls(css: str) -> str:
+    return CSS_RELATIVE_URL.sub(
+        lambda match: f"url({match[1]}assets/{match[2]}{match[1]})", css
+    )
 
 
 def presentation_slugs(repository: Repository) -> list[str]:
@@ -145,39 +161,30 @@ def build_package(
     index_path = workspace / "index.html"
     if index_path.is_file():
         index_content = index_path.read_text(encoding="utf-8")
-        
-        # Match '<link rel="stylesheet" href="assets/styles.css">' or variation
-        # and inline assets/styles.css if it exists
+
+        # Inline assets/styles.css, rebasing its relative url(...) references.
         link_pattern = re.compile(r'<link\s+[^>]*href=["\']assets/styles\.css["\'][^>]*>')
-        if link_pattern.search(index_content):
-            styles_path = workspace / "assets/styles.css"
-            if styles_path.is_file():
-                styles_content = styles_path.read_text(encoding="utf-8")
-                index_content = link_pattern.sub(
-                    f"<style>\n{styles_content}\n</style>", index_content
-                )
-                try:
-                    styles_path.unlink()
-                except OSError:
-                    pass
-                    
-        # Match '<script src="assets/deck.js"></script>' or variation
-        # and inline assets/deck.js if it exists
+        styles_path = workspace / "assets/styles.css"
+        if link_pattern.search(index_content) and styles_path.is_file():
+            styles_content = rebase_css_urls(styles_path.read_text(encoding="utf-8"))
+            # Callable replacement: file contents must not be parsed for backslash escapes.
+            index_content = link_pattern.sub(
+                lambda _: f"<style>\n{styles_content}\n</style>", index_content
+            )
+            styles_path.unlink()
+
+        # Inline assets/deck.js.
         script_pattern = re.compile(
             r'<script\s+[^>]*src=["\']assets/deck\.js["\'][^>]*>\s*</script>'
         )
-        if script_pattern.search(index_content):
-            deck_path = workspace / "assets/deck.js"
-            if deck_path.is_file():
-                deck_content = deck_path.read_text(encoding="utf-8")
-                index_content = script_pattern.sub(
-                    f"<script>\n{deck_content}\n</script>", index_content
-                )
-                try:
-                    deck_path.unlink()
-                except OSError:
-                    pass
-                    
+        deck_path = workspace / "assets/deck.js"
+        if script_pattern.search(index_content) and deck_path.is_file():
+            deck_content = deck_path.read_text(encoding="utf-8")
+            index_content = script_pattern.sub(
+                lambda _: f"<script>\n{deck_content}\n</script>", index_content
+            )
+            deck_path.unlink()
+
         index_path.write_text(index_content, encoding="utf-8")
 
     shutil.copy2(brief_path, destination / "brief.md")
