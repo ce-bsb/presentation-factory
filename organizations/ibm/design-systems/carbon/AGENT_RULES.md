@@ -15,9 +15,8 @@ Mandatory visual rules for Presentation Factory agents.
 
 - Use **IBM Plex Sans** for UI and body text (minimum 18px).
 - Use **IBM Plex Mono** for code, labels, kickers, and technical metadata.
-- Use **IBM Plex Serif** (italic) only for editorial emphasis in hero headings.
 - Always load the canonical Google Fonts URL from `TOKENS.md` — Sans + Mono only.
-  Load Serif separately only when `var(--font-serif)` is actively used in the CSS.
+  No template uses IBM Plex Serif; do not load it.
 
 ## Colors
 
@@ -27,9 +26,9 @@ Mandatory visual rules for Presentation Factory agents.
 - Blue-50 (`#4589ff`, `--ibm-blue-l`) is for interactive elements on dark/blue backgrounds.
 - Gray-20 (`#e0e0e0`) is for borders and dividers.
 - Gray-10 (`#f4f4f4`) is the page/shell background.
-- Orange-40 (`#ff832b`, `--warn`) is for warning icons and highlights.
-- Tint tokens (`--ibm-cyan-t`, `--ibm-purple-t`, `--up-t`, `--warn-t`) are defined only in
-  `ibm-template` — do not use them in brief or edge templates unless you add them to `:root` first.
+- Need a color that is not in `TOKENS.md`? Add it to `tools/template-assets/base.css` `:root` and
+  document it in `TOKENS.md` first. `tools/sync_template_assets.py` removes tokens a template
+  does not reference, so never edit a generated `assets/styles.css` by hand.
 - Never use hardcoded `px` or `#hex` values directly in CSS — always use a defined token.
 
 ## Layout
@@ -100,4 +99,4 @@ Mandatory visual rules for Presentation Factory agents.
 - Never add a CSS variable to `:root` that is not used in that template's CSS.
 - HTML must be semantic with correct `lang`, unique IDs, and `aria-label` on slides.
 - Never use hardcoded pixel font sizes — use `var(--text-*)` tokens.
-  Minimum: `var(--text-11)` (11px) for mono labels. Minimum body: `var(--text-18)`.
+  Minimum: `var(--text-12)` (12px) for mono labels. Minimum body: `var(--text-18)`.
