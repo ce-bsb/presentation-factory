@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,10 +9,11 @@ from pathlib import Path
 from presentation_factory.builder import (
     build_package,
     presentation_slugs,
+    rebase_css_urls,
     validate_repository,
     workspace_target,
 )
-from presentation_factory.config import ConfigurationError, Repository
+from presentation_factory.config import ConfigurationError, Repository, load_toml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -164,6 +166,68 @@ class BuilderTest(unittest.TestCase):
             else:
                 self.assertIn("font-size: 18px;", content,
                               msg=str(path.relative_to(ROOT)))
+
+    def test_rebases_relative_css_urls_when_inlining(self) -> None:
+        css = (
+            ".a { mask-image: url('pictograms/cloud.svg'); }"
+            ' .b { background: url("icons/x.svg"); }'
+            " .c { background: url(data:image/png;base64,AAAA); }"
+            " .d { background: url(https://example.com/a.png); }"
+            " .e { background: url('assets/already.svg'); }"
+            " .f { background: url(#fragment); }"
+        )
+        rebased = rebase_css_urls(css)
+        self.assertIn("url('assets/pictograms/cloud.svg')", rebased)
+        self.assertIn('url("assets/icons/x.svg")', rebased)
+        self.assertIn("url(data:image/png;base64,AAAA)", rebased)
+        self.assertIn("url(https://example.com/a.png)", rebased)
+        self.assertIn("url('assets/already.svg')", rebased)
+        self.assertIn("url(#fragment)", rebased)
+
+    def test_compiled_index_has_no_broken_css_asset_urls(self) -> None:
+        for slug in presentation_slugs(self.repository):
+            destination = build_package(
+                self.repository, slug, output=self.output / slug
+            )
+            workspace = destination / "workspace"
+            index = (workspace / "index.html").read_text(encoding="utf-8")
+            for reference in re.findall(r"url\(['\"]?([^'\")]+)['\"]?\)", index):
+                if reference.startswith(("data:", "http", "#")):
+                    continue
+                self.assertTrue(
+                    (workspace / reference).is_file(),
+                    msg=f"{slug}: {reference} not found relative to index.html",
+                )
+
+    def test_generated_template_css_keeps_media_query_root_overrides(self) -> None:
+        # Regression: pruning unused tokens must not mangle `:root` rules nested in
+        # @media blocks (it once dropped a closing brace and hid slides in print).
+        stylesheets = [
+            *(ROOT / "organizations/ibm/templates").glob("*/assets/styles.css"),
+            ROOT / "clients/ibm-enterprise/assets/css/styles.css",
+        ]
+        self.assertTrue(stylesheets)
+        for path in stylesheets:
+            content = re.sub(
+                r"/\*.*?\*/", "", path.read_text(encoding="utf-8"), flags=re.S
+            )
+            name = str(path.relative_to(ROOT))
+            self.assertEqual(content.count("{"), content.count("}"), msg=name)
+            self.assertIn(":root { --page-pad: var(--u-5); }", content, msg=name)
+            declared = set(re.findall(r"(--[\w-]+)\s*:", content))
+            used = set(re.findall(r"var\(\s*(--[\w-]+)", content))
+            self.assertFalse(
+                {v for v in used if v not in declared}
+                - {"--i", "--n", "--value", "--reveal-delay"},
+                msg=f"{name}: undefined custom properties",
+            )
+
+    def test_malformed_toml_reports_configuration_error(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            broken = Path(directory) / "broken.toml"
+            broken.write_text("slug = \n", encoding="utf-8")
+            with self.assertRaises(ConfigurationError):
+                load_toml(broken)
 
 
 if __name__ == "__main__":
