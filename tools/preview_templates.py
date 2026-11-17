@@ -63,4 +63,4 @@ for slug, name in names.items():
     result=re.sub(r'      <div class="brand-mark brand-mark-client">.*?</div>', '', result, flags=re.S)
     result=result.replace('<title>Tecnologia que transforma',f'<title>Preview {name} — Tecnologia que transforma')
     (directory/'preview.html').write_text(result)
-print('Three illustrative previews generated.')
+print('Illustrative previews generated.')
