@@ -25,7 +25,7 @@ class Deck {
       candidates.filter(element => !candidates.some(parent => parent !== element && parent.contains(element)))
         .forEach((element, order) => {
           element.dataset.reveal = '';
-          element.style.setProperty('--reveal-delay', `${Math.min(order, 5) * 60}ms`);
+          element.style.setProperty('--reveal-delay', `${Math.min(order, 6) * 90}ms`);
         });
     });
     const initial = this.slides.findIndex(slide => `#${slide.id}` === location.hash);

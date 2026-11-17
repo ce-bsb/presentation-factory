@@ -76,6 +76,12 @@ Mandatory visual rules for Presentation Factory agents.
   `--n` (the current index, set by `deck.js`); `.slide`'s
   `transform: translateX(calc((var(--i) - var(--n)) * 100%))` does the rest.
   Never reintroduce opacity/translateY/scale/clip-path as the main slide transition.
+- Depth and polish are allowed on top of the carousel, defined in `expressive.css`:
+  parallax on `.slide__inner`/`.slide-grid` (`--parallax`), a staggered `[data-reveal]`
+  entrance, slow `float`/`pattern-breathe` loops on decorative geometry only, a `shimmer`
+  on `h1 em`/`h2 em`, a `shine` on the progress bar and a glow on the active dot. Text
+  blocks never loop or move while people read. Every animation sits inside
+  `prefers-reduced-motion: no-preference`; reduced-motion and print reset them.
 - Do not remove `@media (prefers-reduced-motion: reduce)`, and never neutralize it by
   forcing `.slide { transform: none }` — that would stack every slide on top of each
   other, since `transform` is what positions slides, not just what animates them.

@@ -120,8 +120,11 @@ body.reading-mode { padding-top: var(--topbar-h); padding-bottom: var(--footer-h
   --pattern-line: color-mix(in srgb, var(--ibm-blue) 18%, transparent);
   --pattern-soft: color-mix(in srgb, var(--ibm-blue) 8%, transparent);
   --pattern-unit: 3rem;
-  --motion-enter: 640ms;
+  --motion-enter: 720ms;
   --motion-expressive: cubic-bezier(0, 0, .3, 1);
+  --motion-slide: 720ms;
+  --motion-slide-ease: cubic-bezier(.76, 0, .24, 1);
+  --parallax: 18%;
   --reveal-delay: 0ms;
 }
 .slide { isolation: isolate; background-image: none; }
@@ -161,23 +164,43 @@ body.reading-mode { padding-top: var(--topbar-h); padding-bottom: var(--footer-h
 .pattern-art span:nth-child(2) { border-radius: 50%; background: repeating-linear-gradient(0deg,var(--ibm-blue) 0,var(--ibm-blue) .125rem,transparent .125rem,transparent .5rem); }
 .pattern-art span:nth-child(3) { background: radial-gradient(var(--ibm-blue) .11rem,transparent .12rem) 0 0 / var(--u-3) var(--u-3); border-radius: 0 0 0 50%; }
 .pattern-art span:nth-child(4) { border-radius: 0 0 100% 0; background-color: var(--ibm-blue-d); background-image: repeating-radial-gradient(circle at 0 0,transparent 0,transparent .55rem,var(--ibm-blue-l) .58rem,transparent .64rem); }
-/* Reveal content once on slide entry. No ambient loops while people read. */
+/* Motion: the slide change stays a horizontal carousel (the .slide transform positions it);
+   depth comes from parallax on the slide content, a staggered reveal, and slow ambient
+   loops (float, breathe, shine) on decoration only. Text never moves while people read. */
 @media (prefers-reduced-motion: no-preference) {
+  .slide { transition: transform var(--motion-slide) var(--motion-slide-ease); }
+  .slide > :is(.slide__inner,.slide-grid) { transition: transform var(--motion-slide) var(--motion-slide-ease), opacity calc(var(--motion-slide) * .6) var(--ease); transform: translateX(calc((var(--i, 0) - var(--n, 0)) * var(--parallax))); }
+  .slide:not(.active) > :is(.slide__inner,.slide-grid) { opacity: 0; }
+  .reading-mode .slide > :is(.slide__inner,.slide-grid) { transform: none; }
   .slide.active [data-reveal] { animation: content-enter var(--motion-enter) var(--motion-expressive) var(--reveal-delay) both; }
-  .slide.active .pattern-art span { animation: geometry-enter 1000ms var(--motion-expressive) both; }
-  .slide.active .pattern-art span:nth-child(2) { animation-delay: 80ms; }
-  .slide.active .pattern-art span:nth-child(3) { animation-delay: 160ms; }
-  .slide.active .pattern-art span:nth-child(4) { animation-delay: 240ms; }
-  .slide.active::after { animation: pattern-enter 1400ms var(--motion-expressive) both; }
+  .slide.active::after { animation: pattern-enter 1400ms var(--motion-expressive) both, pattern-breathe 7s ease-in-out 1400ms infinite alternate; }
+  .slide.active .pattern-art span { animation: geometry-enter 1000ms var(--motion-expressive) both, float 6s ease-in-out 1s infinite alternate; }
+  .slide.active .pattern-art span:nth-child(2) { animation-delay: 80ms, 1.6s; }
+  .slide.active .pattern-art span:nth-child(3) { animation-delay: 160ms, 2.2s; }
+  .slide.active .pattern-art span:nth-child(4) { animation-delay: 240ms, 2.8s; }
+  .slide.active .motion-grid span { animation: geometry-enter 1000ms var(--motion-expressive) both, float 7s ease-in-out 1.2s infinite alternate; }
+  .slide.active .motion-grid span:nth-child(3n) { animation-delay: 160ms, 2.4s; }
+  .slide.active .motion-grid span:nth-child(4n) { animation-delay: 280ms, 3.4s; }
+  :is(h1,h2) em { color: var(--ibm-blue); background: linear-gradient(100deg,var(--ibm-blue) 0,var(--ibm-blue) 42%,var(--ibm-blue-l) 50%,var(--ibm-blue) 58%,var(--ibm-blue) 100%) 100% 0 / 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .slide.active :is(h1,h2) em { animation: shimmer 5s ease-in-out 1s infinite; }
+  .progress-track span { position: relative; overflow: hidden; }
+  .progress-track span::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,transparent,var(--white),transparent); animation: shine 2.8s ease-in-out infinite; }
+  .dot::after { transition: background 160ms var(--ease), box-shadow 240ms var(--ease), left 240ms var(--ease), width 240ms var(--ease); }
+  .dot.active::after { left: 10%; width: 80%; box-shadow: 0 0 .75rem var(--ibm-blue-l); }
   .slide.active .chart-row__fill { transform-origin: bottom; animation: chart-enter 900ms var(--motion-expressive) both; }
-  .slide.active .motion-grid span { animation: geometry-enter 1000ms var(--motion-expressive) both; }
-  .slide.active .motion-grid span:nth-child(3n) { animation-delay: 160ms; }
-  .slide.active .motion-grid span:nth-child(4n) { animation-delay: 280ms; }
+  .card,.panel,.stat,.deployment-option,.executive-panel { transition: translate 280ms var(--ease), box-shadow 280ms var(--ease), border-color 280ms var(--ease); }
   .nav-arrow svg { transition: transform 160ms var(--ease); }
   .nav-arrow--next:hover:not(:disabled) svg { transform: translateX(.1875rem); }
   .nav-arrow--prev:hover:not(:disabled) svg { transform: translateX(-.1875rem); }
 }
-@keyframes content-enter { from { opacity: 0; transform: translateY(var(--u-3)); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .card:hover,.panel:hover,.stat:hover,.deployment-option:hover,.executive-panel:hover { translate: 0 calc(var(--u-1) * -1); border-color: var(--ibm-blue-l); box-shadow: 0 var(--u-3) var(--u-6) var(--pattern-line); }
+}
+@keyframes content-enter { from { opacity: 0; transform: translateY(var(--u-6)) scale(.98); filter: blur(.375rem); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes float { from { translate: 0 0; } to { translate: 0 calc(var(--u-2) * -1); } }
+@keyframes pattern-breathe { from { opacity: 1; } to { opacity: .5; } }
+@keyframes shimmer { 0% { background-position: 100% 0; } 55%,100% { background-position: 0 0; } }
+@keyframes shine { 0% { transform: translateX(-100%); } 60%,100% { transform: translateX(100%); } }
 @keyframes geometry-enter { from { opacity: 0; transform: scale(.92) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
 @keyframes pattern-enter { from { opacity: 0; } to { opacity: 1; } }
 @keyframes chart-enter { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -187,7 +210,9 @@ body.reading-mode { padding-top: var(--topbar-h); padding-bottom: var(--footer-h
 }
 @media print {
   .slide::before,.slide::after { opacity: .3; animation: none !important; }
-  .slide [data-reveal],.slide .pattern-art span,.slide .motion-grid span,.slide .chart-row__fill { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .slide [data-reveal],.slide .pattern-art span,.slide .motion-grid span,.slide .chart-row__fill { animation: none !important; opacity: 1 !important; transform: none !important; translate: none !important; filter: none !important; }
+  .slide > :is(.slide__inner,.slide-grid) { opacity: 1 !important; transform: none !important; }
+  :is(h1,h2) em { animation: none !important; background: none !important; -webkit-text-fill-color: currentcolor !important; }
 }
 
 /* Standard · workshop preparation and actionable checklists. */
