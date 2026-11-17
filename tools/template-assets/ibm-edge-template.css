@@ -44,6 +44,8 @@
 .card-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--u-5); }
 .card { background: var(--white); padding: var(--u-6); border: var(--hairline) solid var(--gray-20); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
 .card__icon { background: var(--ibm-blue); width: var(--u-8); height: var(--u-8); padding: var(--u-3); margin-bottom: var(--u-6); color: var(--white); }
+.card__icon--cyan { background: var(--ibm-cyan); }
+.card__icon--teal { background: var(--ibm-teal); }
 .card__title { margin-bottom: var(--u-4); }
 .card__body { color: var(--cds-text-secondary); }
 .carbon-icon--list,.carbon-icon--fit,.carbon-icon--quotes { display: block; background: currentColor; mask: center/contain no-repeat; }

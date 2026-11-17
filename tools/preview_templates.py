@@ -42,6 +42,8 @@ def replacement(key, slug):
     if key.endswith('_CARGO'): return 'Estratégia e tecnologia'
     if key.endswith('_VALOR'): return '32%' if any(x in key for x in ['METRIC','STAT','RESULTADO','BENEFICIO']) else 'Visão de futuro'
     if key.endswith('_DELTA'): return 'Exemplo ilustrativo'
+    if key.startswith('GRAFICO_ROTULO'): return 'T'+key[-1]
+    if key=='GRAFICO_TITULO': return 'Gráfico de barras com evolução de resultados'
     if key.endswith('_NUM'): return '01'
     if key.endswith('_TITULO') or re.match(r'LINHA_\d_LABEL',key):
         n=re.search(r'_(\d)',key)

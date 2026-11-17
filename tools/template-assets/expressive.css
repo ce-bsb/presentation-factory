@@ -54,7 +54,7 @@
   .slide.active .pattern-art span:nth-child(3) { animation-delay: 160ms; }
   .slide.active .pattern-art span:nth-child(4) { animation-delay: 240ms; }
   .slide.active::after { animation: pattern-enter 1400ms var(--motion-expressive) both; }
-  .slide.active .chart-row span { transform-origin: bottom; animation: chart-enter 900ms var(--motion-expressive) both; }
+  .slide.active .chart-row__fill { transform-origin: bottom; animation: chart-enter 900ms var(--motion-expressive) both; }
   .slide.active .motion-grid span { animation: geometry-enter 1000ms var(--motion-expressive) both; }
   .slide.active .motion-grid span:nth-child(3n) { animation-delay: 160ms; }
   .slide.active .motion-grid span:nth-child(4n) { animation-delay: 280ms; }
@@ -72,5 +72,5 @@
 }
 @media print {
   .slide::before,.slide::after { opacity: .3; animation: none !important; }
-  .slide [data-reveal],.slide .pattern-art span,.slide .motion-grid span,.slide .chart-row span { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .slide [data-reveal],.slide .pattern-art span,.slide .motion-grid span,.slide .chart-row__fill { animation: none !important; opacity: 1 !important; transform: none !important; }
 }

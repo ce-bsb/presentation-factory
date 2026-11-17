@@ -48,9 +48,11 @@
 .dashboard { padding: var(--u-5); background: var(--white); border: var(--hairline) solid var(--gray-20); border-radius: var(--radius-md); }
 .dashboard-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--u-3); }
 .dashboard-header span { font: var(--text-12)/1.5 var(--font-mono); }
-.chart-row { height: 10rem; display: flex; align-items: end; gap: var(--u-4); border-bottom: var(--hairline) solid var(--gray-30); margin: var(--u-5) 0; }
-.chart-row span { flex: 1; height: var(--value); background: var(--ibm-blue); }
-.chart-row span:nth-child(even) { background: var(--ibm-blue-l); }
+.chart-row { list-style: none; padding: 0; height: 12rem; display: flex; align-items: stretch; gap: var(--u-4); border-bottom: var(--hairline) solid var(--gray-30); margin: var(--u-5) 0 var(--u-8); }
+.chart-row__bar { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.chart-row__fill { width: 100%; height: var(--value); background: var(--ibm-blue); }
+.chart-row__value { font: var(--text-12)/1.5 var(--font-mono); color: var(--cds-text-primary); padding-bottom: var(--u-1); }
+.chart-row__label { position: absolute; top: 100%; padding-top: var(--u-1); font: var(--text-12)/1.5 var(--font-mono); color: var(--cds-text-secondary); white-space: nowrap; }
 .status-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--u-4); }
 .status-grid span { display: block; font: var(--text-12)/1.5 var(--font-mono); color: var(--cds-text-secondary); }
 .status-grid strong { font-size: var(--text-24); font-weight: 400; }

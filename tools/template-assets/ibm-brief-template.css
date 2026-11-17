@@ -24,7 +24,8 @@
 .metric { padding: var(--u-5); border-right: var(--hairline) solid var(--gray-20); display: flex; flex-direction: column; align-items: flex-start; gap: var(--u-4); }
 .metric__value { font-size: clamp(var(--text-32),4vw,var(--text-54)); font-weight: 300; line-height: 1.2; color: var(--ibm-blue); }
 .metric__label { font-weight: 500; }
-.metric__delta { font: var(--text-12)/1.5 var(--font-mono); }
+.metric__delta { display: inline-flex; align-items: center; gap: var(--u-1); font: var(--text-12)/1.5 var(--font-mono); }
+.metric__arrow { flex-shrink: 0; }
 .metric__delta--up { color: var(--up); }
 .metric__delta--down { color: var(--down); }
 .metric__desc { color: var(--cds-text-secondary); }

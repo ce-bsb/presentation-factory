@@ -222,6 +222,72 @@ class BuilderTest(unittest.TestCase):
                 msg=f"{name}: undefined custom properties",
             )
 
+    def test_inline_icons_use_official_carbon_artboards(self) -> None:
+        # Carbon ships 16/20/24/32 px icon artboards; never scale a 32 px icon down.
+        official = {16, 20, 24, 32}
+        templates = [
+            *(ROOT / "organizations/ibm/templates").glob("*/index.html"),
+            ROOT / "clients/ibm-enterprise/templates/standard-deck/index.html",
+        ]
+        for path in templates:
+            html = path.read_text(encoding="utf-8")
+            for tag in re.findall(r"<svg\b[^>]*>", html):
+                width = re.search(r'width="(\d+)"', tag)
+                box = re.search(r'viewBox="0 0 (\d+) (\d+)"', tag)
+                name = str(path.relative_to(ROOT))
+                self.assertIsNotNone(width, msg=f"{name}: {tag}")
+                self.assertIsNotNone(box, msg=f"{name}: {tag}")
+                self.assertIn(int(width.group(1)), official, msg=f"{name}: {tag}")
+                self.assertEqual(
+                    int(width.group(1)), int(box.group(1)), msg=f"{name}: {tag}"
+                )
+                self.assertIn('aria-hidden="true"', tag, msg=f"{name}: {tag}")
+                self.assertIn('focusable="false"', tag, msg=f"{name}: {tag}")
+
+    def test_navigation_targets_are_at_least_44px(self) -> None:
+        css = (ROOT / "tools/template-assets/base.css").read_text(encoding="utf-8")
+        for width in re.findall(r"\n\s*\.dot \{ width: ([\d.]+)rem", css):
+            self.assertGreaterEqual(float(width) * 16, 44, msg=".dot touch target")
+        self.assertIn(".dot { flex-shrink: 0; width: 2.75rem; height: 2.75rem;", css)
+
+    def test_status_deltas_do_not_rely_on_color_alone(self) -> None:
+        html = (
+            ROOT / "organizations/ibm/templates/ibm-brief-template/index.html"
+        ).read_text(encoding="utf-8")
+        deltas = re.findall(
+            r'<span class="metric__delta metric__delta--(?:up|down)">(.*?)</span></span>',
+            html,
+            flags=re.S,
+        )
+        self.assertEqual(len(deltas), 4)
+        for delta in deltas:
+            self.assertIn("<svg", delta)
+
+    def test_accent_colors_keep_contrast_with_white_icons(self) -> None:
+        def luminance(hex_color: str) -> float:
+            channels = [int(hex_color[i : i + 2], 16) / 255 for i in (0, 2, 4)]
+            linear = [
+                c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+                for c in channels
+            ]
+            return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+        css = (ROOT / "tools/template-assets/base.css").read_text(encoding="utf-8")
+        for token in ("--ibm-cyan", "--ibm-teal", "--ibm-blue", "--gray-60"):
+            value = re.search(rf"{token}: #([0-9a-f]{{6}})", css).group(1)
+            ratio = 1.05 / (luminance(value) + 0.05)
+            self.assertGreaterEqual(ratio, 4.5, msg=f"{token} #{value}: {ratio:.2f}:1")
+
+    def test_bar_chart_exposes_visible_values_and_labels(self) -> None:
+        html = (
+            ROOT / "organizations/ibm/templates/ibm-template/index.html"
+        ).read_text(encoding="utf-8")
+        bars = re.findall(r'<li class="chart-row__bar"[^>]*>(.*?)</li>', html, re.S)
+        self.assertGreaterEqual(len(bars), 2)
+        for bar in bars:
+            self.assertIn("chart-row__value", bar)
+            self.assertIn("chart-row__label", bar)
+
     def test_malformed_toml_reports_configuration_error(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             broken = Path(directory) / "broken.toml"
