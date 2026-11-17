@@ -27,6 +27,7 @@ be absent from a given template — that is intended.
 |---|---|---|---|
 | `gray-100` | `--gray-100` | `#161616` | Primary text, headings |
 | `gray-70`  | `--gray-70`  | `#525252` | Body text, secondary text |
+| `gray-60`  | `--gray-60`  | `#6f6f6f` | Inactive nav indicators (5.0:1 on white) |
 | `gray-30`  | `--gray-30`  | `#c6c6c6` | Stronger borders |
 | `gray-20`  | `--gray-20`  | `#e0e0e0` | Borders, dividers |
 | `gray-10`  | `--gray-10`  | `#f4f4f4` | Page background, subtle surface |
@@ -36,8 +37,8 @@ be absent from a given template — that is intended.
 
 | Token | CSS var | Value | Use |
 |---|---|---|---|
-| `cyan-50`  | `--ibm-cyan` | `#1192e8` | Secondary accent (edge template) |
-| `teal-60`  | `--ibm-teal` | `#009d9a` | Third accent (edge template) |
+| `cyan-60`  | `--ibm-cyan` | `#0072c3` | Secondary accent (edge template); 5.0:1 with white icons |
+| `teal-60`  | `--ibm-teal` | `#007d79` | Third accent (edge template); 5.0:1 with white icons |
 | `green-60` | `--up`       | `#198038` | Success / positive delta (brief template) |
 | `red-60`   | `--down`     | `#da1e28` | Danger / negative delta (brief template) |
 
@@ -119,3 +120,31 @@ All animation is disabled under `prefers-reduced-motion: reduce` and in print.
 | Token | Value | Use |
 |---|---|---|
 | `--shadow-sm` | `0 .125rem .5rem rgb(22 22 22 / 6%)` | Default card elevation |
+
+## Data visualization (Carbon charts)
+
+Source: https://carbondesignsystem.com/data-visualization/color-palettes
+(`building-blocks/data-visualization/color-palettes`). None of these are `:root` tokens yet; if a
+template needs a chart color, add it to `base.css` first and document it here.
+
+Categorical palette — apply **in this order**, never reorder (the sequence maximizes contrast
+between neighbours):
+
+| # | Color | Hex |
+|---|---|---|
+| 1 | Purple 70 | `#6929c4` |
+| 2 | Cyan 50 | `#1192e8` |
+| 3 | Teal 70 | `#005d5d` |
+| 4 | Magenta 70 | `#9f1853` |
+| 5 | Red 50 | `#fa4d56` |
+| 6 | Red 90 | `#570408` |
+| 7 | Green 60 | `#198038` |
+| 8 | Blue 80 | `#002d9c` |
+
+(The full palette has 14 colors; see the source for 9-14.)
+
+Single-series charts use one hue: `--ibm-blue` (Blue 60) is the sequential default. Sequential
+palettes run Blue 10 → 100; the darkest value is the largest in light themes.
+
+Alert palette: Red 60 `#da1e28` (danger), Orange 40 `#ff832b` (serious warning),
+Yellow 30 `#f1c21b` (warning), Green 60 `#198038` (success).

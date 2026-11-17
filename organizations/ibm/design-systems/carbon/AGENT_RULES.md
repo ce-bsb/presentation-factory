@@ -88,6 +88,39 @@ Mandatory visual rules for Presentation Factory agents.
 - Pictograms come from `organizations/ibm/assets/img/pictograms/` (official
   `@carbon/pictograms`) — pick the closest to the slide topic, never draw a new one.
 
+## Icons, pictograms and data visualization
+
+Source: Carbon Design System `building-blocks/foundations/{icons,pictograms}` and
+`building-blocks/data-visualization`.
+
+### Icons
+- Copy an official `@carbon/icons` SVG. Inline icons use the artboard that matches their
+  rendered size (16, 20, 24 or 32 px) with `viewBox="0 0 N N"` — never scale a 32 px icon
+  down to 16/18 px, and never use another size (18 px is not an official size).
+- 16 px and 20 px icons pair with 14 px and 16 px IBM Plex; use 24 or 32 px for larger text.
+- Icons are one solid color and meet 4.5:1 against their background. Match the icon color to
+  the adjacent text, and center-align icon and text (never baseline-align).
+- Interactive icons need a touch target of at least 44 × 44 px, including on mobile.
+- Never use an icon as the only carrier of meaning; keep a text label or `aria-label`.
+
+### Pictograms
+- Minimum rendered size is 48 px; keep proportions, never crop or recolor outside the palette.
+- Containers are only a circle or a square, with padding of at least 1/4 of the grid.
+- Pictograms illustrate; they are not UI icons and never logos or lockups.
+- Dark backgrounds use gray/blue values 70-100 and light backgrounds 10-20; keep the 5-step
+  contrast rule and never place a dark tone on a dark background.
+
+### Data visualization
+- Label values directly on the chart. Keep an accessible name (`aria-label`) on the figure,
+  but do not make a chart image-only: bars carry visible values and category labels.
+- Bar and area numerical axes always start at zero; truncating is acceptable only for lines.
+- Titles describe the insight, not only the metric; use a legend only when direct labels do
+  not fit.
+- Color is never the only signal: pair status colors with an arrow, sign, texture or label
+  (for example `metric__delta` carries an up/down arrow).
+- Series colors follow the categorical order in `TOKENS.md`. One category = one hue.
+- Status uses the alert palette (red, orange, yellow, green) only for status.
+
 ## Code quality
 
 - Never use `!important` in CSS — fix specificity instead.
