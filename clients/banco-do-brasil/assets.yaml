@@ -1,22 +1,47 @@
 assets:
-  - path: logo_azul_bb.svg
+  - path: logo_horizontal_azul_bb.png
     type: logo
     owner: Banco do Brasil
-    purpose: official Banco do Brasil logo, blue version, for light backgrounds
+    source: BancodoBrasil.Logomarca.VersãoHorizontal.Azul.RGB.png (logomarca oficial BB, PNG RGBA 2856x400)
+    purpose: official Banco do Brasil horizontal logo (symbol beside wordmark), blue version, for light backgrounds
     use_when:
-      - header or cover slide on light background
+      - header or footer bar on light background
       - co-branding IBM × Banco do Brasil
-  - path: logo_amarela_bb.svg
+  - path: logo_central_azul_bb.png
     type: logo
     owner: Banco do Brasil
-    purpose: official Banco do Brasil logo, yellow version, for dark or high-contrast areas
+    source: BancodoBrasil.Logomarca.VersãoCentral.Azul.RGB.png (logomarca oficial BB, PNG RGBA 1226x620)
+    purpose: official Banco do Brasil stacked logo (symbol above wordmark), blue version, for light backgrounds
     use_when:
-      - dark accent blocks
-      - footer or reversed-logo treatments
-  - path: logo_icone_bb.svg
+      - cover or closing slide on light background
+      - centered or square-ish areas
+  - path: logo_icone_azul_bb.png
     type: icon
     owner: Banco do Brasil
-    purpose: Banco do Brasil icon mark (symbol only, no wordmark)
+    source: BancodoBrasil.Logomarca.VersãoPrincipal.Azul.RGB.png (logomarca oficial BB, PNG RGB 500x500)
+    purpose: Banco do Brasil symbol only (no wordmark), blue version, for light backgrounds
     use_when:
       - compact spaces where the full logo does not fit
       - favicon-style usage
+  - path: logo_horizontal_amarelo_bb.png
+    type: logo
+    owner: Banco do Brasil
+    source: BancodoBrasil.Logomarca.VersãoHorizontal.Amarelo.RGB.png (logomarca oficial BB, PNG RGBA 2856x400)
+    purpose: official Banco do Brasil horizontal logo, yellow version, for dark or high-contrast areas only (low contrast on white)
+    use_when:
+      - dark accent blocks
+      - footer or reversed-logo treatments
+  - path: logo_central_amarelo_bb.png
+    type: logo
+    owner: Banco do Brasil
+    source: BancodoBrasil.Logomarca.VersãoCentral.Amarelo.RGB.png (logomarca oficial BB, PNG RGBA 1226x620)
+    purpose: official Banco do Brasil stacked logo, yellow version, for dark or high-contrast areas only (low contrast on white)
+    use_when:
+      - cover or closing slide on dark background
+  - path: logo_icone_amarelo_bb.png
+    type: icon
+    owner: Banco do Brasil
+    source: BancodoBrasil.Logomarca.VersãoPrincipal.Amarelo.RGB.png (logomarca oficial BB, PNG RGB 500x500)
+    purpose: Banco do Brasil symbol only (no wordmark), yellow version, for dark or high-contrast areas only (low contrast on white)
+    use_when:
+      - compact spaces on dark background
