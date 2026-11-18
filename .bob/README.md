@@ -5,7 +5,7 @@ Este diretório configura o modo de projeto `Presentation Factory` no Bob.
 ## O que é carregado automaticamente
 
 - `custom_modes.yaml` — definição do modo
-- `rules-presentation-factory/*.md` — regras essenciais (em ordem alfabética)
+- `rules-presentation-factory/01-criar-deck.md` — fluxo de criação via `tools/new_deck.py`
 
 ## Índice sob demanda
 

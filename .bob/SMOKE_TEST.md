@@ -10,29 +10,10 @@
 5. Envie:
 
 ```text
-Crie um deck HTML de teste com três slides em bob-smoke-test/.
-
-Use o template default
-`presentation-factory/organizations/ibm/templates/ibm-template/` e implemente
-sem parar em uma proposta longa.
-
-Crie:
-- index.html
-- assets/ com as cópias locais dos logos oficiais
-- README.md
-
-Slides:
-1. Abertura
-2. Arquivos consultados
-3. Resultado
-
-No slide 2, liste pelo menos três arquivos reais consultados.
-Use tema claro, base de 18px, slide ativo, teclado, índice, hash, swipe,
-prefers-reduced-motion e impressão.
-
-Valide o JavaScript e procure caminhos absolutos proibidos.
+Crie uma apresentação de teste de três slides chamada bob-smoke-test.
+Use o template ibm e o script tools/new_deck.py. Conteúdo livre, sem inventar dados.
 ```
 
-O teste passa se o Bob usar o novo template default, manter CSS e JavaScript
-dentro de `index.html`, copiar os logos oficiais para `assets/` e implementar
-os requisitos sem depender de Skill.
+O teste passa se o Bob usar `tools/new_deck.py` (tokens → JSON → create) sem ler nem
+reescrever o HTML/CSS/JS do template, criar `bob-smoke-test/` fora da factory com
+`index.html` e `assets/` (inclui `ibm-logo.svg`), e entregar o caminho do `index.html`.

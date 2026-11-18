@@ -13,6 +13,10 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 
 `preview_templates.py` gera apenas `preview.html` com conteúdo ilustrativo. Os placeholders dos arquivos `index.html` são preservados.
 
+## Criar um deck
+
+`new_deck.py` evita ler ou reescrever o HTML do template: `tokens <template>` lista os `{{TOKENS}}` por slide e `create <template> <slug> content.json` copia `index.html` + `assets/` para uma pasta irmã da factory, preenche os tokens (com escape de HTML; ausente vira `[A confirmar]`) e remove os assets não usados. Aliases: `ibm`, `brief`, `edge`. Logo de cliente só com `--client-logo <arquivo oficial>`.
+
 ## Verificação visual e funcional
 
 Com Playwright disponível para o Node (instalado no ambiente ou via `NODE_PATH`) e Google Chrome instalado:

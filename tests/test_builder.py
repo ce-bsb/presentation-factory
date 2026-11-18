@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -301,6 +303,39 @@ class BuilderTest(unittest.TestCase):
             broken.write_text("slug = \n", encoding="utf-8")
             with self.assertRaises(ConfigurationError):
                 load_toml(broken)
+
+
+    def test_new_deck_script_fills_tokens_and_keeps_only_used_assets(self) -> None:
+        script = str(ROOT / "tools/new_deck.py")
+        with tempfile.TemporaryDirectory() as directory:
+            content = Path(directory) / "content.json"
+            content.write_text(
+                json.dumps({"TITULO": 'A & "B"', "CLIENTE": "Acme", "EXTRA": "x"}),
+                encoding="utf-8",
+            )
+            out = Path(directory) / "deck"
+            result = subprocess.run(
+                [sys.executable, script, "create", "edge", "deck", str(content), "--out", str(out)],
+                capture_output=True, text=True, check=True,
+            )
+            page = (out / "index.html").read_text(encoding="utf-8")
+            self.assertNotRegex(page, r"\{\{[A-Z0-9_]+\}\}")
+            self.assertIn("A &amp; &quot;B&quot;", page)
+            self.assertIn("[A confirmar]", page)
+            self.assertNotIn("image-placeholder", page)
+            self.assertIn("EXTRA", result.stdout)
+            names = {path.name for path in (out / "assets").rglob("*") if path.is_file()}
+            self.assertNotIn("image-placeholder.svg", names)
+            self.assertNotIn("logo-light.svg", names)
+            self.assertTrue({"styles.css", "deck.js", "ibm-logo.svg"} <= names)
+
+            inside = subprocess.run(
+                [sys.executable, script, "create", "edge", "x", str(content), "--out", str(ROOT / "x")],
+                capture_output=True, text=True,
+            )
+            self.assertNotEqual(inside.returncode, 0)
+            self.assertIn("fora de presentation-factory", inside.stderr)
+            self.assertFalse((ROOT / "x").exists())
 
 
 if __name__ == "__main__":

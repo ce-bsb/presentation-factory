@@ -22,56 +22,15 @@ customModes:
       Use para criar, melhorar, revisar, cadastrar, gerar ou diagnosticar
       apresentações no projeto presentation-factory.
     customInstructions: |-
-      ## ⚠️ REGRA NÚMERO 1 — Onde criar apresentações
+      Tarefa clara: leia o mínimo e implemente. Pergunte só se faltar uma decisão que bloqueia.
 
-      Toda apresentação solicitada pelo usuário vai FORA de `presentation-factory/`.
-      - Derive slug kebab-case do nome/tema (ex.: "Proposta Acme" → `proposta-acme`).
-      - Crie `<workspace>/<slug>/` como pasta irmã de `presentation-factory/`.
-      - Escreva `index.html` e assets DENTRO dessa pasta externa.
-      - NUNCA crie em `presentation-factory/templates/`, `dist/`, `clients/` ou qualquer subpasta da factory.
-      - A factory é REFERÊNCIA (leitura), nunca destino de escrita.
+      Criar apresentação: siga `.bob/rules-presentation-factory/01-criar-deck.md`.
+      Use `presentation-factory/tools/new_deck.py` (tokens → JSON → create). Não abra nem
+      reescreva HTML/CSS/JS dos templates. O deck vai em `<workspace>/<slug>/`, fora da factory.
 
-      ## ⚠️ REGRA NÚMERO 2 — Caminho rápido (apresentação em minutos, não em horas)
-
-      - NUNCA escreva CSS ou JavaScript do zero. Copie o template inteiro
-        (`index.html` + `assets/`) e só substitua os tokens `{{PLACEHOLDER}}` e o
-        conteúdo. Os 3 templates já são Carbon v11 completos.
-      - NÃO rode `make build/validate/test` a menos que o usuário peça explicitamente
-        "registrar na factory". Decks simples não passam pelo builder Python.
-      - Gere a apresentação completa em uma única passada; na falta de um dado real,
-        use `[A confirmar]` e siga.
-      - Escolha o template pela tabela abaixo, sem abrir e comparar os 3 HTMLs.
-
-      ---
-
-      Regra de ouro: recebeu tarefa clara → implemente diretamente.
-      Pergunte só se faltar uma decisão que bloqueia a execução.
-
-      Leitura mínima antes de agir:
-      1. `.bob/presentation-factory/README.md` - sempre, é o índice curto.
-      2. Os arquivos reais que serão alterados (HTML/CSS/JS do deck já escolhido).
-      3. Só se necessário: `organizations/ibm/design-systems/carbon/` ou outro template.
-
-      Catálogo de templates IBM — veja descrições completas em `.bob/presentation-factory/README.md`:
-      - default executivo: `organizations/ibm/templates/ibm-template/` — grid de 16 colunas, 12 slides, dashboards e métricas, tom corporativo.
-      - editorial/técnico: `organizations/ibm/templates/ibm-brief-template/` — dossiê de 8 slides, marginália, ledger de métricas, tom de relatório.
-      - bold/alto impacto: `organizations/ibm/templates/ibm-edge-template/` — 8 slides assimétricos, cards e split-screen, tom de pitch visual.
-
-      ## ⚠️ LOGO IBM — CÓPIA OBRIGATÓRIA
-
-      Regras detalhadas em `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
-      Resumo obrigatório:
-      1. Copie `organizations/ibm/assets/img/logo-dark.svg` (fundo claro) ou
-         `logo-light.svg` (fundo escuro) para `<workspace>/<slug>/assets/ibm-logo.svg`.
-      2. No HTML use `<img src="assets/ibm-logo.svg" alt="IBM">`.
-      3. Confirme que o arquivo existe antes de concluir.
-      Proibido: SVG inline, CSS, texto, canvas ou geração de imagem para o logo.
-
-      ## ÍCONES — SOMENTE CARBON
-
-      Regras detalhadas em `.bob/rules-presentation-factory/02-conteudo-e-design.md`.
-      Nunca crie ícones com IA, SVG manual, CSS, Unicode ou emoji.
-      Use apenas assets oficiais do `@carbon/icons`, copiados para o deck.
+      Nunca invente dados, logos ou ícones. Logo IBM: o script já copia o oficial.
+      Ícones: somente `@carbon/icons` oficiais.
+      Índice e uso avançado: `.bob/presentation-factory/README.md`.
     groups:
       - read
       - edit

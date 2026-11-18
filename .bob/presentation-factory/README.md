@@ -1,69 +1,25 @@
-# Guia operacional do Presentation Factory
+# Índice operacional
 
-Para pedidos claros: leia o mínimo, informe em 2–3 linhas o que será feito, implemente.
-Aprofunde a leitura somente quando a tarefa pedir registro, build, redesign amplo ou decisões de narrativa.
+Criar deck: siga `.bob/rules-presentation-factory/01-criar-deck.md` (script `tools/new_deck.py`).
+Apresentações novas vão **fora** de `presentation-factory/`, nunca dentro.
 
-## ⚠️ Regra principal: onde criar apresentações
-
-**Toda apresentação nova vai FORA da pasta `presentation-factory/`.**
-
-- Derive o slug kebab-case do nome fornecido.
-- Crie `<workspace>/<slug>/` (pasta irmã de `presentation-factory/`).
-- Copie para lá o `index.html` autocontido e a pasta `assets/` do template.
-- A factory serve apenas como **referência** de estrutura e CSS — nunca como destino de escrita.
-
-## Localizar a factory
-
-1. `./presentation-factory/`
-2. Raiz atual (se contiver `catalog/models.toml` e `pyproject.toml`)
-3. Diretórios irmãos com esses arquivos
-
-## Caminho rápido — não pule isto
-
-Decks simples saem em poucos minutos quando o agente copia o template certo e só
-substitui tokens. Ficam lentos quando o agente reescreve CSS/JS do zero, roda o
-builder sem necessidade, ou itera demais sobre conteúdo. Por isso:
-
-- Escolha o template pela tabela abaixo — não abra os 3 HTMLs para comparar.
-- Copie o template inteiro (`index.html` + `assets/`); nunca recrie estilos do zero.
-- Substitua os tokens `{{PLACEHOLDER}}` numa só passada; falta de dado real = `[A confirmar]`.
-- `make build/validate/test` é só para quando o usuário pedir "registrar na factory".
-
-## Catálogo de templates IBM
-
-Ao criar uma apresentação IBM nova, escolha somente entre estes templates:
-
-| Template | Visual | Quando usar |
+| Template | Alias | Quando usar |
 |---|---|---|
-| `organizations/ibm/templates/ibm-template/` | Grid de 16 colunas, 12 slides, dashboards/métricas, tom corporativo | Padrão default: apresentação executiva, sóbria e orientada a negócio |
-| `organizations/ibm/templates/ibm-brief-template/` | Dossiê de 8 slides, marginália, ledger de métricas, tom de relatório | Dossiê, relatório técnico, diagnóstico ou conteúdo editorial denso |
-| `organizations/ibm/templates/ibm-edge-template/` | 8 slides assimétricos, cards e split-screen, tom de pitch visual | Narrativa visual bold, assimétrica ou de alto impacto |
+| `organizations/ibm/templates/ibm-template/` | `ibm` | Padrão: executivo, 12 slides, dashboards e métricas |
+| `organizations/ibm/templates/ibm-brief-template/` | `brief` | Dossiê/relatório técnico, 8 slides, tom editorial |
+| `organizations/ibm/templates/ibm-edge-template/` | `edge` | Pitch visual e assimétrico, 8 slides |
 
-Qualquer outro template IBM foi descontinuado. Nunca tente localizar, recriar ou usá-los como fallback.
+Outros templates IBM foram descontinuados.
 
-## Referências reais (leitura, nunca destino de escrita)
+## Uso avançado (só se pedirem "registrar na factory")
 
-- Templates → `organizations/ibm/templates/`
-- Assets IBM → `organizations/ibm/assets/`
-- Design system → `organizations/ibm/design-systems/carbon/`
-- Builder → `src/presentation_factory/`
-- Testes → `tests/`
+1. `make list` e escolha um slug único.
+2. Crie `organizations/ibm/presentations/<slug>/brief.md` e `presentation.toml` (ou em `clients/<org>/presentations/`).
+3. `make validate && make test`, depois `make build PRESENTATION=<slug> MODEL=<alias>`.
+4. `dist/` é saída gerada; nunca edite como fonte. CSS dos templates: edite `tools/template-assets/*.css`
+   e rode `python3 tools/sync_template_assets.py` (veja `tools/README.md`).
 
-## Roteamento rápido
+## Referências
 
-| Necessidade | Ação |
-|---|---|
-| Criar nova apresentação | Crie `<workspace>/<slug>/` fora da factory |
-| Apresentação executiva IBM | Use `organizations/ibm/templates/ibm-template/` |
-| Dossiê ou relatório técnico | Use `organizations/ibm/templates/ibm-brief-template/` |
-| Apresentação visual de alto impacto | Use `organizations/ibm/templates/ibm-edge-template/` |
-| Regras visuais IBM | `organizations/ibm/design-systems/carbon/` |
-| Registrar na factory (avançado) | `organizations/ibm/presentations/<slug>/presentation.toml` |
-| Assets compartilhados | `organizations/ibm/assets/assets.yaml` |
-| Builder ou validação | `src/presentation_factory/` e `tests/` |
-
-## Guardrails rápidos
-
-- Paths, slugs e onde criar → `.bob/rules-presentation-factory/01-arquitetura.md`
-- Logo IBM, ícones e regras visuais → `.bob/rules-presentation-factory/02-conteudo-e-design.md`
-- Estrutura do deck e atalhos → `.bob/rules-presentation-factory/03-html-css-javascript.md`
+Assets IBM `organizations/ibm/assets/` · Design `organizations/ibm/design-systems/carbon/` ·
+Builder `src/presentation_factory/` · Testes `tests/`
